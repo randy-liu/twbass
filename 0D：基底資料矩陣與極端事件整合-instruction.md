@@ -1,7 +1,7 @@
 ---
 Title: 卷 0D：基底資料矩陣與極端事件整合
 Volume_ID: 0D
-Upstream_Required: 0A 報告、0B 報告、0C 報告（三者均需上傳）
+Upstream_Required: 0A 報告:0A_台灣氣候forcing與區域差異研究.docx 、0B 報告:0B_南北成土母質與地球化學基底.docx、0C 報告:0C_六大水體 seasonal 評估.docx（三者均需上傳）
 Core_Parameters: 緩衝時間 hr、溶氧崩潰時間 hr、能見度恢復時間 day、Lag Effect（物理/地球化學）、Eh 恢復時間 day
 Key_Mechanisms: 極端事件緩衝排序、溶氧崩潰風險排序、濁度恢復時間排序、物理 vs 地球化學 Lag Effect
 ---
