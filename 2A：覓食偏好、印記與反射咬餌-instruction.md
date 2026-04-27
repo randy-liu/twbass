@@ -80,7 +80,13 @@ Key_Mechanisms: OFT 最佳覓食理論、飼料印記條件反射、Reaction Str
 
 **Q1-1. 黑鱸餌料大小選擇的能量效益計算：**
 - 黑鱸獵物選擇的能量效益公式：E/T = (獵物質量 g × 能量密度 kcal/g) / (搜索時間 s + 追擊時間 s + 處理時間 s)
-- 在台灣封閉水體中，常見獵物（大肚魚 Gambusia affinis，體長 2–4 cm；鯽魚幼魚，體長 3–6 cm；澤蛙幼蛙等）的能量效益估算（kcal/s）
+- 在台灣封閉水體中，**以下五種常見獵物**的能量效益估算（kcal/s），每種需給出濕重能量密度（kcal/g）、最佳掠食者/獵物 TL 比、OFT 效益評級與主要限制因子：
+  1. 大肚魚 *Gambusia affinis*，體長 2–4 cm（密集魚群，搜索時間短）
+  2. 鯽魚幼魚 *Carassius auratus*，體長 3–6 cm（深體型，處理時間長）
+  3. 澤蛙蝌蚪 *Fejervarya limnocharis*（無結構防禦，熱量高）
+  4. **吳郭魚/福壽魚幼魚 *Oreochromis* sp.，體長 3–8 cm**（台灣管理池最常見共池物種，深體型防禦鰭條）
+  5. **日本沼蝦 *Macrobranchium nipponense*，體長 3–6 cm**（台灣野塘底棲原生種，甲殼質額角增加處理時間）
+  6. **頰紋鰕虎 *Ctenogobius giurinus*，體長 3–6 cm**（台灣西南部沿岸低地與埤塘底棲原生種，腹鰭癒合形成吸盤，底棲追擊成本高；文獻來源：Pearl River Delta 捕食研究）
 - 為何黑鱸常「無視近岸大肚魚」卻攻擊較大軟餌？神經學解釋：獵物大小觸發攻擊的最小尺寸閾值（cm）vs 黑鱸口裂大小（cm）的比例關係
 
 ## Q2. 飼料印記（Hatchery Imprinting）與條件反射
