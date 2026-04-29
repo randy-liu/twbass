@@ -1,7 +1,7 @@
 ---
 Title: 卷 2C：大嘴黑鱸視線軸向、攻擊角度與假餌操作策略
 Volume_ID: 2C
-Upstream_Required: 0D 報告（水色、能見度、光場條件）；2A 報告（Carry_Forward_To_Volume2C 視覺觸發參數）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（水色、能見度、光場條件）；2A 報告:2A_覓食偏好、印記與反射咬餌.docx（Carry_Forward_To_Volume2C 視覺觸發參數）
 Core_Parameters: 視軸俯仰角 °、有效視距 cm、光照門檻 lux、攻擊仰角 °、假餌水層相對位置 cm
 Key_Mechanisms: 視網膜感光細胞分布不對稱、Snell's Window 光學效應、Up/Forward/Down-Strike 攻擊路徑、光場→視線軸向偏好映射、側線補償視覺失效
 ---
