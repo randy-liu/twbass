@@ -1,7 +1,7 @@
 ---
 Title: 卷 3A：台灣管理釣場高壓舊魚心理機制與誘咬本質
 Volume_ID: 3A
-Upstream_Required: 0D 報告（Baseline_Facts, Waterbody_Model_Table）；1A 報告（感官觸發臨界值）；2A 報告（OFT 決策、Reaction Strike）；2B 報告（側線頻率響應）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（Baseline_Facts, Waterbody_Model_Table）；1A 報告:1A_短時間環境觸發與生理限制.docx（感官觸發臨界值）；2A 報告:2A_覓食偏好、印記與反射咬餌.docx（OFT 決策、Reaction Strike）；2B 報告:2B_側線、內耳與水下聲學傳遞.docx（側線頻率響應）
 Core_Parameters: 皮質醇半衰期 hr、Alert Reset Time min、CFF 頻率 Hz、視網膜焦距 cm、尾流頻率 Hz
 Key_Mechanisms: Mid-Strolling 視覺催眠（CFF 神經同步）、Follower Rejection 近場焦距失焦決策、Alert Reset Time 皮質醇動力學、新魚/舊魚行為二元化、急停觸覺觸發門檻
 ---
