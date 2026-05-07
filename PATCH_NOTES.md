@@ -2,7 +2,7 @@
 
 **日期：** 2026-05-04  
 **版本：** compliance-patch-v1  
-**涵蓋文件：** 0B、2A、2B、2C、3A、0D
+**涵蓋文件：** 0B、2A、2B、2C、3A、0D、0C1
 
 ---
 
@@ -127,3 +127,38 @@
 ---
 
 *本文件由 GitHub Copilot 自動生成，記錄 2026-05-04 合規修復工作。*
+
+---
+
+## `0C１_六大水體 seasonal 評估.docx`（Zone-B 補充版）
+
+**Patch 日期：** 2026-05-04  
+**Patch 腳本：** `patch_0c1.py`
+
+### [FIX-0C1-01] 化學式空白 run 修復（43 處）
+- **問題：** Gemini 輸出的 .docx 中，Fe³⁺、Fe²⁺、Fe(OH)₃、C_v、Q₁₀、mmol/(m²·day)、J/(cm³·K)、PO₄³⁻、H⁺ 等化學/物理符號以 Unicode 上標/下標格式化，造成 XML 中的 `<w:run>` 文字為空字串。
+- **修正：** 精確修復 20 個段落共 43 個空白 run，對應段落索引與 run 索引均已驗證。
+- **影響段落：** [30][33][36][37][38][39][41][44][45][46][47][65][68][75][76][79][81][82][87][88]
+
+### [FIX-0C1-02] 新增 5 個必要輸出區塊
+- **問題：** Gemini 輸出完全缺少 pipeline 規格要求的輸出結構，所有 5 個區塊均不存在：
+  - `Inherited_Baseline`
+  - `0C_Findings`
+  - `Waterbody_Seasonal_Profiles`（表格）
+  - `Carry_Forward_To_0D`
+  - `Open_Assumptions_0C`
+- **修正：** 依原文內容萃取量化數值，在「引用的著作」標題前逐一插入所有 5 個區塊。
+
+### [FIX-0C1-03] YAML 元資料標頭
+- **修正：** 在文件首段前插入 YAML 元資料區塊，標明 Volume_ID、Upstream_Required 及 Zone-B 補充狀態。
+
+### 主要量化內容摘要（0C_Findings 重點）
+- [0C-01] 北部埤塘（Zone-A）：夜間最低 DO = 3.0–4.5 mg/L；南部埤塘（Zone-C）= 1.5–2.5 mg/L
+- [0C-02] Stokes 2μm 基準速率 = 1.25 cm/hr (20°C)；酸性絮凝（Zone-B）增強 3–8×
+- [0C-03] 南部野生埤塘旱季末 Fe³⁺ 累積 = 300–423 mmol/m²（90 天）
+- [0C-04] 管理池停機後分層重建：Zone-B = 6–12 hr；Zone-C = 4–8 hr
+- [0C-05] 南部蒸發濃縮：1.5m → 0.8m ≈ 1.88 倍
+- [0C-09] Zone-B 春季 22°C 比 Zone-A 早達 12–18 天（Zone-B 專屬）
+- [0C-10] Zone-B Eh < 0 mV 觸發時機 = 5 月下旬；Zone-A = 6 月中旬（Zone-B 專屬）
+
+---
