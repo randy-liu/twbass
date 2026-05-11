@@ -1,7 +1,7 @@
 ---
 Title: 卷 3B：台灣四大極端情境高壓策略推演
 Volume_ID: 3B
-Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（Baseline_Facts, Waterbody_Model_Table）；1B 報告:1B_六大水體棲位模型.docx（六大水體棲位模型）；2A 報告:2A_覓食偏好、印記與反射咬餌.docx（OFT 覓食決策）；2B 報告:2B_側線、內耳與水下聲學傳遞.docx（側線聲學傳遞）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.docx（Carry_Forward_To_3B 機制參數）
+Upstream_Required: 0D 報告:0D1_基底資料矩陣與極端事件整合.docx（Baseline_Facts, Waterbody_Model_Table）；1B 報告:1B1_六大水體棲位模型.docx（六大水體棲位模型）；2A 報告:2A_覓食偏好、印記與反射咬餌.docx（OFT 覓食決策）；2B 報告:2B_側線、內耳與水下聲學傳遞.docx（側線聲學傳遞）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.docx（Carry_Forward_To_3B 機制參數）
 Core_Parameters: 水溫 °C、溶氧 mg/L、Alert Reset Time min、Follower Rejection 急停窗口 s、CFF 頻率 Hz
 Key_Mechanisms: 南部高溫代謝關機（>32°C 強制靜態）、北部冷水翻水後分層崩潰、高有機管理池 H₂S 壓迫棲位、Alert Reset Time 溫度修正、Mid-Strolling 脫習慣化戰術
 ---
