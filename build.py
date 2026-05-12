@@ -10,6 +10,53 @@ from pathlib import Path
 SRC = Path(__file__).parent / "台灣大嘴黑鱸白皮書.md"
 OUT = Path(__file__).parent / "docs" / "index.html"
 
+# ── 術語速查資料 ──────────────────────────────────────────────────────────
+GLOSSARY = [
+    ("DO",               "溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。"),
+    ("Eh",               "氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。"),
+    ("pH",               "酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。"),
+    ("H₂S",              "硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。"),
+    ("Fe²⁺ / Fe³⁺",     "亞鐵（Fe²⁺，可溶）/ 三價鐵（Fe³⁺，不可溶）。底泥開始缺氧時 Fe³⁺ 被還原為 Fe²⁺ 溶入水中，是底質惡化的早期指標。"),
+    ("NTU",              "濁度單位（Nephelometric Turbidity Unit）。清水約 1–5 NTU；台灣豪雨後可達數百 NTU；>40 時視覺有效距離大幅縮短。"),
+    ("TSS",              "懸浮固體總量（Total Suspended Solids），單位 mg/L。颱風過後短期內大量增加，壓制魚的視覺感知範圍。"),
+    ("COD",              "化學需氧量（Chemical Oxygen Demand）。測量水中有機廢物總量；乾淨水體 <5 mg/L，管理池 >20 mg/L 代表飼料殘渣與排泄物嚴重堆積，耗氧加速。"),
+    ("CFF",              "臨界閃爍融合頻率（Critical Flicker Fusion），單位 Hz。超過此值，魚眼會把個別動作融合成連續影像（看不出節奏）。日間約 30–60 Hz，夜間 / 低溫下降至 10 Hz 以下。"),
+    ("ART",              "警覺重置時間（Alert Reset Time）。魚被釣後，主動覓食驅力恢復所需時間。20°C 約 24 小時；10°C 約 48 小時；30°C 約 12 小時。只鎖住主動覓食——反射咬餌（Reaction Strike）在此期間仍可觸發。"),
+    ("Q₁₀",              "溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。"),
+    ("推水",             "路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。"),
+    ("C&R",              "Catch & Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。"),
+    ("皮質醇",           "壓力荷爾蒙（Cortisol），由 HPI 軸分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
+    ("OFT",              "最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。"),
+    ("HVF / LVF",        "新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。"),
+    ("Mid-Strolling",    "以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。"),
+    ("Follower Rejection","魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。"),
+    ("Reaction Strike",  "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
+    ("Schreckstoff",     "受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。"),
+    ("FIE",              "漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。"),
+]
+
+def build_glossary_html(terms):
+    items_html = ""
+    for term, desc in terms:
+        items_html += (
+            f'<div class="gl-item">'
+            f'<dt class="gl-term">{term}</dt>'
+            f'<dd class="gl-desc">{desc}</dd>'
+            f'</div>\n'
+        )
+    return f'''<div id="glossary-panel" role="dialog" aria-modal="true" aria-label="術語速查">
+  <div class="gl-header">
+    <span class="gl-title">📖 術語速查</span>
+    <button id="glossary-close" aria-label="關閉術語面板">✕</button>
+  </div>
+  <dl class="gl-list">
+{items_html}  </dl>
+</div>
+<button id="glossary-btn" aria-label="開啟術語速查">📖 術語</button>
+<div id="glossary-overlay"></div>'''
+
+glossary_html = build_glossary_html(GLOSSARY)
+
 # ── 讀取 Markdown（utf-8-sig 處理 BOM）──────────────────────────────────
 md_text = SRC.read_text(encoding="utf-8-sig")
 
@@ -381,6 +428,130 @@ body {
   #main-wrapper { padding: 52px 18px 60px; }
   #content h1 { font-size: 1.4rem; }
   #content h2 { font-size: 1.15rem; }
+
+  /* 手機：底部 bottom sheet */
+  #glossary-panel {
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 70vh !important;
+    max-height: 70vh !important;
+    border-radius: 16px 16px 0 0 !important;
+    transform: translateY(100%) !important;
+  }
+  #glossary-panel.open {
+    transform: translateY(0) !important;
+  }
+  #glossary-btn {
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+}
+
+/* ── 術語速查面板 ── */
+#glossary-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  background: rgba(22, 27, 34, 0.92);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  border-radius: 24px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: background 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+#glossary-btn:hover {
+  background: rgba(30, 58, 95, 0.95);
+  box-shadow: 0 6px 20px rgba(88,166,255,0.2);
+}
+
+#glossary-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 290;
+}
+#glossary-overlay.open { display: block; }
+
+#glossary-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 340px;
+  max-width: 92vw;
+  z-index: 310;
+  background: #0d1117;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+}
+#glossary-panel.open {
+  transform: translateX(0);
+}
+
+.gl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.gl-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: 0.03em;
+}
+#glossary-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+#glossary-close:hover { color: var(--heading); background: rgba(255,255,255,0.06); }
+
+.gl-list {
+  overflow-y: auto;
+  flex: 1;
+  margin: 0;
+  padding: 12px 0 40px;
+}
+.gl-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(48,54,61,0.6);
+}
+.gl-item:last-child { border-bottom: none; }
+.gl-term {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-style: normal;
+}
+.gl-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin: 0;
 }
 """
 
@@ -464,6 +635,30 @@ document.querySelectorAll('#content table').forEach(t => {
   t.parentNode.insertBefore(wrap, t);
   wrap.appendChild(t);
 });
+
+// ── 術語速查面板 ─────────────────────────────────────────
+const glossaryPanel   = document.getElementById('glossary-panel');
+const glossaryBtn     = document.getElementById('glossary-btn');
+const glossaryClose   = document.getElementById('glossary-close');
+const glossaryOverlay = document.getElementById('glossary-overlay');
+
+function openGlossary() {
+  glossaryPanel.classList.add('open');
+  glossaryOverlay.classList.add('open');
+  glossaryBtn.setAttribute('aria-expanded', 'true');
+}
+function closeGlossary() {
+  glossaryPanel.classList.remove('open');
+  glossaryOverlay.classList.remove('open');
+  glossaryBtn.setAttribute('aria-expanded', 'false');
+}
+
+glossaryBtn.addEventListener('click', () => {
+  glossaryPanel.classList.contains('open') ? closeGlossary() : openGlossary();
+});
+glossaryClose.addEventListener('click', closeGlossary);
+glossaryOverlay.addEventListener('click', closeGlossary);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGlossary(); });
 """
 
 HTML_TEMPLATE = """\
@@ -499,6 +694,8 @@ HTML_TEMPLATE = """\
     </article>
   </div>
 
+{glossary}
+
   <script>
 {js}
   </script>
@@ -511,6 +708,7 @@ html = HTML_TEMPLATE.format(
     css=CSS,
     toc=toc_html,
     content=content_html,
+    glossary=glossary_html,
     js=JS,
 )
 
