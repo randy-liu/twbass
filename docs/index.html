@@ -441,6 +441,23 @@ body {
   line-height: 1.65;
   margin: 0;
 }
+/* ── 術語觸發連結 ── */
+.gl-trigger {
+  color: var(--accent);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0 1px;
+  transition: background 0.15s;
+}
+.gl-trigger:hover { background: var(--accent-dim); }
+/* ── 術語 highlight 動畫 ── */
+@keyframes gl-flash {
+  0%,100% { background: transparent; }
+  35%     { background: rgba(251,191,36,0.28); }
+}
+.gl-highlighted { animation: gl-flash 1.5s ease; }
 
   </style>
 </head>
@@ -556,7 +573,7 @@ body {
 <hr />
 <h2 id="_1">前言：為什麼台灣的鱸魚需要一份白皮書？</h2>
 <p>大嘴黑鱸在台灣的身分很特別：牠是<strong>外來種</strong>，卻也早已成為最重要的路亞對象魚之一。很多釣友第一次真正認真學路亞，往往就是從黑鱸開始。問題是，台灣釣黑鱸，不能直接照搬美國的書。</p>
-<p>原因很簡單：台灣太小，卻太複雜。北部迎風、南部背風；北部多微酸性極育土，南部多中性到微鹼性的新成土與弱育土；有些水域春天還在慢慢回溫，有些地方卻已經熱到藻華、缺氧、爛底一起來。你在北部埤塘遇到的「突然不咬」，可能是清晨光致盲；你在南部管理池遇到的「整池像死掉」，可能是<strong>高溫、低氧、硫化氫、皮質醇壓力</strong>同時疊加。</p>
+<p>原因很簡單：台灣太小，卻太複雜。北部迎風、南部背風；北部多微酸性極育土，南部多中性到微鹼性的新成土與弱育土；有些水域春天還在慢慢回溫，有些地方卻已經熱到藻華、缺氧、爛底一起來。你在北部埤塘遇到的「突然不咬」，可能是清晨光致盲；你在南部管理池遇到的「整池像死掉」，可能是<strong>高溫、低氧、硫化氫、<span class="gl-trigger" data-term="pizichun">皮質醇</span>壓力</strong>同時疊加。</p>
 <p>所以，這份白皮書的目的不是教你背招，而是幫你建立一套比較像樣的判斷方式：</p>
 <ul>
 <li>先讀氣候與地質。</li>
@@ -570,38 +587,38 @@ body {
 <p>這份白皮書大量引用水質數據，幾個化學符號會反覆出現。它們看起來陌生，其實不難——你不需要記公式，只需要對這幾個名字有感覺。</p>
 <p><strong>等你讀完這四個概念，後面遇到「爛底為什麼讓魚上浮」「南部夏天為什麼這麼難釣」這類問題，你才能真正看懂，而不是只知道「反正底層不好」。</strong></p>
 <hr />
-<h3 id="ph">pH：水是偏酸還是偏鹼</h3>
-<p>pH 可以想成「從胃酸到小蘇打水」的一條尺，從 0（強酸）到 14（強鹼），7 是中性。</p>
+<h3 id="ph"><span class="gl-trigger" data-term="ph">pH</span>：水是偏酸還是偏鹼</h3>
+<p><span class="gl-trigger" data-term="ph">pH</span> 可以想成「從胃酸到小蘇打水」的一條尺，從 0（強酸）到 14（強鹼），7 是中性。</p>
 <ul>
-<li><strong>北部常見：pH 4.5–5.5</strong>，偏酸，像稍微發酸的雨水。</li>
-<li><strong>南部常見：pH 6.5–7.5</strong>，接近中性到微鹼，比較穩定。</li>
+<li><strong>北部常見：<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>，偏酸，像稍微發酸的雨水。</li>
+<li><strong>南部常見：<span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>，接近中性到微鹼，比較穩定。</li>
 </ul>
-<p>pH 不一定立刻讓魚死，但會一路影響：水色會不會久濁不退、底部鐵離子何時釋放、繁殖期魚卵能不能正常發育。</p>
+<p><span class="gl-trigger" data-term="ph">pH</span> 不一定立刻讓魚死，但會一路影響：水色會不會久濁不退、底部鐵離子何時釋放、繁殖期魚卵能不能正常發育。</p>
 <hr />
-<h3 id="eh">Eh：底泥有多「新鮮」</h3>
-<p>Eh（氧化還原電位，單位是 <strong>mV 毫伏特</strong>——電壓的千分之一，你可以把它想成「水底環境的鬆緊指數」：有氧氣時電位偏正，氧氣耗盡開始腐爛時電位就往負的方向跑）是底泥「新鮮度」的指標——數值越正，底部越健康；數值越負，底部越像在腐爛。</p>
+<h3 id="eh"><span class="gl-trigger" data-term="eh">Eh</span>：底泥有多「新鮮」</h3>
+<p><span class="gl-trigger" data-term="eh">Eh</span>（氧化還原電位，單位是 <strong>mV 毫伏特</strong>——電壓的千分之一，你可以把它想成「水底環境的鬆緊指數」：有氧氣時電位偏正，氧氣耗盡開始腐爛時電位就往負的方向跑）是底泥「新鮮度」的指標——數值越正，底部越健康；數值越負，底部越像在腐爛。</p>
 <ul>
 <li><strong>+300 到 +500 mV</strong>：像剛煮好的清湯，氧夠、狀態新鮮。</li>
 <li><strong>+200 到 0 mV</strong>：開始悶、開始耗氧。</li>
 <li><strong>0 到 -100 mV</strong>：鐵還原開始明顯，底部已不太妙。</li>
 <li><strong>&lt; -150 mV</strong>：進入「臭底」等級，硫化氫風險高，魚通常已離開底層。</li>
 </ul>
-<p>你只需要記一件事：<strong>Eh 越負，底下越糟，魚越不敢待。</strong></p>
+<p>你只需要記一件事：<strong><span class="gl-trigger" data-term="eh">Eh</span> 越負，底下越糟，魚越不敢待。</strong></p>
 <hr />
-<h3 id="fe2-fe3">Fe²⁺ 與 Fe³⁺：鐵的兩種狀態</h3>
+<h3 id="fe2-fe3"><span class="gl-trigger" data-term="fe">Fe²⁺</span> 與 <span class="gl-trigger" data-term="fe">Fe³⁺</span>：鐵的兩種狀態</h3>
 <p><strong>Fe</strong> 是鐵的化學元素符號（源自拉丁文 <em>ferrum</em>）。鐵在水中以「帶電粒子（離子）」存在，右上角的數字代表帶了幾個電荷：</p>
 <ul>
-<li><strong>Fe³⁺</strong>（三價鐵離子）：鐵的「氧化型態」，不溶於水，形成我們熟悉的<strong>鐵鏽色沉澱</strong>，穩定待在底泥裡。</li>
-<li><strong>Fe²⁺</strong>（二價亞鐵離子）：鐵的「還原型態」，<strong>可溶於水</strong>，能到處移動。當底泥缺氧（Eh 降低），細菌會把 Fe³⁺ 轉化成 Fe²⁺，釋放進水體後對魚鰓和魚卵造成傷害。</li>
+<li><strong><span class="gl-trigger" data-term="fe">Fe³⁺</span></strong>（三價鐵離子）：鐵的「氧化型態」，不溶於水，形成我們熟悉的<strong>鐵鏽色沉澱</strong>，穩定待在底泥裡。</li>
+<li><strong><span class="gl-trigger" data-term="fe">Fe²⁺</span></strong>（二價亞鐵離子）：鐵的「還原型態」，<strong>可溶於水</strong>，能到處移動。當底泥缺氧（<span class="gl-trigger" data-term="eh">Eh</span> 降低），細菌會把 <span class="gl-trigger" data-term="fe">Fe³⁺</span> 轉化成 <span class="gl-trigger" data-term="fe">Fe²⁺</span>，釋放進水體後對魚鰓和魚卵造成傷害。</li>
 </ul>
-<p><strong>簡單記法：Fe³⁺ = 生鏽但穩定、待在泥裡不動；Fe²⁺ = 溶入水中、到處亂跑、可能惹事。</strong></p>
+<p><strong>簡單記法：<span class="gl-trigger" data-term="fe">Fe³⁺</span> = 生鏽但穩定、待在泥裡不動；<span class="gl-trigger" data-term="fe">Fe²⁺</span> = 溶入水中、到處亂跑、可能惹事。</strong></p>
 <hr />
-<h3 id="h2s">H₂S：臭雞蛋的那個味道</h3>
-<p>H₂S 就是「硫化氫」——H₂ 是氫，S 是硫，合在一起就是那個臭雞蛋味。</p>
+<h3 id="h2s"><span class="gl-trigger" data-term="h2s">H₂S</span>：臭雞蛋的那個味道</h3>
+<p><span class="gl-trigger" data-term="h2s">H₂S</span> 就是「硫化氫」——H₂ 是氫，S 是硫，合在一起就是那個臭雞蛋味。</p>
 <ul>
-<li>在極度缺氧的底泥中，細菌把硫酸鹽（SO₄²⁻）還原，產生 H₂S 氣體。</li>
-<li>H₂S 的毒性遠比缺氧更直接：<strong>濃度超過約 0.002 mg/L 就可能讓魚中毒</strong>，即使溶氧還勉強夠用也一樣。</li>
-<li>聞到底水有臭雞蛋味，或看到黑色底泥，就是 H₂S 的警訊。</li>
+<li>在極度缺氧的底泥中，細菌把硫酸鹽（SO₄²⁻）還原，產生 <span class="gl-trigger" data-term="h2s">H₂S</span> 氣體。</li>
+<li><span class="gl-trigger" data-term="h2s">H₂S</span> 的毒性遠比缺氧更直接：<strong>濃度超過約 0.002 mg/L 就可能讓魚中毒</strong>，即使溶氧還勉強夠用也一樣。</li>
+<li>聞到底水有臭雞蛋味，或看到黑色底泥，就是 <span class="gl-trigger" data-term="h2s">H₂S</span> 的警訊。</li>
 </ul>
 <hr />
 <p>記住這四個概念，後面的章節讀起來會順很多。</p>
@@ -682,14 +699,14 @@ body {
 <p>因為對魚來說，不是「變涼一點」，而是<strong>環境在 1 天內整個換季</strong>。</p>
 <h3 id="14">1.4 台灣南北土壤不同，所以池塘的「水感」真的不同</h3>
 <p>很多釣友會說：「北部的水比較澀、比較茶色；南部的水比較亮、比較綠、比較會臭底。」這不是錯覺。</p>
-<p>北部多是<strong>極育土</strong>，經過長年強降雨淋洗後，鹼性礦物被洗掉，留下較多鐵、鋁與酸性條件，所以水體常落在 <strong>pH 4.5–5.5</strong>。</p>
-<p>南部多是<strong>弱育土、新成土</strong>，保留較多碳酸鹽與原生礦物，緩衝能力較強，水體常在 <strong>pH 6.5–7.5</strong>。</p>
+<p>北部多是<strong>極育土</strong>，經過長年強降雨淋洗後，鹼性礦物被洗掉，留下較多鐵、鋁與酸性條件，所以水體常落在 <strong><span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>。</p>
+<p>南部多是<strong>弱育土、新成土</strong>，保留較多碳酸鹽與原生礦物，緩衝能力較強，水體常在 <strong><span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>。</p>
 <p>可以這樣想：</p>
 <ul>
 <li><strong>北部水</strong>像是用紅土和落葉慢慢泡出來的茶，微酸，泥細，但有時雨後會很快沉。</li>
 <li><strong>南部水</strong>像是加了礦物粉和太陽曝曬過的湯，酸鹼比較穩，但一旦濁起來、藻起來，會拖很久。</li>
 </ul>
-<p>這種地質差異後面會一路影響到：濁度會不會很快退、底部會不會缺氧、Fe²⁺ 與 H₂S 何時跑出來、春天巢做得成不成、夏天底還能不能待。</p>
+<p>這種地質差異後面會一路影響到：濁度會不會很快退、底部會不會缺氧、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 與 <span class="gl-trigger" data-term="h2s">H₂S</span> 何時跑出來、春天巢做得成不成、夏天底還能不能待。</p>
 <h3 id="15-zone-b">1.5 北部的「中間地帶」：桃園台地（Zone-B）棲位特徵</h3>
 <p>這份白皮書所有「北部」的氣候數據，<strong>主要引用的代表測站是台北（台北市）</strong>，南部則是高雄。這是原始研究文件依照中央氣象署 1991–2020 氣候平均值的選站標準，反映的是<strong>台北–基隆–宜蘭一帶的「北部迎風面」（Zone-A）氣候特徵</strong>。</p>
 <p>然而，台灣最重要的鱸魚釣場，有很大一部分集中在<strong>桃園台地的埤塘群（「千塘之鄉」）</strong>。研究文件（1B1）已針對桃園台地建立了量化分析，稱為 <strong>Zone-B</strong>，並確認它和台北（Zone-A）的行為規律確實有不同：</p>
@@ -719,7 +736,7 @@ body {
 </tr>
 <tr>
 <td>土壤類型</td>
-<td>極育土，pH 4.5–5.5</td>
+<td>極育土，<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</td>
 <td><strong>同屬極育土</strong>，化學特性類似</td>
 </tr>
 <tr>
@@ -742,13 +759,13 @@ body {
 - Zone-B 全年翻水次數：<strong>2–4 次</strong>（Zone-A：1–2 次）；<br />
 - 每次翻水持續 <strong>24–48 小時</strong>，底層毒水上湧，魚被迫懸浮於中層。</p>
 <p><strong>實戰意義</strong>：桃園的秋末釣手要比台北更早警覺翻水，10 月下旬到 11 月初就要留意。</p>
-<p><strong>3. Fe²⁺ 危險帶比台北更早出現</strong></p>
-<p>Zone-B 土壤同屬極育土，底泥 Fe²⁺ 問題和台北類似；但因春季升溫早，底泥開始缺氧的時間也提前：<br />
-- Zone-B Fe²⁺ 危險帶啟動：<strong>5 月下旬</strong>（Zone-A：<strong>6 月中旬</strong>）；<br />
+<p><strong>3. <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶比台北更早出現</strong></p>
+<p>Zone-B 土壤同屬極育土，底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 問題和台北類似；但因春季升溫早，底泥開始缺氧的時間也提前：<br />
+- Zone-B <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動：<strong>5 月下旬</strong>（Zone-A：<strong>6 月中旬</strong>）；<br />
 - 高危持續約 <strong>4 個月</strong>（Zone-A 約 3.5 個月）；<br />
-- 安全離底距離同樣需要 <strong>40 cm</strong>（Fe²⁺ Fick 擴散精算值）。</p>
+- 安全離底距離同樣需要 <strong>40 cm</strong>（<span class="gl-trigger" data-term="fe">Fe²⁺</span> Fick 擴散精算值）。</p>
 <p><strong>實戰意義</strong>：桃園埤塘在 5 月下旬以後就不能太貼底，這比台北模型早了 3–4 週。</p>
-<p><strong>總結</strong>：桃園在「氣候節奏」上和台北模型有差異（春季進場早 1–2 週、翻水早一個月、Fe²⁺ 早啟動），但在「土壤水質化學」上高度一致（同屬極育土、Fe²⁺/高嶺石/快回清等全部適用）。<strong>Zone-B 棲位邏輯詳見第五章 §5.4。</strong></p>
+<p><strong>總結</strong>：桃園在「氣候節奏」上和台北模型有差異（春季進場早 1–2 週、翻水早一個月、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 早啟動），但在「土壤水質化學」上高度一致（同屬極育土、<span class="gl-trigger" data-term="fe">Fe²⁺</span>/高嶺石/快回清等全部適用）。<strong>Zone-B 棲位邏輯詳見第五章 §5.4。</strong></p>
 <h3 id="16-zone-c">1.6 南部的「弱育土地帶」：Zone-C 水體化學特徵</h3>
 <p>這份白皮書的南部代表測站為<strong>高雄</strong>，覆蓋台灣中南部以下所有南部水體。除了高溫季節更長、雨季更集中以外，南部水體最重要的差異在<strong>土壤類型</strong>：南部以<strong>弱育土（Inceptisol）</strong>為主，和北部的極育土完全不同。研究文件稱此環境為 <strong>Zone-C</strong>。</p>
 <table>
@@ -766,17 +783,17 @@ body {
 <td>弱育土（Inceptisol），礦質較豐富</td>
 </tr>
 <tr>
-<td>水體 pH</td>
+<td>水體 <span class="gl-trigger" data-term="ph">pH</span></td>
 <td><strong>4.5–5.5</strong>，強酸性</td>
 <td><strong>6.5–7.5</strong>，接近中性</td>
 </tr>
 <tr>
-<td>底泥 Fe²⁺ 釋放</td>
+<td>底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 釋放</td>
 <td>酸性促進，夏季進入高危帶</td>
-<td>pH 緩衝作用明顯，釋放程度較低</td>
+<td><span class="gl-trigger" data-term="ph">pH</span> 緩衝作用明顯，釋放程度較低</td>
 </tr>
 <tr>
-<td>Schreckstoff 半衰期</td>
+<td><span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 半衰期</td>
 <td>數分鐘（有效半徑 <strong>&lt;0.5 m</strong>）</td>
 <td>CDOM 保護，延續 <strong>12–36 小時</strong>（有效半徑 <strong>4–7 m</strong>）</td>
 </tr>
@@ -789,12 +806,12 @@ body {
 </table>
 <h4 id="zone-c">Zone-C 的關鍵行為差異</h4>
 <p><strong>1. 化學警報效力遠高於北部——中魚後「換點」更關鍵</strong></p>
-<p>南部水體的腐植酸（CDOM）包裹住 Schreckstoff 分子，使化學警報信號可持續 <strong>12–36 小時</strong>、影響半徑達 <strong>4–7 m</strong>。北部中魚後等 5–10 分鐘就可回原點；<strong>南部一旦中魚或跑魚，那個點可能整天都廢掉</strong>。釣手比北部更需要「拿了就走」的換點紀律（詳見 §3.8）。</p>
+<p>南部水體的腐植酸（CDOM）包裹住 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 分子，使化學警報信號可持續 <strong>12–36 小時</strong>、影響半徑達 <strong>4–7 m</strong>。北部中魚後等 5–10 分鐘就可回原點；<strong>南部一旦中魚或跑魚，那個點可能整天都廢掉</strong>。釣手比北部更需要「拿了就走」的換點紀律（詳見 §3.8）。</p>
 <p><strong>2. 護巢雄魚感知範圍更廣</strong></p>
-<p>北部護巢雄魚幾乎完全依賴視覺與側線；Zone-C 的護巢雄魚可透過 Schreckstoff 感知 <strong>4–7 m</strong> 外的危險，警戒圈比北部大一個數量級，護巢攻擊也更容易被遠距觸發（詳見 §10.5）。</p>
+<p>北部護巢雄魚幾乎完全依賴視覺與側線；Zone-C 的護巢雄魚可透過 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 感知 <strong>4–7 m</strong> 外的危險，警戒圈比北部大一個數量級，護巢攻擊也更容易被遠距觸發（詳見 §10.5）。</p>
 <p><strong>3. 北部的底泥化學規則，在 Zone-C 不完全適用</strong></p>
-<p>北部極育土帶來的強酸、快回清、Fe²⁺ 高危帶等規則，在 Zone-C 中顯著減弱。Zone-C 釣手重點關注的是<strong>高溫下的溶氧梯度</strong>與<strong>高有機負載</strong>，而非底泥 Fe²⁺。</p>
-<p><strong>總結</strong>：Zone-C 涵蓋台灣南部（中南部以下）三類南部水體。它和 Zone-A/B 最大的差異不在氣候節奏，而在<strong>土壤化學與水體 pH 所引發的感官生態學差異</strong>。Schreckstoff 詳見 §3.8；護巢化學感知詳見 §10.5；南部極端情境策略見第九章。</p>
+<p>北部極育土帶來的強酸、快回清、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 高危帶等規則，在 Zone-C 中顯著減弱。Zone-C 釣手重點關注的是<strong>高溫下的溶氧梯度</strong>與<strong>高有機負載</strong>，而非底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span>。</p>
+<p><strong>總結</strong>：Zone-C 涵蓋台灣南部（中南部以下）三類南部水體。它和 Zone-A/B 最大的差異不在氣候節奏，而在<strong>土壤化學與水體 <span class="gl-trigger" data-term="ph">pH</span> 所引發的感官生態學差異</strong>。<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 詳見 §3.8；護巢化學感知詳見 §10.5；南部極端情境策略見第九章。</p>
 <hr />
 <h2 id="_4">第二章：台灣的六種鱸魚棲地——各有個性的水域</h2>
 <h3 id="21">2.1 先把釣場語言和研究模型對上</h3>
@@ -848,7 +865,7 @@ body {
 <th>典型場景</th>
 <th>基本特徵</th>
 <th>四季水溫（°C）</th>
-<th>四季溶氧 DO（mg/L）</th>
+<th>四季溶氧 <span class="gl-trigger" data-term="do">DO</span>（mg/L）</th>
 <th>四季能見度（cm）</th>
 <th>白話重點</th>
 </tr>
@@ -861,7 +878,7 @@ body {
 <td>春 <strong>17–22</strong>／夏 <strong>28–32</strong>／秋 <strong>22–26</strong>／冬 <strong>13–18</strong></td>
 <td>春 <strong>5.5–8.5</strong>／夏 <strong>3.0–7.5</strong>／秋 <strong>4.5–8.0</strong>／冬 <strong>6.5–9.5</strong></td>
 <td>春 <strong>30–50</strong>／夏 <strong>25–45</strong>／秋 <strong>30–50</strong>／冬 <strong>35–55</strong></td>
-<td>暴雨後會濁，但常在 <strong>48–72 小時</strong>內回清；夏天有 Fe²⁺ 風險</td>
+<td>暴雨後會濁，但常在 <strong>48–72 小時</strong>內回清；夏天有 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 風險</td>
 </tr>
 <tr>
 <td><strong>北部深水水庫</strong></td>
@@ -906,7 +923,7 @@ body {
 <td>春 <strong>24–29</strong>／夏 <strong>31–35.5</strong>／秋 <strong>27–31</strong>／冬 <strong>20–25</strong></td>
 <td>春 <strong>3.0–7.0</strong>／夏 <strong>1.0–6.0</strong>／秋 <strong>3.0–6.5</strong>／冬 <strong>5.0–8.0</strong></td>
 <td>春 <strong>&lt;10–30</strong>／夏 <strong>10–25</strong>／秋 <strong>15–30</strong>／冬 <strong>25–40</strong></td>
-<td>最容易出現高溫、低氧、Eh 崩塌與 H₂S 風險</td>
+<td>最容易出現高溫、低氧、<span class="gl-trigger" data-term="eh">Eh</span> 崩塌與 <span class="gl-trigger" data-term="h2s">H₂S</span> 風險</td>
 </tr>
 </tbody>
 </table>
@@ -964,12 +981,12 @@ body {
 </tbody>
 </table>
 <p>研究也指出，當水溫升到 <strong>32–33°C</strong>，黑鱸耗氧率可升到 <strong>69.4 mg O₂/kg/hr</strong>，有氧空間接近被榨乾。這就是很多南部夏天池子裡的魚，看起來還活著，但其實已經不太有本錢去追。</p>
-<h3 id="32-do">3.2 溶氧（DO）：水裡的空氣存款</h3>
+<h3 id="32-do">3.2 溶氧（<span class="gl-trigger" data-term="do">DO</span>）：水裡的空氣存款</h3>
 <p>溶氧可以想成水裡的「可用呼吸額度」。額度高，魚有餘裕；額度低，魚只能縮手縮腳。</p>
 <table>
 <thead>
 <tr>
-<th>DO 狀態</th>
+<th><span class="gl-trigger" data-term="do">DO</span> 狀態</th>
 <th style="text-align: right;">數字</th>
 <th>黑鱸反應</th>
 </tr>
@@ -999,7 +1016,7 @@ body {
 </table>
 <p>再加一個很重要的事實：<strong>溫度越高，水能裝的氧越少。</strong></p>
 <ul>
-<li><strong>30°C</strong> 飽和 DO 約 <strong>7.55 mg/L</strong>。</li>
+<li><strong>30°C</strong> 飽和 <span class="gl-trigger" data-term="do">DO</span> 約 <strong>7.55 mg/L</strong>。</li>
 <li><strong>35°C</strong> 只剩 <strong>6.94 mg/L</strong>。</li>
 </ul>
 <p>也就是說，最熱的時候，魚最需要氧，偏偏水最裝不下氧。這就是南部夏季魚塭和管理池最麻煩的基本矛盾。</p>
@@ -1011,10 +1028,10 @@ body {
 <li><strong>&lt;10–20 cm</strong>：很多時候已經不是顏色問題，而是魚根本只能靠近場震動與輪廓。</li>
 </ul>
 <p>研究顯示，北部微酸性水域暴雨後常在 <strong>48–72 小時</strong>內恢復；南部中性到微鹼性水域則可能要 <strong>14–30 天</strong>。同樣一場大雨，北部可能是「兩天後重新開局」，南部卻是「接下來半個月都在打濁水」。</p>
-<h3 id="34-ph">3.4 pH：水是偏酸還是偏鹼</h3>
-<p>北部常見 <strong>pH 4.5–5.5</strong>（偏酸），南部常見 <strong>pH 6.5–7.5</strong>（接近中性到微鹼）。詳細說明見閱讀前須知。</p>
-<h3 id="35-eh">3.5 Eh：底有多「新鮮」</h3>
-<p>Eh（氧化還原電位）是底泥「新鮮度」的指標，詳細說明見閱讀前須知。量化區間對照：</p>
+<h3 id="34-ph">3.4 <span class="gl-trigger" data-term="ph">pH</span>：水是偏酸還是偏鹼</h3>
+<p>北部常見 <strong><span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>（偏酸），南部常見 <strong><span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>（接近中性到微鹼）。詳細說明見閱讀前須知。</p>
+<h3 id="35-eh">3.5 <span class="gl-trigger" data-term="eh">Eh</span>：底有多「新鮮」</h3>
+<p><span class="gl-trigger" data-term="eh">Eh</span>（氧化還原電位）是底泥「新鮮度」的指標，詳細說明見閱讀前須知。量化區間對照：</p>
 <ul>
 <li><strong>+300 到 +500 mV</strong>：像剛煮好的清湯，氧夠、狀態新鮮。</li>
 <li><strong>+200 到 0 mV</strong>：開始悶、開始耗氧。</li>
@@ -1030,37 +1047,37 @@ body {
 <p>這就是為什麼有些池子不是一下雨立刻爛，而是<strong>淹了幾天後開始發臭、發黑、魚浮頭</strong>。</p>
 <h3 id="36">3.6 南北水質差異：不是誰比較好，是問題不一樣</h3>
 <ul>
-<li><strong>北部</strong>：偏酸、褐、雨多、回溫慢、濁得快也清得快；麻煩在春寒、光線、Fe²⁺、翻水。</li>
-<li><strong>南部</strong>：偏中性到微鹼、日照強、蒸發大、濁得慢也清得慢；麻煩在高溫、濃縮、藻華、低氧、H₂S。</li>
+<li><strong>北部</strong>：偏酸、褐、雨多、回溫慢、濁得快也清得快；麻煩在春寒、光線、<span class="gl-trigger" data-term="fe">Fe²⁺</span>、翻水。</li>
+<li><strong>南部</strong>：偏中性到微鹼、日照強、蒸發大、濁得慢也清得慢；麻煩在高溫、濃縮、藻華、低氧、<span class="gl-trigger" data-term="h2s">H₂S</span>。</li>
 </ul>
 <p>所以北部魚常是「想吃但環境讓牠不敢上來」；南部魚常是「連想吃的生理餘裕都快沒了」。</p>
 <h3 id="37-fick">3.7 安全離底距離：Fick 模型告訴我們的數字</h3>
 <blockquote>
 <p><strong>什麼是 Fick 擴散？</strong><br />
-想像底泥像一塊發臭的海綿，裡面的毒氣（Fe²⁺ 或 H₂S）會慢慢往上「滲透」到水裡。Fick 擴散模型就是用物理方程式計算這個毒氣往上滲透的速度，再算出：「從泥面往上多遠，濃度才能低到對魚安全？」這個距離，就是「安全離底距離」。</p>
+想像底泥像一塊發臭的海綿，裡面的毒氣（<span class="gl-trigger" data-term="fe">Fe²⁺</span> 或 <span class="gl-trigger" data-term="h2s">H₂S</span>）會慢慢往上「滲透」到水裡。Fick 擴散模型就是用物理方程式計算這個毒氣往上滲透的速度，再算出：「從泥面往上多遠，濃度才能低到對魚安全？」這個距離，就是「安全離底距離」。</p>
 </blockquote>
 <p>研究透過 Fick 擴散模型精算（VSUP-B04、VSUP-B06），得出以下兩個重要數字：</p>
-<p><strong>北部水體：Fe²⁺ 安全離底距離 = 40 cm</strong></p>
-<p>北部缺氧底泥的 Fe²⁺ 釋放通量峰值約 50 mmol/m²/day（每平方公尺每天釋出約 2.79 g 的亞鐵離子）。模型計算結果：魚必須距離底泥<strong>至少 40 cm</strong>，才能避開 Fe²⁺ 膠體對魚鰓的氧化損傷。</p>
-<p><strong>南部水體：H₂S 安全離底距離 = ≥86 cm</strong></p>
-<p>南部高有機負載底泥的 H₂S 釋放通量峰值高達 281 mmol/m²/day，遠高於北部。在有微流場的正常情況下，安全距離 = <strong>86 cm</strong>。但要注意：<br />
+<p><strong>北部水體：<span class="gl-trigger" data-term="fe">Fe²⁺</span> 安全離底距離 = 40 cm</strong></p>
+<p>北部缺氧底泥的 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 釋放通量峰值約 50 mmol/m²/day（每平方公尺每天釋出約 2.79 g 的亞鐵離子）。模型計算結果：魚必須距離底泥<strong>至少 40 cm</strong>，才能避開 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 膠體對魚鰓的氧化損傷。</p>
+<p><strong>南部水體：<span class="gl-trigger" data-term="h2s">H₂S</span> 安全離底距離 = ≥86 cm</strong></p>
+<p>南部高有機負載底泥的 <span class="gl-trigger" data-term="h2s">H₂S</span> 釋放通量峰值高達 281 mmol/m²/day，遠高於北部。在有微流場的正常情況下，安全距離 = <strong>86 cm</strong>。但要注意：<br />
 - 靜水（完全無流動）：安全距離縮至 <strong>55–65 cm</strong>；<br />
 - 翻水攪動劇烈時：毒氣可被帶到 <strong>120–160 cm</strong> 高度。</p>
 <p>這些數字比「離底 35–45 cm 就好」的舊說法更嚴格。在南部池的實戰上，代表的是：如果水深只有 1.2–1.5 m，那麼安全的水層就只剩上面那 <strong>30–60 cm</strong> 左右。</p>
-<h3 id="38-schreckstoff">3.8 Schreckstoff（魚的化學警報）：南北的不對稱</h3>
+<h3 id="38-schreckstoff">3.8 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>（魚的化學警報）：南北的不對稱</h3>
 <blockquote>
-<p><strong>什麼是 Schreckstoff？</strong><br />
+<p><strong>什麼是 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>？</strong><br />
 這是德文，意思是「恐懼物質」。魚受傷或被捕食時，皮膚細胞會破裂，釋放出一種叫做 <strong>H3NO（次黃嘌呤-3-N-氧化物）</strong> 的化學物質。附近的魚聞到這個氣味，就知道「有危險！」——這是魚類的天然警報系統。</p>
 </blockquote>
 <p>但是，這個警報在台灣南北水體的有效性<strong>差別非常大</strong>：</p>
-<p><strong>北部酸水（pH 4.5–5.5）：化學竊聽幾乎失效</strong></p>
+<p><strong>北部酸水（<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5）：化學竊聽幾乎失效</strong></p>
 <p>在強酸性水體中，H3NO 分子會很快水解失活，半衰期壓縮至<strong>僅數分鐘</strong>。這代表：<br />
 - 受傷的魚發出的化學警報，還沒漂到幾公尺外就消失了；<br />
 - 北部鱸魚靠化學感知偵測同伴危險的有效半徑 <strong>&lt;0.5 m</strong>（純水理論值是 8 m）；<br />
 - 北部魚被迫主要依賴<strong>視覺和側線</strong>來感知環境危險。</p>
-<p><strong>南部弱育土水體（pH 6.5–7.5，Zone-C）：警報熱點可延續 12–36 小時</strong></p>
+<p><strong>南部弱育土水體（<span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5，Zone-C）：警報熱點可延續 12–36 小時</strong></p>
 <p>南部水體中的 CDOM（腐植酸、黃腐酸）會像「保護套」一樣包裹住 H3NO 分子，讓它不容易被光線分解，同時讓它慢慢釋放：<br />
-- 一旦中魚觸發 Schreckstoff 釋放，有效死區半徑可達 <strong>4–7 m</strong>；<br />
+- 一旦中魚觸發 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 釋放，有效死區半徑可達 <strong>4–7 m</strong>；<br />
 - 這個警報熱點可維持 <strong>12–36 小時</strong>。</p>
 <p><strong>釣魚實戰意義</strong>：</p>
 <table>
@@ -1181,7 +1198,7 @@ body {
 <h3 id="52">5.2 不同水體的選棲邏輯</h3>
 <h4 id="_8">水庫：在舒服層和安全層之間來回算帳</h4>
 <p>深水水庫夏季常建立 <strong>3–5 m</strong> 躍溫層。平常黑鱸常卡在躍溫層上方到中層結構帶，因為那裡通常同時具備：還不算太熱、氧還夠、餌魚會沿著分層線走。</p>
-<p>但一遇到暴雨異重流，北部深水水庫可被 <strong>20°C、TSS（總懸浮固體，數值越高代表水越混濁）&gt;3000 mg/L</strong> 的重泥冷水切進去，形成 <strong>5.55 kg/m³</strong> 的密度差，甚至直搗 <strong>25 m</strong> 深槽。這時原本躲在 <strong>10–15 m</strong> 的魚，會被迫一次往上逃 <strong>10–15 m</strong>。</p>
+<p>但一遇到暴雨異重流，北部深水水庫可被 <strong>20°C、<span class="gl-trigger" data-term="tss">TSS</span>（總懸浮固體，數值越高代表水越混濁）&gt;3000 mg/L</strong> 的重泥冷水切進去，形成 <strong>5.55 kg/m³</strong> 的密度差，甚至直搗 <strong>25 m</strong> 深槽。這時原本躲在 <strong>10–15 m</strong> 的魚，會被迫一次往上逃 <strong>10–15 m</strong>。</p>
 <h4 id="_9">埤塘：淺水暖區和深水避熱區輪流值班</h4>
 <p>淺水埤塘的魚位通常很立體：</p>
 <ul>
@@ -1189,13 +1206,13 @@ body {
 <li>中午、大太陽、缺氧：退到稍深處、陰影、進排水口。</li>
 </ul>
 <p>但若底部已經臭掉，就不是「深比較好」。<strong>研究精算後確認</strong>：<br />
-- 南部高溫爛底時，黑鱸反而必須離底至少 <strong>≥86 cm</strong> 才能避開 H₂S 毒帶（靜水條件）；<br />
-- 北部 Fe²⁺ 問題水域，安全離底距離為 <strong>40 cm</strong>。</p>
+- 南部高溫爛底時，黑鱸反而必須離底至少 <strong>≥86 cm</strong> 才能避開 <span class="gl-trigger" data-term="h2s">H₂S</span> 毒帶（靜水條件）；<br />
+- 北部 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 問題水域，安全離底距離為 <strong>40 cm</strong>。</p>
 <p>這些數字的細節與推導原理，請見第三章 §3.7。</p>
 <h4 id="_10">魚塭／管理池：邊緣結構很重要，但機器比地形更重要</h4>
 <p>管理池的魚位，常先問一句：<strong>水車有沒有開？</strong></p>
 <ul>
-<li>北部管理池：停機後底層 DO 約以 <strong>0.85 mg/L/hr</strong> 速度下滑，約 <strong>6 小時</strong>跌破 <strong>2.0 mg/L</strong>。</li>
+<li>北部管理池：停機後底層 <span class="gl-trigger" data-term="do">DO</span> 約以 <strong>0.85 mg/L/hr</strong> 速度下滑，約 <strong>6 小時</strong>跌破 <strong>2.0 mg/L</strong>。</li>
 <li>南部管理池：極端高溫下可達 <strong>1.41 mg/L/hr</strong>，<strong>3.5 小時</strong>就可能出事。</li>
 </ul>
 <p>所以魚不只是沿邊、靠障礙物而已，牠還會沿著「氧氣留下來的地方」站。很多時候最有價值的不是草、不是石，是<strong>殘存高氧核心區</strong>。</p>
@@ -1230,10 +1247,10 @@ body {
 <li>翻水後：底層毒水上湧，魚被迫懸浮 <strong>1.0–1.5 m</strong> 中層。</li>
 </ul>
 <p><strong>秋末策略</strong>：桃園釣手要比台北模型早一個月警覺翻水，10 月下旬起就要留意冷鋒後的翻水訊號。</p>
-<h4 id="fe2-34">Fe²⁺ 危險帶比台北早 3–4 週</h4>
-<p>Zone-B 春季升溫早，底泥缺氧時間提前，<strong>5 月下旬</strong>就可能進入 Fe²⁺ 高危帶（Zone-A：6 月中旬）。安全離底距離同樣是 <strong>40 cm</strong>（Fick精算值）。</p>
+<h4 id="fe2-34"><span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶比台北早 3–4 週</h4>
+<p>Zone-B 春季升溫早，底泥缺氧時間提前，<strong>5 月下旬</strong>就可能進入 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 高危帶（Zone-A：6 月中旬）。安全離底距離同樣是 <strong>40 cm</strong>（Fick精算值）。</p>
 <h4 id="_13">管理池水車停機重啟的額外危險</h4>
-<p>桃園許多管理池若水車停機 <strong>≥4 小時</strong>後重新啟動，頭 <strong>1–2 小時</strong>因底層翻攪，H₂S 可能湧升至水面下 <strong>30–50 cm</strong> 的位置。這段時間即使水面看起來正常，底層附近也可能是危險帶。</p>
+<p>桃園許多管理池若水車停機 <strong>≥4 小時</strong>後重新啟動，頭 <strong>1–2 小時</strong>因底層翻攪，<span class="gl-trigger" data-term="h2s">H₂S</span> 可能湧升至水面下 <strong>30–50 cm</strong> 的位置。這段時間即使水面看起來正常，底層附近也可能是危險帶。</p>
 <h3 id="55-k">5.5 容載量（K 值）：一片水到底養得起多少黑鱸？</h3>
 <p>K 值你可以把它理解成「這間公寓最多能住幾戶，而且還不會亂掉」。</p>
 <p>研究估算，台灣不同水體的自然 K 值大約落在 <strong>30–180 尾／公頃（ind/ha）</strong>，但「理論能養」不等於「最後養得住」。</p>
@@ -1296,17 +1313,17 @@ body {
 <li>往上看水面的輪廓很敏感。</li>
 </ul>
 <p>實戰上最關鍵的軸向，可以抓成：<strong>前上方約 30–45°</strong>。這也是很多魚為什麼喜歡從下往上頂、從前下方追、卻不愛直接朝腳下啄。</p>
-<h3 id="62-cff">6.2 CFF（閃光融合頻率）：魚看假餌的「影像刷新率」</h3>
+<h3 id="62-cff">6.2 <span class="gl-trigger" data-term="cff">CFF</span>（閃光融合頻率）：魚看假餌的「影像刷新率」</h3>
 <blockquote>
-<p><strong>什麼是 CFF？</strong><br />
-閃爍融合頻率（Critical Flicker Fusion，CFF）是一個描述「眼睛多快才能分辨兩個閃爍是兩個事件，而不是一個殘影」的指標。就像電視螢幕的更新率——人眼大約 24–30 Hz 以上就看不出在閃爍，感覺是連續畫面；低於這個頻率才覺得在閃。對魚來說，CFF 決定了牠能否清楚識別假餌的動作節奏。</p>
+<p><strong>什麼是 <span class="gl-trigger" data-term="cff">CFF</span>？</strong><br />
+閃爍融合頻率（Critical Flicker Fusion，<span class="gl-trigger" data-term="cff">CFF</span>）是一個描述「眼睛多快才能分辨兩個閃爍是兩個事件，而不是一個殘影」的指標。就像電視螢幕的更新率——人眼大約 24–30 Hz 以上就看不出在閃爍，感覺是連續畫面；低於這個頻率才覺得在閃。對魚來說，<span class="gl-trigger" data-term="cff">CFF</span> 決定了牠能否清楚識別假餌的動作節奏。</p>
 </blockquote>
-<p><strong>黑鱸的 CFF 不是固定的，光線條件不同，數值差很多：</strong></p>
+<p><strong>黑鱸的 <span class="gl-trigger" data-term="cff">CFF</span> 不是固定的，光線條件不同，數值差很多：</strong></p>
 <table>
 <thead>
 <tr>
 <th>光線環境</th>
-<th>黑鱸 CFF</th>
+<th>黑鱸 <span class="gl-trigger" data-term="cff">CFF</span></th>
 <th>白話意思</th>
 </tr>
 </thead>
@@ -1334,22 +1351,22 @@ body {
 </tbody>
 </table>
 <p><strong>這有什麼釣魚意義？</strong></p>
-<p>假餌的搖擺頻率如果超過當時的 CFF，魚眼的視神經無法區分個別擺動，會把連續動作訊號<strong>融合成一個穩定影像</strong>——就像日光燈以 60 Hz 閃爍，人眼卻看不出閃爍、只感覺是穩定白光。這時黑鱸無法確認這是有動作的食物，OFT 的「可否下嘴」審查通不過，通常就不咬。</p>
+<p>假餌的搖擺頻率如果超過當時的 <span class="gl-trigger" data-term="cff">CFF</span>，魚眼的視神經無法區分個別擺動，會把連續動作訊號<strong>融合成一個穩定影像</strong>——就像日光燈以 60 Hz 閃爍，人眼卻看不出閃爍、只感覺是穩定白光。這時黑鱸無法確認這是有動作的食物，<span class="gl-trigger" data-term="oft">OFT</span> 的「可否下嘴」審查通不過，通常就不咬。</p>
 <p>還有一個更細膩的問題叫做 <strong>Foveal Fusion（中心視野融合）</strong>：</p>
 <blockquote>
 <p>黑鱸在遠處用眼睛邊緣（周邊視網膜）追蹤假餌；當牠切入攻擊角度、把假餌對準中央銳視區（眼睛解析度最高的區域）時，視網膜的時間解析模式可能改變——部分魚類研究顯示中央與周邊的時間融合閾值存在差異，但黑鱸尚無直接量測數據，以下為推論性解釋：</p>
-<p><strong>結果就是：你以為 Mid-Strolling 的速度夠慢，但對進入攻擊視角的魚來說，假餌的動作節奏可能突然超出有效感知範圍。</strong> 這就是有些魚追到最後一刻卻中途離場的可能原因之一。</p>
+<p><strong>結果就是：你以為 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 的速度夠慢，但對進入攻擊視角的魚來說，假餌的動作節奏可能突然超出有效感知範圍。</strong> 這就是有些魚追到最後一刻卻中途離場的可能原因之一。</p>
 </blockquote>
 <p><strong>怎麼實際操作？</strong></p>
 <p>📌 <strong>先搞清楚你控制的是什麼</strong></p>
 <p>你能直接控制的是<strong>收線速度（m/s）</strong>。<br />
-但魚的 CFF 只認<strong>路亞每秒振幾下（Hz）</strong>，不認你的速度。<br />
-兩者的關係是：<strong>收線速度（m/s）→ 決定路亞振動頻率（Hz）→ 和魚的 CFF 比大小。</strong><br />
+但魚的 <span class="gl-trigger" data-term="cff">CFF</span> 只認<strong>路亞每秒振幾下（Hz）</strong>，不認你的速度。<br />
+兩者的關係是：<strong>收線速度（m/s）→ 決定路亞振動頻率（Hz）→ 和魚的 <span class="gl-trigger" data-term="cff">CFF</span> 比大小。</strong><br />
 同樣的速度，不同路亞振出不同 Hz——所以路亞種類選對了才有意義。</p>
 <hr />
 <p><strong>① 情境一：白天、陽光充足</strong></p>
 <ul>
-<li>魚的 CFF：<strong>30–60 Hz</strong>（上限最高）</li>
+<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span>：<strong>30–60 Hz</strong>（上限最高）</li>
 <li>收線速度：<strong>0.5–1.0 m/s</strong> 正常收</li>
 <li>路亞振動：軟蟲約 1–5 Hz、搖擺假餌約 5–12 Hz、鐵板可達 20+ Hz</li>
 <li><strong>結論</strong>：白天怎麼收都沒問題，所有常見路亞振動頻率都遠低於上限，魚看得很清楚</li>
@@ -1357,7 +1374,7 @@ body {
 <hr />
 <p><strong>② 情境二：傍晚 / 陰天 / 光線明顯變暗</strong></p>
 <ul>
-<li>魚的 CFF 下移到：<strong>15–30 Hz</strong></li>
+<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span> 下移到：<strong>15–30 Hz</strong></li>
 <li>鐵板類路亞（20+ Hz）開始超標——魚可能看不清楚</li>
 <li>必須<strong>放慢速度到 0.2–0.4 m/s</strong>；改用軟蟲（0.5–2 Hz）或搖擺假餌（2–5 Hz）</li>
 <li><strong>結論</strong>：光線暗了，路亞要換慢、換軟，速度也要降</li>
@@ -1365,7 +1382,7 @@ body {
 <hr />
 <p><strong>③ 情境三：夜間</strong></p>
 <ul>
-<li>魚的 CFF 再降到：<strong>10–15 Hz</strong></li>
+<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span> 再降到：<strong>10–15 Hz</strong></li>
 <li>幾乎所有高頻自振路亞都超標（鐵板、無嘴路亞直接out）</li>
 <li><strong>改用軟蟲慢漂</strong>，目標振動 &lt; 10 Hz</li>
 <li>夜釣的重點是讓魚用<strong>側線</strong>感知你，視覺退為次要</li>
@@ -1373,8 +1390,8 @@ body {
 <hr />
 <p><strong>④ 情境四：低水溫（水溫 &lt; 13°C）</strong></p>
 <ul>
-<li>低溫會讓 CFF 再往下掉，<strong>不論白天還是晚上都適用</strong></li>
-<li>低溫 + 夜間同時發生：CFF 可能跌到 <strong>&lt; 5 Hz</strong>，路亞幾乎要靜止漂流才有效</li>
+<li>低溫會讓 <span class="gl-trigger" data-term="cff">CFF</span> 再往下掉，<strong>不論白天還是晚上都適用</strong></li>
+<li>低溫 + 夜間同時發生：<span class="gl-trigger" data-term="cff">CFF</span> 可能跌到 <strong>&lt; 5 Hz</strong>，路亞幾乎要靜止漂流才有效</li>
 <li>此時視覺幾乎失效，<strong>完全依靠側線和化學感知</strong>驅動咬餌</li>
 </ul>
 <h3 id="63">6.3 顏色與水色：怎麼選才有效</h3>
@@ -1439,10 +1456,10 @@ body {
 </ul>
 <p>這意味著：</p>
 <ul>
-<li>大尾軟餌的尾擺、Spinnerbait 的<strong>推水</strong>（路亞移動時擠壓前方水體所產生的壓力波，由魚的側線感知）、波浪邊的翻滾，都能被側線讀到。</li>
+<li>大尾軟餌的尾擺、Spinnerbait 的<strong><span class="gl-trigger" data-term="tuishui">推水</span></strong>（路亞移動時擠壓前方水體所產生的壓力波，由魚的側線感知）、波浪邊的翻滾，都能被側線讀到。</li>
 <li>當濁度高、夜裡黑、或視覺死區擴大時，側線的重要性會急速上升。</li>
 </ul>
-<p>研究甚至指出，當濁度高到 <strong>40 NTU</strong>（濁度單位，數值越高越混濁；清水約 1–5 NTU，台灣豪雨後可達數百 NTU）以上，感官主導權常會從視覺轉移到側線。</p>
+<p>研究甚至指出，當濁度高到 <strong>40 <span class="gl-trigger" data-term="ntu">NTU</span></strong>（濁度單位，數值越高越混濁；清水約 1–5 <span class="gl-trigger" data-term="ntu">NTU</span>，台灣豪雨後可達數百 <span class="gl-trigger" data-term="ntu">NTU</span>）以上，感官主導權常會從視覺轉移到側線。</p>
 <h3 id="66">6.6 內耳（聽覺）：水裡的低頻線索</h3>
 <p>黑鱸不是只靠「聽見聲音」，更像是在感受<strong>聲波帶來的粒子加速度</strong>。</p>
 <ul>
@@ -1459,7 +1476,7 @@ body {
 </ul>
 <p>翻成釣魚話就是：</p>
 <ul>
-<li>風大浪高、藻多、水黏、很濁時，太細碎的高頻響珠，不一定比大低頻推水有用。</li>
+<li>風大浪高、藻多、水黏、很濁時，太細碎的高頻響珠，不一定比大低頻<span class="gl-trigger" data-term="tuishui">推水</span>有用。</li>
 <li>這時候<strong>大片葉、低頻震動、強水壓脈衝</strong>常更有效。</li>
 </ul>
 <h3 id="68">6.8 三感官整合：不同情境誰當老大？</h3>
@@ -1477,18 +1494,18 @@ body {
 <td>清水白天</td>
 <td>視覺</td>
 <td>內耳、側線</td>
-<td>顏色、輪廓、角度、追擊線；確保假餌節奏在 CFF 閾值內</td>
+<td>顏色、輪廓、角度、追擊線；確保假餌節奏在 <span class="gl-trigger" data-term="cff">CFF</span> 閾值內</td>
 </tr>
 <tr>
 <td>濁水或雨後</td>
 <td>側線</td>
 <td>內耳</td>
-<td>推水、低頻、近距離存在感</td>
+<td><span class="gl-trigger" data-term="tuishui">推水</span>、低頻、近距離存在感</td>
 </tr>
 <tr>
 <td>夜間</td>
 <td>側線＋內耳</td>
-<td>視覺（CFF 已下移！）</td>
+<td>視覺（<span class="gl-trigger" data-term="cff">CFF</span> 已下移！）</td>
 <td>輪廓、節奏、震動；速度要放慢至 0.2–0.4 m/s</td>
 </tr>
 <tr>
@@ -1501,19 +1518,19 @@ body {
 <td>北部翻水後</td>
 <td>側線</td>
 <td>內耳（化學感知幾乎失效）</td>
-<td>低頻推水；Schreckstoff 傳遞範圍 &lt;0.5 m，中魚後需換點但稍候即可回</td>
+<td>低頻<span class="gl-trigger" data-term="tuishui">推水</span>；<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 傳遞範圍 &lt;0.5 m，中魚後需換點但稍候即可回</td>
 </tr>
 <tr>
 <td>南部中魚後原點</td>
 <td>—</td>
 <td>—</td>
-<td>Schreckstoff 可持續 12–36 hr，4–7 m 範圍；換到 8 m 外</td>
+<td><span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 可持續 12–36 hr，4–7 m 範圍；換到 8 m 外</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_15">第七章：讓鱸魚開口——掠食心理解碼</h2>
-<h3 id="71-oft">7.1 最佳覓食理論（OFT）的白話版：黑鱸在算「時薪」</h3>
+<h3 id="71-oft">7.1 最佳覓食理論（<span class="gl-trigger" data-term="oft">OFT</span>）的白話版：黑鱸在算「時薪」</h3>
 <p>黑鱸不是看到什麼都咬。牠更像在心裡算一個很快的帳：</p>
 <p><strong>這一口要花多少力氣？值不值得？</strong></p>
 <p>如果一口要追很遠、轉很急、吞很久、還不一定吞得下，那對牠來說就是低時薪工作。</p>
@@ -1532,11 +1549,11 @@ body {
 <h3 id="73">7.3 飼料印記效應：管理池的魚，從小就被教成另一種腦袋</h3>
 <p>研究指出，養殖或長期管理環境中的黑鱸，會對顆粒飼料的聲音、大小、下沉節奏形成印記。這種印記可能持續<strong>數週到數月</strong>。</p>
 <p>所以有些管理池魚為什麼特別吃某些下沉式假餌？因為牠不是在辨識「餌魚」，而是在辨識「熟悉的投餌邏輯」。</p>
-<h3 id="74-reaction-strike">7.4 反射性咬餌（Reaction Strike）：不是餓，是嚇到來不及想</h3>
+<h3 id="74-reaction-strike">7.4 反射性咬餌（<span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span>）：不是餓，是嚇到來不及想</h3>
 <p>當假餌以足夠快的速度切過視野，黑鱸不一定是因為想吃，可能是因為大腦<strong>來不及理性否決</strong>。</p>
 <p>研究指出，真正能逼出反射性咬餌的最小線性速度，大約是 <strong>1.5–1.8 m/s</strong>。</p>
 <p>低於這個速度，魚還有時間想；高於這個速度，中腦視頂蓋直接下命令：「先咬再說。」</p>
-<p>所以 Reaction Strike 常見於：</p>
+<p>所以 <span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span> 常見於：</p>
 <ul>
 <li>快速移動；</li>
 <li>突然轉向；</li>
@@ -1549,25 +1566,25 @@ body {
 <li>被釣放過多次；</li>
 <li>常看見人造餌；</li>
 <li>長期待在高噪聲、高干擾池；</li>
-<li>基礎皮質醇偏高。</li>
+<li>基礎<span class="gl-trigger" data-term="pizichun">皮質醇</span>偏高。</li>
 </ul>
-<p>研究推估，老魚型個體的靜息皮質醇可能偏到 <strong>≥30 ng/mL</strong>，遠高於一般新魚大約 <strong>6 ng/mL</strong> 左右的基線。這種魚的端腦否決權會更強。</p>
-<h3 id="76-mid-strollingfollower-rejectionalert-reset">7.6 Mid-Strolling、Follower Rejection、Alert Reset</h3>
-<h4 id="mid-strolling">Mid-Strolling（游走不咬）</h4>
+<p>研究推估，老魚型個體的靜息<span class="gl-trigger" data-term="pizichun">皮質醇</span>可能偏到 <strong>≥30 ng/mL</strong>，遠高於一般新魚大約 <strong>6 ng/mL</strong> 左右的基線。這種魚的端腦否決權會更強。</p>
+<h3 id="76-mid-strollingfollower-rejectionalert-reset">7.6 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>、<span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>、Alert Reset</h3>
+<h4 id="mid-strolling"><span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>（游走不咬）</h4>
 <p>當假餌以 <strong>0.5–1.0 m/s</strong> 緩慢移動，路亞在水中產生<strong>低頻自振節奏</strong>（軟蟲約 1–5 Hz、搖擺假餌約 5–12 Hz；此為路亞本身的自振頻率，釣手手動操控實際不超過 3–7 Hz），魚會進入一種像被催眠的慢速跟隨狀態。牠有興趣，但還沒下最後決心。</p>
 <blockquote>
-<p>⚠️ <strong>光線條件修正（SUP-A）</strong>：0.5–1.0 m/s 的速度設定，只在<strong>白天、明視覺</strong>條件下有效（CFF 30–60 Hz，路亞自振節奏遠低於閾值）。在<strong>低光、傍晚、夜間或寒冷水域</strong>，黑鱸的 CFF 已下移至 10–15 Hz 甚至 &lt;10 Hz；此時搖擺假餌（5–12 Hz）或無嘴路亞（20+ Hz）的自振節奏就超過 CFF 極限，個別擺動在魚眼中融合成一個連續平滑的動作，魚無法識別擺動節奏，Mid-Strolling 失效。<strong>低光條件下，移動速度必須降至 0.2–0.4 m/s</strong>，改用低自振頻率軟蟲，才能讓假餌節奏回到暗視覺 CFF 以內。</p>
+<p>⚠️ <strong>光線條件修正（SUP-A）</strong>：0.5–1.0 m/s 的速度設定，只在<strong>白天、明視覺</strong>條件下有效（<span class="gl-trigger" data-term="cff">CFF</span> 30–60 Hz，路亞自振節奏遠低於閾值）。在<strong>低光、傍晚、夜間或寒冷水域</strong>，黑鱸的 <span class="gl-trigger" data-term="cff">CFF</span> 已下移至 10–15 Hz 甚至 &lt;10 Hz；此時搖擺假餌（5–12 Hz）或無嘴路亞（20+ Hz）的自振節奏就超過 <span class="gl-trigger" data-term="cff">CFF</span> 極限，個別擺動在魚眼中融合成一個連續平滑的動作，魚無法識別擺動節奏，<span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 失效。<strong>低光條件下，移動速度必須降至 0.2–0.4 m/s</strong>，改用低自振頻率軟蟲，才能讓假餌節奏回到暗視覺 <span class="gl-trigger" data-term="cff">CFF</span> 以內。</p>
 </blockquote>
-<h4 id="follower-rejection">Follower Rejection（跟餌不咬）</h4>
+<h4 id="follower-rejection"><span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>（跟餌不咬）</h4>
 <p>研究指出，當魚靠近到 <strong>13.5–24 cm</strong>，已進入眼球近點極限，影像開始失焦。這時若你停太久，讓假餌靜下來超過 <strong>100 ms</strong>，魚就有時間把「看起來不太對」「沒有味道」「震動消失」「我以前好像被這玩意搞過」全部湊起來，然後轉頭走人。</p>
 <h4 id="alert-reset">Alert Reset（警覺重置）</h4>
 <p>魚被釣、被驚、被跑魚事件嚇到後，不是幾分鐘就忘記。</p>
-<p>研究提供了一份<strong>完整的 ART（Alert Reset Time）溫度矩陣</strong>。其中 20°C = 24 小時是來自實證研究（血乳酸與血糖回到靜息基線的量測值）；其他溫度依 Q₁₀=2.0 原則（溫度每降 10°C，化學反應速率減半，恢復時間約變兩倍）計算；5°C 一行為研究範圍外的外插估算值。信心等級：中。</p>
+<p>研究提供了一份<strong>完整的 <span class="gl-trigger" data-term="art">ART</span>（Alert Reset Time）溫度矩陣</strong>。其中 20°C = 24 小時是來自實證研究（血乳酸與血糖回到靜息基線的量測值）；其他溫度依 <span class="gl-trigger" data-term="q10">Q₁₀</span>=2.0 原則（溫度每降 10°C，化學反應速率減半，恢復時間約變兩倍）計算；5°C 一行為研究範圍外的外插估算值。信心等級：中。</p>
 <table>
 <thead>
 <tr>
 <th>水溫</th>
-<th>ART（警覺重置時間）</th>
+<th><span class="gl-trigger" data-term="art">ART</span>（警覺重置時間）</th>
 <th>釣手白話</th>
 </tr>
 </thead>
@@ -1610,16 +1627,16 @@ body {
 <tr>
 <td><strong>35°C</strong></td>
 <td><strong>8.5 小時</strong></td>
-<td>高溫時恢復最快，但若又遇缺氧，肝臟的皮質醇清除機制會失效，ART 反而趨近無窮大</td>
+<td>高溫時恢復最快，但若又遇缺氧，肝臟的<span class="gl-trigger" data-term="pizichun">皮質醇</span>清除機制會失效，<span class="gl-trigger" data-term="art">ART</span> 反而趨近無窮大</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>注意：<strong>35°C + 缺氧（DO &lt;2 mg/L）時，ART 不適用上表，實際上魚可能根本不會重置。</strong></p>
+<p>注意：<strong>35°C + 缺氧（<span class="gl-trigger" data-term="do">DO</span> &lt;2 mg/L）時，<span class="gl-trigger" data-term="art">ART</span> 不適用上表，實際上魚可能根本不會重置。</strong></p>
 </blockquote>
-<p>💡 <strong>ART 的適用範圍：端腦主導的主動覓食，不是「完全不咬」</strong></p>
-<p>ART 描述的是「主動覓食驅力（由端腦認知決策主導）」回到正常所需的時間。但是<strong>反射咬餌（Reaction Strike）在 ART 窗口內仍然可以觸發</strong>——只要假餌速度夠快（&gt;1.5 m/s），視頂蓋的反射迴路會直接繞過皮質醇阻斷的端腦，照樣攻擊。</p>
-<p>這也解釋了為什麼有時同一個點短時間再釣，換成快速系假餌偶爾仍能得手：不是魚「忘記了」，而是你換了一條繞路。但這條繞路只對反射系假餌有效；慢吞吞的 Finesse 在 ART 窗口內通常還是沒用。</p>
+<p>💡 <strong><span class="gl-trigger" data-term="art">ART</span> 的適用範圍：端腦主導的主動覓食，不是「完全不咬」</strong></p>
+<p><span class="gl-trigger" data-term="art">ART</span> 描述的是「主動覓食驅力（由端腦認知決策主導）」回到正常所需的時間。但是<strong>反射咬餌（<span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span>）在 <span class="gl-trigger" data-term="art">ART</span> 窗口內仍然可以觸發</strong>——只要假餌速度夠快（&gt;1.5 m/s），視頂蓋的反射迴路會直接繞過<span class="gl-trigger" data-term="pizichun">皮質醇</span>阻斷的端腦，照樣攻擊。</p>
+<p>這也解釋了為什麼有時同一個點短時間再釣，換成快速系假餌偶爾仍能得手：不是魚「忘記了」，而是你換了一條繞路。但這條繞路只對反射系假餌有效；慢吞吞的 Finesse 在 <span class="gl-trigger" data-term="art">ART</span> 窗口內通常還是沒用。</p>
 <p>所以很多時候不是這個點沒魚，而是<strong>這個點剛剛發生過一件讓魚全體進入警戒的事，主動覓食驅力要很久才能恢復——除非你能繞過端腦、直接打視頂蓋反射</strong>。</p>
 <hr />
 <h2 id="_16">第八章：視線與假餌——讓牠看到你想讓牠看到的</h2>
@@ -1724,7 +1741,7 @@ body {
 <td>魚縮短追擊距離，偏吃路過</td>
 </tr>
 <tr>
-<td>爛底、H₂S、翻水剛發生</td>
+<td>爛底、<span class="gl-trigger" data-term="h2s">H₂S</span>、翻水剛發生</td>
 <td><strong>避免真貼底</strong></td>
 <td>底部可能不是魚位，而是死亡層</td>
 </tr>
@@ -1737,9 +1754,9 @@ body {
 <p><strong>水質特徵（附數值）</strong>：</p>
 <ul>
 <li>水溫常 <strong>&gt;32°C</strong>，管理池可到 <strong>35.5°C</strong>。</li>
-<li>DO 常掉到 <strong>&lt;3 mg/L</strong>，水車停機後可在 <strong>3.5 小時</strong>內崩盤。</li>
-<li>Eh 會一路往下掉；真正最危險常發生在 <strong>&lt; -150 mV</strong>。</li>
-<li>H₂S 釋放可達 <strong>19–281 mmol/m²/day</strong>，0.8 m 水深可累積到 <strong>8.5 mg/L</strong>。</li>
+<li><span class="gl-trigger" data-term="do">DO</span> 常掉到 <strong>&lt;3 mg/L</strong>，水車停機後可在 <strong>3.5 小時</strong>內崩盤。</li>
+<li><span class="gl-trigger" data-term="eh">Eh</span> 會一路往下掉；真正最危險常發生在 <strong>&lt; -150 mV</strong>。</li>
+<li><span class="gl-trigger" data-term="h2s">H₂S</span> 釋放可達 <strong>19–281 mmol/m²/day</strong>，0.8 m 水深可累積到 <strong>8.5 mg/L</strong>。</li>
 </ul>
 <p><strong>魚的行為預測</strong>：</p>
 <ul>
@@ -1761,7 +1778,7 @@ body {
 <li>冷鋒可使氣溫 <strong>4–8°C/day</strong> 下滑；</li>
 <li>當表層接近 <strong>4°C</strong>、底層仍約 <strong>8°C</strong>，翻水閾值成立；</li>
 <li>配合 <strong>&gt;5 m/s</strong> 東北風，全混合只要 <strong>2–4 小時</strong>；</li>
-<li>DO 可能以 <strong>1.5–2.0 mg/L/hr</strong> 下降。</li>
+<li><span class="gl-trigger" data-term="do">DO</span> 可能以 <strong>1.5–2.0 mg/L/hr</strong> 下降。</li>
 </ul>
 <blockquote>
 <p><strong>Zone-B（桃竹苗）特別注意</strong>：Zone-B 翻水首次出現在 <strong>11 月</strong>，比 Zone-A（台北，12 月）早一個月；全年翻水次數 <strong>2–4 次</strong>（Zone-A 1–2 次）。桃園釣手要從 10 月下旬起就留意冷鋒後的翻水訊號。</p>
@@ -1781,7 +1798,7 @@ body {
 <h3 id="_20">【情境三：高有機負載管理池】</h3>
 <p><strong>水質特徵（附數值）</strong>：</p>
 <ul>
-<li>常見 <strong>COD &gt;20 mg/L</strong>（化學需氧量，測量水中有機廢物總量；乾淨水體通常 &lt;5 mg/L，超過 20 代表飼料殘渣與排泄物大量堆積，耗氧嚴重、臭底風險高）；</li>
+<li>常見 <strong><span class="gl-trigger" data-term="cod">COD</span> &gt;20 mg/L</strong>（化學需氧量，測量水中有機廢物總量；乾淨水體通常 &lt;5 mg/L，超過 20 代表飼料殘渣與排泄物大量堆積，耗氧嚴重、臭底風險高）；</li>
 <li>水車啟動時背景噪聲強；</li>
 <li>停機後很快分層；</li>
 <li>視覺常受濁度、藻與有機懸浮壓制。</li>
@@ -1794,10 +1811,10 @@ body {
 </ul>
 <p><strong>對應策略邏輯</strong>：</p>
 <ul>
-<li>水車開：用大推水、強存在感。</li>
+<li>水車開：用大<span class="gl-trigger" data-term="tuishui">推水</span>、強存在感。</li>
 <li>水車停：切微物、切細線、切低侵略感。</li>
-<li>對老魚可用 Mid-Strolling（白天條件）；但進近點後<strong>不要停超過 100 ms</strong>。</li>
-<li>⚠️ <strong>水車停機≥4hr 後重啟頭 1–2hr</strong>：底層翻攪，H₂S 可能湧升至水面下 <strong>30–50 cm</strong>。這段時間不要把假餌沉到中下層，魚可能本身也在往上躲。</li>
+<li>對老魚可用 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>（白天條件）；但進近點後<strong>不要停超過 100 ms</strong>。</li>
+<li>⚠️ <strong>水車停機≥4hr 後重啟頭 1–2hr</strong>：底層翻攪，<span class="gl-trigger" data-term="h2s">H₂S</span> 可能湧升至水面下 <strong>30–50 cm</strong>。這段時間不要把假餌沉到中下層，魚可能本身也在往上躲。</li>
 </ul>
 <h3 id="_21">【情境四：颱風過境前後】</h3>
 <p><strong>水質特徵（附數值）</strong>：</p>
@@ -1816,7 +1833,7 @@ body {
 <ul>
 <li>前緣搶窗口可以快、可以找、可以廣搜。</li>
 <li>壓力掉太兇後別硬撐，常是白費力氣。</li>
-<li>過後先用低頻強推水；北部回清再轉視覺，南部則別太早換回清水打法。</li>
+<li>過後先用低頻強<span class="gl-trigger" data-term="tuishui">推水</span>；北部回清再轉視覺，南部則別太早換回清水打法。</li>
 </ul>
 <hr />
 <h2 id="_22">第十章：繁殖季節——春天的特殊行為</h2>
@@ -1842,15 +1859,15 @@ body {
 <li>砂礫硬底或健康根系巢，孵化率常有 <strong>90–93%</strong>；</li>
 <li>軟泥巢常直接掉到 <strong>20% 以下</strong>，甚至整巢覆沒。</li>
 </ul>
-<h3 id="103-ehfe2h2s">10.3 Eh、Fe²⁺、H₂S：為什麼臭底不適合當育嬰房</h3>
+<h3 id="103-ehfe2h2s">10.3 <span class="gl-trigger" data-term="eh">Eh</span>、<span class="gl-trigger" data-term="fe">Fe²⁺</span>、<span class="gl-trigger" data-term="h2s">H₂S</span>：為什麼臭底不適合當育嬰房</h3>
 <p>若底泥太還原：</p>
 <ul>
-<li>北部會冒出較多 <strong>Fe²⁺</strong>；</li>
-<li>南部更怕 <strong>H₂S</strong>。</li>
+<li>北部會冒出較多 <strong><span class="gl-trigger" data-term="fe">Fe²⁺</span></strong>；</li>
+<li>南部更怕 <strong><span class="gl-trigger" data-term="h2s">H₂S</span></strong>。</li>
 </ul>
 <p>對蛋和稚魚來說，這不是「有點不舒服」，而是會直接切斷氧進不去、細胞活不下去。研究還指出，北部高嶺石泥殼若把卵包住，當懸浮黏土濃度達 <strong>139 mg/L</strong> 時，孵化率就可能掉到 <strong>57.7% 以下</strong>；若 <strong>&gt;500 mg/L</strong>，常跌到 <strong>30% 以下</strong>。</p>
-<p><strong>廢棄巢穴的 H₂S 死亡區</strong></p>
-<p>這是一個常被忽略的問題：<strong>被遺棄的黑鱸巢穴</strong>（卵未孵化、親魚棄巢），巢穴裡有機物腐敗，往往會在底部形成一個強烈的 H₂S 濃度中心，向四周擴散。</p>
+<p><strong>廢棄巢穴的 <span class="gl-trigger" data-term="h2s">H₂S</span> 死亡區</strong></p>
+<p>這是一個常被忽略的問題：<strong>被遺棄的黑鱸巢穴</strong>（卵未孵化、親魚棄巢），巢穴裡有機物腐敗，往往會在底部形成一個強烈的 <span class="gl-trigger" data-term="h2s">H₂S</span> 濃度中心，向四周擴散。</p>
 <p>研究用半球體擴散方程計算：直徑 50 cm 的廢棄巢穴，周圍會產生一個三維半球體死亡區，半徑 <strong>r = 1.6–2.3 m</strong>（直徑 3.2–4.6 m，佔底床面積約 <strong>8–17 m²</strong>）。</p>
 <p>更嚴重的是，當多個廢棄巢穴距離 <strong>&lt;4.6 m</strong>（各自毒氣雲開始交疊），相鄰死亡區疊加，會直接把底層大面積變成不可用的危險帶——這就是「骨牌效應」。當年度的幼魚招募率（多少幼魚成功存活）會因此大幅下降。</p>
 <p><strong>釣魚意義</strong>：春季繁殖後若釣場有明顯的廢棄巢跡象（大量沉底死卵、發黑底泥），原本的繁殖淺灘區反而可能變成地雷區，此時拉高假餌水層比貼底更安全。</p>
@@ -1870,10 +1887,10 @@ body {
 <li>微流能過但不會把巢沖掉；</li>
 <li>有一點遮蔭或立體結構。</li>
 </ul>
-<p>健康水草根際甚至能靠泌氧，做出一圈較高 Eh 的小安全帶，替蛋和稚魚擋掉部分化學毒害。</p>
+<p>健康水草根際甚至能靠泌氧，做出一圈較高 <span class="gl-trigger" data-term="eh">Eh</span> 的小安全帶，替蛋和稚魚擋掉部分化學毒害。</p>
 <p><strong>北部護巢魚化學警戒範圍很小</strong></p>
-<p>提到護巢防禦，很多人想象「魚聞到危險就會保護巢穴」。但北部酸水（pH 4.5–5.5）中，Schreckstoff（魚受傷時釋放的化學警報）半衰期只有數分鐘，有效感知半徑 <strong>&lt;0.5 m</strong>。這代表北部護巢雄魚對<strong>化學告警幾乎完全依賴視覺和側線</strong>，側翼的危險需要靠得更近才能感知到。這也解釋了為什麼北部護巢魚有時候「直到很近才反應」。</p>
-<p>南部（Zone-C）的護巢雄魚則可透過 Schreckstoff 熱點感知 4–7 m 外的傷亡事件，相對警戒範圍更廣。</p>
+<p>提到護巢防禦，很多人想象「魚聞到危險就會保護巢穴」。但北部酸水（<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5）中，<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>（魚受傷時釋放的化學警報）半衰期只有數分鐘，有效感知半徑 <strong>&lt;0.5 m</strong>。這代表北部護巢雄魚對<strong>化學告警幾乎完全依賴視覺和側線</strong>，側翼的危險需要靠得更近才能感知到。這也解釋了為什麼北部護巢魚有時候「直到很近才反應」。</p>
+<p>南部（Zone-C）的護巢雄魚則可透過 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 熱點感知 4–7 m 外的傷亡事件，相對警戒範圍更廣。</p>
 <h3 id="106">10.6 水位擾動：灌溉放水為什麼很傷</h3>
 <p>研究指出，只要：</p>
 <ul>
@@ -1923,7 +1940,7 @@ body {
 <td><strong>18–22°C</strong></td>
 <td>北低、南中</td>
 <td>北部偏深或避風結構；南部日照淺區有窗口</td>
-<td>北部慢、貼底或中層；南部可找中午升溫。ART ~48–68 hr（10–15°C），驚魚後等兩天</td>
+<td>北部慢、貼底或中層；南部可找中午升溫。<span class="gl-trigger" data-term="art">ART</span> ~48–68 hr（10–15°C），驚魚後等兩天</td>
 </tr>
 <tr>
 <td>2 月</td>
@@ -1953,7 +1970,7 @@ body {
 <td><strong>25–29°C</strong></td>
 <td>北高、南高</td>
 <td>北部最佳前向追擊期；南部清晨與陰影區好</td>
-<td>中層最萬用；南部午後慎防過熱。ART 約 20–24 hr</td>
+<td>中層最萬用；南部午後慎防過熱。<span class="gl-trigger" data-term="art">ART</span> 約 20–24 hr</td>
 </tr>
 <tr>
 <td>5 月</td>
@@ -1963,7 +1980,7 @@ body {
 <td><strong>28–32°C</strong></td>
 <td>北高、南中高</td>
 <td>北部埤塘旺季；南部魚開始躲陰與高氧帶</td>
-<td>北部可廣搜；南部改早晚與進水口。<strong>（Zone-B 5月下旬 Fe²⁺ 危險帶啟動，已需離底 40 cm！）</strong></td>
+<td>北部可廣搜；南部改早晚與進水口。<strong>（Zone-B 5月下旬 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動，已需離底 40 cm！）</strong></td>
 </tr>
 <tr>
 <td>6 月</td>
@@ -1973,7 +1990,7 @@ body {
 <td><strong>30–34°C</strong></td>
 <td>北中、南中低</td>
 <td>南部魚逐漸上浮離底；北部梅雨後依濁度換招</td>
-<td>南部優先氧氣；北部把握雨後回清。Zone-A 6 月中旬 Fe²⁺ 危險帶啟動</td>
+<td>南部優先氧氣；北部把握雨後回清。Zone-A 6 月中旬 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動</td>
 </tr>
 <tr>
 <td>7 月</td>
@@ -1983,7 +2000,7 @@ body {
 <td><strong>31–35.5°C</strong></td>
 <td>北中低、南低</td>
 <td>南部高氧核心 <strong>0.8–1.2 m</strong>；北部早晚較佳</td>
-<td>少追大範圍；打陰影、水車出水區、背風流。南部 H₂S 安全距離 ≥86 cm，水柱只剩上方 30–60 cm</td>
+<td>少追大範圍；打陰影、水車出水區、背風流。南部 <span class="gl-trigger" data-term="h2s">H₂S</span> 安全距離 ≥86 cm，水柱只剩上方 30–60 cm</td>
 </tr>
 <tr>
 <td>8 月</td>
@@ -1993,7 +2010,7 @@ body {
 <td><strong>31–35.5°C</strong></td>
 <td>北中低、南低</td>
 <td>南部最怕臭底缺氧；北部仍有清晨窗口</td>
-<td>南部以保命層為主；北部可打晨昏表中層。35°C 高溫下 ART=8.5 hr（但若缺氧則 ART 無限大）</td>
+<td>南部以保命層為主；北部可打晨昏表中層。35°C 高溫下 <span class="gl-trigger" data-term="art">ART</span>=8.5 hr（但若缺氧則 <span class="gl-trigger" data-term="art">ART</span> 無限大）</td>
 </tr>
 <tr>
 <td>9 月</td>
@@ -2061,7 +2078,7 @@ body {
 <li>先尊重繁殖與極端壓力時段，再談技巧。</li>
 </ul>
 <p>科學的價值，不是把釣魚變成考試；而是讓你知道哪些東西真的重要，哪些只是自我安慰。</p>
-<p>當你開始能用 <strong>18–22°C</strong> 去看繁殖啟動、用 <strong>DO 2–3 mg/L</strong> 去判斷魚是不是只剩保命模式、用 <strong>Eh -150 mV</strong> 去猜底下是不是已經不能待、用 <strong>1.5–1.8 m/s</strong> 去理解什麼叫真正的反射咬餌、用<strong>完整的 ART 矩陣</strong>去理解老魚在不同水溫下需要多久才能忘記驚嚇（5°C 要等 68 小時、20°C 要等 24 小時、30°C 只要 12 小時）、用 <strong>≥86 cm</strong> 或 <strong>40 cm</strong> 的安全離底距離去判斷底是棲位還是毒區、用暗視覺的 <strong>0.2–0.4 m/s</strong> 替代白天的 0.5–1.0 m/s Mid-Strolling，你看水的方式就會完全不同。</p>
+<p>當你開始能用 <strong>18–22°C</strong> 去看繁殖啟動、用 <strong><span class="gl-trigger" data-term="do">DO</span> 2–3 mg/L</strong> 去判斷魚是不是只剩保命模式、用 <strong><span class="gl-trigger" data-term="eh">Eh</span> -150 mV</strong> 去猜底下是不是已經不能待、用 <strong>1.5–1.8 m/s</strong> 去理解什麼叫真正的反射咬餌、用<strong>完整的 <span class="gl-trigger" data-term="art">ART</span> 矩陣</strong>去理解老魚在不同水溫下需要多久才能忘記驚嚇（5°C 要等 68 小時、20°C 要等 24 小時、30°C 只要 12 小時）、用 <strong>≥86 cm</strong> 或 <strong>40 cm</strong> 的安全離底距離去判斷底是棲位還是毒區、用暗視覺的 <strong>0.2–0.4 m/s</strong> 替代白天的 0.5–1.0 m/s <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>，你看水的方式就會完全不同。</p>
 <p>而當你看水的方式變了，釣魚自然就會變。</p>
 <p>你不一定每次都中魚。</p>
 <p>但你會越來越知道：</p>
@@ -2082,27 +2099,27 @@ body {
     <button id="glossary-close" aria-label="關閉術語面板">✕</button>
   </div>
   <dl class="gl-list">
-<div class="gl-item"><dt class="gl-term">DO</dt><dd class="gl-desc">溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。</dd></div>
-<div class="gl-item"><dt class="gl-term">Eh</dt><dd class="gl-desc">氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。</dd></div>
-<div class="gl-item"><dt class="gl-term">pH</dt><dd class="gl-desc">酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。</dd></div>
-<div class="gl-item"><dt class="gl-term">H₂S</dt><dd class="gl-desc">硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。</dd></div>
-<div class="gl-item"><dt class="gl-term">Fe²⁺ / Fe³⁺</dt><dd class="gl-desc">亞鐵（Fe²⁺，可溶）/ 三價鐵（Fe³⁺，不可溶）。底泥開始缺氧時 Fe³⁺ 被還原為 Fe²⁺ 溶入水中，是底質惡化的早期指標。</dd></div>
-<div class="gl-item"><dt class="gl-term">NTU</dt><dd class="gl-desc">濁度單位（Nephelometric Turbidity Unit）。清水約 1–5 NTU；台灣豪雨後可達數百 NTU；>40 時視覺有效距離大幅縮短。</dd></div>
-<div class="gl-item"><dt class="gl-term">TSS</dt><dd class="gl-desc">懸浮固體總量（Total Suspended Solids），單位 mg/L。颱風過後短期內大量增加，壓制魚的視覺感知範圍。</dd></div>
-<div class="gl-item"><dt class="gl-term">COD</dt><dd class="gl-desc">化學需氧量（Chemical Oxygen Demand）。測量水中有機廢物總量；乾淨水體 <5 mg/L，管理池 >20 mg/L 代表飼料殘渣與排泄物嚴重堆積，耗氧加速。</dd></div>
-<div class="gl-item"><dt class="gl-term">CFF</dt><dd class="gl-desc">臨界閃爍融合頻率（Critical Flicker Fusion），單位 Hz。超過此值，魚眼會把個別動作融合成連續影像（看不出節奏）。日間約 30–60 Hz，夜間 / 低溫下降至 10 Hz 以下。</dd></div>
-<div class="gl-item"><dt class="gl-term">ART</dt><dd class="gl-desc">警覺重置時間（Alert Reset Time）。魚被釣後，主動覓食驅力恢復所需時間。20°C 約 24 小時；10°C 約 48 小時；30°C 約 12 小時。只鎖住主動覓食——反射咬餌（Reaction Strike）在此期間仍可觸發。</dd></div>
-<div class="gl-item"><dt class="gl-term">Q₁₀</dt><dd class="gl-desc">溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。</dd></div>
-<div class="gl-item"><dt class="gl-term">推水</dt><dd class="gl-desc">路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。</dd></div>
-<div class="gl-item"><dt class="gl-term">C&R</dt><dd class="gl-desc">Catch & Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。</dd></div>
-<div class="gl-item"><dt class="gl-term">皮質醇</dt><dd class="gl-desc">壓力荷爾蒙（Cortisol），由 HPI 軸分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。</dd></div>
-<div class="gl-item"><dt class="gl-term">OFT</dt><dd class="gl-desc">最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。</dd></div>
-<div class="gl-item"><dt class="gl-term">HVF / LVF</dt><dd class="gl-desc">新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。</dd></div>
-<div class="gl-item"><dt class="gl-term">Mid-Strolling</dt><dd class="gl-desc">以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。</dd></div>
-<div class="gl-item"><dt class="gl-term">Follower Rejection</dt><dd class="gl-desc">魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。</dd></div>
-<div class="gl-item"><dt class="gl-term">Reaction Strike</dt><dd class="gl-desc">反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。</dd></div>
-<div class="gl-item"><dt class="gl-term">Schreckstoff</dt><dd class="gl-desc">受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。</dd></div>
-<div class="gl-item"><dt class="gl-term">FIE</dt><dd class="gl-desc">漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。</dd></div>
+<div class="gl-item" id="gl-do"><dt class="gl-term">DO</dt><dd class="gl-desc">溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。</dd></div>
+<div class="gl-item" id="gl-eh"><dt class="gl-term">Eh</dt><dd class="gl-desc">氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。</dd></div>
+<div class="gl-item" id="gl-ph"><dt class="gl-term">pH</dt><dd class="gl-desc">酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。</dd></div>
+<div class="gl-item" id="gl-h2s"><dt class="gl-term">H₂S</dt><dd class="gl-desc">硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。</dd></div>
+<div class="gl-item" id="gl-fe"><dt class="gl-term">Fe²⁺ / Fe³⁺</dt><dd class="gl-desc">亞鐵（Fe²⁺，可溶）/ 三價鐵（Fe³⁺，不可溶）。底泥開始缺氧時 Fe³⁺ 被還原為 Fe²⁺ 溶入水中，是底質惡化的早期指標。</dd></div>
+<div class="gl-item" id="gl-ntu"><dt class="gl-term">NTU</dt><dd class="gl-desc">濁度單位（Nephelometric Turbidity Unit）。清水約 1–5 NTU；台灣豪雨後可達數百 NTU；>40 時視覺有效距離大幅縮短。</dd></div>
+<div class="gl-item" id="gl-tss"><dt class="gl-term">TSS</dt><dd class="gl-desc">懸浮固體總量（Total Suspended Solids），單位 mg/L。颱風過後短期內大量增加，壓制魚的視覺感知範圍。</dd></div>
+<div class="gl-item" id="gl-cod"><dt class="gl-term">COD</dt><dd class="gl-desc">化學需氧量（Chemical Oxygen Demand）。測量水中有機廢物總量；乾淨水體 <5 mg/L，管理池 >20 mg/L 代表飼料殘渣與排泄物嚴重堆積，耗氧加速。</dd></div>
+<div class="gl-item" id="gl-cff"><dt class="gl-term">CFF</dt><dd class="gl-desc">臨界閃爍融合頻率（Critical Flicker Fusion），單位 Hz。超過此值，魚眼會把個別動作融合成連續影像（看不出節奏）。日間約 30–60 Hz，夜間 / 低溫下降至 10 Hz 以下。</dd></div>
+<div class="gl-item" id="gl-art"><dt class="gl-term">ART</dt><dd class="gl-desc">警覺重置時間（Alert Reset Time）。魚被釣後，主動覓食驅力恢復所需時間。20°C 約 24 小時；10°C 約 48 小時；30°C 約 12 小時。只鎖住主動覓食——反射咬餌（Reaction Strike）在此期間仍可觸發。</dd></div>
+<div class="gl-item" id="gl-q10"><dt class="gl-term">Q₁₀</dt><dd class="gl-desc">溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。</dd></div>
+<div class="gl-item" id="gl-tuishui"><dt class="gl-term">推水</dt><dd class="gl-desc">路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。</dd></div>
+<div class="gl-item" id="gl-cr"><dt class="gl-term">C&R</dt><dd class="gl-desc">Catch &amp; Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。</dd></div>
+<div class="gl-item" id="gl-pizichun"><dt class="gl-term">皮質醇</dt><dd class="gl-desc">壓力荷爾蒙（Cortisol），由 HPI 軸分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。</dd></div>
+<div class="gl-item" id="gl-oft"><dt class="gl-term">OFT</dt><dd class="gl-desc">最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。</dd></div>
+<div class="gl-item" id="gl-hvf-lvf"><dt class="gl-term">HVF / LVF</dt><dd class="gl-desc">新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。</dd></div>
+<div class="gl-item" id="gl-mid-strolling"><dt class="gl-term">Mid-Strolling</dt><dd class="gl-desc">以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。</dd></div>
+<div class="gl-item" id="gl-follower-rejection"><dt class="gl-term">Follower Rejection</dt><dd class="gl-desc">魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。</dd></div>
+<div class="gl-item" id="gl-reaction-strike"><dt class="gl-term">Reaction Strike</dt><dd class="gl-desc">反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。</dd></div>
+<div class="gl-item" id="gl-schreckstoff"><dt class="gl-term">Schreckstoff</dt><dd class="gl-desc">受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。</dd></div>
+<div class="gl-item" id="gl-fie"><dt class="gl-term">FIE</dt><dd class="gl-desc">漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。</dd></div>
   </dl>
 </div>
 <button id="glossary-btn" aria-label="開啟術語速查">📖 術語</button>
@@ -2213,6 +2230,21 @@ glossaryBtn.addEventListener('click', () => {
 glossaryClose.addEventListener('click', closeGlossary);
 glossaryOverlay.addEventListener('click', closeGlossary);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGlossary(); });
+
+// ── 術語點擊連動（事件委派）────────────────────────────────
+document.getElementById('content').addEventListener('click', e => {
+  const trigger = e.target.closest('.gl-trigger');
+  if (!trigger) return;
+  const termId = trigger.dataset.term;
+  openGlossary();
+  const item = document.getElementById('gl-' + termId);
+  if (!item) return;
+  item.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  item.classList.remove('gl-highlighted');
+  void item.offsetWidth; // force reflow to restart animation
+  item.classList.add('gl-highlighted');
+  item.addEventListener('animationend', () => item.classList.remove('gl-highlighted'), { once: true });
+});
 
   </script>
 </body>
