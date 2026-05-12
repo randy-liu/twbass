@@ -50,6 +50,7 @@ TERM_PATTERNS = [
     ("tss",                r'(?<![A-Za-z])TSS(?![A-Za-z])'),
     ("cod",                r'(?<![A-Za-z])COD(?![A-Za-z])'),
     ("cff",                r'(?<![A-Za-z])CFF(?![A-Za-z])'),
+    ("art",                r'Alert Reset Time'),
     ("art",                r'(?<![A-Za-z])ART(?![A-Za-z])'),
     ("q10",                r'Q₁₀'),
     ("tuishui",            r'推水'),
