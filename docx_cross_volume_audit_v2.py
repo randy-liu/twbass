@@ -5,7 +5,7 @@ from pathlib import Path
 
 from docx import Document
 
-BASE = Path(r"C:\Research\twbass-data")
+BASE = Path(__file__).resolve().parent.parent  # docx 研究報告位於 repo 上層目錄
 FILES = OrderedDict([
     ("0A1", BASE / "0A1_台灣氣候forcing與區域差異研究.docx"),
     ("0B", BASE / "0B_南北成土母質與地球化學基底.docx"),
