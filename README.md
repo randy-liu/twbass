@@ -234,3 +234,15 @@ SUP-B ──> 1B1（V1B-05/06 精算）／3B1（Unresolved 標記）／4A（CI-0
 如果你忘記順序，記這句就夠了：
 
 > **先做 `0A + 0B`，再做 `0C`，再做 `0D`；後面大多數卷優先吃 `0D`。**
+
+---
+
+## 授權條款
+
+本作品採用 [創用CC 姓名標示－非商業性－相同方式分享 4.0 國際授權條款](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant)。
+
+[![CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hant)
+
+- **姓名標示**：使用或引用本作品須標示原作者
+- **非商業性**：禁止將本作品用於商業目的
+- **相同方式分享**：衍生作品須採用相同授權條款釋出
