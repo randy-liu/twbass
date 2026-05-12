@@ -310,6 +310,12 @@ body {
   flex: 1;
   min-width: 0;
   padding: 48px 32px 80px;
+  transition: margin-right 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* 術語面板開啟時：桌機推擠主內容讓位（無遮罩） */
+body.glossary-open #main-wrapper {
+  margin-right: 340px;
 }
 
 #content {
@@ -484,6 +490,10 @@ body {
   #content h1 { font-size: 1.4rem; }
   #content h2 { font-size: 1.15rem; }
 
+  /* 手機：恢復 overlay；取消桌機 margin 推擠 */
+  #glossary-overlay.open { display: block; }
+  body.glossary-open #main-wrapper { margin-right: 0; }
+
   /* 手機：底部 bottom sheet */
   #glossary-panel {
     top: auto !important;
@@ -536,7 +546,7 @@ body {
   background: rgba(0,0,0,0.45);
   z-index: 290;
 }
-#glossary-overlay.open { display: block; }
+/* overlay only shown on mobile (see @media block below) */
 
 #glossary-panel {
   position: fixed;
@@ -726,11 +736,13 @@ function openGlossary() {
   glossaryPanel.classList.add('open');
   glossaryOverlay.classList.add('open');
   glossaryBtn.setAttribute('aria-expanded', 'true');
+  document.body.classList.add('glossary-open');
 }
 function closeGlossary() {
   glossaryPanel.classList.remove('open');
   glossaryOverlay.classList.remove('open');
   glossaryBtn.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('glossary-open');
   if (activeGlItem) { activeGlItem.classList.remove('gl-highlighted'); activeGlItem = null; }
 }
 
