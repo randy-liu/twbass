@@ -11,29 +11,30 @@ SRC = Path(__file__).parent / "台灣大嘴黑鱸白皮書.md"
 OUT = Path(__file__).parent / "docs" / "index.html"
 
 # ── 術語速查資料 ──────────────────────────────────────────────────────────
-# 每條: (id, term_display, description)
+# 每條: (id, term_display, zh_alias, description)
+# zh_alias 為空字串代表無別名
 GLOSSARY = [
-    ("do",                  "DO",               "溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。"),
-    ("eh",                  "Eh",               "氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。"),
-    ("ph",                  "pH",               "酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。"),
-    ("h2s",                 "H₂S",              "硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。"),
-    ("fe",                  "Fe²⁺ / Fe³⁺",      "亞鐵（Fe²⁺，可溶）/ 三價鐵（Fe³⁺，不可溶）。底泥開始缺氧時 Fe³⁺ 被還原為 Fe²⁺ 溶入水中，是底質惡化的早期指標。"),
-    ("ntu",                 "NTU",              "濁度單位（Nephelometric Turbidity Unit）。清水約 1–5 NTU；台灣豪雨後可達數百 NTU；>40 時視覺有效距離大幅縮短。"),
-    ("tss",                 "TSS",              "懸浮固體總量（Total Suspended Solids），單位 mg/L。颱風過後短期內大量增加，壓制魚的視覺感知範圍。"),
-    ("cod",                 "COD",              "化學需氧量（Chemical Oxygen Demand）。測量水中有機廢物總量；乾淨水體 <5 mg/L，管理池 >20 mg/L 代表飼料殘渣與排泄物嚴重堆積，耗氧加速。"),
-    ("cff",                 "CFF",              "臨界閃爍融合頻率（Critical Flicker Fusion），單位 Hz。超過此值，魚眼會把個別動作融合成連續影像（看不出節奏）。日間約 30–60 Hz，夜間 / 低溫下降至 10 Hz 以下。"),
-    ("art",                 "ART",              "警覺重置時間（Alert Reset Time）。魚被釣後，主動覓食驅力恢復所需時間。20°C 約 24 小時；10°C 約 48 小時；30°C 約 12 小時。只鎖住主動覓食——反射咬餌（Reaction Strike）在此期間仍可觸發。"),
-    ("q10",                 "Q₁₀",              "溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。"),
-    ("tuishui",             "推水",             "路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。"),
-    ("cr",                  "C&R",              "Catch &amp; Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。"),
-    ("pizichun",            "皮質醇",           "壓力荷爾蒙（Cortisol），由 HPI 軸分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
-    ("oft",                 "OFT",              "最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。"),
-    ("hvf-lvf",             "HVF / LVF",        "新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。"),
-    ("mid-strolling",       "Mid-Strolling",    "以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。"),
-    ("follower-rejection",  "Follower Rejection","魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。"),
-    ("reaction-strike",     "Reaction Strike",  "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
-    ("schreckstoff",        "Schreckstoff",     "受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。"),
-    ("fie",                 "FIE",              "漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。"),
+    ("do",                  "DO",               "溶氧",         "溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。"),
+    ("eh",                  "Eh",               "",             "氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。"),
+    ("ph",                  "pH",               "",             "酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。"),
+    ("h2s",                 "H₂S",              "硫化氫",       "硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。"),
+    ("fe",                  "Fe²⁺ / Fe³⁺",      "亞鐵/三價鐵", "亞鐵（Fe²⁺，可溶）/ 三價鐵（Fe³⁺，不可溶）。底泥開始缺氧時 Fe³⁺ 被還原為 Fe²⁺ 溶入水中，是底質惡化的早期指標。"),
+    ("ntu",                 "NTU",              "濁度",         "濁度單位（Nephelometric Turbidity Unit）。清水約 1–5 NTU；台灣豪雨後可達數百 NTU；>40 時視覺有效距離大幅縮短。"),
+    ("tss",                 "TSS",              "懸浮固體",     "懸浮固體總量（Total Suspended Solids），單位 mg/L。颱風過後短期內大量增加，壓制魚的視覺感知範圍。"),
+    ("cod",                 "COD",              "化學需氧量",   "化學需氧量（Chemical Oxygen Demand）。測量水中有機廢物總量；乾淨水體 <5 mg/L，管理池 >20 mg/L 代表飼料殘渣與排泄物嚴重堆積，耗氧加速。"),
+    ("cff",                 "CFF",              "臨界閃爍融合頻率", "臨界閃爍融合頻率（Critical Flicker Fusion），單位 Hz。超過此值，魚眼會把個別動作融合成連續影像（看不出節奏）。日間約 30–60 Hz，夜間 / 低溫下降至 10 Hz 以下。"),
+    ("art",                 "ART",              "警覺重置時間", "警覺重置時間（Alert Reset Time）。魚被釣後，主動覓食驅力恢復所需時間。20°C 約 24 小時；10°C 約 48 小時；30°C 約 12 小時。只鎖住主動覓食——反射咬餌（Reaction Strike）在此期間仍可觸發。"),
+    ("q10",                 "Q₁₀",              "溫度係數",     "溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。"),
+    ("tuishui",             "推水",             "",             "路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。"),
+    ("cr",                  "C&R",              "",             "Catch &amp; Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。"),
+    ("pizichun",            "皮質醇",           "",             "壓力荷爾蒙（Cortisol），由 HPI 軸分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
+    ("oft",                 "OFT",              "最佳覓食理論", "最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。"),
+    ("hvf-lvf",             "HVF / LVF",        "",             "新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。"),
+    ("mid-strolling",       "Mid-Strolling",    "",             "以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。"),
+    ("follower-rejection",  "Follower Rejection","",            "魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。"),
+    ("reaction-strike",     "Reaction Strike",  "",             "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
+    ("schreckstoff",        "Schreckstoff",     "",             "受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。"),
+    ("fie",                 "FIE",              "漁業誘發演化", "漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -89,10 +90,11 @@ def inject_term_links(html):
 
 def build_glossary_html(terms):
     items_html = ""
-    for tid, term, desc in terms:
+    for tid, term, zh_alias, desc in terms:
+        alias_html = f' <span class="gl-alias">{zh_alias}</span>' if zh_alias else ""
         items_html += (
             f'<div class="gl-item" id="gl-{tid}">'
-            f'<dt class="gl-term">{term}</dt>'
+            f'<dt class="gl-term">{term}{alias_html}</dt>'
             f'<dd class="gl-desc">{desc}</dd>'
             f'</div>\n'
         )
@@ -617,12 +619,20 @@ body {
   transition: background 0.15s;
 }
 .gl-trigger:hover { background: var(--accent-dim); }
-/* ── 術語 highlight 動畫 ── */
-@keyframes gl-flash {
-  0%,100% { background: transparent; }
-  35%     { background: rgba(251,191,36,0.28); }
+/* ── 術語 highlight（持久，直到換術語或關閉面板）── */
+.gl-highlighted { background: rgba(251,191,36,0.18); border-radius: 4px; }
+/* ── 術語別名標籤 ── */
+.gl-alias {
+  font-size: 0.72em;
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  vertical-align: middle;
+  font-weight: normal;
+  letter-spacing: 0.02em;
 }
-.gl-highlighted { animation: gl-flash 1.5s ease; }
 """
 
 JS = r"""
@@ -721,6 +731,7 @@ function closeGlossary() {
   glossaryPanel.classList.remove('open');
   glossaryOverlay.classList.remove('open');
   glossaryBtn.setAttribute('aria-expanded', 'false');
+  if (activeGlItem) { activeGlItem.classList.remove('gl-highlighted'); activeGlItem = null; }
 }
 
 glossaryBtn.addEventListener('click', () => {
@@ -731,6 +742,7 @@ glossaryOverlay.addEventListener('click', closeGlossary);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGlossary(); });
 
 // ── 術語點擊連動（事件委派）────────────────────────────────
+let activeGlItem = null;
 document.getElementById('content').addEventListener('click', e => {
   const trigger = e.target.closest('.gl-trigger');
   if (!trigger) return;
@@ -738,11 +750,10 @@ document.getElementById('content').addEventListener('click', e => {
   openGlossary();
   const item = document.getElementById('gl-' + termId);
   if (!item) return;
-  item.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  item.classList.remove('gl-highlighted');
-  void item.offsetWidth; // force reflow to restart animation
+  if (activeGlItem) activeGlItem.classList.remove('gl-highlighted');
+  activeGlItem = item;
   item.classList.add('gl-highlighted');
-  item.addEventListener('animationend', () => item.classList.remove('gl-highlighted'), { once: true });
+  item.scrollIntoView({ block: 'center', behavior: 'smooth' });
 });
 """
 
