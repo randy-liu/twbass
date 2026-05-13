@@ -40,6 +40,17 @@ GLOSSARY = [
     ("reaction-strike",     "Reaction Strike",  "",             "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
     ("schreckstoff",        "Schreckstoff",     "",             "受傷魚釋放的水溶性警報化學物質。觸發閾值極低（10⁻¹⁸ 稀釋）。南部中性水體擴散半徑可達 4–7 m，警報持續 12–36 小時；北部酸性水體因化學水解，有效範圍 <0.5 m。"),
     ("fie",                 "FIE",              "漁業誘發演化", "漁業誘發演化（Fisheries-Induced Evolution）。長期高壓垂釣使高皮質醇、高警覺的個體（老魚）存活優勢增加，逐漸在族群中佔主導，導致管理池整體難釣程度世代性提升。"),
+    ("lockjaw",             "Lockjaw",          "絕對拒咬",     "魚的主動覓食驅力完全關閉的狀態，不願追也不願咬。觸發原因：劇烈氣壓驟降（Ebullition 啟動後）、C&R 後皮質醇飆升（ART 計時中）、翻水後 0–24 hr 水質惡化。<br><br><strong>與 Follower Rejection 的區別</strong><ul class=\"gl-list-inner\"><li>Lockjaw：連「跟隨」都不出現；魚感知到假餌但完全無覓食反應</li><li>Follower Rejection：魚跟到 13–24 cm 近點後拒絕最後咬合</li></ul><strong>唯一突破方式</strong>：Reaction Strike（>1.5 m/s）直打視頂蓋反射，但 Ebullition 啟動期或水質極度惡化時連 Reaction Strike 也無效。"),
+    ("tl",                  "TL",               "全長",         "全長（Total Length），魚體從嘴尖到尾鰭末端的直線距離，是研究描述魚體比例的標準單位。OFT 最佳獵物大小以自身 TL 比例表示：<ul class=\"gl-list-inner\"><li>一般健康成魚：最佳獵物 <strong>22–29% TL</strong>（35 cm 鱸魚偏好 7.7–10.1 cm 獵物）</li><li>老魚（LVF）高壓池：偏好縮至 <strong>0.22–0.29 TL</strong>（更保守）</li><li>超過 <strong>0.30 TL</strong>：肌肉 LDH 活化代謝代價超過獵物熱量約 20%，老魚不啟動攻擊</li></ul>"),
+    ("ldh",                 "LDH",              "乳酸脫氫酶",   "乳酸脫氫酶（Lactate Dehydrogenase），肌肉在無氧爆發衝刺時啟動的關鍵酵素，負責乳酸生成與無氧能量轉換。黑鱸追擊超過 <strong>0.30 TL</strong> 的大型獵物時，肌肉 LDH 活化代謝代價可超過獵物熱量約 <strong>20%</strong>（能量虧損）。老魚（LVF）OFT 計算下不啟動攻擊；新魚（HVF）因皮質醇基線低，仍可能出手。"),
+    ("ebullition",          "Ebullition",       "氣泡釋放",     "底泥孔隙水中長期累積的溶解氣體（CO₂、CH₄）因外部壓力驟降而快速以氣泡形式逸出的現象。<br><br><strong>颱風觸發機制</strong><ul class=\"gl-list-inner\"><li>颱前 12–24 小時氣壓可驟降 <strong>53 hPa</strong>（1013 → 960 hPa）</li><li>壓差引發底泥黏彈性破裂（viscoelastic-fracture），溶氣大量逸出</li><li>底泥劇烈翻攪：能見度趨零，側線感知同時受氣泡干擾</li></ul><strong>對魚的影響</strong>：啟動後魚進入完全 Lockjaw，強行作釣無效；應在 Ebullition 出現前撤退（颱前 0–12 hr 爆吃窗口已過）。"),
+    ("zeta",                "Zeta 電位",        "",             "水中懸浮顆粒表面電荷的量化指標（mV）。絕對值越大，顆粒間靜電斥力越強，越難絮凝沉降，水色越久濁不清。<br><br><strong>台灣南北差異</strong><ul class=\"gl-list-inner\"><li><strong>北部</strong>（高嶺石，礦物顆粒）：Zeta <strong>-15 ~ -40 mV</strong>，斥力弱 → 颱後 48–72 小時回清</li><li><strong>南部</strong>（有機膠體）：Zeta <strong>-42 ~ -52 mV</strong>，DDL 排斥效率高 → 颱後 14–30 天才回清</li></ul>"),
+    ("ddl",                 "DDL",              "擴散雙層",     "擴散雙層（Diffuse Double Layer）。帶電顆粒表面吸附的反離子雲，形成靜電斥力屏障，阻止顆粒碰撞絮凝。DDL 厚度與 Zeta 電位絕對值正相關：南部有機膠體 Zeta -42 ~ -52 mV，DDL 排斥力強，即使靜置也難以自然絮凝，這是颱後長濁期（14–30 天）的根本原因。"),
+    ("stokes",              "Stokes 沉降",      "",             "根據 Stokes 定律計算的顆粒在靜水中沉降速率，與顆粒半徑平方成正比、與液體黏度成反比。<br><br><strong>台灣颱後南北差異</strong><ul class=\"gl-list-inner\"><li><strong>北部</strong>（高嶺石，Zeta -15~-40 mV）：沉降速 <strong>3 cm/s</strong>（0.108 m/hr），48–72 小時回清 → 切回視覺餌</li><li><strong>南部</strong>（有機膠體，Zeta -42~-52 mV）：沉降速 <strong>0.35 m/day</strong>，14–30 天才回清 → 持續低頻震動路亞</li></ul>"),
+    ("mo2",                 "MO₂",              "靜態代謝耗氧率", "靜態代謝耗氧率（Metabolic Oxygen consumption rate）。魚在靜止狀態下每公斤體重每小時消耗的溶氧量（mg O₂/kg/h）。<br><br><strong>黑鱸 MO₂ 隨溫度</strong><ul class=\"gl-list-inner\"><li>20°C：約 <strong>48.8 mg/kg/h</strong></li><li>33°C：約 <strong>69.4 mg/kg/h</strong>（比 20°C 高約 42%）</li></ul>高溫時 MO₂ 飆升（需更多氧）而 DO 飽和上限下降（32°C = 7.55 mg/L；35°C = 6.94 mg/L），雙重擠壓導致魚幾乎不追餌。"),
+    ("pcrit",               "Pcrit",            "臨界低氧點",   "臨界溶氧濃度（Critical Oxygen Partial Pressure）。DO 低於此值時，魚無法維持有氧代謝，被迫切換保命模式：大幅降低活動量、停止主動覓食。<br><br><strong>黑鱸參考值</strong><ul class=\"gl-list-inner\"><li>15°C：≈ <strong>1.15 mg/L</strong></li><li>20°C：≈ <strong>1.12 mg/L</strong></li></ul>DO 趨近 Pcrit 時咬餌機率接近零。離場信號：DO <strong>&lt;1.5 mg/L</strong> + Eh <strong>&lt;−150 mV</strong> = 停釣。"),
+    ("acoustic-masking",    "Acoustic Masking", "聲學遮蔽",     "水中高強度噪音掩蓋魚類側線與內耳感知的現象，使路亞訊號沉沒在背景噪音中。<br><br><strong>管理池水車情境</strong><ul class=\"gl-list-inner\"><li>水車噪聲：<strong>125–135 dB re 1 μPa</strong>，頻率 <strong>25–1,000 Hz</strong></li><li>有效遮蔽管狀神經丘（30–100 Hz）與內耳（100–600 Hz）感知</li><li>對策：大型 Swimbait、Spinnerbait 等<strong>大推水強震動</strong>路亞突破遮蔽閾值</li></ul>水車停機後噪音消失，但老魚端腦警戒上升，需改用細線微物低干擾策略。"),
+    ("sns",                 "SNs",              "表淺神經丘",   "表淺神經丘（Superficial Neuromasts）。側線系統的表層感測單元，直接暴露於水流，對 <strong>1–30 Hz</strong> 低頻流速變化最敏感。<br><br><strong>與管狀神經丘（CNs）比較</strong><ul class=\"gl-list-inner\"><li>SNs（表淺神經丘）：偏好 <strong>1–30 Hz</strong>，感知穩定流速方向（穩定水流、大面積推水）</li><li>CNs（管狀神經丘）：偏好 <strong>30–100+ Hz</strong>，感知加速度與壓力梯度（快速振動、尾擺）</li></ul>颱後渾水期視覺失效時，SNs 是魚感知 Spinnerbait 等低頻大推水路亞的主要感知通道。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -73,6 +84,19 @@ TERM_PATTERNS = [
     ("reaction-strike",    r'Reaction Strike'),
     ("schreckstoff",       r'Schreckstoff'),
     ("fie",                r'(?<![A-Za-z])FIE(?![A-Za-z])'),
+    ("lockjaw",            r'Lockjaw'),
+    ("tl",                 r'(?<![A-Za-z])TL(?![A-Za-z])'),
+    ("ldh",                r'(?<![A-Za-z])LDH(?![A-Za-z])'),
+    ("ebullition",         r'Ebullition'),
+    ("ebullition",         r'氣泡釋放'),
+    ("zeta",               r'Zeta 電位'),
+    ("ddl",                r'(?<![A-Za-z])DDL(?![A-Za-z])'),
+    ("stokes",             r'Stokes 沉降'),
+    ("mo2",                r'MO₂'),
+    ("pcrit",              r'Pcrit'),
+    ("acoustic-masking",   r'Acoustic Masking'),
+    ("acoustic-masking",   r'聲學遮蔽'),
+    ("sns",                r'(?<![A-Za-z])SNs(?![A-Za-z])'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
