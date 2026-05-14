@@ -51,6 +51,7 @@ GLOSSARY = [
     ("pcrit",               "Pcrit",            "臨界低氧點",   "臨界溶氧濃度（Critical Oxygen Partial Pressure）。DO 低於此值時，魚無法維持有氧代謝，被迫切換保命模式：大幅降低活動量、停止主動覓食。<br><br><strong>黑鱸參考值</strong><ul class=\"gl-list-inner\"><li>15°C：≈ <strong>1.15 mg/L</strong></li><li>20°C：≈ <strong>1.12 mg/L</strong></li></ul>DO 趨近 Pcrit 時咬餌機率接近零。離場信號：DO <strong>&lt;1.5 mg/L</strong> + Eh <strong>&lt;−150 mV</strong> = 停釣。"),
     ("acoustic-masking",    "Acoustic Masking", "聲學遮蔽",     "水中高強度噪音掩蓋魚類側線與內耳感知的現象，使路亞訊號沉沒在背景噪音中。<br><br><strong>管理池水車情境</strong><ul class=\"gl-list-inner\"><li>水車噪聲：<strong>125–135 dB re 1 μPa</strong>，頻率 <strong>25–1,000 Hz</strong></li><li>有效遮蔽管狀神經丘（30–100 Hz）與內耳（100–600 Hz）感知</li><li>對策：大型 Swimbait、Spinnerbait 等<strong>大推水強震動</strong>路亞突破遮蔽閾值</li></ul>水車停機後噪音消失，但老魚端腦警戒上升，需改用細線微物低干擾策略。"),
     ("sns",                 "SNs",              "表淺神經丘",   "表淺神經丘（Superficial Neuromasts）。側線系統的表層感測單元，直接暴露於水流，對 <strong>1–30 Hz</strong> 低頻流速變化最敏感。<br><br><strong>與管狀神經丘（CNs）比較</strong><ul class=\"gl-list-inner\"><li>SNs（表淺神經丘）：偏好 <strong>1–30 Hz</strong>，感知穩定流速方向（穩定水流、大面積推水）</li><li>CNs（管狀神經丘）：偏好 <strong>30–100+ Hz</strong>，感知加速度與壓力梯度（快速振動、尾擺）</li></ul>颱後渾水期視覺失效時，SNs 是魚感知 Spinnerbait 等低頻大推水路亞的主要感知通道。"),
+    ("optic-tectum",        "Optic Tectum",     "視頂蓋",       "中腦的關鍵視覺處理中樞，負責快速運動偵測與定向反射（潛伏期僅 30–50 ms）。<br><br><strong>觸發條件</strong>：假餌速度突變 ΔV <strong>&gt;30 cm/s</strong>（角速度突變）→ 視頂蓋的定向反射神經元強制重啟 → 魚重新進入「獵物逃竄」的攻擊迴路，<strong>繞過端腦的皮質醇記憶否決審查</strong>。<br><br><strong>與 Reaction Strike 的關係</strong><ul class=\"gl-list-inner\"><li>路亞速度 &gt;1.5 m/s 時，視頂蓋直接下攻擊指令，端腦插不了手</li><li>ART 計時中（魚被驚嚇後）仍可透過視頂蓋反射觸發咬餌</li></ul><strong>操作技巧</strong>：用竿身橫向快速揮帶（不是加快收線）在近點製造 ΔV &gt;30 cm/s 突變，可用來破解 Follower Rejection。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -97,6 +98,8 @@ TERM_PATTERNS = [
     ("acoustic-masking",   r'Acoustic Masking'),
     ("acoustic-masking",   r'聲學遮蔽'),
     ("sns",                r'(?<![A-Za-z])SNs(?![A-Za-z])'),
+    ("optic-tectum",       r'Optic Tectum'),
+    ("optic-tectum",       r'視頂蓋'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
