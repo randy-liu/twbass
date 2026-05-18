@@ -53,6 +53,7 @@ GLOSSARY = [
     ("sns",                 "SNs",              "表淺神經丘",   "表淺神經丘（Superficial Neuromasts）。側線系統的表層感測單元，直接暴露於水流，對 <strong>1–30 Hz</strong> 低頻流速變化最敏感。<br><br><strong>與管狀神經丘（CNs）比較</strong><ul class=\"gl-list-inner\"><li>SNs（表淺神經丘）：偏好 <strong>1–30 Hz</strong>，感知穩定流速方向（穩定水流、大面積推水）</li><li>CNs（管狀神經丘）：偏好 <strong>30–100+ Hz</strong>，感知加速度與壓力梯度（快速振動、尾擺）</li></ul>颱後渾水期視覺失效時，SNs 是魚感知 Spinnerbait 等低頻大推水路亞的主要感知通道。"),
     ("optic-tectum",        "Optic Tectum",     "視頂蓋",       "中腦的關鍵視覺處理中樞，負責快速運動偵測與定向反射（潛伏期僅 30–50 ms）。<br><br><strong>觸發條件</strong>：假餌速度突變 ΔV <strong>&gt;30 cm/s</strong>（角速度突變）→ 視頂蓋的定向反射神經元強制重啟 → 魚重新進入「獵物逃竄」的攻擊迴路，<strong>繞過端腦的皮質醇記憶否決審查</strong>。<br><br><strong>與 Reaction Strike 的關係</strong><ul class=\"gl-list-inner\"><li>路亞速度 &gt;1.5 m/s 時，視頂蓋直接下攻擊指令，端腦插不了手</li><li>ART 計時中（魚被驚嚇後）仍可透過視頂蓋反射觸發咬餌</li></ul><strong>操作技巧</strong>：用竿身橫向快速揮帶（不是加快收線）在近點製造 ΔV &gt;30 cm/s 突變，可用來破解 Follower Rejection。"),
     ("foraging-forays",     "Foraging Forays",  "覓食突進",     "非 LVF 中小型黑鱸在底層獵物密度超出表層 <strong>3.5–5.0 倍</strong>時，從含氧表層短暫衝入底層毒區（&lt; 30 秒）發動攻擊後迅速返回的冒險覓食行為。<br><br><strong>生理極限</strong><ul class=\"gl-list-inner\"><li>單次安全衝入時間：<strong>15–25 秒</strong>（絕對上限 30 秒）</li><li>單日有效突進次數：<strong>10–15 次</strong>（H₂S ≤ 0.01 mg/L，12 小時覓食期）</li><li>每次突進後強制 COX 重置冷卻期：<strong>45–60 分鐘</strong></li></ul><strong>限制條件</strong><ul class=\"gl-list-inner\"><li>H₂S &lt; 0.05 mg/L 且非 LVF 個體才可能觸發</li><li>LVF 舊魚（皮質醇 ≥ 20 ng/mL）：即使底層獵物密度達 10 倍，端腦仍完全抑制突進反射</li><li>超額突進會導致 ROS 階梯累積與延遲性器官損傷</li></ul>⚠️ 超過 10–15 次額度後，標點進入強制冷卻，底層誘咬失效。"),
+    ("cox",                 "COX",              "細胞色素 c 氧化酶", "粒線體電子傳遞鏈最末端的酵素，全名 Cytochrome c Oxidase（細胞色素 c 氧化酶，複合體 IV）。負責將電子從細胞色素 c 傳遞至分子氧，是有氧 ATP 生產的最後一道關卡。<br><br><strong>H₂S 如何攻擊 COX</strong><ul class=\"gl-list-inner\"><li>H₂S 直接鎖住 COX 核心的鐵—銅雙核中心（Heme a₃–CuB），阻斷電子傳遞</li><li>有氧 ATP 生產瞬間停擺 → 即使水中含氧充足，魚仍陷入「<strong>組織毒性缺氧</strong>」</li><li>堵塞的電子傳遞鏈大量洩漏，產生 ROS（活性氧），對細胞膜造成脂質過氧化損傷</li></ul><strong>可逆性與冷卻期</strong><ul class=\"gl-list-inner\"><li>短暫暴露後抑制是<strong>動態可逆</strong>的（魚返回含氧水層後 H₂S 逐漸脫離結合位點）</li><li>每次突進底層後，COX 活性需 <strong>45–60 分鐘</strong>才能完全恢復至基準線（COX 重置冷卻期）</li><li>超頻突進 → ROS 階梯累積 → 延遲性器官損傷</li></ul><strong>大嘴黑鱸的脆弱性</strong>：黑鱸保留脊椎動物標準易感構象，無 SQR 去毒基因過度表現，無法像 <em>Poecilia mexicana</em> 硫泉族群那樣靠分子免疫抵抗 H₂S，完全依賴「短時空間迴避」存活。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -105,6 +106,9 @@ TERM_PATTERNS = [
     ("optic-tectum",       r'視頂蓋'),
     ("foraging-forays",    r'Foraging Forays'),
     ("foraging-forays",    r'覓食突進'),
+    ("cox",                r'(?<![A-Za-z])COX(?![A-Za-z])'),
+    ("cox",                r'細胞色素 c 氧化酶'),
+    ("cox",                r'COX 重置冷卻期'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
