@@ -145,6 +145,11 @@
   - 聚焦：Fick 擴散精算 H₂S / Fe²⁺ 安全距離、H₂S 三維死亡區、CDOM 化學竊聽
   - 輸出已整合至：1B1 V1B-05（Fe²⁺ 40 cm）、V1B-06（H₂S ≥86 cm）、3B1 Unresolved #4、4A CI-03/04
 
+- **SUP-C：黑鱸毒區迴避實證與冒險覓食決策機制**
+  - 聚焦：H₂S/低溶氧耐受行為、FIE（Fisheries-Induced Evolution）、LVF/HVF 族群分類、Foraging Forays（毒區覓食短突）、3D 決策矩陣
+  - 上游繼承：0D1、4A、SUP-A、SUP-B
+  - 輸出已整合至：3A（V3A-06 皮質醇分類補充）、3B1（Foraging Forays 策略、毒區時間性滲透）
+
 ---
 
 ### 第四層：卷 4
@@ -175,6 +180,7 @@
 
 SUP-A ──> 3A（Open_Assumptions）／3B1（Unresolved_Dependencies）
 SUP-B ──> 1B1（V1B-05/06 精算）／3B1（Unresolved 標記）／4A（CI-03/04）
+SUP-C ──> 3A（LVF/HVF 分類、V3A-06 皮質醇解讀）／3B1（Foraging Forays、毒區容忍度）
 ```
 
 > 括號 `(+ 卷)` 表示可選補充，不上傳也能完成。
