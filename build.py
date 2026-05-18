@@ -32,9 +32,9 @@ GLOSSARY = [
     ("q10",                 "Q₁₀",              "溫度係數",     "溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。"),
     ("tuishui",             "推水",             "",             "路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。"),
     ("cr",                  "C&R",              "",             "Catch &amp; Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。"),
-    ("pizichun",            "皮質醇",           "",             "壓力荷爾蒙（Cortisol），由 HPI 軸（Hypothalamic-Pituitary-Interrenal；下視丘—腦垂體—腎間腺軸，魚類壓力反應系統，等效哺乳類的 HPA 軸：下視丘—腦垂體—腎上腺軸）分泌。靜息濃度約 6 ng/mL；C&R 後飆升至 150–300+ ng/mL。促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
+    ("pizichun",            "皮質醇",           "",             "壓力荷爾蒙（Cortisol），由 HPI 軸（Hypothalamic-Pituitary-Interrenal；下視丘—腦垂體—腎間腺軸，魚類壓力反應系統，等效哺乳類的 HPA 軸：下視丘—腦垂體—腎上腺軸）分泌。<br><br><strong>三個重要基線</strong><ul class=\"gl-list-inner\"><li>HVF 自然靜息基線：<strong>1.68±0.69 ng/mL</strong>（健康範圍 ≤6 ng/mL）</li><li>LVF 慢性基線：<strong>20–40 ng/mL</strong>（HPI 軸長期重塑）</li><li>C&amp;R 急性飆升：<strong>&gt;150 ng/mL</strong>（15–30 分鐘內達峰）</li></ul>促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
     ("oft",                 "OFT",              "最佳覓食理論", "最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。"),
-    ("hvf-lvf",             "HVF / LVF",        "",             "新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 皮質醇基線低，依賴視頂蓋反射，容易被釣；LVF 皮質醇慢性升高，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。"),
+    ("hvf-lvf",             "HVF / LVF",        "",             "新魚（High Vulnerability Fish）/ 老魚（Low Vulnerability Fish）。HVF 自然靜息皮質醇基線：<strong>1.68±0.69 ng/mL</strong>（健康範圍 ≤6 ng/mL），依賴視頂蓋反射，容易被釣；LVF 慢性皮質醇長期維持在 <strong>20–40 ng/mL</strong>，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。⚠️ LVF 在任何 H₂S 存在條件下幾乎不發動底層衝入（冒險覓食突進被端腦完全抑制）。"),
     ("mid-strolling",       "Mid-Strolling",    "",             "以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。"),
     ("follower-rejection",  "Follower Rejection","",            "魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。"),
     ("reaction-strike",     "Reaction Strike",  "",             "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
@@ -52,6 +52,7 @@ GLOSSARY = [
     ("acoustic-masking",    "Acoustic Masking", "聲學遮蔽",     "水中高強度噪音掩蓋魚類側線與內耳感知的現象，使路亞訊號沉沒在背景噪音中。<br><br><strong>管理池水車情境</strong><ul class=\"gl-list-inner\"><li>水車噪聲：<strong>125–135 dB re 1 μPa</strong>，頻率 <strong>25–1,000 Hz</strong></li><li>有效遮蔽管狀神經丘（30–100 Hz）與內耳（100–600 Hz）感知</li><li>對策：大型 Swimbait、Spinnerbait 等<strong>大推水強震動</strong>路亞突破遮蔽閾值</li></ul>水車停機後噪音消失，但老魚端腦警戒上升，需改用細線微物低干擾策略。"),
     ("sns",                 "SNs",              "表淺神經丘",   "表淺神經丘（Superficial Neuromasts）。側線系統的表層感測單元，直接暴露於水流，對 <strong>1–30 Hz</strong> 低頻流速變化最敏感。<br><br><strong>與管狀神經丘（CNs）比較</strong><ul class=\"gl-list-inner\"><li>SNs（表淺神經丘）：偏好 <strong>1–30 Hz</strong>，感知穩定流速方向（穩定水流、大面積推水）</li><li>CNs（管狀神經丘）：偏好 <strong>30–100+ Hz</strong>，感知加速度與壓力梯度（快速振動、尾擺）</li></ul>颱後渾水期視覺失效時，SNs 是魚感知 Spinnerbait 等低頻大推水路亞的主要感知通道。"),
     ("optic-tectum",        "Optic Tectum",     "視頂蓋",       "中腦的關鍵視覺處理中樞，負責快速運動偵測與定向反射（潛伏期僅 30–50 ms）。<br><br><strong>觸發條件</strong>：假餌速度突變 ΔV <strong>&gt;30 cm/s</strong>（角速度突變）→ 視頂蓋的定向反射神經元強制重啟 → 魚重新進入「獵物逃竄」的攻擊迴路，<strong>繞過端腦的皮質醇記憶否決審查</strong>。<br><br><strong>與 Reaction Strike 的關係</strong><ul class=\"gl-list-inner\"><li>路亞速度 &gt;1.5 m/s 時，視頂蓋直接下攻擊指令，端腦插不了手</li><li>ART 計時中（魚被驚嚇後）仍可透過視頂蓋反射觸發咬餌</li></ul><strong>操作技巧</strong>：用竿身橫向快速揮帶（不是加快收線）在近點製造 ΔV &gt;30 cm/s 突變，可用來破解 Follower Rejection。"),
+    ("foraging-forays",     "Foraging Forays",  "覓食突進",     "非 LVF 中小型黑鱸在底層獵物密度超出表層 <strong>3.5–5.0 倍</strong>時，從含氧表層短暫衝入底層毒區（&lt; 30 秒）發動攻擊後迅速返回的冒險覓食行為。<br><br><strong>生理極限</strong><ul class=\"gl-list-inner\"><li>單次安全衝入時間：<strong>15–25 秒</strong>（絕對上限 30 秒）</li><li>單日有效突進次數：<strong>10–15 次</strong>（H₂S ≤ 0.01 mg/L，12 小時覓食期）</li><li>每次突進後強制 COX 重置冷卻期：<strong>45–60 分鐘</strong></li></ul><strong>限制條件</strong><ul class=\"gl-list-inner\"><li>H₂S &lt; 0.05 mg/L 且非 LVF 個體才可能觸發</li><li>LVF 舊魚（皮質醇 ≥ 20 ng/mL）：即使底層獵物密度達 10 倍，端腦仍完全抑制突進反射</li><li>超額突進會導致 ROS 階梯累積與延遲性器官損傷</li></ul>⚠️ 超過 10–15 次額度後，標點進入強制冷卻，底層誘咬失效。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -100,6 +101,8 @@ TERM_PATTERNS = [
     ("sns",                r'(?<![A-Za-z])SNs(?![A-Za-z])'),
     ("optic-tectum",       r'Optic Tectum'),
     ("optic-tectum",       r'視頂蓋'),
+    ("foraging-forays",    r'Foraging Forays'),
+    ("foraging-forays",    r'覓食突進'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
