@@ -5,3 +5,27 @@ __pycache__/
 # Session/temp files
 *.tmp
 *.bak
+
+# Microsoft Word/Excel/PowerPoint lock files (created while a document is open)
+~$*.docx
+~$*.doc
+~$*.xlsx
+~$*.xls
+~$*.pptx
+
+# Windows system files
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS (synced via Dropbox)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code worktrees (temporary git branches, auto-cleaned)
+.claude/worktrees/
+
+# Temporary extraction/helper scripts generated during audit sessions
+.claude/*.txt
+.claude/*.py
