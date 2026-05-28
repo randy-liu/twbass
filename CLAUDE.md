@@ -41,22 +41,22 @@ Always use the highest-numbered version as upstream input. The README version ta
 ## Pipeline Architecture
 
 ```
-0A1 ─┐
-     ├─> 0C1 ──> 0D1
-0B  ─┘
+0A ─┐
+    ├─> 0C ──> 0D
+0B ─┘
 
-0D1 ──> 1A / 1B1 / 2A / 2B         (1A ∥ 1B1 can run in parallel)
-0D1 + 2A ──> 2C                     (2A ∥ 2B can run in parallel; 2C waits for 2A)
-0D1 + 1A + 2A + 2B ──> 3A
-0D1 + 1B1 + 2A + 2B + 3A ──> 3B1
-0D1 + 4A ──> 4B
+0D ──> 1A / 1B / 2A / 2B            (1A ∥ 1B can run in parallel)
+0D + 2A ──> 2C                      (2A ∥ 2B can run in parallel; 2C waits for 2A)
+0D + 1A + 2A + 2B ──> 3A
+0D + 1B + 2A + 2B + 3A ──> 3B
+0D + 4A ──> 4B
 
-SUP-A ──> 3A (Open_Assumptions) / 3B1 (Unresolved_Dependencies)
-SUP-B ──> 1B1 (V1B-05/06) / 3B1 / 4A (CI-03/04)
-SUP-C ──> 3A (V3A-06) / 3B1 (Foraging Forays)
+SUP-A ──> 3A (Open_Assumptions) / 3B (Unresolved_Dependencies)
+SUP-B ──> 1B (V1B-05/06) / 3B / 4A (CI-03/04)
+SUP-C ──> 3A (V3A-06) / 3B (Foraging Forays)
 SUP-D-A ∥ SUP-D-B ──> SUP-D-C (A/B parallel; C runs after or with fallback)
-SUP-D-A + SUP-D-B + SUP-D-C ──> 2A / 2B / 3A / 3B1 (behavioral mechanism framework; VSUP-DA/DB/DC)
-SUP-E ──> 2A / 1B1 / 3B1 (Taiwan ecological calendar + OFT threshold)
+SUP-D-A + SUP-D-B + SUP-D-C ──> 2A / 2B / 3A / 3B (behavioral mechanism framework; VSUP-DA/DB/DC)
+SUP-E ──> 2A / 1B / 3B (Taiwan ecological calendar + OFT threshold)
 SUP-D-A ∥ SUP-D-B ∥ SUP-E (parallel; no inter-dependency; SUP-D-C after A/B)
 ```
 
@@ -87,6 +87,7 @@ Scope violations are tracked in `PATCH_NOTES.md`. Each volume has hard boundarie
 | SUP-D-A | 食性選擇指數（Chesson's α/Ivlev's E）、NTU 視覺失效閾值（三水體）、感官匹配優先序矩陣 | 多模態入水辨識 (→SUP-D-B)、水中漂流 (→SUP-D-C)、策略切換 (→SUP-D-C) |
 | SUP-D-B | Topwater 入水衝擊辨識（< 100 ms 聲學 + 100 ms–3 s 側線）、追擊序列、Commit 觸發 | 食性選擇指數 (→SUP-D-A)、水中漂流 (→SUP-D-C)、實戰配方（Claude 後處理）|
 | SUP-D-C | 水中漂流偵測（μm/s、Kármán 尾流）、搜索映像 LTP ms、策略切換神經生理 | Topwater 入水辨識 (→SUP-D-B)、追擊序列框架 (→SUP-D-B)、實戰決策矩陣（Claude 後處理） |
+| SUP-E | 六大水體獵物群落時空圖譜、季節性爆量月曆、OFT 切換豐度閾值、假餌映射 | 行為機制/神經生理 (→SUP-D)、覓食決策內在機制 (→2A) |
 
 Global: 0 series strictly excludes all fish behavior/physiology. Volumes 1–3 strictly exclude spawning/nest-guarding (4A/4B only).
 
@@ -120,7 +121,7 @@ Zone-B was added in v2 (2026-05). All quantitative outputs must list all three z
 | `VSUP-{字母}NN` | Findings from SUP volumes |
 | `CI-XX` | Correction instructions issued by SUP volumes to patch existing volumes |
 
-Critical cross-volume anchors: `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May), `VSUP-B04` (Fe²⁺ safe distance 40 cm north), `VSUP-B06` (H₂S safe distance ≥86 cm south).
+v1 cross-volume anchors (archived in git, v2 re-runs not yet completed): `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May), `VSUP-B04` (Fe²⁺ safe distance 40 cm north), `VSUP-B06` (H₂S safe distance ≥86 cm south). These IDs may change in v2 reports.
 
 ## Modifying Instructions or Adding Volumes
 
@@ -128,6 +129,6 @@ Critical cross-volume anchors: `B0-21` (Zone-B 22°C onset 12–18 days early), 
 - **Modifying scope**: update both the master version (`0`–`4`) and the corresponding split version (`*-instruction.md`) to stay in sync; never delete content from master versions, only append
 - **Creating a new sub-volume**: naming rule is `{卷號}{字母}：{主題}-instruction.md`; also update README.md execution order, pipeline diagram, the volume scope table in `.github/copilot-instructions.md`, and the Volume Scope Boundaries + Pipeline Architecture sections in this `CLAUDE.md`
 
-## Pending Zone-B Patches
+## Zone-B Status
 
-Volumes still needing Zone-B patches: **1A, 2C, 3A, 4A, 4B**. When editing these, flag Zone-B corrections with `CI-XX` format and note which Findings are affected. See README.md for the authoritative per-volume patch status table.
+Zone-B (桃竹苗) is now built into all v2 `*-instruction.md` files. All volumes are pending a full v2 re-run with Zone-A/B/C three-zone output as the standard format — no separate patches needed. The v1 `CI-XX` patch approach is obsolete. See README.md for the authoritative per-volume execution status.
