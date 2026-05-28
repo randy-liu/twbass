@@ -40,7 +40,9 @@
 | SUP-A | SUP-A | — | 感官生理閾值補充；CFF 信心標注已更新；下游 3A/3B1 已引用 |
 | SUP-B | SUP-B | — | 底棲水化學梯度補充；Fick 精算值已下游 patch 至 1B1/3B1/4A |
 | SUP-C | SUP-C | — | 毒區迴避實證與冒險覓食決策；已整合至 3A（V3A-06）/3B1（Foraging Forays） |
-| SUP-D | — | — | ⏳ 待跑；行為機制研究（食性選擇、感官匹配、辨識序列、Commit 觸發）；**與 SUP-E 平行** |
+| SUP-D-A | — | — | ⏳ 待跑；食性選擇性 + 感官匹配優先序（Q1+Q2）；**instruction.md 已建立** |
+| SUP-D-B | — | — | ⏳ 待跑；多模態入水辨識 + 追擊序列（Q3-1 至 Q3-5 + Q4）；**instruction.md 已建立** |
+| SUP-D-C | — | — | ⏳ 待跑；水中漂流偵測 + 策略切換（Q3-6 + Q5-1 至 Q5-3）；建議在 A/B 後執行；**instruction.md 已建立** |
 | SUP-E | — | — | ⏳ 待跑；台灣生態調查（六大水體 × 12 個月獵物爆量月曆 + OFT 切換閾值）；**與 SUP-D 平行** |
 
 ---
@@ -153,11 +155,21 @@
   - 上游繼承：0D1、4A、SUP-A、SUP-B
   - 輸出已整合至：3A（V3A-06 皮質醇分類補充）、3B1（Foraging Forays 策略、毒區時間性滲透）
 
-- **SUP-D：Match the Hatch 概念適用性——大嘴黑鱸食性選擇性、多模態獵物辨識機制與感官匹配策略**（待跑，**與 SUP-E 平行**）
-  - 聚焦：食性選擇指數（Chesson's α）、感官匹配維度優先順序（NTU 切換閾值）、多模態獵物辨識（活物 vs 落葉 vs 假餌的入水聲學/側線/視覺辨識）、Match the Hatch vs Reaction Strike 決策框架
+- **SUP-D-A：食性選擇性與感官匹配優先序**（⏳ 待跑，**可與 SUP-D-B 平行**）
+  - 聚焦：Chesson's α / Ivlev's E 食性選擇指數；NTU 視覺失效閾值（三種水體各自）；感官匹配優先序矩陣；LVF vs HVF Reaction Strike 觸發概率差異
   - 上游繼承：2A、2B、0D1、3A
-  - ⚡ **可與 SUP-E 平行執行**：本卷聚焦「行為機制」（鱸魚如何切換、如何辨識），SUP-E 聚焦「生態事實」（台灣何時何地有何爆量、規模多大），研究內容獨立、互不引用；下游整合在 2A/3A/3B 進行
-  - 輸出預計整合至：2A（食性選擇指數補充）、2B（入水辨識聲學特徵）、3A/3B（Match-Hatch vs Reaction Strike 戰術切換）
+  - 輸出（VSUP-DA01–XX）整合至：2A（食性選擇指數補充）、3A/3B（LVF 觸發差異）；同時作為 SUP-D-C 上游
+
+- **SUP-D-B：多模態獵物辨識與追擊序列**（⏳ 待跑，**可與 SUP-D-A 平行**）
+  - 聚焦：活體蛙 vs 落葉 vs 假餌入水衝擊聲壓波（Hz/dB/ms）；追擊序列各階段時間窗口；Commit 觸發加速度閾值；Dead Stop 效果（%）
+  - 上游繼承：2A、2B、0D1、3A
+  - 輸出（VSUP-DB01–XX）整合至：2B（入水辨識聲學特徵）、3A/3B（追擊序列與 Commit 觸發）；同時作為 SUP-D-C 上游
+
+- **SUP-D-C：水中漂流偵測與策略切換**（⏳ 待跑，**建議在 A/B 後執行**）
+  - 聚焦：生物微振動振幅 μm/s；Bio-Drift 偵測距離；搜索映像 LTP 時間窗口 ms；Match the Hatch vs Reaction Strike 神經生理切換條件；LVF 學習速度
+  - 上游繼承：2A、2B、0D1、3A；建議同時提供 SUP-D-A/B 報告
+  - ⚡ **三卷均可與 SUP-E 平行執行**
+  - 輸出（VSUP-DC01–XX）整合至：2A（漂流偵測）、3A/3B（策略切換條件）
 
 - **SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射**（待跑，**與 SUP-D 平行**）
   - 聚焦：台灣六大水體 × 北中南三區 × 12 個月的獵物爆量月曆；五大獵物類群（魚、甲殼類、兩棲類、水生昆蟲、爬蟲）；北美 Hatch Equivalent 台灣化對應；OFT 切換豐度閾值（Q6）；假餌映射建議
@@ -196,10 +208,11 @@
 SUP-A ──> 3A（Open_Assumptions）／3B1（Unresolved_Dependencies）
 SUP-B ──> 1B1（V1B-05/06 精算）／3B1（Unresolved 標記）／4A（CI-03/04）
 SUP-C ──> 3A（LVF/HVF 分類、V3A-06 皮質醇解讀）／3B1（Foraging Forays、毒區容忍度）
-SUP-D ──> 2A（食性選擇指數補充）／2B（入水辨識聲學）／3A（Match the Hatch vs Reaction Strike 決策）／3B1（戰術切換條件）
+SUP-D-A ∥ SUP-D-B ──> SUP-D-C（A/B 先完成或用 Fallback）
+SUP-D-A + SUP-D-B + SUP-D-C ──> 2A（食性選擇指數、漂流偵測）／2B（入水辨識聲學）／3A（策略切換、Commit 觸發）／3B1（戰術切換條件）
 SUP-E ──> 2A（台灣獵物補充）／1B1（六大水體獵物棲位）／3B1（戰術切換生態事實）
 
-SUP-D ∥ SUP-E（平行，無相依，可同時執行；下游整合在 2A/3A/3B1 進行）
+SUP-D-A ∥ SUP-D-B ∥ SUP-E（三卷平行，無相依；SUP-D-C 在 A/B 後執行）
 ```
 
 > 括號 `(+ 卷)` 表示可選補充，不上傳也能完成。

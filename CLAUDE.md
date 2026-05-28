@@ -22,20 +22,23 @@ Skills live in `.claude/skills/{name}/SKILL.md`. After editing a SKILL.md, repac
 python .claude/skills/打包技能.py
 ```
 
-This re-zips each `SKILL.md` into a `.skill` file. The two active skills are:
+This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 - `twbass-audit` — 5-phase audit of research reports against instruction.md + Phase 6 re-run necessity scoring with Gemini/Claude tool recommendation
 - `twbass-pipeline-manager` — pipeline status tracking and upstream dependency resolution
+- `gemini-plan-review` — review Gemini Deep Research plans against instruction.md prompts; outputs Go/Hold/Rework signal
 
 ## File Naming Convention
 
 | Pattern | Meaning |
 |---------|---------|
 | `{卷號}：{主題}-instruction.md` | Research prompt (scope/output source of truth) |
-| `{卷號}_{主題}.docx` | Research report, original run (no number suffix) |
-| `{卷號}{N}_{主題}.docx` | Research report, vN (e.g. `0A1`, `0D1` = Zone-B updated) |
+| `{卷號}_{主題}.docx` | Research report, original run (no number suffix) — **not git-tracked** |
+| `{卷號}{N}_{主題}.docx` | Research report, vN (e.g. `0A1`, `0D1` = Zone-B updated) — **not git-tracked** |
 | `0`–`4` (no letter suffix) | Master volume specs — reference only, **not for direct execution** |
 
 Always use the highest-numbered version as upstream input. The README version table is authoritative for current valid versions.
+
+> `.docx` report files are not committed to this repository. Version status is tracked in the README version table.
 
 ## Pipeline Architecture
 
@@ -53,9 +56,10 @@ Always use the highest-numbered version as upstream input. The README version ta
 SUP-A ──> 3A (Open_Assumptions) / 3B1 (Unresolved_Dependencies)
 SUP-B ──> 1B1 (V1B-05/06) / 3B1 / 4A (CI-03/04)
 SUP-C ──> 3A (V3A-06) / 3B1 (Foraging Forays)
-SUP-D ──> 2A / 2B / 3A / 3B1 (behavioral mechanism framework)
+SUP-D-A ∥ SUP-D-B ──> SUP-D-C (A/B parallel; C runs after or with fallback)
+SUP-D-A + SUP-D-B + SUP-D-C ──> 2A / 2B / 3A / 3B1 (behavioral mechanism framework; VSUP-DA/DB/DC)
 SUP-E ──> 2A / 1B1 / 3B1 (Taiwan ecological calendar + OFT threshold)
-SUP-D ∥ SUP-E (parallel; no inter-dependency; downstream integration in 2A/3A/3B1)
+SUP-D-A ∥ SUP-D-B ∥ SUP-E (parallel; no inter-dependency; SUP-D-C after A/B)
 ```
 
 - `0A` and `0B` are fully independent and can run in parallel
@@ -82,6 +86,9 @@ Scope violations are tracked in `PATCH_NOTES.md`. Each volume has hard boundarie
 | 3B | 南部高溫爛底、北部翻水期、管理池、颱風前後四大極端情境戰術 | 機制理論重寫 |
 | 4A | 築巢底質、孵化、Eh/Fe/H₂S、水位水溫擾動 | 競爭物種、護巢防禦細節 (→4B) |
 | 4B | K 值、競爭物種、護巢防禦性攻擊 | 地球化學細節 |
+| SUP-D-A | 食性選擇指數（Chesson's α/Ivlev's E）、NTU 視覺失效閾值（三水體）、感官匹配優先序矩陣 | 多模態入水辨識 (→SUP-D-B)、水中漂流 (→SUP-D-C)、策略切換 (→SUP-D-C) |
+| SUP-D-B | Topwater 入水衝擊辨識（< 100 ms 聲學 + 100 ms–3 s 側線）、追擊序列、Commit 觸發 | 食性選擇指數 (→SUP-D-A)、水中漂流 (→SUP-D-C)、實戰配方（Claude 後處理）|
+| SUP-D-C | 水中漂流偵測（μm/s、Kármán 尾流）、搜索映像 LTP ms、策略切換神經生理 | Topwater 入水辨識 (→SUP-D-B)、追擊序列框架 (→SUP-D-B)、實戰決策矩陣（Claude 後處理） |
 
 Global: 0 series strictly excludes all fish behavior/physiology. Volumes 1–3 strictly exclude spawning/nest-guarding (4A/4B only).
 
