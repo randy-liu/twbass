@@ -1,7 +1,7 @@
 ---
 Title: 卷 2A：覓食偏好、印記與反射咬餌
 Volume_ID: 2A
-Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（Baseline_Facts、Waterbody_Model_Table）；可選：1A 報告:1A_短時間環境觸發與生理限制.docx
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts、Waterbody_Model_Table）；可選：1A 報告:1A_短時間環境觸發與生理限制.md
 Core_Parameters: 能量效益比 kcal/s、視覺識別距離 cm、Reaction Strike 觸發速度 m/s、光照門檻 lux、波長衰減係數 m⁻¹
 Key_Mechanisms: OFT 最佳覓食理論、飼料印記條件反射、Reaction Strike 神經機制、水色波長衰減、皮質醇記憶強化
 ---

@@ -1,7 +1,7 @@
 ---
 Title: 補充卷 SUP-B：大嘴黑鱸底棲水化學梯度補充研究——Schreckstoff × CDOM 結合動力學與 Fe²⁺/H₂S 毒性垂直梯度
 Volume_ID: SUP-B
-Upstream_Required: 0B 報告:0B_南北成土母質與地球化學基底.docx（北部極育土/南部弱育土 pH、有機碳、Eh 特性）；0D1 報告:0D1_基底資料矩陣與極端事件整合.docx（B0-XX Baseline_Facts，特別是 B0-11 Eh 閾值、B0-21/B0-22 Zone-B 時機）；1B1 報告:1B1_六大水域棲位模型與風生流.docx（V1B-06 H₂S 毒性帶高度與安全距離估算）；4A 報告:4A_繁衍地球化學與水文干擾.docx（4A-10 H₂S 毒理）
+Upstream_Required: 0B 報告:0B_南北成土母質與地球化學基底.md（北部極育土/南部弱育土 pH、有機碳、Eh 特性）；0D1 報告:0D1_基底資料矩陣與極端事件整合.md（B0-XX Baseline_Facts，特別是 B0-11 Eh 閾值、B0-21/B0-22 Zone-B 時機）；1B1 報告:1B1_六大水域棲位模型與風生流.md（V1B-06 H₂S 毒性帶高度與安全距離估算）；4A 報告:4A_繁衍地球化學與水文干擾.md（4A-10 H₂S 毒理）
 Core_Parameters: CDOM 濃度 mg/L DOC、H₂S 濃度 mg/L、Fe²⁺ 濃度 mg/L、Schreckstoff 擴散半徑 m、Eh mV、安全距離 cm
 Key_Mechanisms: 腐植酸-警報物質大分子錯合（Complexation）、Fe²⁺/H₂S 底泥-水柱界面擴散梯度、垂直安全距離估算
 Research_Type: Supplemental（補充現有報告的量化缺口，不建立新研究框架）

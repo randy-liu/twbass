@@ -1,7 +1,7 @@
 ---
 Title: 卷 4B：台灣大嘴黑鱸棲位競爭、容載量與護巢防禦
 Volume_ID: 4B
-Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（Baseline_Facts, Waterbody_Model_Table）；1B 報告:1B_六大水域棲位模型與風生流.docx（六大水體棲位模型）；4A 報告:4A_繁衍地球化學與水文干擾.docx（Carry_Forward_To_4B 孵化風險參數）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts, Waterbody_Model_Table）；1B 報告:1B_六大水域棲位模型與風生流.md（六大水體棲位模型）；4A 報告:4A_繁衍地球化學與水文干擾.md（Carry_Forward_To_4B 孵化風險參數）
 Core_Parameters: Lotka-Volterra K 值（ind/ha）、Pianka 重疊指數（0–1）、護巢觸發距離 cm、吳郭魚干擾半徑 cm、捕食成功率 %
 Key_Mechanisms: Lotka-Volterra 競爭模型（K 值修正）、吳郭魚巢穴干擾半徑、魚虎/泰國鱧捕食稚魚成功率、Pianka 食性重疊指數、護巢防禦觸發距離與倫理邊界
 ---

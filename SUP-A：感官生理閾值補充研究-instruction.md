@@ -1,7 +1,7 @@
 ---
 Title: 補充卷 SUP-A：大嘴黑鱸感官生理閾值補充研究——CFF 溫度偏移與慢性皮質醇基線平移
 Volume_ID: SUP-A
-Upstream_Required: 2B 報告:2B_側線、內耳與水下聲學傳遞.docx（V2B-XX SNs/CNs 頻率定義）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.docx（V3A-XX CFF 閾值、Alert Reset Time、皮質醇半衰期）；3B1 報告:3B1_極端情境高壓策略推演.docx（V3B-XX Tactical_Rules 引用現況）
+Upstream_Required: 2B 報告:2B_側線、內耳與水下聲學傳遞.md（V2B-XX SNs/CNs 頻率定義）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.md（V3A-XX CFF 閾值、Alert Reset Time、皮質醇半衰期）；3B1 報告:3B1_極端情境高壓策略推演.md（V3B-XX Tactical_Rules 引用現況）
 Core_Parameters: CFF Hz、皮質醇 ng/mL、Alert Reset Time min、水溫 °C、代謝清除率 MCR
 Key_Mechanisms: 視網膜光感受器離子通道熱動力學（溫度→CFF 偏移）、慢性高壓環境下魚體 HPI 軸基線平移（Chronic Cortisol Baseline Shift）
 Research_Type: Supplemental（補充現有報告的量化缺口，不建立新研究框架）

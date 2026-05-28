@@ -32,13 +32,11 @@ This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 | Pattern | Meaning |
 |---------|---------|
 | `{卷號}：{主題}-instruction.md` | Research prompt (scope/output source of truth) |
-| `{卷號}_{主題}.docx` | Research report, original run (no number suffix) — **not git-tracked** |
-| `{卷號}{N}_{主題}.docx` | Research report, vN (e.g. `0A1`, `0D1` = Zone-B updated) — **not git-tracked** |
+| `{卷號}_{主題}.md` | Research report, original run (no number suffix) |
+| `{卷號}{N}_{主題}.md` | Research report, vN (e.g. `0A1` = updated run) |
 | `0`–`4` (no letter suffix) | Master volume specs — reference only, **not for direct execution** |
 
 Always use the highest-numbered version as upstream input. The README version table is authoritative for current valid versions.
-
-> `.docx` report files are not committed to this repository. Version status is tracked in the README version table.
 
 ## Pipeline Architecture
 

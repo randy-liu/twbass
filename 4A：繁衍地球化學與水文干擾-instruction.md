@@ -1,7 +1,7 @@
 ---
 Title: 卷 4A：台灣大嘴黑鱸繁衍地球化學與水文干擾
 Volume_ID: 4A
-Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.docx（Baseline_Facts, Waterbody_Model_Table）；0B 報告:0B_南北成土母質與地球化學基底.docx（土壤地球化學基底，可選）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts, Waterbody_Model_Table）；0B 報告:0B_南北成土母質與地球化學基底.md（土壤地球化學基底，可選）
 Core_Parameters: 產卵水溫 °C、孵化率 %、H₂S 急毒閾值 mg/L、Fe³⁺ 還原速率 mmol/m²/day、水位震盪振幅 cm
 Key_Mechanisms: 高嶺土黏粒裹卵（擴散距離 mm）、pH 對精子活力影響（μm/s）、旱季-回淹後 Fe³⁺ 還原速率、H₂S 劑量-孵化率反應、水位震盪導致棄巢率
 ---

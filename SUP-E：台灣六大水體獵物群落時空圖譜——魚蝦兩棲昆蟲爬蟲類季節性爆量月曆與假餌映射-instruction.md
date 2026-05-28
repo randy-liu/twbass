@@ -1,8 +1,8 @@
 ---
 Title: 補充卷 SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類的季節性爆量月曆與假餌映射
 Volume_ID: SUP-E
-Upstream_Required: 0A1 報告:0A1_台灣氣候forcing與區域差異研究.docx（Zone-A/B/C 三區氣溫/降雨月均值、冷氣團頻率）；0C 報告:0C_六大水體 seasonal 評估.docx（六大水體四季水溫/溶氧/濁度基準）；0D1 報告:0D1_基底資料矩陣與極端事件整合.docx（Baseline_Facts、極端事件時序）
-Upstream_Optional: 2A 報告（若已上傳）:2A_覓食偏好、印記與反射咬餌.docx（V2A-02 台灣主要獵物能量密度表——提取後補充本卷獵物能量欄位；若未上傳則本卷自行建立初始清單）
+Upstream_Required: 0A1 報告:0A1_台灣氣候forcing與區域差異研究.md（Zone-A/B/C 三區氣溫/降雨月均值、冷氣團頻率）；0C 報告:0C_六大水體 seasonal 評估.md（六大水體四季水溫/溶氧/濁度基準）；0D1 報告:0D1_基底資料矩陣與極端事件整合.md（Baseline_Facts、極端事件時序）
+Upstream_Optional: 2A 報告（若已上傳）:2A_覓食偏好、印記與反射咬餌.md（V2A-02 台灣主要獵物能量密度表——提取後補充本卷獵物能量欄位；若未上傳則本卷自行建立初始清單）
 Core_Parameters: 獵物爆量月份（月）、持續週數（週）、獵物尺寸範圍（mm）、偏好水層（cm 深度）、移動特徵（速度 m/s、頻率 Hz）、北中南三區月均水溫對應的物候觸發點（°C）
 Key_Mechanisms: 物候季節性（Phenological Seasonality）、獵物群落動態（Prey Community Dynamics）、台灣亞熱帶氣候下的繁殖週期壓縮、入侵物種（大肚魚/吳郭魚）的全年繁殖效應
 Research_Type: Supplemental（獨立生態調查卷；建立台灣鱸魚釣場的「Hatch Equivalent 年曆」與 OFT 切換豐度閾值；與 SUP-D 行為機制卷平行執行）

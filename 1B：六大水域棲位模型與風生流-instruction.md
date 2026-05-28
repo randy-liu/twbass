@@ -1,7 +1,7 @@
 ---
 Title: 卷 1B：六大水域棲位模型與風生流
 Volume_ID: 1B
-Upstream_Required: 0D 報告:0D1_基底資料矩陣與極端事件整合.docx（Baseline_Facts、Waterbody_Model_Table）
+Upstream_Required: 0D 報告:0D1_基底資料矩陣與極端事件整合.md（Baseline_Facts、Waterbody_Model_Table）
 Core_Parameters: 偏好水深 m、溶氧耐受下限 mg/L、H₂S 毒性閾值 ppm、風生流速度 cm/s、異重流入侵深度 m
 Key_Mechanisms: 溶氧驅動垂直遷徙、異重流被迫上移、冷休克翻水迴避、H₂S 毒性帶迴避、風生食物鏈集中
 ---
