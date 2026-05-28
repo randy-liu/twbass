@@ -29,3 +29,6 @@ $RECYCLE.BIN/
 # Temporary extraction/helper scripts generated during audit sessions
 .claude/*.txt
 .claude/*.py
+
+# Claude Code local settings（本機專用，不共用）
+.claude/settings.local.json
