@@ -99,6 +99,7 @@ Every research report must contain:
 3. **Findings** — uniquely numbered `V{卷號}-NN` (main) or `VSUP-{字母}NN` (SUP); bracket-only format like `[0A-01]` is non-compliant
 4. **Carry_Forward_To_{下游卷}** — downstream parameters with source finding IDs
 5. **Open_Assumptions** — high-uncertainty parameters, conservative values, verification directions
+6. **Language & Terminology** — All research reports must be written in **Traditional Chinese (正體中文)**. Must use standard Taiwanese scientific and fishing terminology (e.g. 埤塘, 溫躍層, 溶氧, 假餌, 活性鐵, 消落帶), and avoid English placeholders or non-local terms (e.g. 池塘, 斜溫層, 擬餌).
 
 Prohibited in all volumes: vague descriptors (高/低/強/弱/顯著/明顯). All key parameters require numeric values or justified estimation ranges. Unit rules: temperature °C, DO mg/L, Eh mV, visibility cm, time hr/day — never mix specific heat with volumetric heat capacity.
 
