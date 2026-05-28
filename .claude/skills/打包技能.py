@@ -11,6 +11,7 @@ base = pathlib.Path(__file__).parent
 skills = [
     'twbass-audit',           # 研究卷審查（主要技能）
     'twbass-pipeline-manager', # Pipeline 管理
+    'gemini-plan-review',     # Gemini plan 審查
     # 'twbass-tactical-advisor' # 已棄用，改用 MCP 方式
 ]
 
