@@ -2,7 +2,7 @@
 Title: 卷 1A：短時間環境觸發與大嘴黑鱸生理限制
 Volume_ID: 1A
 Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts、Waterbody_Model_Table）
-Core_Parameters: 光強度 lux、氣壓 hPa、魚鰾垂直位移 cm、視網膜反應延遲 ms、melatonin 分泌量化
+Core_Parameters: 光強度 lux、氣壓 hPa、魚鰾垂直位移 cm、視網膜反應延遲 ms、melatonin 分泌量 pg/mL
 Key_Mechanisms: 沼氣釋放耗氧機制、微型躍溫層、氣壓-魚鰾生理、光致盲閾值、月相光照效應
 ---
 
@@ -153,7 +153,7 @@ Key_Mechanisms: 沼氣釋放耗氧機制、微型躍溫層、氣壓-魚鰾生理
 
 ---
 
-# 八、最終輸出區塊
+# 八、最終輸出區塊規格
 
 研究報告結尾必須包含以下三個獨立輸出區塊：
 
