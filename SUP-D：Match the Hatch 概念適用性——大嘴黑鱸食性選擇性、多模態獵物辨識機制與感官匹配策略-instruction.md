@@ -1,7 +1,7 @@
 ---
 Title: 補充卷 SUP-D：Match the Hatch 概念適用性——大嘴黑鱸食性選擇性、多模態獵物辨識機制與感官匹配策略
 Volume_ID: SUP-D
-Upstream_Required: 2A 報告:2A_覓食偏好、印記與反射咬餌.md（V2A-01–V2A-09 OFT 基準、台灣獵物能量表、Reaction Strike 速度閾值、光譜衰減模型）；2B 報告:2B_側線、內耳與水下聲學傳遞.md（側線頻率響應、遠/近場聲學偵測距離）；0D1 報告:0D1_基底資料矩陣與極端事件整合.md（Baseline_Facts、水質基準）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.md（LVF/HVF 行為差異、皮質醇基線）
+Upstream_Required: 2A 報告:2A_覓食偏好、印記與反射咬餌.md（V2A-01–V2A-09 OFT 基準、台灣獵物能量表、Reaction Strike 速度閾值、光譜衰減模型）；2B 報告:2B_側線、內耳與水下聲學傳遞.md（側線頻率響應、遠/近場聲學偵測距離）；0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts、水質基準）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.md（LVF/HVF 行為差異、皮質醇基線）
 Core_Parameters: Chesson's α 選擇指數、Ivlev's E 電傾值、NTU 視覺失效閾值、側線觸發頻率 Hz、衝擊聲壓 dB/ms、搜索映像建立時間 ms、Reaction Strike 觸發概率 %、獵物辨識準確率 %
 Key_Mechanisms: 食性選擇指數（Dietary Electivity）、多模態獵物辨識（Multimodal Prey Discrimination）、感官匹配維度層級（Sensory Matching Hierarchy）、Match the Hatch vs Reaction Strike 策略切換、飼料印記殘餘效應、高壓環境下 LVF 的選擇性增強
 Research_Type: Supplemental（驗證「Match the Hatch」概念在台灣鱸魚釣場的生物學基礎；量化食性選擇性；釐清黑鱸如何辨識活物 vs 非生物干擾；建立行為機制決策框架——台灣特定獵物群落清單由 SUP-E 平行卷處理，本卷不引用 SUP-E 數值）
@@ -12,7 +12,7 @@ Parallel_With: SUP-E（兩卷研究內容獨立：本卷聚焦行為機制、SUP
 >
 > 本次 Deep Research **必須輸出結構化報告，不可輸出純散文**。最終報告須包含以下五個標題區塊（缺任何一個均視為不完整）：
 >
-> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源卷號（V2A-XX、2B、0D1、3A）
+> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源卷號（V2A-XX、V2B-XX、B0-XX、V3A-XX）
 > 2. `SUPD_Findings` — 10–20 條，每條以 `[VSUP-D01]`、`[VSUP-D02]`… 格式編號，每條必須含量化數值（選擇指數 / NTU / Hz / % / 月份 / 倍率等），**嚴禁模糊描述（高、低、強、弱）**
 > 3. `Correction_Instructions` — 對現有報告（2A/3A/3B）估算值的「\[確認\]」或「\[修正\]」建議
 > 4. `Carry_Forward_To_2A_2B_3A_3B` — 可供 2A/2B/3A/3B 直接引用的具體數值清單
@@ -292,7 +292,7 @@ Parallel_With: SUP-E（兩卷研究內容獨立：本卷聚焦行為機制、SUP
 # 六、最終輸出區塊規格
 
 ### `Inherited_Baseline`
-列出本卷補充研究所引用的上游基準數值，標注引用來源（V2A-XX、0C、0D1-XX、1A-XX、3A-XX 或 Fallback）。
+列出本卷補充研究所引用的上游基準數值，標注引用來源（V2A-XX、0C、B0-XX、V1A-XX、V3A-XX 或 Fallback）。
 若未上傳上游報告，先列出 `Missing_Upstream_Context`，以卷四「上游基準數值」中的數值為 Fallback 繼續分析，所有結論標示「[Fallback 基準]」。
 
 ### `SUPD_Findings`

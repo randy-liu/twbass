@@ -1,20 +1,20 @@
 ---
 Title: 補充卷 SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類的季節性爆量月曆與假餌映射
 Volume_ID: SUP-E
-Upstream_Required: 0A1 報告:0A1_台灣氣候forcing與區域差異研究.md（Zone-A/B/C 三區氣溫/降雨月均值、冷氣團頻率）；0C 報告:0C_六大水體 seasonal 評估.md（六大水體四季水溫/溶氧/濁度基準）；0D1 報告:0D1_基底資料矩陣與極端事件整合.md（Baseline_Facts、極端事件時序）
+Upstream_Required: 0A 報告:0A_台灣四季氣候 forcing 與區域差異.md（Zone-A/B/C 三區氣溫/降雨月均值、冷氣團頻率）；0C 報告:0C_六大水體 seasonal 評估.md（六大水體四季水溫/溶氧/濁度基準）；0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts、極端事件時序）
 Upstream_Optional: 2A 報告（若已上傳）:2A_覓食偏好、印記與反射咬餌.md（V2A-02 台灣主要獵物能量密度表——提取後補充本卷獵物能量欄位；若未上傳則本卷自行建立初始清單）
 Core_Parameters: 獵物爆量月份（月）、持續週數（週）、獵物尺寸範圍（mm）、偏好水層（cm 深度）、移動特徵（速度 m/s、頻率 Hz）、北中南三區月均水溫對應的物候觸發點（°C）
 Key_Mechanisms: 物候季節性（Phenological Seasonality）、獵物群落動態（Prey Community Dynamics）、台灣亞熱帶氣候下的繁殖週期壓縮、入侵物種（大肚魚/吳郭魚）的全年繁殖效應
 Research_Type: Supplemental（獨立生態調查卷；建立台灣鱸魚釣場的「Hatch Equivalent 年曆」與 OFT 切換豐度閾值；與 SUP-D 行為機制卷平行執行）
 Parallel_With: SUP-D（兩卷研究內容獨立：本卷聚焦生態調查與爆量時空圖譜、SUP-D 聚焦行為機制；可同時執行，下游整合在 2A/3A/3B 進行）
-Downstream_Users: 2A（台灣獵物能量表補充）、1B/1B1（六大水體棲位模型補充）、3B1 整合卷（與 SUP-D 行為機制結合構建完整「台灣情境 Match the Hatch 決策矩陣」）
+Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位模型補充）、3B 整合卷（與 SUP-D 行為機制結合構建完整「台灣情境 Match the Hatch 決策矩陣」）
 ---
 
 > ⚠️ **輸出格式強制要求（最高優先級）**
 >
 > 本次 Deep Research **必須輸出結構化報告，不可輸出純散文**。最終報告須包含以下五個標題區塊（缺任何一個均視為不完整）：
 >
-> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源卷號（0A1、0C、0D1）
+> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源卷號（0A、0C、0D）
 > 2. `SUPE_Findings` — 10–25 條，每條以 `[VSUP-E01]`、`[VSUP-E02]`… 格式編號，每條必須含量化數值（月份 / 週數 / mm / cm / °C / Hz 等），**嚴禁模糊描述（高、低、強、弱）**
 > 3. `Hatch_Equivalent_Calendar` — 台灣全年獵物爆量月曆，格式為月份 × 水體類型矩陣表
 > 4. `Carry_Forward_To_SUPD_2A` — 可供 SUP-D 與 2A 直接引用的具體數值清單
@@ -236,9 +236,9 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B/1B1（六大水體棲
 
 提取以下確認數值並列入 `Inherited_Baseline`：
 
-- **0A1 Zone-A/B/C**：北部/桃竹苗/南部各月均水溫（°C）——用於推算各蛙類、魚類、蝦類的繁殖觸發月份
+- **0A Zone-A/B/C**：北部/桃竹苗/南部各月均水溫（°C）——用於推算各蛙類、魚類、蝦類的繁殖觸發月份
 - **0C 六大水體基準**：管理池、水庫、灌渠、溪流的四季水溫範圍（°C）與溶氧（mg/L）
-- **0D1 B0-01/02**：台灣水體季節極端水溫記錄（北部冬季最低、南部夏季最高）
+- **B0-01/02**：台灣水體季節極端水溫記錄（北部冬季最低、南部夏季最高）
 - **V2A-02**（2A 報告，選擇性）：台灣主要獵物能量密度表（若已上傳 2A 報告則提取此表作為基準；若未上傳，則本卷自行建立台灣獵物能量初始清單，並在 `Carry_Forward_To_SUPD_2A` 中標注「建議 2A 更新此表」）
 
 ---
@@ -259,7 +259,7 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B/1B1（六大水體棲
 # 六、最終輸出區塊規格
 
 ### `Inherited_Baseline`
-列出本卷引用的上游基準數值，標注引用來源（0A1-XX、0C、0D1-XX、V2A-XX 或 Fallback）。
+列出本卷引用的上游基準數值，標注引用來源（V0A-XX、0C、B0-XX、V2A-XX 或 Fallback）。
 若未上傳上游報告，先列出 `Missing_Upstream_Context`，以台灣北部年均水溫 22°C / 南部 25°C 為 Fallback，標示「[Fallback 基準]」。
 
 ### `SUPE_Findings`

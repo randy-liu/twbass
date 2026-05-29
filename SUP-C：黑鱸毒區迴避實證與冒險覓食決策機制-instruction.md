@@ -1,7 +1,7 @@
 ---
 Title: 補充卷 SUP-C：大嘴黑鱸毒區迴避行為實證、冒險覓食決策機制與毒素耐受性評估
 Volume_ID: SUP-C
-Upstream_Required: 0D1 報告:0D1_基底資料矩陣與極端事件整合.md（B0-11 H₂S/Eh 基準值）；4A 報告:4A_繁衍地球化學與水文干擾.md（4A-10 H₂S 毒理閾值 LC50）；3A 報告（皮質醇動力學、Lockjaw 定義）；SUP-A 報告:SUP-A：感官生理閾值補充研究.md（VSUP-A04 ART 矩陣）；SUP-B 報告:SUP-B：底棲水化學梯度補充研究.md（VSUP-B06 安全距離）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（B0-11 H₂S/Eh 基準值）；4A 報告:4A_繁衍地球化學與水文干擾.md（4A-10 H₂S 毒理閾值 LC50）；3A 報告（皮質醇動力學、Lockjaw 定義）；SUP-A 報告:SUP-A：感官生理閾值補充研究.md（VSUP-A04 ART 矩陣）；SUP-B 報告:SUP-B：底棲水化學梯度補充研究.md（VSUP-B06 安全距離）
 Core_Parameters: H₂S 行為迴避閾值 mg/L、DO 迴避閾值 mg/L（% 飽和度）、體型依賴性閾值差異、毒區停留時間 s、衝入次數安全上限、獵物密度觸發倍率、H₂S LC50 比較（M. salmoides vs 耐受物種）、皮質醇 ng/mL、OFT 淨能量獲取
 Key_Mechanisms: 化學感受器介導的毒區迴避（H₂S/DO）、機會主義冒險覓食（Risk-taking Foraging）、最佳覓食理論（OFT）能量決策、Habitat compression 獵物密度壓縮、毒素耐受性比較毒理學、次致死暴露的行為代價
 Research_Type: Supplemental（針對白皮書中「毒素影響棲位分布」假設的實證驗證與量化補充）
@@ -13,8 +13,8 @@ Research_Type: Supplemental（針對白皮書中「毒素影響棲位分布」�
 >
 > 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源卷號
 > 2. `SUPC_Findings` — 10–20 條，每條以 `[VSUP-C01]`、`[VSUP-C02]`… 格式編號，每條必須含量化數值（mg/L / hr / s / % / 倍率等），**嚴禁模糊描述（高、低、強、弱）**
-> 3. `Correction_Instructions` — 對現有報告（1B1/3A/4A/SUP-B）估算值的「\[確認\]」或「\[修正\]」建議
-> 4. `Carry_Forward_To_3A_3B` — 可供 3A/3B1 直接引用的具體數值清單
+> 3. `Correction_Instructions` — 對現有報告（1B/3A/4A/SUP-B）估算值的「\[確認\]」或「\[修正\]」建議
+> 4. `Carry_Forward_To_3A_3B` — 可供 3A/3B 直接引用的具體數值清單
 > 5. `Unresolved_Dependencies` — 仍無法量化的缺口及建議後續研究方向
 >
 > 文末統一列參考文獻，**內文不使用 `[數字]` 引用標記**。
@@ -150,7 +150,7 @@ Research_Type: Supplemental（針對白皮書中「毒素影響棲位分布」�
 - **SUP-B VSUP-B06**：靜水安全距離 86 cm；停機 55–65 cm；水車 120–160 cm
 - **3A**：皮質醇基線 ~6.0 ng/mL；C&R 峰值 >150 ng/mL；Lockjaw 定義
 - **SUP-A VSUP-A04**：ART 溫度矩陣（5°C=67.9 hr → 35°C=8.5 hr）
-- **0D1 B0-11**：H₂S 釋放速率 19–281 mmol/m²/day；0.8 m 深峰值 8.5 mg/L
+- **B0-11**：H₂S 釋放速率 19–281 mmol/m²/day；0.8 m 深峰值 8.5 mg/L
 
 ---
 

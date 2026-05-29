@@ -12,7 +12,7 @@ Parallel_With: SUP-D-B（可同時執行，無直接依賴）；SUP-D-C 下游�
 >
 > 本次 Deep Research **必須輸出結構化報告，不可輸出純散文**。最終報告須包含以下五個標題區塊（缺任何一個均視為不完整）：
 >
-> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源（V2A-XX、V2B-XX、0D1-XX、V3A-XX）
+> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源（V2A-XX、V2B-XX、B0-XX、V3A-XX）
 > 2. `SUPDA_Findings` — 8–12 條，每條以 `[VSUP-DA01]`、`[VSUP-DA02]`… 格式編號，每條必須含量化數值（選擇指數 / NTU / Hz / % 等），**嚴禁模糊描述（高、低、強、弱）**
 > 3. `Correction_Instructions` — 對現有報告（2A/3A/3B）估算值的「\[確認\]」或「\[修正\]」建議
 > 4. `Carry_Forward_To_SUPDB_SUPDC_2A_3A_3B` — 可供 SUP-D-B/SUP-D-C/2A/3A/3B 直接引用的具體數值清單
@@ -143,7 +143,7 @@ Parallel_With: SUP-D-B（可同時執行，無直接依賴）；SUP-D-C 下游�
 # 六、最終輸出區塊規格
 
 ### `Inherited_Baseline`
-列出本卷補充研究所引用的上游基準數值，標注引用來源（V2A-XX、V2B-XX、0D1-XX、V3A-XX 或 Fallback）。若未上傳上游報告，先列出 `Missing_Upstream_Context`，以卷四數值為 Fallback 繼續分析，所有結論標示「[Fallback 基準]」。
+列出本卷補充研究所引用的上游基準數值，標注引用來源（V2A-XX、V2B-XX、B0-XX、V3A-XX 或 Fallback）。若未上傳上游報告，先列出 `Missing_Upstream_Context`，以卷四數值為 Fallback 繼續分析，所有結論標示「[Fallback 基準]」。
 
 ### `SUPDA_Findings`
 8–12 條，每條附唯一編號（格式 `[VSUP-DA01]`、`[VSUP-DA02]`…）。格式：

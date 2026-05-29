@@ -1,7 +1,7 @@
 ---
 Title: 卷 0C：六大水體 seasonal 評估
 Volume_ID: 0C
-Upstream_Required: 0A 報告:0A1_台灣氣候forcing與區域差異研究.md（氣候 forcing 數值）、0B 報告:0B_南北成土母質與地球化學基底.md（底質地球化學參數）
+Upstream_Required: 0A 報告:0A_台灣四季氣候 forcing 與區域差異.md（氣候 forcing 數值）、0B 報告:0B_南北成土母質與地球化學基底.md（底質地球化學參數）
 Core_Parameters: 水溫日夜差 °C、溶氧飽和值 mg/L、Eh mV、能見度 cm、Stokes 沉降速率 cm/hr
 Key_Mechanisms: 淺水熱慣性緩衝、溫躍層翻轉、Stokes 絮凝沉降、南部蒸發濃縮、內部營養鹽負載
 ---
