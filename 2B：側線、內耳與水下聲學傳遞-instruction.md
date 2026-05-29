@@ -1,7 +1,7 @@
 ---
 Title: 卷 2B：側線、內耳與水下聲學傳遞
 Volume_ID: 2B
-Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合（Baseline_Facts、Waterbody_Model_Table）
+Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts、Waterbody_Model_Table）
 Core_Parameters: 側線頻率響應 Hz、聲速 m/s、聲學阻抗 Rayl、衰減係數 dB/m、粒子加速度 m/s²
 Key_Mechanisms: 側線近場/遠場感知、Otolith 低頻整合、Medwin 聲速方程、黏土膠體阻抗增加、EPS 黏滯衰減
 ---
