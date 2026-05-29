@@ -13,7 +13,7 @@
 
 **目標檔案**：`0C_六大水體 seasonal 評估.md`
 **執行流程**：gemini-plan-review（2 輪）→ twbass-audit 5-Phase → Claude 後處理
-**最終 Findings 數**：V0C-01–14　**Carry_Forward 數**：CF0C-01–14
+**最終 Findings 數**：V0C-01–14　**Carry_Forward 數**：CF0C-01–16（第二輪稽核後新增 CF0C-15/16）
 
 ### Plan Review 輪次紀錄
 
@@ -65,3 +65,18 @@
 - 南部春末藻華：野生埤塘 10–15 cm（15–25 天）；水庫庫灣 30–50 cm（10–18 天）
 - 南部野生埤塘春雨回淹釋磷：25–45 μg/L（5–9 天）
 - 南部水庫颱風後 TP：+15–35 μg/L（7–14 天）
+
+### 第二輪稽核補丁（2026-05-29，twbass-audit 重審）
+
+Phase 6 判定：✅ 不需重跑（1 分）。以下 6 條由 Claude 直接修補。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-0C-R2-01 | Metadata、§三-2、V0C-02、W1 溫度描述、Table W1 冬季欄、CF0C-03 | Zone-A/B 熱阻阻尼值拆分：CF0C-03 拆為 CF0C-03a（Zone-A 17–23 hr，C_v=3.215）與 CF0C-03b（Zone-B 18–24 hr，C_v=3.411）；Table W1 冬季欄補入 V0A-08 Zone-A/B 降溫幅度 |
+| FIX-0C-R2-02 | Waterbody-1 溫度動態第一句 | 刪除「熱慣性適中」模糊描述，替換為 Zone-A/B C_v 量化值與 hr 範圍 |
+| FIX-0C-R2-03 | §六/七 章節標題 | 補充研究章節由「七」更正為「六」；參考文獻由「六」更正為「七」 |
+| FIX-0C-R2-04 | Carry_Forward_To_0D 末端 | 新增 CF0C-15（北部管理池停機透明度窗口 50–80 cm，引 V0C-11）與 CF0C-16（南部管理池夏季水溫峰值 34–35°C，表底差 4–5°C，引 V0C-12） |
+| FIX-0C-R2-05 | Waterbody-2 水文段 | 北部水庫回淹 TP <3 μg/L 補標「理論估算：V0B-02 Q_max = 780–1,250 mg/kg」 |
+| FIX-0C-R2-06 | Waterbody-1 溶氧與水質段 | 夏季 DO 光合 0.4–0.8 mg/L/hr、呼吸 0.2–0.5 mg/L/hr 補標「文獻估算：亞熱帶淺水湖沼學外推」 |
+
+**git commit**：`e11c9f1`（fix(0C): 套用六條 FIX 稽核修正）
