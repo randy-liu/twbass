@@ -26,12 +26,12 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 0A | `0A_台灣四季氣候 forcing 與區域差異.md` | Zone-A/B/C 三區並列已完成 |
 | 0B | `0B_南北成土母質與地球化學基底.md` | 地球化學與物理底質特徵已完成 |
 | 0C | `0C_六大水體 seasonal 評估.md` | Zone-A/B/C 三區並列；V0C-01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-05-29） |
-| 0D | ⏳ 待跑 | |
+| 0D | `0D_基底資料矩陣與極端事件整合.md` | B0-01–19；Zone-A/B/C 三區並列已完成 |
 | 1A | ⏳ 待跑 | |
 | 1B | ⏳ 待跑 | |
-| 2A | ⏳ 待跑 | |
-| 2B | ⏳ 待跑 | 聲學物理，Zone-B 影響低 |
-| 2C | ⏳ 待跑 | |
+| 2A | ⏳ 待跑 | instruction.md 格式稽核完成（FMT-2A-01~11） |
+| 2B | ⏳ 待跑 | 聲學物理，Zone-B 影響低；instruction.md 格式稽核完成（FMT-2B-01~08） |
+| 2C | ⏳ 待跑 | instruction.md 格式稽核完成（FMT-2C-01~10） |
 | 3A | ⏳ 待跑 | |
 | 3B | ⏳ 待跑 | |
 | 4A | ⏳ 待跑 | |
