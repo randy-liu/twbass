@@ -28,7 +28,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 0C | `0C_六大水體 seasonal 評估.md` | Zone-A/B/C 三區並列；V0C-01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-05-29） |
 | 0D | `0D_基底資料矩陣與極端事件整合.md` | B0-01–19；Zone-A/B/C 三區並列已完成 |
 | 1A | `1A_短時間環境觸發與生理限制.md` | V1A-01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
-| 1B | ⏳ 待跑 | |
+| 1B | `1B_六大水域棲位模型與風生流.md` | V1B-01–13；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2A | ⏳ 待跑 | instruction.md 格式稽核完成（FMT-2A-01~11） |
 | 2B | ⏳ 待跑 | 聲學物理，Zone-B 影響低；instruction.md 格式稽核完成（FMT-2B-01~08） |
 | 2C | ⏳ 待跑 | instruction.md 格式稽核完成（FMT-2C-01~10） |
