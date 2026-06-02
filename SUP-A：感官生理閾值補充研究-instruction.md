@@ -1,10 +1,24 @@
 ---
-Title: 補充卷 SUP-A：大嘴黑鱸感官生理閾值補充研究——CFF 溫度偏移與慢性皮質醇基線平移
+Title: 卷 SUP-A：大嘴黑鱸感官生理閾值補充研究——CFF 溫度偏移與慢性皮質醇基線平移
 Volume_ID: SUP-A
-Upstream_Required: 2B 報告:2B_側線、內耳與水下聲學傳遞.md（V2B-XX SNs/CNs 頻率定義）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.md（V3A-XX CFF 閾值、Alert Reset Time、皮質醇半衰期）；3B 報告:3B_極端情境高壓策略推演.md（V3B-XX Tactical_Rules 引用現況）
-Core_Parameters: CFF Hz、皮質醇 ng/mL、Alert Reset Time min、水溫 °C、代謝清除率 MCR
+Upstream_Required: 2B 報告:2B_側線、內耳與水下聲學傳遞.md（V2B-XX SNs/CNs 頻率定義）；3A 報告:3A_高壓舊魚心理機制與誘咬本質.md（V3A-XX CFF 閾值、Alert Reset Time、皮質醇半衰期）；3B 報告:3B_極端情境高壓策略推演.md（V3B-XX 3B_Tactical_Rules 引用現況）
+Core_Parameters: CFF Hz、皮質醇 ng/mL、Alert Reset Time min、水溫 °C、代謝清除率 MCR ng/mL/hr
 Key_Mechanisms: 視網膜光感受器離子通道熱動力學（溫度→CFF 偏移）、慢性高壓環境下魚體 HPI 軸基線平移（Chronic Cortisol Baseline Shift）
 Research_Type: Supplemental（補充現有報告的量化缺口，不建立新研究框架）
+---
+
+> ⚠️ **輸出格式強制要求（最高優先級）**
+>
+> 本次 Deep Research **必須輸出結構化報告，不可輸出純散文**。最終報告須包含以下區塊（缺任何一個均視為不完整）：
+>
+> 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源編號
+> 2. `SUPA_Findings` — 8–15 條，每條以 `VSUP-A01`、`VSUP-A02`… 格式編號，每條必須含量化數值與信心等級，**嚴禁模糊描述（高、低、強、弱）**
+> 3. `Carry_Forward_To_3A_3B` — 可供 3A Open_Assumptions 與 3B Unresolved_Dependencies 直接引用的量化結論清單
+> 4. `Correction_Instructions` — 對 3A/3B 現有估算值的「[確認]」或「[修正]」建議（SUP 卷專用）
+> 5. `Unresolved_Dependencies` — 仍無法量化的缺口及建議後續研究方向
+>
+> 文末統一列參考文獻，**內文不使用 `[數字]` 引用標記**。
+
 ---
 
 # 一、通用系統設定與輸出規範
@@ -13,7 +27,12 @@ Research_Type: Supplemental（補充現有報告的量化缺口，不建立新�
 2. **單位標準（全卷強制）**：溫度 °C、皮質醇 ng/mL、Alert Reset Time min、頻率 Hz、代謝清除率 MCR（ng/mL/hr）。
 3. **量化要求**：每條發現必須附量化數值或合理估算區間；嚴禁使用「高、低、強、弱」等模糊描述。
 4. **推測標示**：缺乏直接 *Micropterus salmoides* 實證須標示「基於〔引用物種/理論〕之推測」；若從近緣物種外推，需說明外推依據。
-5. **補充研究原則**：本卷不重寫 3A/3B 的現有戰術框架，僅輸出可**直接覆蓋或修正**既有 fallback 數值的量化結論。
+5. **反幻覺原則（兼補充研究原則）**：涉及黑鱸生理參數時，所有結論必須明確區分以下四個層級並標注來源；本卷不重寫 3A/3B 的現有戰術框架，僅輸出可**直接覆蓋或修正**既有 fallback 數值的量化結論：
+   - **直接實驗證據**（*Micropterus salmoides* 直接量測）
+   - **近緣物種外推**（鱸科 Centrarchidae，如 *M. dolomieu*、*Lepomis macrochirus*、*Perca flavescens*）——標注「類比推估」
+   - **廣泛硬骨魚類外推**——標注「廣泛外推」
+   - **純理論模型推算**——標注「理論估算」
+6. **跨卷引用**：凡引用上游數值，必須標注來源編號（如 `VSUP-A01`、`V3A-05`）；覆蓋 fallback 時標注「[覆蓋 fallback 假設]」。
 
 ---
 
@@ -53,11 +72,25 @@ Research_Type: Supplemental（補充現有報告的量化缺口，不建立新�
 - 皮質醇代謝清除率（MCR）：依 Q₁₀ ≈ 2.0 假設
 
 **Fallback 情況（未上傳上游報告）：**
-若未提供上游文件，先列出 `Missing_Upstream_Context`，以上述數值為基準繼續分析，所有結論標示「[Fallback 基準]」。
+若未提供上游文件，先列出 `Missing_Upstream_Context`，以上述數值為基準繼續分析，所有結論標示「[Fallback 基準]」。本卷研究問題為感官生理與內分泌機制，不依賴具體水體物理情境，六大水體精簡 fallback 對本卷不適用（N/A）。
 
 ---
 
-# 五、核心研究清單
+# 五、上游基準數值（Inherited_Baseline 來源）
+
+本補充卷的研究基準來自以下上游卷的 fallback 估算值（上傳實際報告後，以報告中實測值覆蓋）：
+
+| 參數 | 基準值 | 來源卷 |
+|------|--------|-------|
+| CFF 閾值 | 30–60 Hz（通用真骨魚類） | 3A fallback |
+| 靜息皮質醇基線（自然個體） | ~6.0 ng/mL | 3A fallback |
+| Alert Reset Time（正常條件） | 24–72 hr | 3A fallback |
+| Alert Reset Time（H₂S 環境） | 80–120 hr | 3A fallback |
+| 皮質醇代謝清除率 MCR | Q₁₀ ≈ 2.0 假設 | 3A fallback |
+
+---
+
+# 六、核心研究清單
 
 ## Q1. CFF 溫度偏移（Thermal CFF Shift）
 
@@ -98,18 +131,18 @@ Research_Type: Supplemental（補充現有報告的量化缺口，不建立新�
 
 ---
 
-# 六、排除條件
+# 七、排除條件
 
 - ❌ 棲位模型、水體分層、風生流——那是 1B 的任務
 - ❌ 側線頻率響應的詳細聲學計算——那是 2B 的任務（本卷只引用結論）
-- ❌ 繁衍行為與護巢
+- ❌ 繁衍行為與護巢——那是卷 4A / 4B 的任務
 - ❌ 食物偏好、印記、OFT——那是 2A 的任務
 - ❌ 特定假餌品牌推薦
 - ❌ 不重寫 3A/3B 的完整戰術框架，只輸出數值修正建議
 
 ---
 
-# 七、最終輸出區塊規格
+# 八、最終輸出區塊規格
 
 ### `Inherited_Baseline`
 列出本卷補充研究所引用的上游基準數值（CFF、ART、皮質醇基線），標注引用來源（V3A-XX、V3B-XX 或 Fallback）。
@@ -124,8 +157,12 @@ Research_Type: Supplemental（補充現有報告的量化缺口，不建立新�
 目標：[3A/3B 文件中的具體段落或發現編號]
 現有數值：[XX]
 建議更新為：[YY]（依據：VSUP-AXX）
-影響的 Tactical_Rules：[V3B-XX 列表]
+影響的 3B_Tactical_Rules：[V3B-XX 列表]
 ```
+
+### `Carry_Forward_To_3A_3B`
+列出可供 3A Open_Assumptions 與 3B Unresolved_Dependencies 直接引用的量化結論。每條需明確指出：
+(a) 參數類型、(b) 量化數值/估算區間、(c) 適用條件（水溫 °C / 個體類型）、(d) 引用的 VSUP-AXX 編號。
 
 ### `Unresolved_Dependencies`
 列出本補充研究後仍無法解決的缺口，說明缺失數據、影響範圍及建議的後續研究方向。
