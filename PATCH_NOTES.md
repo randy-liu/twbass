@@ -428,6 +428,86 @@ Zone-A 採 SD=35 cm（κ=4.86）後，水下 0.5m 月光提升至 0.018 lux，Me
 
 ---
 
+## 2C 卷 Q-SUP 補充研究整合與後處理（2026-06-02）
+
+**目標檔案**：`2C_視線軸向、攻擊角度與假餌操作.md`
+**執行流程**：gemini-plan-review（1 輪）→ Gemini 主卷執行 → twbass-audit R1（5-Phase）→ Gemini Q-SUP-01/02 補充執行 → twbass-audit R2（5-Phase）→ Claude 後處理
+**補充研究任務**：Q-SUP-01（Up-Strike 水溫/DO/深度三區分列門檻）+ Q-SUP-02（全視野與雙眼區空間視敏度 CPD）
+**最終 Findings 數**：V2C-01–12；Carry_Forward_To_3A_3B（5 條）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ✅ Go | 無結構性缺口；獵物相對水層位置（探討 2 第 3 項）屬「可浮現缺口」，研究過程自然命中 | 直接執行 |
+
+### 5-Phase 稽核結果（R1，主卷執行後）
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 3 件 | V2C-12「Caucasian」幻覺殘碼；Down-Strike 速度缺 m/s 換算；V1A-10 適應時間 30–45 min 待核對（V1A-04 熱點值 45–60 min） |
+| P2 輸出區塊 | ⚠️ 2 件 | Zone-B 視距未列 Inherited_Baseline item 4；Carry_Forward items 2–3 缺 Zone-B 獨立條目 |
+| P3 引用鏈 | ⚠️ 5 件 | B0-03、V2A-04/05/06、V2B-01 用於正文但未列 Inherited_Baseline |
+| P4 Scope | ✅ OK | 無越界；側線引用均為 2B 結論引用，OFT 引用均為 2A 結論引用 |
+| P5 研究缺口 | ⚠️ 2 件 | V2C-07 缺 Up-Strike 水溫/DO/深度門檻（Carry_Forward 缺失）；全視野視敏 CPD 完整範圍缺失 |
+
+**Phase 6 R1 判定**：⚠️ 局部補充（6 分）
+- Carry_Forward 必要參數完全缺失（Up-Strike 溫度/DO/深度）+4
+- 全視野視敏度 CPD 缺失 +1
+- V1A-10 適應時間核對旗標 +1
+
+推薦工具：先 Gemini（Q-SUP-01/02）→ 後 Claude（結構修補）
+
+### Q-SUP 補充研究清單
+
+| Q-SUP 編號 | 研究問題 | 補充結果 |
+|-----------|---------|---------|
+| Q-SUP-01 | Up-Strike 觸發的水溫（°C）、溶氧（mg/L）、發動深度（cm）三區分列門檻 | 已整合至 Section 四.2–4 與 V2C-07；水溫 Zone-A/B <12°C / Zone-C <14°C；DO 抑制點 Zone-A 2.5 / Zone-B 2.8 / Zone-C 3.0 mg/L；發動深度 Zone-A <30 cm / Zone-B <45 cm / Zone-C <50 cm / 深水水庫 <120 cm |
+| Q-SUP-02 | 大嘴黑鱸全視野與雙眼區空間視敏度（CPD）完整範圍 | 已整合至 Section 三.3 與 V2C-05；Snellen 0.10–0.18 換算全視野 3.0–5.4 CPD（行為均值 4.06 CPD）；雙眼區 1.18–5.4 CPD（幼魚 1.18–2.5 CPD；成魚 3.62–5.4 CPD） |
+
+### 5-Phase 稽核結果（R2，Q-SUP 整合後）
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 3 件 | 「Caucasian」仍存在（持續）；Down-Strike m/s 仍缺（持續）；Section 十三 item 3 英文殘碼「the」（新發現） |
+| P2 輸出區塊 | ⚠️ 1 件 | Zone-B 仍未列入 Inherited_Baseline item 4（持續；Carry_Forward Zone-B 已解決） |
+| P3 引用鏈 | ⚠️ 5 件 | B0-03、V2A-04/05/06、V2B-01 仍未列 Inherited_Baseline（持續） |
+| P4 Scope | ✅ OK | 新增 Q-SUP 內容均在 2C scope 內 |
+| P5 研究缺口 | ✅ OK | Q-SUP-01/02 兩大缺口均已補齊 |
+
+**Phase 6 R2 判定**：✅ 不需重跑（2 分）
+所有內容缺口關閉；剩餘問題均為 Claude 可直接執行的文字與結構修補。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-2C-R2-01 | V2C-12 | 刪除「Caucasian」幻覺殘碼 → 「前方狹窄的 ±10° 搜索錐形區」 |
+| FIX-2C-R2-02 | 攻擊路徑圖示 + V2C-11 | Down-Strike 補入 m/s 換算：2–4 BL/s → 2–4 BL/s（以 35 cm 黑鱸計為 0.7–1.4 m/s） |
+| FIX-2C-R2-03 | Section 十三 item 3 | 刪除英文殘碼「the」 |
+| FIX-2C-R2-04 | Inherited_Baseline item 4 | 補入 Zone-B (SD 45cm)：強光高對比 36 cm / 低對比 98 cm；陰天 50 cm / 135 cm |
+| FIX-2C-R2-05 | Inherited_Baseline items 13–17 | 新增 B0-03、V2A-04、V2A-05、V2A-06、V2B-01 五條缺失引用 |
+| FIX-2C-次要-01 | Section 十二 標題 | 逗號「,」→ 頓號「、」 |
+
+### Q-SUP 核心數值（稽核確認正確）
+
+| 數值 | 驗證結果 |
+|------|---------|
+| 雙眼重疊區：水平 25°–30°，垂直 -10° 至 +35° | V2C-01 ✓ |
+| 眼球主動旋轉 ±12°（Centrarchidae 類比推估） | V2C-03 ✓ |
+| 全視野視敏 3.0–5.4 CPD（Snellen 0.10–0.18 × 30） | V2C-05 ✓ |
+| Snell's Window Zone-A SD 35cm 濁水壓縮至 ±16°（全角 32°） | V2C-06 ✓ |
+| Up-Strike 仰角 +20° 至 +45°；4–8 BL/s（1.4–2.8 m/s） | V2C-09 ✓ |
+| Forward-Strike -10° 至 +10°；3–6 BL/s（1.05–2.1 m/s） | V2C-10 ✓ |
+| Down-Strike -15° 至 -45°；2–4 BL/s（0.7–1.4 m/s）；Head-down -15° 至 -30° | V2C-11 ✓ |
+| 冬季 <12°C 眼球掃描萎縮 65%–70%；搜索錐縮限至 ±10° | V2C-12 ✓ |
+| Up-Strike 水溫 Zone-A/B <12°C / Zone-C <14°C（停止仰攻 <10°C） | V2C-07 ✓ |
+| Up-Strike DO 正常 >4.5 mg/L；抑制 2.5–3.0 mg/L；ASR <1.6–2.0 mg/L | V2C-07 ✓ |
+| Up-Strike 發動深度 Zone-A <30 cm / Zone-B <45 cm / Zone-C <50 cm / 水庫 <120 cm | V2C-08 ✓ |
+| apparent 視敏衰退：Zone-A r>20cm → <0.5 CPD；Zone-B r>28cm → <0.7 CPD；Zone-C r>35cm → <0.8 CPD | V2C-08 ✓ |
+
+---
+
 ## 2B 卷第二輪稽核與後處理（2026-06-02）
 
 **目標檔案**：`2B_側線、內耳與水下聲學傳遞.md`（Q-SUP-01/02 整合後版本）

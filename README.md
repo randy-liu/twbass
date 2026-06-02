@@ -31,7 +31,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 1B | `1B_六大水域棲位模型與風生流.md` | V1B-01–13；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2A | `2A_覓食偏好、印記與反射咬餌.md` | V2A-01–12；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2B | `2B_側線、內耳與水下聲學傳遞.md` | V2B-01–13；2 輪 plan review + Q-SUP-01/02 補充研究（EPS 聲學衰減三成分分解、Stokes 振盪球近場修正）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
-| 2C | ⏳ 待跑 | instruction.md 格式稽核完成（FMT-2C-01~10） |
+| 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
 | 3A | ⏳ 待跑 | |
 | 3B | ⏳ 待跑 | |
 | 4A | ⏳ 待跑 | |

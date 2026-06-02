@@ -5,23 +5,28 @@ from pathlib import Path
 
 from docx import Document
 
-BASE = Path(__file__).resolve().parent.parent  # docx 研究報告位於 repo 上層目錄
+BASE = Path(__file__).resolve().parent  # 讀取當前資料夾的 .md 報告
 FILES = OrderedDict([
-    ("0A1", BASE / "0A1_台灣氣候forcing與區域差異研究.docx"),
-    ("0B", BASE / "0B_南北成土母質與地球化學基底.docx"),
-    ("0C1", BASE / "0C１_六大水體 seasonal 評估.docx"),
-    ("0D1", BASE / "0D1_基底資料矩陣與極端事件整合.docx"),
-    ("1A", BASE / "1A_短時間環境觸發與生理限制.docx"),
-    ("1B1", BASE / "1B1_六大水域棲位模型與風生流.docx"),
-    ("2A", BASE / "2A_覓食偏好、印記與反射咬餌.docx"),
-    ("2B", BASE / "2B_側線、內耳與水下聲學傳遞.docx"),
-    ("2C", BASE / "2C_視線軸向、攻擊角度與假餌操作.docx"),
-    ("3A", BASE / "3A_高壓舊魚心理機制與誘咬本質.docx"),
-    ("3B1", BASE / "3B1_極端情境高壓策略推演.docx"),
-    ("4A", BASE / "4A_繁衍地球化學與水文干擾.docx"),
-    ("4B", BASE / "4B_棲位競爭、容載量與護巢防禦.docx"),
-    ("SUP-A", BASE / "SUP-A：感官生理閾值補充研究.docx"),
-    ("SUP-B", BASE / "SUP-B：底棲水化學梯度補充研究.docx"),
+    ("0A1", BASE / "0A_台灣四季氣候 forcing 與區域差異.md"),
+    ("0B", BASE / "0B_南北成土母質與地球化學基底.md"),
+    ("0C1", BASE / "0C_六大水體 seasonal 評估.md"),
+    ("0D1", BASE / "0D_基底資料矩陣與極端事件整合.md"),
+    ("1A", BASE / "1A_短時間環境觸發與生理限制.md"),
+    ("1B1", BASE / "1B_六大水域棲位模型與風生流.md"),
+    ("2A", BASE / "2A_覓食偏好、印記與反射咬餌.md"),
+    ("2B", BASE / "2B_側線、內耳與水下聲學傳遞.md"),
+    ("2C", BASE / "2C_視線軸向、攻擊角度與假餌操作.md"),
+    ("3A", BASE / "3A_高壓舊魚心理機制與誘咬本質.md"),
+    ("3B1", BASE / "3B_極端情境高壓策略推演.md"),
+    ("4A", BASE / "4A_繁衍地球化學與水文干擾.md"),
+    ("4B", BASE / "4B_棲位競爭、容載量與護巢防禦.md"),
+    ("SUP-A", BASE / "SUP-A：感官生理閾值補充研究.md"),
+    ("SUP-B", BASE / "SUP-B：底棲水化學梯度補充研究.md"),
+    ("SUP-C", BASE / "SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md"),
+    ("SUP-D-A", BASE / "SUP-D-A_食性選擇性與感官匹配優先序.md"),
+    ("SUP-D-B", BASE / "SUP-D-B_多模態獵物辨識與追擊序列.md"),
+    ("SUP-D-C", BASE / "SUP-D-C_水中漂流偵測與策略切換.md"),
+    ("SUP-E", BASE / "SUP-E_台灣六大水體獵物群落時空圖譜.md"),
 ])
 
 TRANSLATION = str.maketrans({
@@ -39,7 +44,7 @@ TRANSLATION = str.maketrans({
     "　": " ",
 })
 FLAGS = re.I | re.S
-CODE_RE = re.compile(r"\b(?:B0-\d{2}|V[1-4][ABC]-\d{2}|VSUP-[AB]-?\d{2}|CF-\d{2})\b")
+CODE_RE = re.compile(r"\b(?:B0-\d{2}|V[1-4][ABC]-\d{2}|VSUP-(?:[A-CE]|D[ABC])-?\d{2}|CF-\d{2})\b")
 NUM_RE = re.compile(r"(?:>=|<=|>|<|~|≈)?\s*\d+(?:\.\d+)?(?:\s*[-~]\s*\d+(?:\.\d+)?)?(?:\s*(?:cm|m|mg/L|mV|Hz|ng/mL|ng/ml|hr|h|min|day|天|月下旬|°C|C))?", re.I)
 
 
@@ -53,18 +58,29 @@ def norm(text: str) -> str:
 
 
 def read_doc(path: Path):
-    doc = Document(path)
+    if not path.exists():
+        return {"lines": [], "text": ""}
+    
     lines = []
-    for para in doc.paragraphs:
-        t = norm(para.text)
-        if t:
-            lines.append(t)
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                t = norm(cell.text)
+    if path.suffix == ".md":
+        with open(path, "r", encoding="utf-8-sig") as f:
+            for line in f:
+                t = norm(line)
                 if t:
                     lines.append(t)
+    else:
+        doc = Document(path)
+        for para in doc.paragraphs:
+            t = norm(para.text)
+            if t:
+                lines.append(t)
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    t = norm(cell.text)
+                    if t:
+                        lines.append(t)
+                        
     deduped = []
     prev = None
     for line in lines:
@@ -170,9 +186,13 @@ def section_slice(lines, start_markers, end_markers):
     return lines[start:end]
 
 
+_VSUP_PREFIXES = ["VSUP-A", "VSUP-B", "VSUP-C", "VSUP-DA", "VSUP-DB", "VSUP-DC", "VSUP-E"]
+
+
 def canonical_code(code: str) -> str:
     code = norm(code).upper().replace(" ", "")
-    code = code.replace("VSUP-A-", "VSUP-A").replace("VSUP-B-", "VSUP-B")
+    for prefix in _VSUP_PREFIXES:
+        code = code.replace(prefix + "-", prefix)
     return code
 
 
@@ -191,6 +211,11 @@ def code_target(code: str):
         "V4B": "4B",
         "VSUP-A": "SUP-A",
         "VSUP-B": "SUP-B",
+        "VSUP-C": "SUP-C",
+        "VSUP-DA": "SUP-D-A",
+        "VSUP-DB": "SUP-D-B",
+        "VSUP-DC": "SUP-D-C",
+        "VSUP-E": "SUP-E",
     }
     for prefix, target in mapping.items():
         if code.startswith(prefix):
@@ -201,20 +226,18 @@ def code_target(code: str):
 def code_exists_in_doc(code: str, text: str):
     code = canonical_code(code)
     patterns = [re.escape(code)]
-    if code.startswith("VSUP-A"):
-        patterns.append(re.escape(code.replace("VSUP-A", "VSUP-A-")))
-    if code.startswith("VSUP-B"):
-        patterns.append(re.escape(code.replace("VSUP-B", "VSUP-B-")))
+    for prefix in _VSUP_PREFIXES:
+        if code.startswith(prefix):
+            patterns.append(re.escape(code.replace(prefix, prefix + "-")))
     return any(re_has(text, p) for p in patterns)
 
 
 def snippets_for_code(code: str, lines):
     code = canonical_code(code)
     pats = [re.escape(code)]
-    if code.startswith("VSUP-A"):
-        pats.append(re.escape(code.replace("VSUP-A", "VSUP-A-")))
-    if code.startswith("VSUP-B"):
-        pats.append(re.escape(code.replace("VSUP-B", "VSUP-B-")))
+    for prefix in _VSUP_PREFIXES:
+        if code.startswith(prefix):
+            pats.append(re.escape(code.replace(prefix, prefix + "-")))
     return find_snippets_regex(lines, pats, radius=1, limit=3)
 
 
@@ -400,6 +423,54 @@ def main():
             "anchor_groups": [[r"B0-08", r"DO", r"溶氧"], [r"3\s*[-~]\s*4\s*mg\s*/\s*L"]],
             "checks": [("3-4 mg/L", r"3\s*[-~]\s*4\s*mg\s*/\s*L")],
         },
+        {
+            "name": "雙眼重疊區水平角",
+            "expected": "25-30°",
+            "expected_docs": ["2C"],
+            "scan_docs": ["2C", "3A", "3B1"],
+            "anchor_groups": [[r"Binocular [Oo]verlap", r"雙眼重疊"]],
+            "checks": [("25-30°", r"25\s*°?\s*[-–~至]\s*30\s*°")],
+        },
+        {
+            "name": "Up-Strike仰角",
+            "expected": "+20° to +45°",
+            "expected_docs": ["2C"],
+            "scan_docs": ["2C", "3A", "3B1"],
+            "anchor_groups": [[r"Up-Strike|朝上攻擊"], [r"仰角|\+\s*20\s*°|\+\s*45\s*°"]],
+            "checks": [("20-45°", r"[+]?\s*20\s*°?\s*[-–~至]\s*[+]?\s*45\s*°")],
+        },
+        {
+            "name": "Up-Strike水溫門檻",
+            "expected": "Zone-A/B <12°C; Zone-C <14°C",
+            "expected_docs": ["2C"],
+            "scan_docs": ["2C", "3A", "3B1"],
+            "anchor_groups": [[r"Up-Strike|仰攻"]],
+            "mode": "all",
+            "checks": [
+                ("Zone-A/B <12°C", r"<\s*12\s*°?\s*C"),
+                ("Zone-C <14°C", r"<\s*14\s*°?\s*C"),
+            ],
+        },
+        {
+            "name": "Up-Strike溶氧門檻",
+            "expected": ">4.5 mg/L (正常); 2.5-3.0 mg/L (抑制)",
+            "expected_docs": ["2C"],
+            "scan_docs": ["2C", "3A", "3B1"],
+            "anchor_groups": [[r"Up-Strike|仰攻|DO.*mg|溶氧門檻"]],
+            "mode": "all",
+            "checks": [
+                (">4.5 mg/L", r">\s*4\.5\s*mg\s*/\s*L"),
+                ("2.5-3.0 mg/L", r"2\.5\s*[-–~]\s*3\.0\s*mg\s*/\s*L"),
+            ],
+        },
+        {
+            "name": "V2C全視野空間視敏度CPD",
+            "expected": "3.0-5.4 CPD",
+            "expected_docs": ["2C"],
+            "scan_docs": ["2C", "3A", "3B1"],
+            "anchor_groups": [[r"CPD|cpd|空間視敏|cycles per degree"]],
+            "checks": [("3.0-5.4 CPD", r"3\.0\s*[-–~至]\s*5\.4\s*CPD")],
+        },
     ]
 
     phase1 = []
@@ -427,6 +498,11 @@ def main():
         "4B": [("Inherited_Baseline", r"Inherited_Baseline"), ("V4X-XX Findings", r"V4B-\d{2}"), ("Carry_Forward", r"Carry_Forward")],
         "SUP-A": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-A-?\d{2}"), ("Correction_Instructions", r"Correction_Instructions"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
         "SUP-B": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-B-?\d{2}"), ("Correction_Instructions", r"Correction_Instructions"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
+        "SUP-C": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-C-?\d{2}"), ("Correction_Instructions", r"Correction_Instructions"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
+        "SUP-D-A": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-DA-?\d{2}"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
+        "SUP-D-B": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-DB-?\d{2}"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
+        "SUP-D-C": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-DC-?\d{2}"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
+        "SUP-E": [("Metadata", r"\bMetadata\b"), ("Inherited_Baseline", r"Inherited_Baseline"), ("VSUP-XX", r"VSUP-E-?\d{2}"), ("Carry_Forward", r"Carry_Forward"), ("Unresolved", r"Unresolved")],
     }
     phase2 = OrderedDict((doc_key, [(label, "存在" if re_has(docs[doc_key]["text"], pat) else "缺失") for label, pat in checks]) for doc_key, checks in block_specs.items())
 
