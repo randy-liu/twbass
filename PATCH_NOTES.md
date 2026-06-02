@@ -425,3 +425,45 @@ Zone-A 採 SD=35 cm（κ=4.86）後，水下 0.5m 月光提升至 0.018 lux，Me
 | r_crit 管道側線 30 Hz 清水 = 40.9 cm | ω×v 加速度反推驗算 ✓ |
 | 8.5–12.3 m EPS 藻華埤塘有效距離定界 | TL = 10 log r + 1.0r 驗算 ✓（前提：tan δ_bottom 估算成立） |
 | 30–45% 軟蟲振幅衰減 | 指數行波模型理論估算，材料剛度 ±20% 不確定性已記錄 |
+
+---
+
+## 2B 卷第二輪稽核與後處理（2026-06-02）
+
+**目標檔案**：`2B_側線、內耳與水下聲學傳遞.md`（Q-SUP-01/02 整合後版本）
+**執行流程**：twbass-audit 完整 5-Phase 第二輪 → Claude 後處理
+**最終 Findings 數**：V2B-01–**13**（新增 V2B-13 Swimbait Finding）
+
+### 5-Phase 稽核結果（第二輪）
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 2 件 | B0-02/09/10 幻覺引用（代碼存在但指向完全不同的 0D 條目）；「顯著」禁用詞殘留 1 處；TL 公式參數未明示 |
+| P2 輸出區塊 | ⚠️ 3 件 | Correction_Instructions 區塊缺失；Swimbait 無專屬 V2B Finding；Carry_Forward 第 4 條 Zone-A/B 未拆分 |
+| P3 引用鏈 | ⚠️ 5 件 | B0-02/09/10 未列入 Inherited_Baseline（且為幻覺引用）；B0-07 在 Inherited_Baseline 但無 Finding 引用；Carry_Forward 第 2 條 V2B-12 錯誤引用 Swimbait |
+| P4 Scope | ⚠️ 3 件 | Carry_Forward 第 1/2/3 條含「作釣必須/應/拋投」處方語（輕度越界） |
+| P5 研究缺口 | ✅ OK | Q-SUP-01/02 已完整解決前輪所有缺口 |
+
+**Phase 6 判定**：✅ 不需重跑（總分 2）。V2B-12 在 Carry_Forward 中被錯誤引用為 Swimbait（+2）；其餘均為格式/結構問題，不計入 Phase 6。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-2B-R2-01 | Medwin 溫度表格移除三個幻覺 B0 引用：25°C `(B0-02)` → `[Fallback]`；30°C `(B0-09)` → `[Fallback]`；35°C `(B0-10)` → `[Fallback]`。（B0-02=春季熱遲滯；B0-09=微生物Q₁₀；B0-10=H₂S濃度，均與水溫無關） |
+| FIX-2B-R2-02 | Medwin 30°C 行「聲波傳遞速度顯著加快」→「聲速達 1511.98 m/s（較 25°C 增加 13.43 m/s）」（移除禁用詞「顯著」，改為量化） |
+| FIX-2B-R2-03 | 比較表 Spinnerbait 低頻 Zone-C 行「產生顯著的剪切阻尼，縮短了近場有效感知半徑」→「產生剪切阻尼，使近場有效感知半徑縮短（40–80 cm → 30–60 cm）」 |
+| FIX-2B-R2-04 | Section 六.2 EPS 有效距離計算段補注：採用 Otolith 閾值 85 dB（中位數）、圓柱擴展起算基準距離 0.1 m |
+| FIX-2B-R2-05 | 新增 V2B-13：Swimbait 尾部偶極子源（2–8 Hz、5–20 mm、20 cm 處流速 1.0–5.0 mm/s，Zone-A/B 有效 40–80 cm、Zone-C 有效 40–70 cm）[信心等級：中][理論估算] |
+| FIX-2B-R2-06 | Carry_Forward 第 2 條 Swimbait 引用 `V2B-12` → `V2B-13`（V2B-12 為 Soft Jig，非 Swimbait） |
+| FIX-2B-R2-07 | Carry_Forward 第 1/2/3 條移除「作釣拋投必須」「作釣必須改用」「作釣應拋投」處方語，改為物理定界描述；具體假餌選型說明移交卷 3B |
+| FIX-2B-R2-08 | Carry_Forward 第 4 條「北部/南部深水水庫」拆分：Zone-B 石門/寶山；Zone-A 不適用；Zone-C 曾文 |
+| FIX-2B-R2-09 | 補入 `Correction_Instructions: (本卷為主卷，N/A)` 區塊（Instruction Section 八 強制要求） |
+
+### 幻覺 B0 代碼確認表
+
+| 2B 報告引用 | 報告聲稱含義 | 0D 真實內容 | 修正方式 |
+|-----------|-----------|-----------|---------|
+| `B0-02` for 25°C | 台灣全區夏末/秋初基準表層水溫 | 春季熱遲滯、Zone-B 22°C 提早 12–18 天（來源 V0A-03/04） | 改 `[Fallback]` |
+| `B0-09` for 30°C | Zone-C 夏季野生埤塘/管理池均值 | 夏季底泥微生物 Q₁₀=2.2–2.6 動力學加速（來源 V0B-10） | 改 `[Fallback]` |
+| `B0-10` for 35°C | Zone-C 夏季極端高溫管理池表層 | 南部孔隙水 H₂S=0.15–0.85 mg/L（來源 V0B-11） | 改 `[Fallback]` |
