@@ -13,7 +13,7 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 > 本次 Deep Research **必須輸出結構化報告，不可輸出純散文**。最終報告須包含以下五個標題區塊（缺任何一個均視為不完整）：
 >
 > 1. `Inherited_Baseline` — 列出引用的上游基準數值，標注來源（V2A-XX、V2B-XX、B0-XX、V3A-XX、VSUP-DAXX、VSUP-DBXX）
-> 2. `SUPDC_Findings` — 6–10 條，每條以 `[VSUP-DC01]`、`[VSUP-DC02]`… 格式編號，每條必須含量化數值（μm/s / Hz / cm / ms / % 等），**嚴禁模糊描述（高、低、強、弱）**
+> 2. `SUPDC_Findings` — 8–15 條，每條以 `[VSUP-DC01]`、`[VSUP-DC02]`… 格式編號，每條必須含量化數值（μm/s / Hz / cm / ms / % 等），**嚴禁模糊描述（高、低、強、弱）**
 > 3. `Correction_Instructions` — 對現有報告（2A/3A/3B）估算值的「\[確認\]」或「\[修正\]」建議
 > 4. `Carry_Forward_To_2A_2B_3A_3B` — 可供 2A/2B/3A/3B 直接引用的具體數值清單
 > 5. `Unresolved_Dependencies` — 仍無法量化的缺口及建議後續研究方向
@@ -22,7 +22,22 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 
 ---
 
-# 一、研究背景與核心問題
+# 一、通用系統設定與輸出規範
+
+1. **Metadata 區塊**：研究報告輸出時必須在最上方重現上述 Metadata 格式並填入實際研究結果。
+2. **單位標準（全卷強制）**：溫度 °C、溶氧 mg/L、能見度 cm、時間 hr/day、頻率 Hz、振動振幅 μm/s、距離 cm、神經時間窗口 ms、皮質醇濃度 ng/mL、百分比 %。
+3. **量化要求**：嚴禁使用「高、低、強、弱、顯著、明顯」等模糊描述；所有關鍵參數必須給出量化數值或合理估算區間。
+4. **推測標示**：缺乏台灣直接實證時，必須明確標示為「基於〔引用理論/研究〕之推測」。
+5. **反幻覺原則**：涉及黑鱸生理參數時，所有結論必須明確區分以下四個層級並標注來源：
+   - **直接實驗證據**（*Micropterus salmoides* 直接量測）
+   - **近緣物種外推**（鱸科 Centrarchidae，如 *M. dolomieu*、*Lepomis macrochirus*、*Perca flavescens*）——標注「類比推估」
+   - **廣泛硬骨魚類外推**——標注「廣泛外推」
+   - **純理論模型推算**——標注「理論估算」
+6. **跨卷引用**：凡引用上游數值，必須標注來源編號（如 `B0-07`、`V2A-05`、`VSUP-DA01`）；覆蓋 fallback 時標注「[覆蓋 fallback 假設]」。
+
+---
+
+# 二、計畫背景與本卷定位
 
 本卷處理兩個在原 SUP-D 中被混入其他問題導致研究失焦的獨立課題：
 
@@ -34,19 +49,61 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 
 ---
 
-# 二、角色設定
+# 三、系統設定
 
-**你現在是結合「魚類感官生理學家」、「行為神經科學家」與「漁業生態學家」背景的 AI 專家**，擅長量化掠食魚類在流體環境中的感官辨識能力（側線水動力感知、微振動偵測）、神經可塑性機制（搜索映像 LTP 建立時間窗口），以及行為模式切換的神經生理條件（皮質醇閾值、飢餓程度、腦區活動）。
+**你的角色：** 你現在是結合「魚類感官生理學家」、「行為神經科學家」與「漁業生態學家」背景的 AI 專家，擅長量化掠食魚類在流體環境中的感官辨識能力（側線水動力感知、微振動偵測）、神經可塑性機制（搜索映像 LTP 建立時間窗口），以及行為模式切換的神經生理條件（皮質醇閾值、飢餓程度、腦區活動）。請針對【補充卷 SUP-D-C：大嘴黑鱸水中漂流偵測與策略切換】進行 Gemini Deep Research。
 
-所有結論必須明確區分：
-- **直接實驗證據（*M. salmoides* 直接量測）**
-- **近緣物種外推（鱸科 Centrarchidae，如 *M. dolomieu*、*Lepomis macrochirus*）**
-- **廣泛硬骨魚類外推**
-- **純理論模型推算**
+**Gemini Deep Research 執行規則：**
+1. 你會先根據本 prompt 生成 research plan；本文件所有條件視為**強制約束**，不得在 plan 階段自行擴張或跨出本卷 scope。
+2. 若使用者已上傳 `SUP-D-A 報告`，請優先引用其 `SUPDA_Findings`（`VSUP-DAXX`）中的 NTU 閾值與感官優先序矩陣；若已上傳 `SUP-D-B 報告`，優先引用 `SUPDB_Findings`（`VSUP-DBXX`）中的 Commit 觸發機制數值。上傳報告為權威性上游資料，優先於本卷四的 fallback 數值。
+3. 若你的預設 research plan 與本 prompt 衝突，以本 prompt 的 scope 規則為優先。
+4. 在 research plan 中，請先明確列出：本卷研究邊界、要繼承的上游區塊、核心問題、來源類型、固定輸出區塊。
+
+所有結論必須明確區分以下四層並標注來源：
+- **直接實驗證據**（*M. salmoides* 直接量測）
+- **近緣物種外推**（鱸科 Centrarchidae，如 *M. dolomieu*、*Lepomis macrochirus*）——標注「類比推估」
+- **廣泛硬骨魚類外推**——標注「廣泛外推」
+- **純理論模型推算**——標注「理論估算」
 
 ---
 
-# 三、核心研究問題
+# 四、獨立執行與上游輸入規則
+
+**優先情況（已上傳上游報告）：**
+引用 SUP-D-A 的 `SUPDA_Findings`（`VSUP-DAXX`）中的 NTU 視覺失效閾值與感官優先序矩陣，以及 SUP-D-B 的 `SUPDB_Findings`（`VSUP-DBXX`）中的 Commit 觸發機制數值，標注引用編號。覆蓋 fallback 數值時標注「[覆蓋 fallback 假設]」。
+
+**Fallback 情況（未上傳上游報告）：**
+若未提供 SUP-D-A 或 SUP-D-B 報告，先列出 `Missing_Upstream_Context`，然後使用以下 fallback 背景繼續分析（結論信心等級降為「中」）：
+
+> **Fallback SUP-D-A 數值**：NTU 視覺失效閾值 ≈ 50–80 NTU（腐植酸褐水）；Reaction Strike vs 選擇性覓食的切換皮質醇估算值 ≈ 30 ng/mL（依 3A 報告端腦凌駕閾值）
+>
+> **Fallback SUP-D-B 數值**：Commit 觸發加速度下限估算（待 SUP-D-B 確認後修正）
+
+**六大水體精簡 fallback：**
+1. 北部野生埤塘：水深 <3m；極育土黏重微酸性底質；能見度 30–50 cm；冬季具泥底熱慣性緩衝
+2. 北部深水埤塘/水庫：水深 >10m；微酸性極育土促進絮凝；能見度 100–150 cm；暴雨易形成異重流
+3. 北部管理池：水深 <2m；水車/增氧機非常態開啟（僅高溫低風時段啟動節電，平時關閉）；停機期 DO 依自然復氧；能見度 30–50 cm
+4. 南部野生埤塘：水深 <2m；弱育土中等質地；旱季蒸發濃縮極端；春雨回淹 Fe³⁺ 還原風險
+5. 南部深水埤塘/水庫：水深 >10m；弱育土；旱季消落帶礦化強；夏季暴雨產生巨大內部營養鹽負載
+6. 南部管理池：水深 <2m；弱育土；曝氣機非常態開啟（僅高溫低風時段，平時關閉節電）；停機期夏季易轉硫酸鹽還原產生 H₂S
+
+---
+
+# 五、上游基準數值（Inherited_Baseline 來源）
+
+提取以下確認數值並列入 `Inherited_Baseline`：
+
+- **V2A-05**：飼料印記魚的自然獵物識別缺陷——初期 91% 競爭劣勢，需數週至數月才能恢復
+- **V2A-06**：皮質醇強化迴避學習——C&R 後皮質醇峰值 > 150 ng/mL 強化假餌迴避記憶
+- **V2A-07（Reaction Strike）**：視頂蓋啟動潛伏期 30–50 ms；最小觸發速度 1.5–1.8 m/s
+- **V2B**：側線神經丘（Neuromast）最敏感頻率範圍（Hz）；遠/近場偵測距離（m）
+- **V3A**：LVF 皮質醇基線 20–40 ng/mL；HVF 基線 ≈ 6 ng/mL；ART 溫度矩陣
+- **Fallback（若 SUP-D-A 尚未完成）**：NTU 視覺失效閾值 ≈ 50–80 NTU（腐植酸褐水）；Reaction Strike vs 選擇性覓食的切換皮質醇估算值 ≈ 30 ng/mL（依 3A 報告 VSUP-D15 端腦凌駕閾值）
+- **Fallback（若 SUP-D-B 尚未完成）**：Commit 觸發加速度下限估算（待 SUP-D-B 確認後修正）
+
+---
+
+# 六、核心研究清單
 
 ## Q3-6. 水中漂流物辨識（Underwater Drift Discrimination）——無入水衝擊信號的偵測情境
 
@@ -97,21 +154,7 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 
 ---
 
-# 四、上游基準數值（Inherited_Baseline 來源）
-
-提取以下確認數值並列入 `Inherited_Baseline`：
-
-- **V2A-05**：飼料印記魚的自然獵物識別缺陷——初期 91% 競爭劣勢，需數週至數月才能恢復
-- **V2A-06**：皮質醇強化迴避學習——C&R 後皮質醇峰值 > 150 ng/mL 強化假餌迴避記憶
-- **V2A-07（Reaction Strike）**：視頂蓋啟動潛伏期 30–50 ms；最小觸發速度 1.5–1.8 m/s
-- **V2B**：側線神經丘（Neuromast）最敏感頻率範圍（Hz）；遠/近場偵測距離（m）
-- **V3A**：LVF 皮質醇基線 20–40 ng/mL；HVF 基線 ≈ 6 ng/mL；ART 溫度矩陣
-- **Fallback（若 SUP-D-A 尚未完成）**：NTU 視覺失效閾值 ≈ 50–80 NTU（腐植酸褐水）；Reaction Strike vs 選擇性覓食的切換皮質醇估算值 ≈ 30 ng/mL（依 3A 報告 VSUP-D15 端腦凌駕閾值）
-- **Fallback（若 SUP-D-B 尚未完成）**：Commit 觸發加速度下限估算（待 SUP-D-B 確認後修正）
-
----
-
-# 五、排除條件（以下不在本卷範圍）
+# 七、排除條件（以下不在本卷範圍）
 
 - ❌ OFT 能量模型的詳細推導——已在 2A 建立
 - ❌ 側線聲學阻抗物理計算——已在 2B 建立
@@ -119,7 +162,7 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 - ❌ NTU 視覺失效閾值的系統性量化——屬 SUP-D-A 範疇
 - ❌ Topwater 入水衝擊辨識（聲壓波 Hz/dB、入水後 100 ms–3 s 中止概率）——屬 SUP-D-B 範疇
 - ❌ 追擊序列行為學框架（Detect→Evaluate→Commit 時間窗口）——屬 SUP-D-B 範疇
-- ❌ 側線 SNR 臨界流速理論推算（Rheotaxis Interference 物理模型）——理論物理，超出行為文獻範疇；若文獻缺乏，標注「數據缺口：無直接文獻」
+- ❌ 側線 SNR 臨界流速理論推算（Rheotaxis Interference 物理模型）——純流體力學理論物理，超出行為文獻範疇，不屬任何白皮書子卷；若文獻缺乏，標注「數據缺口：無直接文獻」
 - ❌ 實戰決策矩陣（Match the Hatch / Reaction Strike / 混合 × NTU × 魚群狀態 × 爆量 × 水溫）——此矩陣為 Q1–Q4 研究結論的整合產物，由 Claude 後處理統一執行，不在本 Gemini 研究任務範疇
 - ❌ 台灣獵物群落物種調查、爆量月曆、OFT 切換豐度閾值——全屬 SUP-E 平行卷
 - ❌ 高壓 LVF 魚的 Follower Rejection 心理機制詳細分析——已在 3A 建立
@@ -129,13 +172,13 @@ Runs_After: SUP-D-A（NTU 閾值）、SUP-D-B（Commit 觸發機制）；若提�
 
 ---
 
-# 六、最終輸出區塊規格
+# 八、最終輸出區塊規格
 
 ### `Inherited_Baseline`
 列出本卷補充研究所引用的上游基準數值，標注引用來源（V2A-XX、V2B-XX、B0-XX、V3A-XX、VSUP-DAXX、VSUP-DBXX 或 Fallback）。若未上傳 SUP-D-A/SUP-D-B 報告，先列出 `Missing_Upstream_Context`，以卷四數值為 Fallback 繼續分析，所有結論標示「[Fallback 基準]」。
 
 ### `SUPDC_Findings`
-6–10 條，每條附唯一編號（格式 `[VSUP-DC01]`、`[VSUP-DC02]`…）。格式：
+8–15 條，每條附唯一編號（格式 `[VSUP-DC01]`、`[VSUP-DC02]`…）。格式：
 > [VSUP-DCXX]：[發現描述，含量化數值或估算區間]。信心等級：高/中/低。[若為外推，標示依據物種/理論]
 
 **本卷必須輸出的核心數值（缺任一項視為不完整）**：
