@@ -732,3 +732,122 @@ Q1–Q4 所有研究方向均有段落覆蓋；Q4-4 為子問題缺失（非整�
 - V4A-07：H₂S ≤0.01 mg/L → 孵化率 85–95%；0.05 mg/L → 45–55%；0.10 mg/L → 15–25%；≥0.50 mg/L → <2%
 - V4A-11：野生埤塘硬底質 2.0–4.5 m²/100m²；水庫 0.5–2.0 m²/100m²；管理池 1.0–3.0 m²/100m²；vs 北美 >40 m²/100m²
 - V4A-14：dH/dt <4 cm/day → 棄巢率 <10%；≥15 cm/day → 棄巢率 80–95%
+
+---
+
+## SUP-A 卷新增與稽核（2026-06-03）
+
+**目標檔案**：`SUP-A：感官生理閾值補充研究.md`（新建）
+**執行流程**：gemini-plan-review（3 輪）→ twbass-audit 5-Phase → Claude 後處理（11 條 FIX）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ❌ Rework | 提交的是 4B plan（主題完全不符） | 重新提交正確 plan |
+| Round 2 | ❌ Rework | H₂S ART 單位錯誤（min vs hr）；VSUP-B12 跨卷 code；2B 越界修改；Mid-Strolling 操作臨界缺失；LVF vs HVF 對比缺失 | 送 Gemini 修正 prompt |
+| Round 3 | ⚠️ Hold | 研究方向全數補入；仍有 H₂S 單位未修正、VSUP-B12 殘留 | Claude 後處理處理實作層錯誤 |
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 5 件 | LVF 基線 20–40 vs 35–45 ng/mL 矛盾；HVF 1.68 ng/mL 與上游 6.0 ng/mL 衝突無 CI；H₂S 80–120 min vs 80–120 hr 概念未分離；λ_spatial 假設未引用；CFF 35°C CI 缺失 |
+| P2 輸出區塊 | ✅ OK | 全部 5 個必要區塊齊全 |
+| P3 引用鏈 | ⚠️ 2 件 | V2B-01 不應引用 CFF（2B 為側線卷）；V2A-05 不應引用皮質醇基線（2A 為覓食卷） |
+| P4 Scope | ⚠️ 1 件 | V3B-13 CI 指定具體材料品名（Shore 00-10 Plastisol），超出數值修正範疇 |
+| P5 研究缺口 | ⚠️ 4 件 | VSUP-A06/A03/A08 信心等級標注過高；λ_spatial 缺乏實測；台灣管理池 LVF 血液學缺口未列入 Unresolved |
+
+**Phase 6 判定**：⚠️ Claude 結構重建（14 分，結構分 50%，Q 覆蓋完整型）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-SUPA-01 | 撤回（Metadata `Alert Reset Time min` 符合 instruction 規格，不需修改） |
+| FIX-SUPA-02 | Inherited_Baseline CFF 引用：移除 V2B-01（2B 為側線卷），改為 3A fallback |
+| FIX-SUPA-03 | Inherited_Baseline 皮質醇引用：移除 V2A-05（2A 為覓食卷），改為 V3A-09 / 3A fallback |
+| FIX-SUPA-04 | VSUP-A06 LVF 基線釐清：「20–40 ng/mL（具體為 35–45 ng/mL）」→「廣泛估算區間 20–40 ng/mL，台灣管理池實測分佈 35–45 ng/mL」；Carry_Forward 同步更新 |
+| FIX-SUPA-05 | Correction_Instructions 補 HVF 基線 CI：1.68 ± 0.69 ng/mL 取代 3A fallback 6.0 ng/mL |
+| FIX-SUPA-06 | VSUP-A08 補行為窗口與生理 ART 概念分離說明；Correction_Instructions 補 H₂S 雙參數 CI |
+| FIX-SUPA-07 | VSUP-A05 補 λ_spatial = 2.0 cm 假設標注；Unresolved_Dependencies 補第 3 條 |
+| FIX-SUPA-08 | Correction_Instructions 補 CFF 35°C → 38–45 Hz 的 [修正] CI（更新 3A CFF fallback） |
+| FIX-SUPA-09 | VSUP-A06 信心等級高→中；直接實驗證據→類比推估（飼養實驗室研究）；Unresolved 補第 4 條（台灣現場血液學缺口） |
+| FIX-SUPA-10 | VSUP-A03 信心等級高→中（缺乏 ERG 實測）；VSUP-A08 信心等級高→中（缺乏 H₂S 行為學驗證） |
+| FIX-SUPA-11 | V3B-13 CI 移除具體材料品名，改為量化邊界條件（Δ Shore 00 ≤ 10；揚竿延遲 100–150 ms） |
+
+### 確認正確的核心數值
+
+- VSUP-A01：photopic CFF 22°C 基準：30–60 Hz（中央凹 55–60 Hz，周邊 30–40 Hz）
+- VSUP-A02：CFF 熱動力學 Q₁₀ = 1.9（1.8–2.1）；dCFF/dT ≈ 1.6 Hz/°C（獨立於 MCR Q₁₀）
+- VSUP-A03：35°C 極端高溫 CFF 退化至 38–45 Hz（熱應激，近 CTmax 39–40°C）
+- VSUP-A04：Scotopic CFF 5–15 Hz（峰值 10 Hz）
+- VSUP-A05：Mid-Strolling 0.5–1.0 m/s → 25–50 Hz；35°C 下速度上限 <0.75 m/s
+- VSUP-A09：ART 溫度矩陣（LVF 30 ng/mL 基線，Q₁₀=2.0）：15°C→36–42 hr；22°C→20–24 hr；30°C→12 hr；35°C→8.5 hr
+
+---
+
+## 跨卷 Gemini 同步補丁（2026-06-03）
+
+**觸發原因**：SUP-A 研究完成後，Gemini 自動更新 0D/1A/3A/3B/4A 以同步 VSUP-A 數值；Claude 審核後發現 3B Inherited_Baseline 結構性損壞，執行修復。
+
+**git commit**：`61d52fb`（報告檔案）/ `31016c4`（稽核腳本）
+
+### 0D 報告補丁
+
+| 修改 | 內容 |
+|------|------|
+| B0-08 補充 | 補入溶氧臨界下限 3–4 mg/L 說明 |
+| 新增 B0-20 | Zone-B 春季 22°C 超前 Zone-A 12–18 天（引 V0A-04） |
+| 新增 B0-21 | Zone-B 22°C 超前導致生物活性提早啟動（引 V0A-04） |
+| 新增 B0-22 | Zone-B 極育土 Eh <0 mV 首觸約 5 月下旬（引 V0B-08） |
+
+### 1A 報告補丁
+
+| 修改 | 內容 |
+|------|------|
+| Inherited_Baseline 第 8 條 | 新增 B0-21（Zone-B 22°C 超前 12–18 天） |
+
+### 3A 報告補丁（VSUP-A 數值對齊）
+
+| 修改 | 內容 |
+|------|------|
+| Core_Parameters | 更新 ART 溫度矩陣、CFF 各溫度點、Follower Rejection 近點範圍 |
+| CFF 溫度矩陣擴充 | 22°C 基準 30–60 Hz；35°C 退化 38–45 Hz；scotopic 5–15 Hz（補入 Q1/V3A-02） |
+| ART Q₁₀ 修正 | Q₁₀ 2.4→2.0；重置時間全面更新（30°C：6–8 hr→12.0 hr；15°C：24–30 hr→36–42 hr） |
+| 四層基線 ART 分析 | 補入 6→15→30→50 ng/mL 各層 MCR 下調與 ART 動力學 |
+| H₂S override 補入 | V3A-11 補入 80–120 min 行為覆蓋窗口（behavioral override window） |
+| Schreckstoff Zone 分離 | V3A-12：2.5–4.0 m 均化值→Zone-A/B <0.5 m / Zone-C 4–7 m |
+| LVF 皮質醇基線 | >30 ng/mL→>20–40 ng/mL（估算範圍 35–45 ng/mL） |
+| 章節標題 | Unresolved_Dependencies→Open_Assumptions / Unresolved_Dependencies |
+
+### 3B 報告補丁（Gemini 修改 + Claude 結構修復）
+
+| 修改 | 內容 |
+|------|------|
+| Core_Parameters | 更新 ART 溫度矩陣、CFF 各溫度點 |
+| **結構修復**（Claude）| V1B-07 截斷還原（epilimnion 表層完整文字）；補回 V1B-08/09、V1B-13；補回 V1A 節（V1A-06/10/11/12）；補回 V2A-01/02 |
+| Section 6 V3A 更新 | V3A-02/10/11/12 四條以 VSUP-A 新值更新（CFF 多溫度點、ART 矩陣、H₂S 窗口、Zone Schreckstoff） |
+| V3B-06 | 舊魚皮質醇 35–45 ng/mL→20–40 ng/mL（實際 35–45 ng/mL） |
+| V3B-12 | 連投間隔 ≥10–15 min→≥15–20 min；重度 ART 延長至 36–42 hr |
+| V3B-13 | 觸發條件補入慢性皮質醇 20–40 ng/mL；Gemini 原版保留 Shore 00-10 規格 |
+| V3B-14 | 移除幻覺字「Graves」 |
+| V3B-19 | 舊魚皮質醇 35–45→20–40 ng/mL |
+| 新增 V3B-27 | 水車重啟 H₂S 湧升戰術規則（引 VSUP-B12、B0-11）；⚠️ 120–160 cm 數值待 SUP-B 確認 |
+
+### 4A 報告補丁
+
+| 修改 | 內容 |
+|------|------|
+| 新增還原性段落 | B0-22（Zone-B Eh <0 mV 首觸 5 月下旬）+ VSUP-B08（H₂S 廢棄巢穴死亡區 r=1.6–2.3 m）補入 Inherited_Baseline |
+
+### 稽核腳本補丁（docx_cross_volume_audit_v2.py）
+
+| 修改 | 內容 |
+|------|------|
+| 檔名路徑 | 4A/4B 路徑修正（底線→全形冒號） |
+| CFF 明視覺 22°C | expected_docs：2B→3A |
+| SNs 峰值 | 期望值 ~20 Hz(<30 Hz)→1–20 Hz（對應 V2B-01 游離側線實際內容） |
+| Fe²⁺ 安全距離 | 期望值 40 cm→30–50 cm |
+| H₂S 靜水/微流 | expected_docs 移除 1B1 |
+| 新增 H₂S Zone-C | 新增 60–100 cm 獨立檢查規則 |

@@ -26,17 +26,17 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 0A | `0A_台灣四季氣候 forcing 與區域差異.md` | Zone-A/B/C 三區並列已完成 |
 | 0B | `0B_南北成土母質與地球化學基底.md` | 地球化學與物理底質特徵已完成 |
 | 0C | `0C_六大水體 seasonal 評估.md` | Zone-A/B/C 三區並列；V0C-01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-05-29） |
-| 0D | `0D_基底資料矩陣與極端事件整合.md` | B0-01–19；Zone-A/B/C 三區並列已完成 |
+| 0D | `0D_基底資料矩陣與極端事件整合.md` | B0-01–22；Zone-A/B/C 三區並列；補入 B0-20/21/22（Zone-B 春季超前、Eh 首觸）（2026-06-03） |
 | 1A | `1A_短時間環境觸發與生理限制.md` | V1A-01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 1B | `1B_六大水域棲位模型與風生流.md` | V1B-01–13；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2A | `2A_覓食偏好、印記與反射咬餌.md` | V2A-01–12；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2B | `2B_側線、內耳與水下聲學傳遞.md` | V2B-01–13；2 輪 plan review + Q-SUP-01/02 補充研究（EPS 聲學衰減三成分分解、Stokes 振盪球近場修正）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
 | 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
-| 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
-| 3B | `3B_極端情境高壓策略推演.md` | V3B-01–26；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
-| 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
+| 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：CFF 多溫度點、ART Q₁₀ 2.0 矩陣、Schreckstoff Zone 分離（2026-06-03） |
+| 3B | `3B_極端情境高壓策略推演.md` | V3B-01–27；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：V3A 條目更新、V3B-12/13/19 皮質醇基線對齊、新增 V3B-27（H₂S 水車重啟，數值待 SUP-B 確認）（2026-06-03） |
+| 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
 | 4B | ⏳ 待跑 | |
-| SUP-A | ⏳ 待跑 | |
+| SUP-A | `SUP-A：感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
 | SUP-B | ⏳ 待跑 | |
 | SUP-C | ⏳ 待跑 | |
 | SUP-D-A | ⏳ 待跑 | instruction.md 已建立 |
