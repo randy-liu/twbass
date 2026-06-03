@@ -34,7 +34,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
 | 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
 | 3B | `3B_極端情境高壓策略推演.md` | V3B-01–26；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
-| 4A | ⏳ 待跑 | |
+| 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
 | 4B | ⏳ 待跑 | |
 | SUP-A | ⏳ 待跑 | |
 | SUP-B | ⏳ 待跑 | |
