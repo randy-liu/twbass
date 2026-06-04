@@ -37,7 +37,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
 | 4B | `4B：棲位競爭、容載量與護巢防禦.md` | V4B-01–15；Zone-A/B/C 三區並列；1 輪 plan review + Q-SUP 三項（V4B-13/14/15）+ 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；第二輪稽核 6 條補丁（FIX-4B-07~12：VSUP-B06 H₂S 閾值更正、VSUP-B08 非批准上游標注、V4B-05 信心等級修正、α₁₂ 缺口補入 Unresolved）完成（2026-06-04） |
 | SUP-A | `SUP-A：感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
-| SUP-B | ⏳ 待跑 | |
+| SUP-B | `SUP-B：底棲水化學梯度補充研究報告.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
 | SUP-C | ⏳ 待跑 | |
 | SUP-D-A | ⏳ 待跑 | instruction.md 已建立 |
 | SUP-D-B | ⏳ 待跑 | instruction.md 已建立 |
@@ -137,9 +137,10 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
   - 聚焦：閃光融合頻率（CFF）、聽覺閾值、感覺恢復時間（ART）
   - 下游整合至：3A `Open_Assumptions`、3B `Unresolved_Dependencies`
 
-- **SUP-B：底棲水化學梯度補充研究**（⏳ 待跑）
-  - 聚焦：Fick 擴散精算 H₂S / Fe²⁺ 安全距離、H₂S 三維死亡區、CDOM 化學竊聽
-  - 下游整合至：1B、3B、4A
+- **SUP-B：底棲水化學梯度補充研究**（✅ 完成 2026-06-04）
+  - 聚焦：Schreckstoff × CDOM 死區半徑修正（Zone-A/B/C 三區）、Fick 擴散精算 Fe²⁺/H₂S 安全距離、水車重啟瞬態 H₂S 擴散
+  - Correction_Instructions 覆蓋：V1B-CF-04（北部 Fe²⁺ 上修）、V1B-10（H₂S 確認上界）、V3A-12（Schreckstoff 死區 Zone 分野）
+  - V3B-27 H₂S 水車重啟衝突已解決（VSUP-B11 支撐）
 
 - **SUP-C：黑鱸毒區迴避實證與冒險覓食決策機制**（⏳ 待跑）
   - 聚焦：H₂S/低溶氧耐受行為、FIE（Fisheries-Induced Evolution）、LVF/HVF 族群分類、Foraging Forays（毒區覓食短突）
