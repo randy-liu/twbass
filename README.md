@@ -34,10 +34,10 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
 | 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：CFF 多溫度點、ART Q₁₀ 2.0 矩陣、Schreckstoff Zone 分離（2026-06-03） |
 | 3B | `3B_極端情境高壓策略推演.md` | V3B-01–27；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：V3A 條目更新、V3B-12/13/19 皮質醇基線對齊、新增 V3B-27（H₂S 水車重啟，數值待 SUP-B 確認）（2026-06-03） |
-| 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
-| 4B | `4B：棲位競爭、容載量與護巢防禦.md` | V4B-01–15；Zone-A/B/C 三區並列；1 輪 plan review + Q-SUP 三項（V4B-13/14/15）+ 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；第二輪稽核 6 條補丁（FIX-4B-07~12：VSUP-B06 H₂S 閾值更正、VSUP-B08 非批准上游標注、V4B-05 信心等級修正、α₁₂ 缺口補入 Unresolved）完成（2026-06-04） |
-| SUP-A | `SUP-A：感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
-| SUP-B | `SUP-B：底棲水化學梯度補充研究報告.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
+| 4A | `4A_繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
+| 4B | `4B_棲位競爭、容載量與護巢防禦.md` | V4B-01–15；Zone-A/B/C 三區並列；1 輪 plan review + Q-SUP 三項（V4B-13/14/15）+ 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；第二輪稽核 6 條補丁（FIX-4B-07~12：VSUP-B06 H₂S 閾值更正、VSUP-B08 非批准上游標注、V4B-05 信心等級修正、α₁₂ 缺口補入 Unresolved）完成（2026-06-04） |
+| SUP-A | `SUP-A_感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
+| SUP-B | `SUP-B_底棲水化學梯度補充研究.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
 | SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
 | SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
