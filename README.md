@@ -35,7 +35,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：CFF 多溫度點、ART Q₁₀ 2.0 矩陣、Schreckstoff Zone 分離（2026-06-03） |
 | 3B | `3B_極端情境高壓策略推演.md` | V3B-01–27；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：V3A 條目更新、V3B-12/13/19 皮質醇基線對齊、新增 V3B-27（H₂S 水車重啟，數值待 SUP-B 確認）（2026-06-03） |
 | 4A | `4A：繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
-| 4B | ⏳ 待跑 | |
+| 4B | `4B：棲位競爭、容載量與護巢防禦.md` | V4B-01–15；Zone-A/B/C 三區並列；1 輪 plan review + Q-SUP 三項（V4B-13/14/15）+ 5-Phase 稽核 + Claude 後處理完成（2026-06-03） |
 | SUP-A | `SUP-A：感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
 | SUP-B | ⏳ 待跑 | |
 | SUP-C | ⏳ 待跑 | |
