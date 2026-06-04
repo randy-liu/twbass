@@ -5,9 +5,9 @@ Upstream_Required: 0A 報告:0A_台灣四季氣候 forcing 與區域差異.md（
 Upstream_Optional: 2A 報告（若已上傳）:2A_覓食偏好、印記與反射咬餌.md（V2A-02 台灣主要獵物能量密度表——提取後補充本卷獵物能量欄位；若未上傳則本卷自行建立初始清單）
 Core_Parameters: 獵物爆量月份（月）、持續週數（週）、獵物尺寸範圍（mm）、偏好水層（cm 深度）、移動特徵（速度 m/s、頻率 Hz）、北中南三區月均水溫對應的物候觸發點（°C）
 Key_Mechanisms: 物候季節性（Phenological Seasonality）、獵物群落動態（Prey Community Dynamics）、台灣亞熱帶氣候下的繁殖週期壓縮、入侵物種（大肚魚/吳郭魚）的全年繁殖效應
-Research_Type: Supplemental（獨立生態調查卷；建立台灣鱸魚釣場的「Hatch Equivalent 年曆」與 OFT 切換豐度閾值；與 SUP-D 行為機制卷平行執行）
-Parallel_With: SUP-D（兩卷研究內容獨立：本卷聚焦生態調查與爆量時空圖譜、SUP-D 聚焦行為機制；可同時執行，下游整合在 2A/3A/3B 進行）
-Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位模型補充）、3B 整合卷（與 SUP-D 行為機制結合構建完整「台灣情境 Match the Hatch 決策矩陣」）
+Research_Type: Supplemental（獨立生態調查卷；建立台灣鱸魚釣場的「Hatch Equivalent 年曆」與 OFT 切換豐度閾值；與 SUP-D-A/B/C 行為機制卷平行執行）
+Parallel_With: SUP-D-A ∥ SUP-D-B ∥ SUP-D-C（本卷與 A/B/C 三分卷均平行：本卷聚焦生態調查與爆量時空圖譜、SUP-D-A/B/C 聚焦行為機制；SUP-D-A ∥ SUP-D-B 可同時執行，SUP-D-C 在 A/B 完成後執行；下游整合在 2A/3A/3B 進行）
+Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位模型補充）、3B 整合卷（與 SUP-D-A/B/C 行為機制結合構建完整「台灣情境 Match the Hatch 決策矩陣」）
 ---
 
 > ⚠️ **輸出格式強制要求（最高優先級）**
@@ -18,7 +18,7 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位�
 > 2. `SUPE_Findings` — 10–25 條（本卷覆蓋 6 類獵物群落 × 3 氣候區，研究問題多於一般 SUP 卷），每條以 `[VSUP-E01]`、`[VSUP-E02]`… 格式編號，每條必須含量化數值（月份 / 週數 / mm / cm / °C / Hz 等），**嚴禁模糊描述（高、低、強、弱）**
 > 3. `Correction_Instructions` — 對現有報告（2A/3A/3B）OFT 相關估算值的「\[確認\]」或「\[修正\]」建議
 > 4. `Hatch_Equivalent_Calendar` — 台灣全年獵物爆量月曆，格式為月份 × 水體類型矩陣表
-> 5. `Carry_Forward_To_SUPD_2A` — 可供 SUP-D 與 2A 直接引用的具體數值清單
+> 5. `Carry_Forward_To_SUPDC_2A` — 可供 SUP-D-C 與 2A 直接引用的具體數值清單
 > 6. `Unresolved_Dependencies` — 仍無法量化的缺口及建議後續研究方向
 >
 > 文末統一列參考文獻，**內文不使用 `[數字]` 引用標記**。
@@ -262,7 +262,7 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位�
 
 **研究目標：量化台灣各 Hatch Equivalent 事件中，獵物豐度達到何種程度時，黑鱸會從「機會性覓食」轉入「高選擇性覓食（Match the Hatch）模式」**
 
-這是「生態事實」與「行為機制」的橋接問題：即便確知台灣水體存在獵物爆量事件，釣手仍需要知道「爆量」要多強才能讓黑鱸開始挑剔假餌。本問題的量化閾值由 SUP-E 處理（屬「外在豐度條件」範疇）；SUP-D 平行卷處理切換後的行為機制（屬「內在神經迴路」範疇）。兩卷各自獨立執行。
+這是「生態事實」與「行為機制」的橋接問題：即便確知台灣水體存在獵物爆量事件，釣手仍需要知道「爆量」要多強才能讓黑鱸開始挑剔假餌。本問題的量化閾值由 SUP-E 處理（屬「外在豐度條件」範疇）；SUP-D-C 平行卷處理切換後的行為機制（屬「內在神經迴路」範疇，SUP-D-C Q5）。兩卷各自獨立執行。
 
 **具體研究問題：**
 
@@ -286,9 +286,9 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位�
 
 # 七、排除條件（以下不在本卷範圍）
 
-- ❌ 黑鱸的食性選擇機制（Chesson's α 指數計算）——屬 SUP-D Q1
-- ❌ 感官匹配（視覺/側線）的機制研究——屬 SUP-D Q2/Q3
-- ❌ Match the Hatch vs Reaction Strike 決策框架——屬 SUP-D Q5
+- ❌ 黑鱸的食性選擇機制（Chesson's α 指數計算）——屬 SUP-D-A Q1
+- ❌ 感官匹配（視覺/側線）的機制研究——屬 SUP-D-A Q2（感官優先序矩陣）/ SUP-D-B Q3（多模態入水辨識）
+- ❌ Match the Hatch vs Reaction Strike 決策框架——屬 SUP-D-C Q5
 - ❌ 水化學梯度（H₂S、Fe²⁺）——屬 SUP-B/SUP-C
 - ❌ 棲位模型詳細計算——屬 1B
 - ❌ 繁衍行為（護巢、築巢底質）——屬 4A/4B
@@ -338,7 +338,7 @@ Downstream_Users: 2A（台灣獵物能量表補充）、1B（六大水體棲位�
 - 水體類型：管理池、水庫、溪流、灌渠（至少 4 類）
 - 每個格子列出主要獵物事件（可多項）
 
-### `Carry_Forward_To_SUPD_2A`
+### `Carry_Forward_To_SUPDC_2A`
 格式：
 ```
 (a) 參數類型：[Hatch Equivalent 事件名稱 / OFT 切換閾值 / 搜索映像建立時間]
