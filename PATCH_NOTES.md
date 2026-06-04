@@ -982,3 +982,54 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 - VSUP-B11 H₂S 安全距離 Stagnant h=150 cm：致死 125.2 cm；避忌 149.0 cm
 - VSUP-B11 Mixed 狀態（水車開啟）：低端避忌 186.8 cm；高端全池超標（翻水危險）
 - VSUP-B13 亞致死 H₂S 皮質醇增幅：15–35 ng/mL（達 21–45 ng/mL 中度應激，信心等級：中-低）
+
+---
+
+## SUP-C 卷稽核與後處理（2026-06-04）
+
+**目標檔案**：`SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md`（新建）
+**執行流程**：gemini-plan-review（2 輪）→ twbass-audit 5-Phase → Claude 後處理
+**最終 Findings 數**：VSUP-C01–12（12 條）　**Carry_Forward 數**：4 項（低氧迴避閾值、冒險覓食觸發條件、靜止容忍特徵、皮質醇抑制閾值）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ⚠️ Hold | Q1.3 迴避行為確定性（個體差異比例）結構性缺口；Q4.3 決策矩陣缺「靜止容忍」第三行為結果；Inherited Baseline 皮質醇基線值衝突（1.68 vs ~6.0 ng/mL） | 送 Gemini 修正 prompt |
+| Round 2 | ✅ Go | 三項結構性缺口全數修復；皮質醇基線統一為 ~6.0 ng/mL；三行為結果矩陣明確列出 | 進入執行 |
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 2 件 | B0-11 content mismatch（DO 動態 vs H₂S 釋放速率歸屬）；VSUP-B06 V-code 漂移（86 cm 舊版 → VSUP-B09/B11 精算值） |
+| P2 輸出區塊 | ⚠️ 1 件 | 缺 4A 報告 [確認] CI（instruction 列出 1B/3A/4A/SUP-B 為目標） |
+| P3 引用鏈 | ⚠️ 3 件 | B0-11/VSUP-B10 歸屬差異；VSUP-A04 vs VSUP-A09 V-code 漂移；VSUP-B06 指向內容與 instruction 預期不符 |
+| P4 Scope | ✅ OK（1 Scope Note）| VSUP-B05 Schreckstoff 引用為背景引用，非越界 |
+| P5 研究缺口 | ✅ OK | 3 條 Unresolved_Dependencies 均正確標注 |
+
+**Phase 6 判定**：⚠️ 局部補充（6 分，Q 覆蓋完整型）。所有缺口為 V-code 版本漂移標注與一個 CI 補充，Claude 後處理即可。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-SUPC-01 | Inherited_Baseline 第 1 條 H₂S 釋放速率 | 歸屬說明修正：`(SUP-B 報告 VSUP-B10)` → `（0D 報告原引用編號 B0-11；精算後由 SUP-B 報告 VSUP-B10 更新覆蓋）` |
+| FIX-SUPC-02 | Inherited_Baseline 第 4 條 ART 溫度矩陣 | V-code 漂移說明：`(SUP-A 報告 VSUP-A09)` → `（SUP-A 報告 VSUP-A09；對應 instruction 預期編號 VSUP-A04，V-code 重新編號後更新為 VSUP-A09）` |
+| FIX-SUPC-03 | Inherited_Baseline 第 3 條開頭 | 新增 VSUP-B06 V-code 版本漂移說明：86 cm 舊版已被 VSUP-B09/B11（靜水 99.7–100.0 cm；開機 186.8–348.4 cm）覆蓋，標注「[覆蓋 fallback 假設]」 |
+| FIX-SUPC-04 | Correction_Instructions 末尾 | 新增 4A 報告 V4A-10 [確認] CI：H₂S 96-h LC50 = 0.0297–0.0316 mg/L 與行為迴避閾值 0.002 mg/L 獲 VSUP-C03/C08 驗證確認 |
+
+### 不受影響的確認正確數值
+
+- VSUP-C01：Chowan River 遙測 n=45，91.1% 個體在 DO < 1.8 mg/L 時 2.5–6.0 hr 內逃逸；速度 45–110 m/hr
+- VSUP-C02：逃逸群體 75–85%（<5 min 立即型）vs 滯留群體 15–25%（延遲/靜止容忍型，LVF 老魚為主）
+- VSUP-C03：成魚 DO 迴避 2.2–2.5 mg/L；小魚 1.5–1.8 mg/L；H₂S 迴避閾值 0.002 mg/L（體型間無差異）
+- VSUP-C04：衝入時間窗口 15–25 s（上限 30 s）；爆發速度 1.5–2.2 m/s
+- VSUP-C05：獵物密度觸發倍率 ≥3.5×；OFT 淨能量獲取 1.0–2.3 kJ（代謝代價 0.2–0.5 kJ）
+- VSUP-C06：H₂S = 0.005 mg/L 單次吸收 0.015–0.025 µg/kg（LC50 之 0.05–0.08%）；0.01 mg/L 為 0.030–0.051 µg/kg（0.10–0.17%）
+- VSUP-C07：COX 抑制 5–15%；重置冷卻期 45–60 min；安全衝入上限 H₂S < 0.01 mg/L → 10–15 次/day；≥ 0.05 mg/L → 0–1 次/day
+- VSUP-C08：M. salmoides LC50（0.0306 mg/L）vs P. mexicana（>10–15 mg/L）差距 300 倍以上；SQR 活性差 98%+
+- VSUP-C09：CAWS Pcrit 21.1–26.7%（≈1.8–2.2 mg/L at 20°C），與對照水域無統計差異，確認黑鱸依賴行為避難而非生理適應
+- VSUP-C10：皮質醇 >150 ng/mL → 冒險覓食 100% 阻斷；LVF 基線 20–40 ng/mL → 觸發門檻升至 ≥6.0×；飢餓 3–5 天 → 門檻降至 2.0–2.5×
+- VSUP-C11：靜止容忍群體游泳活性降 50–80%；H₂S 鰓吸收降 40–60%；主動索餌率 0%
+- VSUP-C12：3D 決策矩陣完整（迴避/靜止容忍/冒險覓食 × 三 H₂S 區間 × 兩體型）

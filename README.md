@@ -38,7 +38,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 4B | `4B：棲位競爭、容載量與護巢防禦.md` | V4B-01–15；Zone-A/B/C 三區並列；1 輪 plan review + Q-SUP 三項（V4B-13/14/15）+ 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；第二輪稽核 6 條補丁（FIX-4B-07~12：VSUP-B06 H₂S 閾值更正、VSUP-B08 非批准上游標注、V4B-05 信心等級修正、α₁₂ 缺口補入 Unresolved）完成（2026-06-04） |
 | SUP-A | `SUP-A：感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
 | SUP-B | `SUP-B：底棲水化學梯度補充研究報告.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
-| SUP-C | ⏳ 待跑 | |
+| SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
 | SUP-D-A | ⏳ 待跑 | instruction.md 已建立 |
 | SUP-D-B | ⏳ 待跑 | instruction.md 已建立 |
 | SUP-D-C | ⏳ 待跑 | 建議在 A/B 後執行；instruction.md 已建立 |
@@ -142,10 +142,11 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
   - Correction_Instructions 覆蓋：V1B-CF-04（北部 Fe²⁺ 上修）、V1B-10（H₂S 確認上界）、V3A-12（Schreckstoff 死區 Zone 分野）
   - V3B-27 H₂S 水車重啟衝突已解決（VSUP-B11 支撐）
 
-- **SUP-C：黑鱸毒區迴避實證與冒險覓食決策機制**（⏳ 待跑）
-  - 聚焦：H₂S/低溶氧耐受行為、FIE（Fisheries-Induced Evolution）、LVF/HVF 族群分類、Foraging Forays（毒區覓食短突）
-  - 上游繼承：0D、4A、SUP-A、SUP-B
-  - 下游整合至：3A、3B
+- **SUP-C：黑鱸毒區迴避實證與冒險覓食決策機制**（✅ 完成 2026-06-04）
+  - 聚焦：H₂S/DO 迴避行為實證、個體差異（75–85% 立即逃逸 vs 15–25% 靜止容忍）、Foraging Forays（15–25 s 時間窗口、單日安全上限）、比較毒理學（M. salmoides vs P. mexicana/K. marmoratus）、3D 行為決策矩陣
+  - 上游繼承：0D（B0-11）、4A（V4A-10）、3A（皮質醇）、SUP-A（VSUP-A09 ART）、SUP-B（VSUP-B09/B11 安全距離）
+  - Correction_Instructions 覆蓋：V1B-10（H₂S 安全高度確認）、V3A-12（COX 重置補充）、V3A-09（皮質醇基線修正）、VSUP-B11（確認）、V4A-10（確認）
+  - 下游整合至：3A（V3A-06 皮質醇解讀）、3B（Foraging Forays、靜止容忍）
 
 - **SUP-D-A：食性選擇性與感官匹配優先序**（⏳ 待跑，**可與 SUP-D-B 平行**）
   - 聚焦：Chesson's α / Ivlev's E 食性選擇指數；NTU 視覺失效閾值（三水體）；感官匹配優先序矩陣；LVF vs HVF Reaction Strike 觸發概率差異
