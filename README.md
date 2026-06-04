@@ -41,7 +41,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
 | SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
-| SUP-D-C | ⏳ 待跑 | 建議在 A/B 後執行；instruction.md 已建立 |
+| SUP-D-C | `SUP-D-C_水中漂流偵測與策略切換.md` | VSUP-DC01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（7 條 FIX-DC-01~07）完成（2026-06-04）；Carry_Forward 5 組；Unresolved_Dependencies 5 項 |
 | SUP-E | ⏳ 待跑 | 與 SUP-D-A/B/C 平行（instruction.md 已更新卷號引用） |
 
 ---
@@ -148,21 +148,21 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
   - Correction_Instructions 覆蓋：V1B-10（H₂S 安全高度確認）、V3A-12（COX 重置補充）、V3A-09（皮質醇基線修正）、VSUP-B11（確認）、V4A-10（確認）
   - 下游整合至：3A（V3A-06 皮質醇解讀）、3B（Foraging Forays、靜止容忍）
 
-- **SUP-D-A：食性選擇性與感官匹配優先序**（⏳ 待跑，**可與 SUP-D-B 平行**）
-  - 聚焦：Chesson's α / Ivlev's E 食性選擇指數；NTU 視覺失效閾值（三水體）；感官匹配優先序矩陣；LVF vs HVF Reaction Strike 觸發概率差異
+- **SUP-D-A：食性選擇性與感官匹配優先序**（✅ 完成 2026-06-04）
+  - 聚焦：Chesson's α / Ivlev's E 食性選擇指數；NTU 視覺失效閾值（三水體）；感官匹配優先序矩陣；LVF vs HVF Reaction Strike 觸發概率差異（HVF 65–80%、LVF 15–30%）
   - 上游繼承：2A、2B、0D、3A
-  - 輸出（VSUP-DA01–XX）整合至：2A（食性選擇指數補充）、3A/3B（LVF 觸發差異）；同時作為 SUP-D-C 上游
+  - 輸出（VSUP-DA01–11）整合至：2A（食性選擇指數補充）、3A/3B（LVF 觸發差異）；同時作為 SUP-D-C 上游
 
 - **SUP-D-B：多模態獵物辨識與追擊序列**（✅ 完成 2026-06-04）
   - 聚焦：活體蛙 vs 落葉 vs 假餌入水衝擊聲壓波（Hz/dB/ms）；追擊序列各階段時間窗口；Commit 觸發加速度閾值；Dead Stop 效果（%）
   - 上游繼承：2A（V2A-06/07/11）、2B（V2B-01/02/03）、0D（B0-06/11）、3A（V3A-05/09）
   - 輸出（VSUP-DB01–12）整合至：2B（入水聲壓頻率與側線感知頻段配對）、3A/3B（追擊序列時間窗口、Commit ≥2.5 m/s²、Dead Stop HVF +30–50%/LVF −40–60%）；Correction_Instructions 覆蓋 2A/3A/3B；同時作為 SUP-D-C 上游
 
-- **SUP-D-C：水中漂流偵測與策略切換**（⏳ 待跑，**建議在 A/B 後執行**）
-  - 聚焦：生物微振動振幅 μm/s；Bio-Drift 偵測距離；搜索映像 LTP 時間窗口 ms；Match the Hatch vs Reaction Strike 神經生理切換條件；LVF 學習速度
-  - 上游繼承：2A、2B、0D、3A；建議同時提供 SUP-D-A/B 報告
-  - ⚡ **三卷均可與 SUP-E 平行執行**
-  - 輸出（VSUP-DC01–XX）整合至：2A（漂流偵測）、3A/3B（策略切換條件）
+- **SUP-D-C：水中漂流偵測與策略切換**（✅ 完成 2026-06-04）
+  - 聚焦：生物微振動振幅 15–40 μm/s（1–5 Hz）；Bio-Drift 側線辨識距離（六大水體 12–80 cm）；Tilt 視覺偵測距離 80–120 cm；搜索映像 LTP 1500–2500 ms；LVF vs HVF Reaction Strike 差距 35–65 個百分點；策略切換 12–24 hr 窗口
+  - 上游繼承：2A（V2A-05/06/07）、2B（V2B-01/02）、3A（V3A-09）、SUP-D-A（VSUP-DA01/05/08/09/11）、SUP-D-B（VSUP-DB01/02/03/07/10）
+  - 輸出（VSUP-DC01–14）整合至：2A（漂流偵測數值）、2B（側線辨識距離補充）、3A/3B（策略切換閾值、LVF 衰退曲線、Dead Drift 感官通道排序）
+  - Correction_Instructions：V2A-07/12（確認+補充 NTU 閾值）、V3A-09/10（LVF 衰退曲線中間數據點）、V3B-04/12（Dead Drift 材質量化、Match the Hatch 切換時序）
 
 - **SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射**（⏳ 待跑，**與 SUP-D-A/B/C 平行**）
   - 聚焦：台灣六大水體 × 北中南三區 × 12 個月的獵物爆量月曆；五大獵物類群（魚、甲殼類、兩棲類、水生昆蟲、爬蟲）；北美 Hatch Equivalent 台灣化對應；OFT 切換豐度閾值（Q6）；假餌映射建議

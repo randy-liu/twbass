@@ -58,6 +58,53 @@
 | V2A-07 速度閾值歸屬 | 1.2 m/s（V2A-07 一般基準） | 1.5–1.8 m/s（instruction 期望 V2A-07） | 2A |
 | V3A-03 是否含 Dead Stop 計時 | 本卷標為「推導值」 | instruction 未列 V3A-03 含此數值 | 3A |
 
+---
+
+## SUP-D-C 卷完整稽核與後處理（2026-06-04）
+
+**目標檔案**：`SUP-D-C_水中漂流偵測與策略切換.md`
+**執行流程**：gemini-plan-review（2 輪）→ twbass-audit 5-Phase → Claude 後處理
+**最終 Findings 數**：VSUP-DC01–14　**Carry_Forward 區塊**：5 組（Kármán 尾流頻率與攻擊率、各水體側線辨識距離、LVF vs HVF 觸發概率基線與衰退曲線、飼料印記消退參數、Match the Hatch 策略切換機制）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ⚠️ Hold | 2 項結構性缺口：側線辨識距離未按各水體類型分列、LVF 衰退曲線缺中間數據點；Q5-3 範圍過寬風險（颱風/慈鯛仔魚易拉入 SUP-E）；LVF/HVF 概率預填值無上游引用 | 送修正 prompt |
+| Round 2 | ✅ Go | 所有結構性缺口已補；Q5-3 明確限縮為純機制研究；V2A-05/06 引用確認交 Claude 後處理 | 進入執行 |
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 2 件（潛在） | Reaction Strike 潛伏期（12–25 ms vs instruction 預期 30–50 ms）；最小觸發速度（1.2 m/s vs instruction 預期 1.5–1.8 m/s）——兩者均對照 2A 報告後確認為真實值（詳見下方驗證表） |
+| P2 輸出區塊 | ⚠️ 1 件 | LVF vs HVF Reaction Strike 基線差異（instruction 第 8 個必要核心數值）未以 VSUP-DC 獨立 Finding 呈現，僅繼承於 Inherited_Baseline |
+| P3 引用鏈 | ⚠️ 5 件 | 第一條 V2A-06 應為 V2A-05（皮質醇 80–180 ng/mL）；V2A-05 91% 缺陷無正式 V-code 引用；孤兒引用：VSUP-DA09、VSUP-DB02、VSUP-DB03 未列入 Inherited_Baseline |
+| P4 Scope | ✅ OK | 無嚴重越界；B0-10/11 未被任何 Finding 引用（冗餘，已清除） |
+| P5 研究缺口 | ⚠️ 1 件 | 搜索映像 LTP 時間窗口（ms）直接電生理實驗值缺口未列為獨立 Unresolved 項目（instruction 優先列出項） |
+
+**Phase 6 判定**：✅ 不需重跑（4 分）→ 直接 Claude 後處理
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-DC-01 | Inherited_Baseline 第一條 V2A-06 改標為 **V2A-05**，皮質醇值從 `>150 ng/mL` 修正為 `80–180 ng/mL`，補入「消退需 48–96 hr」（對照 2A 報告 V2A-05 實際內容） |
+| FIX-DC-02 | Inherited_Baseline 新增 **VSUP-DA09**（台灣獵物水動力波：魚類 2–15 Hz / C-start 25–50 Hz / 蝦類 30–60 Hz） |
+| FIX-DC-03 | Inherited_Baseline 新增 **VSUP-DB02**（靜止後 LVF 中止追擊 90%、HVF 45%、活蛙 25%）與 **VSUP-DB03**（LVF 拒絕率 75–90%；金屬閃光 85–95% > 線影 70–85% > 幾何對稱 50–65%） |
+| FIX-DC-04 | Inherited_Baseline 移除 **B0-10**（H₂S）與 **B0-11**（DO 崩跌）——未被任何 Finding 引用的冗餘條目 |
+| FIX-DC-05 | SUPDC_Findings 末尾新增 **[VSUP-DC14]**：LVF 15–30% vs HVF 65–80%，差距 35–65 個百分點，補齊 instruction 第 8 個必要核心數值 |
+| FIX-DC-06 | Carry_Forward #3 更新：補入 HVF 基線 65–80%、LVF 基線 15–30%，來源新增 VSUP-DC14（基線）+ VSUP-DC09（衰退曲線） |
+| FIX-DC-07 | Unresolved_Dependencies 新增第 5 項：**LTP 神經時間窗口（ms）直接電生理實驗值缺口** |
+
+### 2A 報告驗證結果（解決 P1 潛在矛盾）
+
+| 參數 | SUP-D-C 使用值 | 2A 實際 Finding | 結論 |
+|------|---------------|----------------|------|
+| Reaction Strike 潛伏期 | 12–25 ms（V2A-06） | V2A-06：12–25 ms（快速視覺通路，直接實驗證據） | ✅ 數值正確；instruction 預期 30–50 ms 為 fallback，非 2A 實際輸出 |
+| 最小觸發速度 | Vcrit ≥ 1.2 m/s（V2A-07） | V2A-07：Vcrit ≥ 1.2 m/s（Zone-B 基準）| ✅ 數值正確；instruction 預期 1.5–1.8 m/s 為 Zone-A 閾值（V2A-11） |
+| 皮質醇峰值 | 原標 V2A-06 >150 ng/mL | V2A-05：80–180 ng/mL | ✅ 已修正為 V2A-05（FIX-DC-01） |
+
 ### 不受影響的確認正確數值
 
 - 活體蛙著水：100–300 Hz、95–105 dB、15–30 ms
