@@ -9,6 +9,71 @@
 
 ---
 
+## SUP-D-A 卷完整稽核與後處理（2026-06-04）
+
+**目標檔案**：`SUP-D-A_食性選擇性與感官匹配優先序.md`
+**執行流程**：gemini-plan-review（2 輪）→ twbass-audit 5-Phase → Claude 後處理
+**最終 Findings 數**：VSUP-DA01–11　**Carry_Forward 區塊**：4 組（α 矩陣、NTU 閾值、獵物振動 Hz、LVF vs HVF 觸發率）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ⚠️ Hold | 6 項結構性缺口：Q2.1 視覺維度排序、溫度/DO 選擇性抑制、Prey Switching 三維度、各獵物振動 Hz、振頻咬餌率比較、季節變化 | 送修正 prompt |
+| Round 2 | ✅ Go | 全數 6 項補入；新增 2 條 scope guard（OFT 邊界、Prey Switching 不量化豐度閾值） | 進入執行 |
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 4 件（待驗證） | V2A-07 潛伏期（30–50 ms vs 12–25 ms）、最小觸發速度（1.5–1.8 vs 1.2–1.5 m/s）、大肚魚能量密度（0.85 vs 1.10 kcal/g）、HVF 皮質醇（≈6 vs 10–15 ng/mL）；均需對照 2A/3A 原報告確認 |
+| P2 輸出區塊 | ⚠️ 1 件 | CI 格式使用 file:// 本地連結 |
+| P3 引用鏈 | ⚠️ 2 件 | CI-3 引用 VSUP-DA02（應為 V3A-02）；Inherited_Baseline 缺 V3A ART 溫度矩陣 |
+| P4 Scope | ⚠️ 1 件 | CI-3 CFF 操餌速度修正屬 2A/2C 範疇，超出本卷 scope |
+| P5 研究缺口 | ⚠️ 6 件 | 3 項 instruction 必列 Unresolved 完全缺失；Zone-B NTU 未明確標示；VSUP-DA02/DA07 信心等級標注偏高 |
+
+**Phase 6 判定**：⚠️ Claude 結構重建（總分 15，結構分 100%，Q 覆蓋完整型）
+所有缺口均為格式補充、引用訂正、Zone-B 注釋與 Unresolved 補條目，無需 Gemini 補研究。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-SDA-01 | Inherited_Baseline V2A-07 末尾加 ⚠️ 待驗證標注（潛伏期 fallback 30–50 ms vs 12–25 ms） |
+| FIX-SDA-02 | Inherited_Baseline V2A-07 觸發速度待驗證標注（1.5–1.8 m/s vs VSUP-DA07 1.2–1.5 m/s） |
+| FIX-SDA-03 | Inherited_Baseline V2A-02 末尾加 ⚠️ 待驗證標注（大肚魚 0.85 vs 1.10 kcal/g） |
+| FIX-SDA-04 | Inherited_Baseline V3A-09 末尾加 ⚠️ 待驗證標注（HVF ≈6 vs 10–15 ng/mL） |
+| FIX-SDA-05 | CI-1 / CI-2 格式修正：移除 file:// 本地連結，改為純文字段落描述 |
+| FIX-SDA-06 | CI-3 引用訂正（隨 FIX-SDA-08 一併處理，CI-3 已移除） |
+| FIX-SDA-07 | Inherited_Baseline 補入 V3A（VSUP-A04）ART 溫度矩陣（Q₁₀=2.0，20°C 基準 24.0 hr） |
+| FIX-SDA-08 | 刪除 CI-3（CFF 操餌速度，Scope 超出本卷）；移至 Unresolved_Dependencies 第 7 條備忘，待 2C 後續稽核發出 CI-2C |
+| FIX-SDA-09 | Unresolved_Dependencies 補入第 1 優先項：台灣管理池 LVF 魚實際食性選擇指數（缺胃內容物分析） |
+| FIX-SDA-10 | Unresolved_Dependencies 補入第 2 優先項：M. salmoides 直接 Chesson's α 實測數據 |
+| FIX-SDA-11 | Unresolved_Dependencies 補入第 3 優先項：台灣各濁度類型 NTU 閾值現場實測值 |
+| FIX-SDA-12 | VSUP-DA08 水體標籤：腐植酸褐水（Zone-A）→（Zone-A/B）；Carry_Forward 第 2 項同步補 Zone-B 注釋 |
+| FIX-SDA-13 | VSUP-DA02 信心等級：高 → 中（依據為類比推估，缺 M. salmoides 受控飢餓實驗） |
+| FIX-SDA-14 | VSUP-DA07 信心等級：高 → 中（依據為理論估算，缺直接行為實驗驗證） |
+
+### 待驗證項目（需對照上游報告）
+
+| 項目 | 本卷使用值 | instruction fallback | 需確認報告 |
+|------|-----------|---------------------|-----------|
+| V2A-07 視頂蓋潛伏期 | 12–25 ms | 30–50 ms | 2A |
+| V2A-07 最小觸發速度 | 1.2–1.5 m/s | 1.5–1.8 m/s | 2A |
+| V2A-02 大肚魚能量密度 | 1.10 kcal/g | 0.85 kcal/g | 2A |
+| V3A-09 HVF 皮質醇基線 | 10–15 ng/mL | ≈6 ng/mL | 3A |
+
+### 不受影響的確認正確數值
+
+- Chesson's α（常溫）：吳郭魚 0.65 / 大肚魚 0.25 / 蝌蚪 0.10
+- 飢餓 5 天以上：α 全收斂至 0.33，E → 0.0
+- NTU 視覺失效閾值：褐水（Zone-A/B）35 / 綠水（Zone-C）45 / 灰水 60 NTU
+- 感官模式 100% 切換平均值：40 NTU（褐水 30 / 綠水 40 / 灰水 50）
+- 魚類 C-start 振動 25–50 Hz / 蝦類 Tail-flip 30–60 Hz / 蝌蚪逃逸 8–12 Hz
+- LVF 觸發率 15–30%；HVF 65–80%；相對減損 70–80%
+
+---
+
 ## 0C 卷完整稽核與後處理（2026-05-29）
 
 **目標檔案**：`0C_六大水體 seasonal 評估.md`
