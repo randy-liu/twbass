@@ -40,7 +40,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-B | `SUP-B：底棲水化學梯度補充研究報告.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
 | SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
-| SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPDB-01~09：Carry_Forward 補 Commit 閾值/Dead Stop、V2A-07 30–50 ms 補入、V2A-11 待驗證標注、V3A-03 幻覺修正、DB12→DB13 重編號）完成（2026-06-04）；Carry_Forward 7 組 |
+| SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
 | SUP-D-C | ⏳ 待跑 | 建議在 A/B 後執行；instruction.md 已建立 |
 | SUP-E | ⏳ 待跑 | 與 SUP-D 平行 |
 
@@ -153,10 +153,10 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
   - 上游繼承：2A、2B、0D、3A
   - 輸出（VSUP-DA01–XX）整合至：2A（食性選擇指數補充）、3A/3B（LVF 觸發差異）；同時作為 SUP-D-C 上游
 
-- **SUP-D-B：多模態獵物辨識與追擊序列**（⏳ 待跑，**可與 SUP-D-A 平行**）
+- **SUP-D-B：多模態獵物辨識與追擊序列**（✅ 完成 2026-06-04）
   - 聚焦：活體蛙 vs 落葉 vs 假餌入水衝擊聲壓波（Hz/dB/ms）；追擊序列各階段時間窗口；Commit 觸發加速度閾值；Dead Stop 效果（%）
-  - 上游繼承：2A、2B、0D、3A
-  - 輸出（VSUP-DB01–XX）整合至：2B（入水辨識聲學特徵）、3A/3B（追擊序列與 Commit 觸發）；同時作為 SUP-D-C 上游
+  - 上游繼承：2A（V2A-06/07/11）、2B（V2B-01/02/03）、0D（B0-06/11）、3A（V3A-05/09）
+  - 輸出（VSUP-DB01–12）整合至：2B（入水聲壓頻率與側線感知頻段配對）、3A/3B（追擊序列時間窗口、Commit ≥2.5 m/s²、Dead Stop HVF +30–50%/LVF −40–60%）；Correction_Instructions 覆蓋 2A/3A/3B；同時作為 SUP-D-C 上游
 
 - **SUP-D-C：水中漂流偵測與策略切換**（⏳ 待跑，**建議在 A/B 後執行**）
   - 聚焦：生物微振動振幅 μm/s；Bio-Drift 偵測距離；搜索映像 LTP 時間窗口 ms；Match the Hatch vs Reaction Strike 神經生理切換條件；LVF 學習速度

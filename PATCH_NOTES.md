@@ -70,6 +70,39 @@
 
 ---
 
+## SUP-D-B 卷 v2 二次稽核後處理（2026-06-04）
+
+**目標檔案**：`SUP-D-B_多模態獵物辨識與追擊序列.md`（Gemini 2 次校正後版本）
+**執行流程**：twbass-audit 完整 5-Phase（Phase 6 included）→ Claude 後處理
+**Phase 6 判定**：✅ 不需重跑（總分 4 分，Q 覆蓋完整型，所有 Core_Parameters 已有值）
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化一致性 | ⚠️ 6 件 | 禁詞 ×2、信心等級膨脹 ×4 |
+| P2 輸出區塊 | ✅ OK | 5 必要區塊齊全，Findings 12 條在範圍內 |
+| P3 引用鏈 | ⚠️ 4 件 | 數值缺源 ×2、Carry_Forward 命名含 2B 但無 2B 條目 ×1、外推物種未標 ×1 |
+| P4 Scope | ✅ OK | 無嚴重越界 |
+| P5 研究缺口 | ⚠️ 1 件 | Correction_Instructions 缺 3B 確認建議 |
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-SDB-01 | VSUP-DB02：「概率呈現顯著分化」→「概率在三類目標間相差 25%–98%，分化如下」（移除禁詞「顯著」） |
+| FIX-SDB-02 | VSUP-DB11：「Dead Stop 創造了極佳的能量划算窗口」→ 替換為 OFT 追逐成本量化描述（移除禁詞「極佳」） |
+| FIX-SDB-03 | VSUP-DB01 信心等級：高 → 中-高（理論估算+類比推估，缺 M. salmoides 直接數據） |
+| FIX-SDB-04 | VSUP-DB05 信心等級：高 → 中-高（補標 Lepomis macrochirus 外推依據） |
+| FIX-SDB-05 | VSUP-DB06 信心等級：高 → 中（Centrarchidae 類比推估） |
+| FIX-SDB-06+10 | VSUP-DB12 信心等級：高 → 中-高（補標 Lepomis macrochirus 外推依據） |
+| FIX-SDB-07 | VSUP-DB09：「清水 2.0 m」補標「理論估算，基於分子擴散係數與嗅覺偵測閾值模型」；範圍改為「1.5–2.5 m」 |
+| FIX-SDB-08 | VSUP-DB11：「壁面無滑移梯度 60–80%，決策窗口 50%」補標「理論估算，no-slip 邊界條件與 CNs 加速度響應模型，缺直接實驗驗證」 |
+| FIX-SDB-09 | Carry_Forward 新增第 8 條：輸往 2B，含著水主頻與掙扎剪切流頻率對 V2B-01/V2B-03 感知範圍的配對說明（VSUP-DB01、DB02） |
+| FIX-SDB-11 | Correction_Instructions 新增第 4 條：3B Topwater 段落確認建議，涵蓋 VSUP-DB01/03/10/11 四組數值 |
+
+---
+
 ## SUP-D-A 卷完整稽核與後處理（2026-06-04）
 
 **目標檔案**：`SUP-D-A_食性選擇性與感官匹配優先序.md`
