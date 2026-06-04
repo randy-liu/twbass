@@ -9,6 +9,67 @@
 
 ---
 
+## SUP-D-B 卷完整稽核與後處理（2026-06-04）
+
+**目標檔案**：`SUP-D-B_多模態獵物辨識與追擊序列.md`
+**執行流程**：gemini-plan-review（3 輪）→ twbass-audit 5-Phase → Claude 後處理
+**最終 Findings 數**：VSUP-DB01–12　**Carry_Forward 區塊**：7 組（著水聲壓特徵、追擊序列時間窗口、接近最小速度、搜索映像排名、印記魚異化係數、Commit 觸發閾值、Dead Stop 效果）
+
+### Plan Review 輪次紀錄
+
+| 輪次 | 信號 | 主要缺口 | 處置 |
+|------|------|---------|------|
+| Round 1 | ⚠️ Hold | 5 項結構性缺口：Q3-3 游向距離、Q3-5 先天/習得分類、飼料印記魚量化、Q4-2 最小速度閾值、Q4-3 維度排名；V2A-07 速度值矛盾、V3A-09 皮質醇值偏移、V3A-03 Dead Stop 引用無效 | 送修正 prompt |
+| Round 2 | ⚠️ Hold | 全部結構性缺口已補；V2A-11 新 V-code 解決速度衝突；V3A-03 Dead Stop 引用仍具幻覺風險 | 送修正 prompt（僅 V3A-03 處理說明） |
+| Round 3 | ✅ Go | V3A-03 改為條件式驗證處理（有文獻列 Inherited_Baseline，無文獻列 VSUP-DB 新發現）；所有結構性缺口清零 | 進入執行 |
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 1 件 | V2A-07 視頂蓋啟動潛伏期 30–50 ms 未列入 Inherited_Baseline（僅有 12–25 ms 快速通路） |
+| P2 輸出區塊 | ⚠️ 1 件（格式） | Findings 計 13 條，超出 instruction 上限 12 條 |
+| P3 引用鏈 | ⚠️ 6 件 | V2A-07 潛伏期缺失；V2A-11 非 Upstream_Required 列出之 V-code（待驗證）；V3A-03 於 CI 中被「確認」但 VSUP-DB11 自標「本卷推導值」矛盾；V2A-11 誤引於 VSUP-DB10 加速度計算；CI-2 引用未定義 V3A-10；CI-1 Carry_Forward_To_2C（2C 非本卷下游目標） |
+| P4 Scope | Scope Note | VSUP-DB09 引用 OFT/LDH 為概念援引，非推導，不計違規 |
+| P5 研究缺口 | ⚠️ 3 件 | Unresolved_Dependencies 缺 instruction 明定 3 項優先缺口：M. salmoides 入水聲壓辨識實驗、LVF 老魚行為遙測、Commit 加速度直接實測 |
+
+**Phase 6 判定**：⚠️ Claude 結構重建（總分 19，結構分 73.7%，Q 覆蓋完整型）
+所有 Q 問題均有研究段落；缺口集中在 Carry_Forward 遺漏、V-code 引用訂正與 Unresolved 補條目，無需 Gemini 補研究。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-SUPDB-01 | Carry_Forward 新增第 6 條：Commit 觸發閾值 ≥ 2.5 m/s²（來源 VSUP-DB10），下游 SUP-D-C / 3A / 3B |
+| FIX-SUPDB-02 | Carry_Forward 新增第 7 條：Dead Stop 效果（HVF +30–50%，LVF −40–60%，最短 1.5–2.5 s，來源 VSUP-DB11），下游 SUP-D-C / 3A / 3B |
+| FIX-SUPDB-03 | Inherited_Baseline V2A-07 補入「視頂蓋啟動潛伏期 30–50 ms」 |
+| FIX-SUPDB-04 | V2A-11 全文加〔待驗證 2A 報告確認〕；VSUP-DB10 逃跑加速度描述移除 V2A-11 引用，改標「理論估算值」 |
+| FIX-SUPDB-05 | Correction_Instructions 第 3 條改標題為「新增建議」，措辭從「[確認] V3A-03」改為「[新增] VSUP-DB11 推導值，V3A-03 確認待驗證」 |
+| FIX-SUPDB-06 | Unresolved_Dependencies 補入第 4–6 條（instruction 優先缺口：M. salmoides 聲壓辨識實驗、LVF 行為遙測、Commit 加速度直接實測） |
+| FIX-SUPDB-07 | 舊 VSUP-DB12（水質老化化學線索干擾）刪除，核心數值（2.0 m → <0.3 m）移入 VSUP-DB09 第 4 項附注；舊 VSUP-DB13 改編號 VSUP-DB12（总 Findings 12 條） |
+| FIX-SUPDB-08 | Correction_Instructions 第 2 條移除 V3A-10（未定義 V-code） |
+| FIX-SUPDB-09 | Correction_Instructions 第 1 條 Carry_Forward_To_2C 改為 Carry_Forward_To_2A |
+
+### 待驗證項目（需對照上游報告）
+
+| 項目 | 本卷使用值 | instruction 期望值 | 需確認報告 |
+|------|-----------|-------------------|-----------|
+| V2A-11 是否存在 | ≥1.5 m/s（Zone-A） | 指令未列此 V-code | 2A |
+| V2A-07 速度閾值歸屬 | 1.2 m/s（V2A-07 一般基準） | 1.5–1.8 m/s（instruction 期望 V2A-07） | 2A |
+| V3A-03 是否含 Dead Stop 計時 | 本卷標為「推導值」 | instruction 未列 V3A-03 含此數值 | 3A |
+
+### 不受影響的確認正確數值
+
+- 活體蛙著水：100–300 Hz、95–105 dB、15–30 ms
+- 落葉著水：>1000 Hz、<70 dB、無脈衝
+- 硬式假餌著水：500–2000 Hz、115–125 dB、50–100 ms
+- 追擊序列窗口：Detect 0–100 ms / Identify 100–500 ms / Approach 500 ms–2 s / Evaluate 2–5 s / Commit 5–5.1 s
+- Commit 逃跑加速度閾值：≥2.5 m/s²
+- Dead Stop：HVF +30–50%，LVF −40–60%，最短 1.5–2.5 s（推導值）
+- LVF 學習過濾建立速度：3–5 次暴露後過濾率 +80%
+
+---
+
 ## SUP-D-A 卷完整稽核與後處理（2026-06-04）
 
 **目標檔案**：`SUP-D-A_食性選擇性與感官匹配優先序.md`

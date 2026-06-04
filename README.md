@@ -40,7 +40,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-B | `SUP-B：底棲水化學梯度補充研究報告.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
 | SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
-| SUP-D-B | ⏳ 待跑 | instruction.md 已建立 |
+| SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPDB-01~09：Carry_Forward 補 Commit 閾值/Dead Stop、V2A-07 30–50 ms 補入、V2A-11 待驗證標注、V3A-03 幻覺修正、DB12→DB13 重編號）完成（2026-06-04）；Carry_Forward 7 組 |
 | SUP-D-C | ⏳ 待跑 | 建議在 A/B 後執行；instruction.md 已建立 |
 | SUP-E | ⏳ 待跑 | 與 SUP-D 平行 |
 
