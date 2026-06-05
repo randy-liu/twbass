@@ -42,7 +42,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
 | SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
 | SUP-D-C | `SUP-D-C_水中漂流偵測與策略切換.md` | VSUP-DC01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（7 條 FIX-DC-01~07）完成（2026-06-04）；Carry_Forward 5 組；Unresolved_Dependencies 5 項 |
-| SUP-E | ⏳ 待跑 | 與 SUP-D-A/B/C 平行（instruction.md 已更新卷號引用） |
+| SUP-E | ⏳ 待跑 | 與 SUP-D-A/B/C 平行；instruction.md 格式稽核完成（FMT-SUPE-01~03）；四類生態輔助報告（甲殼類、兩棲類、爬蟲類、昆蟲）已加入 repo（2026-06-05） |
 
 ---
 

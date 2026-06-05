@@ -9,6 +9,20 @@
 
 ---
 
+## SUP-E instruction.md 格式稽核修補（2026-06-05）
+
+**目標檔案**：`SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射-instruction.md`
+**執行流程**：twbass-instruction-audit 8 項格式檢查
+**同步加入 repo**：台灣淡水與沿岸四類生態輔助報告（甲殼類、兩棲類、水生爬蟲類、水生昆蟲）
+
+| FMT 編號 | 檢查項目 | 修改內容 |
+|---------|---------|---------|
+| FMT-SUPE-01 | C2 + C6 | Finding 編號去方括號：`[VSUP-E01]` → `VSUP-E01`（⚠️ 前置區塊 item 2 + Section 八 SUPE_Findings 兩處，含格式範例行） |
+| FMT-SUPE-02 | C6 | `Carry_Forward_To_SUPDC_2A` 拆分為 `Carry_Forward_To_SUPDC`（供 SUP-D-C 引用振動頻率 / 事件時序 / OFT 閾值）與 `Carry_Forward_To_2A`（供 2A 引用獵物能量密度 / 物種尺寸 / 假餌映射）兩個獨立區塊；⚠️ 前置區塊總數「六個」→「七個」 |
+| FMT-SUPE-03 | C4 Point 4 | 推測標示補充說明：`[地理外推]`（等同「基於〔亞熱帶亞洲近緣物種研究〕之地理外推」） |
+
+---
+
 ## SUP-D-B 卷完整稽核與後處理（2026-06-04）
 
 **目標檔案**：`SUP-D-B_多模態獵物辨識與追擊序列.md`
