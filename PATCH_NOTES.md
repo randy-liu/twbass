@@ -9,6 +9,56 @@
 
 ---
 
+## SUP-E 卷完整稽核與後處理（2026-06-09）
+
+**目標檔案**：`SUP-E_台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射.md`
+**執行流程**：twbass-audit 5-Phase（第一輪）→ Q-SUP 補充研究（Gemini）→ twbass-audit 5-Phase（第二輪）→ Claude 後處理
+**最終 Findings 數**：VSUP-E01–E27（含 Q-SUP 補充後新增 VSUP-E26/E27）
+**Carry_Forward 區塊**：2 組（Carry_Forward_To_SUPDC、Carry_Forward_To_2A）
+**Correction_Instructions**：CI-SUPE-01~04
+
+### 稽核輪次紀錄
+
+| 輪次 | Phase 6 判定 | 分數 | 主要缺口 | 處置 |
+|------|-------------|------|---------|------|
+| Round 1 | ⚠️ 多輪 Q-SUP 補充 | 15 分 | 三星攀鱸量化數值缺失、熊蟬側線觸發距離缺失、稻蝗水面運動缺失、VSUP-E15 拒咬反射 80 ms 未標推測依據、VSUP-E25 SMR 122.26 mg O₂/kg/hr 引用錯誤（應為 65.2，Díaz et al. 2007，原值為 RMR 誤引） | 送 Q-SUP-01~05 至 Gemini |
+| Round 2 | ✅ 不需重跑 | 4 分 | 全 5 項 Q-SUP 缺口已填補；新增 4 項結構問題（FIX-SUPE-18~21：VSUP-E21-B/E22-C 編號不規範、Carry_Forward 錯誤 Hz、缺 E26/E27 數據、Zone 標注混用） | 進入最終 Claude 後處理 |
+
+### 5-Phase 稽核結果（第二輪）
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化 | ⚠️ 1 件 | VSUP-E16 幼龜 T_h > 15 s 缺推測依據標注 |
+| P2 輸出區塊 | ⚠️ 2 件 | CI 缺 3A 確認條目；VSUP-E21-B/E22-C 編號不符規範 |
+| P3 引用鏈 | ⚠️ 1 件 | Carry_Forward 「水蠆 20–30 Hz」無 VSUP-E19 文本支撐 |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 6 項完整 |
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-SUPE-01 | VSUP-E15 蟾蜍蝌蚪拒咬反射時間改為 80–120 ms，加入 [類比推估] 標注（Kasumyan 2003 推算）（Q-SUP 補充） |
+| FIX-SUPE-02 | VSUP-E16 幼龜 T_h > 15 s 加入 [理論估算；詳見 Unresolved_Dependencies #5] |
+| FIX-SUPE-03 | VSUP-E25 SMR 修正：122.26 → 65.2 mg O₂/kg/hr（Díaz et al. 2007 直接實測；原值為 Q10=2.3 外推之 RMR 誤引） |
+| FIX-SUPE-04 | 日曆欄位標題「中部峰值」改為「Zone-B 桃竹苗背風面」；介紹文字明確三區名稱 |
+| FIX-SUPE-05 | Correction_Instructions 加入 CI-SUPE-01~03 正式編號 |
+| FIX-SUPE-06~09 | Hatch_Equivalent_Calendar 補入 7 行缺失物種：澤蛙蝌蚪、小雨蛙透明蝌蚪、牛蛙巨型蝌蚪（Zone-C）、鰷條幼魚、草條田中鰟鮍、蓋斑鬥魚、極樂吻鰕虎 |
+| FIX-SUPE-10 | 新增 CI-SUPE-04：確認 3A 報告 OFT 機制與 VSUP-E25 閾值相容，無需修改 |
+| FIX-SUPE-11 | VSUP-E06/E12/E14/E16/E17/E20/E21/E25 加入 [覆蓋 fallback 假設：來自 XX 輔助報告] 標注 |
+| FIX-SUPE-12 | VSUP-E01/E05/E11/E14/E20/E21 Zone-A/B 物候時間分離（依 B0-02 提前 12–18 天） |
+| FIX-SUPE-13 | VSUP-E19 加入「感知機制詳見 SUP-D-B」Scope 連結 |
+| FIX-SUPE-14 | Q-SUP 補入 VSUP-E03 三星攀鱸：繁殖期三區分列、幼魚 TL 30–60 mm、游速 0.05–0.15 m/s（[地理外推]） |
+| FIX-SUPE-15 | Q-SUP 補入 VSUP-E26（原 VSUP-E21-B）熊蟬/薄翅蟬側線觸發半徑：60–90 cm / 30–50 cm（[類比推估]） |
+| FIX-SUPE-16 | Q-SUP 補入 VSUP-E27（原 VSUP-E22-C）中華稻蝗：后足划水 2–3 Hz，推進速度 0.10–0.13 m/s |
+| FIX-SUPE-17 | VSUP-E22 颱風脈衝持續時窗拆分為 4 組分：蚯蚓 12–24 hr、昆蟲 6–18 hr、兩棲類 24–48 hr、溪蟹 24–72 hr（各附理論依據）|
+| FIX-SUPE-18 | VSUP-E21-B → VSUP-E26；VSUP-E22-C → VSUP-E27；Finding 總數更新為 27 |
+| FIX-SUPE-19 | Carry_Forward_To_SUPDC 新增 VSUP-E26 熊蟬（5–12 Hz，半徑 60–90 cm）、薄翅蟬（8–15 Hz，30–50 cm）、VSUP-E27 稻蝗（2–3 Hz，0.10–0.13 m/s）三條機械波資料 |
+| FIX-SUPE-20 | Carry_Forward_To_SUPDC 移除「水蠆 20–30 Hz」（無 VSUP-E19 文本支撐），改為速度突變描述（ΔV ≥ 0.40 m/s；Hz 待補充） |
+| FIX-SUPE-21 | VSUP-E26 月份峰值由「Zone-A/B（北部/中部）8 月中旬峰」拆為 Zone-A 8月中旬、Zone-B 8月上旬（B0-02）、Zone-C 7月下旬三行 |
+
+---
+
 ## SUP-E instruction.md 格式稽核修補（2026-06-05）
 
 **目標檔案**：`SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射-instruction.md`

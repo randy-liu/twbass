@@ -42,7 +42,7 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
 | SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
 | SUP-D-C | `SUP-D-C_水中漂流偵測與策略切換.md` | VSUP-DC01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（7 條 FIX-DC-01~07）完成（2026-06-04）；Carry_Forward 5 組；Unresolved_Dependencies 5 項 |
-| SUP-E | ⏳ 待跑 | 與 SUP-D-A/B/C 平行；instruction.md 格式稽核完成（FMT-SUPE-01~03）；四類生態輔助報告（甲殼類、兩棲類、爬蟲類、昆蟲）已加入 repo（2026-06-05） |
+| SUP-E | `SUP-E_台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射.md` | VSUP-E01–E27（含 Q-SUP 補充後新增 E26/E27）；Zone-A/B/C 三區物候時間分離（B0-02）；2 輪 5-Phase 稽核 + Q-SUP 補充研究（三星攀鱸、熊蟬側線距離、稻蝗划水、SMR 修正）+ Claude 後處理（FIX-SUPE-01~21，共 21 項）完成（2026-06-09）；CI-SUPE-01~04；Hatch_Equivalent_Calendar 25 行 |
 
 ---
 
@@ -164,11 +164,11 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
   - 輸出（VSUP-DC01–14）整合至：2A（漂流偵測數值）、2B（側線辨識距離補充）、3A/3B（策略切換閾值、LVF 衰退曲線、Dead Drift 感官通道排序）
   - Correction_Instructions：V2A-07/12（確認+補充 NTU 閾值）、V3A-09/10（LVF 衰退曲線中間數據點）、V3B-04/12（Dead Drift 材質量化、Match the Hatch 切換時序）
 
-- **SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射**（⏳ 待跑，**與 SUP-D-A/B/C 平行**）
-  - 聚焦：台灣六大水體 × 北中南三區 × 12 個月的獵物爆量月曆；五大獵物類群（魚、甲殼類、兩棲類、水生昆蟲、爬蟲）；北美 Hatch Equivalent 台灣化對應；OFT 切換豐度閾值（Q6）；假餌映射建議
-  - 上游繼承：0A（三區月均水溫）、0C（六大水體基準）、0D
-  - ⚡ **可與 SUP-D 平行執行**：獨立生態調查；本卷量化「外在豐度條件」，SUP-D 量化「內在神經迴路機制」，兩者下游合用
-  - 輸出預計整合至：2A（台灣獵物能量表補充）、1B（六大水體獵物棲位補充）、3B（與 SUP-D 合用構建完整台灣情境決策矩陣）
+- **SUP-E：台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射**（✅ 完成 2026-06-09）
+  - 聚焦：台灣六大水體 × Zone-A/B/C 三區 × 12 個月獵物爆量月曆（25 行）；五大獵物類群（魚、甲殼類、兩棲類、水生昆蟲、爬蟲類）；北美 Hatch Equivalent 台灣化對應；OFT 切換豐度閾值（65–80% / ≥2.5 enc/min，溫度修正）；假餌映射建議
+  - 上游繼承：0A（三區月均水溫）、0C（六大水體基準）、0D（B0-02 Zone-B 超前 12–18 天）；四類生態輔助報告（甲殼類、兩棲類、爬蟲類、昆蟲）
+  - 輸出（VSUP-E01–E27）整合至：2A（台灣獵物能量密度與視覺/側線映射補充）、1B（六大水體獵物棲位補充）、3B（颱風後陸源脈衝、白蟻分飛、熊蟬側線距離等戰術切換生態事實）
+  - Correction_Instructions：CI-SUPE-01（修正 2A 軟殼蝦 T_h）、CI-SUPE-02（修正 3B 南部作釣水層）、CI-SUPE-03（修正 3B 颱風後色系切換時窗）、CI-SUPE-04（確認 3A OFT 相容性）
 
 ---
 
