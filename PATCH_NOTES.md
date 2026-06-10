@@ -1847,3 +1847,14 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX-3B-H2S-01 | 3B V3B-03 戰術規則 | H₂S 安全高度由舊值 "60–100 cm" 更新為 **"≥100 cm（精算 99.7–100.0 cm，VSUP-B11）"**；機制來源由 V1B-05 更新為 V1B-10/VSUP-B11 |
 | FIX-3B-H2S-02 | 3B Inherited_Baseline section 2 V1B-05/V1B-10 行 | H₂S 安全高度更新為 **~100 cm（VSUP-B11）**；Fe²⁺ 安全高度更新為 VSUP-B09 三區精算值（Zone-B 25.7–32.7 cm；Zone-A 56.5–67.2 cm）；廢棄舊一行式 "60-100 cm / 30-50 cm" 格式 |
 | FIX-3B-H2S-03 | 3B Carry_Forward_To_SUPA V3B-03 驗證項目 | 預期避毒高度由舊值 "60–100 cm" 更新為 **"≥100 cm（VSUP-B11 精算；原估 60–100 cm 廢棄）"** |
+
+---
+
+## SUP-D Carry_Forward 補接（2A + 2B，2026-06-10）
+
+**觸發原因**：2A 和 2B 均缺少 SUP-D-A/B/C 的正式 Inherited_Baseline 引用段落，而 SUP-D-A Section 1/2/3 和 SUP-D-B Section 2/8 分別明確指向 2A/2B 作為下游。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-2A-SUPD | 2A Inherited_Baseline 末端 | 新增 **Section 3（食性選擇性與感官辨識補充，引用自卷 SUP-D-A/B/C）**：VSUP-DA01~04（Chesson's α 矩陣）、VSUP-DA08（NTU 視覺失效閾值 35/45/60 NTU）、VSUP-DB08（最小啟動速度 1.5–3.0 cm/s）、VSUP-DC02/04（Dead Drift 攻擊率降 60–75%）|
+| FIX-2B-SUPD | 2B 九、Inherited_Baseline 末端 | 新增 **補充小節（獵物生物機械振動特徵，引用自卷 SUP-D-A/B）**：VSUP-DA09（各獵物游泳/逃逸頻率特徵）、VSUP-DB01/02（Topwater 感官接力時序 <100 ms 聲學 → 100 ms–3 s 側線）|
