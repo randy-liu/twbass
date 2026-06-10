@@ -2160,3 +2160,76 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 - **問題**：SUP-D-C line 75 在 VSUP-DC09 正文中寫「受 >150 ng/mL 急性皮質醇應激主導，V2A-06」。實際上 2A 的 V2A-06 = Reaction Strike 12–25 ms；皮質醇 C&R 內容在 V2A-05。
 - **修正**：`V2A-06，為期 48–96 hr` → `V2A-05，為期 48–96 hr`
 - **影響**：引用編號正確；與 Inherited_Baseline（line 21）V2A-06 = Reaction Strike 的正確標注一致，文件內部不再矛盾
+
+---
+
+## 雙向引用稽核 — 2B 卷（首次）
+
+**稽核日期**：2026-06-10
+**對象文件**：`2B_側線、內耳與水下聲學傳遞.md`
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | V2B-01~V2B-13 數值內部一致；Medwin 方程計算值驗證正確 |
+| P2 輸出區塊 | ✅ OK | 全部輸出區塊完整；13 Findings / 4 Carry_Forward / N/A CI / 3 Open_Assumptions / 2 Unresolved_Dependencies |
+| P3 引用鏈 | ⚠️ 1 件（待 0D 稽核時解決）| B0-15 在 Inherited_Baseline 中出現兩次，各指向不同內容（藻華 EPS + 曾文水庫能見度）；需對照 0D 確認是否同屬 B0-15 或有誤 |
+| P4 Scope | ✅ OK | 側線、聽石、聲學傳遞完全在 2B 範疇；未越入視覺系統（2A/2C）或覓食決策（2A）|
+| P5 研究缺口 | ✅ OK | Open_Assumptions 3 條、Unresolved_Dependencies 2 條均已標注 |
+
+**反向核查（Backward Check）**：
+- B0-03/06/07/12/14: 0D baseline 引用，待 0D 稽核核實
+- **B0-15**：line 309 = "南部 Zone-C 春末藻華期 EPS 動力黏度增加 10%"；line 313 = "曾文水庫局部靜水庫灣能見度降至 30–50 cm（持續 10–18 天）" — 兩筆均標 B0-15，但內容指向不同現象，需 0D 驗證
+- **VSUP-DA09**: ✅ 已驗證 — SUP-D-A line 76 VSUP-DA09 內容（各台灣獵物水動力波特徵）完全對應 2B Inherited_Baseline line 315-316
+- **VSUP-DB01/02**: ✅ 已驗證 — SUP-D-B Carry_Forward 指定 "(d) 下游引用卷：2B"，內容（Topwater 入水感官接力時序）完全對應 2B line 316-317
+
+**待處理項目（0D 稽核時確認）**：
+
+| 項目 | 描述 | 動作 |
+|------|------|------|
+| PENDING-2B-CITE-01 | B0-15 在 Inherited_Baseline line 309 與 line 313 各描述不同現象（藻華 EPS vs 曾文水庫能見度）| 稽核 0D 時確認 B0-15 實際範疇；若兩者同屬 B0-15 則無誤；若指向不同 B0-XX 則修正其中一處 |
+
+**Phase 6 判定**：✅ 不需重跑
+
+---
+
+## 雙向引用稽核 — 2C 卷（首次）
+
+**稽核日期**：2026-06-10
+**對象文件**：`2C_視線軸向、攻擊角度與假餌操作.md`
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | V2C-01~V2C-12 數值內部一致；三區 Zone-A/B/C 各自獨立列出 |
+| P2 輸出區塊 | ✅ OK | 全部輸出區塊完整；12 Findings / 5 Carry_Forward / N/A CI / 3 Unresolved_Dependencies |
+| P3 引用鏈 | ⚠️ 1 件（已修正）| V2C-10 及 Carry_Forward 以「V2A-07」標注 Follower Rejection 近點 13.5-24 cm，但 V2A-07 = Vcrit ≥1.2 m/s 速度閾值，並未包含光學近點距離值 |
+| P4 Scope | ✅ OK | 視線軸向、攻擊角度、假餌操作映射；未越入側線聲學（2B）或護巢行為（4B）|
+| P5 研究缺口 | ✅ OK | 3 條 Unresolved_Dependencies 均已標注 |
+
+**反向核查（Backward Check）**：
+- B0-06/B0-15/B0-03: 0D baseline，待 0D 稽核核實
+- V1A-06/10/11/12: 1A findings，待 1A 稽核核實
+- V2A-01/02/04/05/06/07/11/12: ✅ 均已通過本輪稽核（2A 已讀取並確認 V2A-01~V2A-12 內容正確）
+- V2A-08/09/10: 光譜消光係數（三區），在 2A 各自確立 ✅
+- **V2B-01**: ✅ V2B-01 = 側線頻率 1-200 Hz，最敏感 5-10 Hz，2C line 244 正確引用
+- **VSUP-DB08**: ✅ 已驗證 — SUP-D-B line 94 VSUP-DB08 = 最低移動速度 ≥1.5-3.0 cm/s，完全對應 2C line 245
+
+---
+
+### [FIX-2C-CITE-01] V2C-10 及 Carry_Forward 的 Follower Rejection 近點引用修正
+
+- **問題**：
+  - 2C line 267（V2C-10 正文）：「13.5-24 cm 近點範圍（即 Follower Rejection 近點，V2A-07）」
+  - 2C line 305（Carry_Forward 第 1 項）：「近點 13.5-24 cm 內（即 Follower Rejection 近點，V2A-07）」
+  - V2A-07 = Vcrit ≥1.2 m/s 速度閾值；其中提及「游速慢於 0.5 m/s 則大幅增加 Follower 拒咬機率」，但**不包含 13.5-24 cm 光學近點距離值**
+  - 13.5-24 cm 近點是晶狀體牽引肌光學限制，應源自 2C 自身的晶狀體機制分析（V2C-04）
+
+- **修正**：
+  - 原：`（即 Follower Rejection 近點，V2A-07）`
+  - 改為：`（即 Follower Rejection 近點，V2A-07 / V2C-04）`
+  - V2A-07 = 速度條件觸發（<0.5 m/s 進入慢速分析路徑）；V2C-04 = 晶狀體光學近點物理機制
+
+- **影響**：使 13.5-24 cm 的光學近點有明確的本卷（V2C-04）來源依據，而非純引用 V2A-07 速度閾值
