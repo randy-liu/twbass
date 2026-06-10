@@ -2045,3 +2045,28 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX 編號 | 修改位置 | 修改內容 |
 |---------|---------|---------|
 | FIX-SUPDA-CITE-01 | Inherited_Baseline 最後一條（ART 溫度矩陣引用）| `V3A（VSUP-A04）` → `VSUP-A04`（移除無效的 V3A 混合引用格式；VSUP-A04 為 SUP-A 最終精算矩陣，為 ART 數值的正式來源）|
+
+---
+
+## SUP-D-B 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-D-B_多模態獵物辨識與追擊序列.md`
+**稽核範圍**：Inherited_Baseline 引用正確性；VSUP-DB01~DB12 完整性；Carry_Forward 與 Correction_Instructions CI 套用狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-DB01~DB12 數值內部一致；著水聲壓/追擊時序/Commit 閾值均已量化 |
+| P2 輸出區塊 | ✅ OK | 全部輸出區塊完整；12 Findings / 8 Carry_Forward / 4 CI / 6 Unresolved_Dependencies |
+| P3 引用鏈 | ⚠️ 1 件（待驗證）| V2A-06 內容衝突：SUP-D-A 將 V2A-06 定義為「皮質醇強化迴避學習（C&R 後 >150 ng/mL）」，SUP-D-B 將 V2A-06 定義為「Reaction Strike 12–25 ms 快速視覺通路」；無法在不讀取 2A 原報告的情況下確定哪個 finding 編號正確 |
+| P4 Scope | ✅ OK | 多模態辨識與追擊序列；未跨入食性選擇指數（SUP-D-A）或漂流/策略切換（SUP-D-C）|
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 6 條已標注（Dead Stop 實驗驗證、LTP 衰退常數、化學配體動力學常數、聲壓辨識實驗、行為遙測驗證、Commit 加速度閾值量測）|
+
+**Phase 6 判定**：✅ 不需重跑（1 件 V2A-06/07 引用編號待 2A 審核時確認）
+
+### 待處理項目（需 2A 審核時解決）
+
+| 項目 | 描述 | 動作 |
+|------|------|------|
+| PENDING-SUPDB-CITE-01 | V2A-06 內容衝突：SUP-D-A（cortisol/C&R）vs SUP-D-B（Reaction Strike 12–25 ms）| 讀取 2A 報告確認 V2A-06/V2A-07 實際內容，修正 SUP-D-A 或 SUP-D-B Inherited_Baseline 中錯誤的引用編號 |
