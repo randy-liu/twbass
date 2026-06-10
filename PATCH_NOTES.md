@@ -1915,6 +1915,18 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 
 ---
 
+## 3B + 1B 雙向引用稽核補丁（2026-06-10）
+
+**觸發原因**：3B 稽核發現 V1B-04 的 H₂S 避毒高度在 1B 本文與 3B Inherited_Baseline 均仍顯示舊估算值「60–100 cm」（V1B-05/V1B-10 已在前次 FIX-1B-NEW-01/CITE-01 中更新，但 V1B-04 遺漏）；另 3B section 4 缺少 V2A-09（Zone-B）視距矩陣。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-1B-V04 | 1B V1B-04 finding body text（南部停機效應段落） | "至少 **60–100 cm**（遠離底泥毒性帶）" → "至安全高度 **~100 cm**（精算 99.7–100.0 cm，Stagnant h=100 cm，VSUP-B11；原估 60–100 cm 廢棄）" |
+| FIX-3B-CITE-05 | 3B Inherited_Baseline 第 2 節 V1B-04 描述行 | "引發急性垂直避毒上移 **60–100 cm**" → "引發急性垂直避毒上移至安全高度 **~100 cm**（精算 99.7–100.0 cm，VSUP-B11；原估 60–100 cm 廢棄）" |
+| FIX-3B-CITE-06 | 3B Inherited_Baseline 第 4 節（2A）V2A-08 之後 | 新增 **V2A-09**（Zone-B 北部背風面 SD 45 cm 視距矩陣：晴天高對比 36 cm / 低對比 98 cm；陰天 50/135 cm；暴雨期 <5 cm；紅光穿透 92 cm） |
+
+---
+
 ## 2A 正式 Inherited_Baseline 補接 SUP-D/E 引用（2026-06-10）
 
 **觸發原因**：2A 在早期 overview 段落（lines 15–42）已含 VSUP-DA/DB/DC/E 引用，但正式輸出區塊 `Inherited_Baseline`（line 236+）原本僅列 B0-06/B0-11/B0-07/V1A-06/V1A-10/V1A-11/V1A-12，缺少 SUP-D 和 SUP-E 的正式引用條目，導致正式輸出與實際使用數值不符。
