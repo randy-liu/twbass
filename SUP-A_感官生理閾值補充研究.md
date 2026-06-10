@@ -31,7 +31,7 @@ Research_Type: Supplemental（補充現有報告的量化缺口，不建立新�
 | **CFF 閾值** | 30–60 Hz | V3A-02 / 3A fallback | 通用真骨魚類明視覺常態基準 |
 | **靜息皮質醇基線（自然個體）** | ~6.0 ng/mL | V3A-09 / 3A fallback | 自然界未受應激之健康大嘴黑鱸 |
 | **Alert Reset Time（正常條件）** | 24–72 hr | V3A-10 / V3A-11 | 正常肝臟清除速率下的恢復窗口 |
-| **Alert Reset Time（H₂S 環境）** | 80–120 hr | V3A-10 / V3A-12 | 考慮底泥毒氣壓迫下的生理閉口期 |
+| **Alert Reset Time（H₂S 環境）** | 80–120 hr | V3A-10 / V3A-11 | 考慮底泥毒氣壓迫下的生理閉口期（V3A-11 LVF 延長因子 2.0–2.5× 應用至 15°C 基準 36–42 hr，推算值 72–105 hr ≈ 80–120 hr；V3A-12 為驚嚇素，與 H₂S 生理 ART 無關） |
 | **皮質醇代謝清除率 MCR** | Q₁₀ ≈ 2.0 | V3A fallback | HPI 軸一階動力學清除模型設定 |
 
 ---

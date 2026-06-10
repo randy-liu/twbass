@@ -1945,3 +1945,28 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX 編號 | 修改位置 | 修改內容 |
 |---------|---------|---------|
 | FIX-3A-CITE-07-HDR | 3A Open_Assumptions item 4 標題行 | 舊標題：「**ART 計算使用 Q₁₀ = 2.4（廣泛硬骨魚類外推）與預期 VSUP-A04（Q₁₀ = 2.0）之潛在衝突**」→ 新標題：「**ART 計算 Q₁₀ = 2.0（VSUP-A09 確認）——半衰期 15°C = 6.2 hr 與嚴格推算值（5.1 hr）存在 ~21% 偏差（Q₁₀ ≈ 2.28），但不影響 ART 矩陣有效性**」 |
+
+---
+
+## SUP-A 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-A_感官生理閾值補充研究.md`
+**稽核範圍**：Inherited_Baseline 引用正確性（V3A-XX 逆向查驗）；Carry_Forward 與 Correction_Instructions 結構確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-A01~A09 數值與 3A 引用一致 |
+| P2 輸出區塊 | ✅ OK | Carry_Forward（4 項）/ Correction_Instructions（3A 4 條 + 3B 4 條）/ Unresolved_Dependencies（4 條）完整 |
+| P3 引用鏈 | ⚠️ 1 件 | Inherited_Baseline 第 4 條「Alert Reset Time（H₂S 環境）: 80–120 hr」引用「V3A-10 / V3A-12」——V3A-12 為 Schreckstoff（驚嚇化學警報素），與 H₂S 生理 ART 無關；正確應引 V3A-11（含 LVF 延長因子 2.0–2.5×，應用至 V3A-10 15°C 基準 36–42 hr → 推算值 72–105 hr ≈ 80–120 hr） |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 4 條已正確標注 |
+
+**Phase 6 判定**：✅ 不需重跑（1 件引用 ID 修正）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-SUPA-CITE-01 | Inherited_Baseline 第 4 條來源欄 | `V3A-10 / V3A-12` → `V3A-10 / V3A-11`；備注欄補充說明：「V3A-11 LVF 延長因子 2.0–2.5× 應用至 15°C 基準 36–42 hr，推算值 72–105 hr ≈ 80–120 hr；V3A-12 為驚嚇素，與 H₂S 生理 ART 無關」 |
