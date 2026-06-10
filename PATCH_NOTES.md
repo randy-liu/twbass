@@ -2097,3 +2097,66 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | PENDING-SUPDC-CITE-01 | V2A-03 文件內衝突：Inherited_Baseline（line 19）= 落水聽覺制約記憶 >12 個月；VSUP-DC10（line 81）= 飼料印記消退半衰期 50 天（這兩個內容不能都是 V2A-03）| 讀取 2A，確認 V2A-03/V2A-05 實際內容，修正其中一處錯誤引用 |
 | PENDING-SUPDC-CITE-02 | V2A-06 文件內衝突：Inherited_Baseline（line 21）= Reaction Strike 12–25 ms；VSUP-DC09（line 75）= C&R 後皮質醇 >150 ng/mL（SUP-D-A 亦將 V2A-06 定義為 cortisol/C&R，但 SUP-D-B/D-C 將其定義為 Reaction Strike）| 讀取 2A，確認 V2A-05/V2A-06 實際內容，全批修正 SUP-D-A/B/C 中不一致的引用編號 |
 | PENDING-SUPDC-CITE-03 | V2A-05 跨卷衝突：SUP-D-A（line 32）= 飼料印記 91% 競爭劣勢/50 天半衰期；SUP-D-C（line 20）= C&R 後皮質醇 80–180 ng/mL | 同上，一併在 2A 審核時解決 |
+
+---
+
+## 雙向引用稽核 — SUP-D-A V2A 引用編號修正（FIX-SUPDA-CITE-02~04）
+
+**稽核日期**：2026-06-10
+**依據**：讀取 `2A_覓食偏好、印記與反射咬餌.md` lines 253–268 確認 V2A-01~V2A-12 authoritative content
+
+**PENDING 解決結果**：
+
+| PENDING 項目 | 結論 | 2A 確認值 |
+|-------------|------|----------|
+| PENDING-SUPDC-CITE-01（V2A-03 雙重引用）| ✅ 已解決：V2A-03 同時包含「操作制約半衰期 50 天」AND「聽覺古典制約記憶 >12 個月」，SUP-D-C 兩處引用均正確，無需修正 | V2A-03 包含兩項內容 |
+| PENDING-SUPDB-CITE-01 + PENDING-SUPDC-CITE-02（V2A-06 定義衝突）| ✅ 已解決：V2A-06 = Reaction Strike 12–25 ms（SUP-D-B/C 正確；SUP-D-A 錯誤）| V2A-06 = Reaction Strike 12–25 ms |
+| PENDING-SUPDC-CITE-03（V2A-05 跨卷衝突）| ✅ 已解決：V2A-05 = 皮質醇 C&R 80–180 ng/mL（SUP-D-C/SUP-E 正確；SUP-D-A 錯誤）| V2A-05 = 皮質醇 C&R 80–180 ng/mL |
+
+**V2A-01~V2A-07 authoritative 對照表（來自 2A lines 257–263）**：
+
+| Finding ID | 2A 實際內容 |
+|-----------|------------|
+| V2A-01 | OFT 各獵物能效值（kcal/s）；吳郭魚幼魚最優 |
+| V2A-02 | 大肚魚視角不過 1.5° 閾值 → 神經生物學忽略機制 |
+| V2A-03 | 操作制約半衰期 50 天（3–6 個月消退）+ 聽覺古典制約記憶殘留 >12 個月 |
+| V2A-04 | 路亞落水聲 300–1500 Hz + 古典制約觸發通路 |
+| V2A-05 | C&R 後皮質醇 80–180 ng/mL + Lure-shyness 48–96 hr |
+| V2A-06 | Reaction Strike 12–25 ms 快速視覺通路 |
+| V2A-07 | Vcrit ≥ 1.2 m/s 速度閾值（慢速認知通路 150–350 ms） |
+
+---
+
+### [FIX-SUPDA-CITE-02] SUP-D-A Inherited_Baseline V2A-05 → V2A-03
+
+- **問題**：SUP-D-A line 32 將「飼料印記 91% 競爭劣勢，半衰期 50 天」標注為 V2A-05。實際上 2A 的 V2A-05 = 皮質醇 C&R 80–180 ng/mL；飼料印記/半衰期內容在 V2A-03。
+- **修正**：`**V2A-05**：養殖飼料印記魚放流後初期…` → `**V2A-03**：養殖飼料印記魚放流後初期…`
+- **影響**：引用編號正確；內容描述（91%、50 天）不變
+
+---
+
+### [FIX-SUPDA-CITE-03] SUP-D-A Inherited_Baseline V2A-06 → V2A-05
+
+- **問題**：SUP-D-A line 33 將「皮質醇強化迴避學習，C&R 後 >150 ng/mL」標注為 V2A-06。實際上 2A 的 V2A-06 = Reaction Strike 12–25 ms；皮質醇 C&R 內容在 V2A-05。
+- **修正**：`**V2A-06**：皮質醇強化迴避學習…` → `**V2A-05**：皮質醇強化迴避學習…`
+- **影響**：引用編號正確；內容描述不變
+
+---
+
+### [FIX-SUPDA-CITE-04] SUP-D-A Inherited_Baseline V2A-07 → V2A-06（並移除待驗證注記）
+
+- **問題**：SUP-D-A line 34 將「Reaction Strike 12–25 ms 視頂蓋啟動潛伏期」標注為 V2A-07，並附「⚠️ [待驗證：instruction fallback 為 30–50 ms]」。實際上 2A 的 V2A-06 = Reaction Strike 12–25 ms；V2A-07 = Vcrit ≥ 1.2 m/s 速度閾值。
+- **修正**：`**V2A-07**：Reaction Strike…⚠️ [待驗證…]` → `**V2A-06**：Reaction Strike…（覆蓋 instruction fallback 30–50 ms；2A 原報告確認值）`
+- **影響**：引用編號正確；12–25 ms 數值已由 2A 確認，移除待驗證狀態
+
+---
+
+## 雙向引用稽核 — SUP-D-C VSUP-DC09 V2A-06 → V2A-05（FIX-SUPDC-CITE-01）
+
+**稽核日期**：2026-06-10
+
+### [FIX-SUPDC-CITE-01] SUP-D-C VSUP-DC09 line 75 皮質醇引用編號修正
+
+- **問題**：SUP-D-C line 75 在 VSUP-DC09 正文中寫「受 >150 ng/mL 急性皮質醇應激主導，V2A-06」。實際上 2A 的 V2A-06 = Reaction Strike 12–25 ms；皮質醇 C&R 內容在 V2A-05。
+- **修正**：`V2A-06，為期 48–96 hr` → `V2A-05，為期 48–96 hr`
+- **影響**：引用編號正確；與 Inherited_Baseline（line 21）V2A-06 = Reaction Strike 的正確標注一致，文件內部不再矛盾
