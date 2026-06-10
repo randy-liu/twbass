@@ -1461,6 +1461,7 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX-4B-CITE-01 | Inherited_Baseline B0-22 後備注項 | 刪除「[備注] VSUP-B08：H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m」（此值在 SUP-B 全文中不存在；VSUP-B08 實為 Fe²⁺ 垂直濃度剖面）；改為正確的 VSUP-B11 H₂S 安全距離數值（Stagnant ~100 cm；Mixed 低端 186.8 cm） |
 | FIX-4B-CITE-02 | Inherited_Baseline V1B-05/10/11 行（原 FIX-4B-07 更新） | "[VSUP-B06 覆蓋 V1B-05 舊下限 60 cm，舊值廢棄]" → "[VSUP-B11 確認；舊值 ≥86 cm 廢棄]"；H₂S 值 "≥86 cm（上限 100 cm）" → "~100 cm（靜水 Stagnant 精算 99.7–100.0 cm）" |
 | FIX-4B-CITE-03 | V4B-09 有效防禦半徑注釋 | "V1B-05 Zone-C H₂S 化學安全高度 ≥86 cm" → "V1B-10 Zone-C H₂S 化學安全高度 **~100 cm**（VSUP-B11 精算；舊值 V1B-05 ≥86 cm 已廢棄）" |
+| FIX-4B-CITE-04 | Inherited_Baseline V1B-04 描述行（補完，2026-06-10） | "黑鱸垂直向上避毒位移 60–100 cm" → "黑鱸垂直向上避毒至安全高度 **~100 cm**（精算 99.7–100.0 cm，VSUP-B11；原估 60–100 cm 廢棄）"（V1B-04 在 1B 本文已同步更新，3B 已修正，4B 本次補完） |
 
 ### 虛假值確認
 
