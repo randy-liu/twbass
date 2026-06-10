@@ -1471,6 +1471,39 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 
 ---
 
+## 1B 卷雙向引用稽核（2026-06-10）
+
+**目標檔案**：`1B_六大水域棲位模型與風生流.md`
+**稽核範圍**：SUP-B CI-01~06 套用確認（V1B-CF-04 Fe²⁺ 修正 + V1B-10 H₂S 精算）；Inherited_Baseline B0-XX 標準化確認；Carry_Forward 數值一致性
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ⚠️ 2 件 | (1) V1B-10 body text「60 至 100 cm」與 VSUP-B11 精算值 ~100 cm 不一致（V1B-CF-03 已正確更新，V1B-10 本文未同步）；(2) V1B-CF-04 Zone-C H₂S「60–100 cm」與底部注釋「99.7–100.0 cm」自相矛盾 |
+| P2 輸出區塊 | ✅ OK | Inherited_Baseline / Findings / Carry_Forward / Unresolved 完整 |
+| P3 引用鏈 | ✅ OK | Inherited_Baseline 全部使用標準 B0-XX 格式（無 B0-CF-XX 非標準 ID）；V1B-CF-04 已含「[修正，VSUP-B09]」標注 |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 3 條已標注 |
+
+**SUP-B CI 套用狀態**：
+- V1B-CF-04 Fe²⁺ 北部（VSUP-B09）：✅ 已套用（Zone-B 25.7–32.7 cm；Zone-A 56.5–67.2 cm）
+- V1B-CF-03 H₂S 停機情境（VSUP-B11）：✅ 已套用（Stagnant 99.7–100.0 cm；h=150 cm→149.0 cm）
+- V1B-CF-04 Zone-C H₂S（VSUP-B11）：⚠️ 未完全套用（注釋有值但主文未更新）
+- V1B-10 body H₂S 精算（VSUP-B11）：⚠️ 未套用（仍顯示 60–100 cm 原估）
+- V1B-11 Fe²⁺ 閾值（VSUP-B09）：✅ 已套用（0.10 mg/L 行為避忌；標注「[修正，VSUP-B09]」）
+
+**Phase 6 判定**：✅ 不需重跑
+
+### Claude 後處理修改清單（雙向引用稽核，2026-06-10）
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-1B-CITE-01 | V1B-10 安全距離結論句 | "至少 **60 至 100 cm** 的最小安全高度（本卷 V1B-10 擴散模型計算值）" → "至少 **~100 cm** 的最小安全高度（V1B-10 初估 60–100 cm；VSUP-B11 採嚴格閾值 0.002 mg/L 精算，Stagnant h=100 cm 確認 **99.7–100.0 cm**）" |
+| FIX-1B-CITE-02 | V1B-CF-04 Zone-C H₂S 主文 | "南部（Zone-C）底泥 H₂S 安全高度 **60–100 cm**" → "南部（Zone-C）底泥 H₂S 安全高度 **~100 cm**（精算 99.7–100.0 cm，VSUP-B11；原估 60–100 cm 廢棄）" |
+
+---
+
 ## 0A 卷雙向引用稽核與後處理（2026-06-05）
 
 **目標檔案**：`0A_台灣四季氣候 forcing 與區域差異.md`
