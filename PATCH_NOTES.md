@@ -2070,3 +2070,30 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | 項目 | 描述 | 動作 |
 |------|------|------|
 | PENDING-SUPDB-CITE-01 | V2A-06 內容衝突：SUP-D-A（cortisol/C&R）vs SUP-D-B（Reaction Strike 12–25 ms）| 讀取 2A 報告確認 V2A-06/V2A-07 實際內容，修正 SUP-D-A 或 SUP-D-B Inherited_Baseline 中錯誤的引用編號 |
+
+---
+
+## SUP-D-C 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-D-C_水中漂流偵測與策略切換.md`
+**稽核範圍**：Inherited_Baseline 引用正確性；VSUP-DC01~DC14 完整性；Carry_Forward 與 Correction_Instructions CI 套用狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-DC01~DC14 數值內部一致（跨 SUP-D-A/B 繼承值正確）|
+| P2 輸出區塊 | ✅ OK | 全部輸出區塊完整；14 Findings / 5 Carry_Forward / 3 CI / 5 Unresolved_Dependencies |
+| P3 引用鏈 | ⚠️ 3 件（待驗證）| V2A finding 編號系統性衝突：V2A-03 / V2A-05 / V2A-06 在 SUP-D-C 內及跨 SUP-D-A/B 各卷定義不一致（詳見待處理項目）|
+| P4 Scope | ✅ OK | 漂流偵測（Kármán、微振動）、搜索映像 LTP、策略切換神經生理；Topwater 入水衝擊已歸屬 SUP-D-B |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 5 條已標注（生物微振動電生理缺口、Dead Stop 交互作用矩陣、遙測衰減曲線、飼料印記分子標記、LTP 電生理時間窗口）|
+
+**Phase 6 判定**：✅ 不需重跑（V2A-XX 引用編號待 2A 審核時全批解決）
+
+### 待處理項目（需 2A 審核時解決）
+
+| 項目 | 描述 | 動作 |
+|------|------|------|
+| PENDING-SUPDC-CITE-01 | V2A-03 文件內衝突：Inherited_Baseline（line 19）= 落水聽覺制約記憶 >12 個月；VSUP-DC10（line 81）= 飼料印記消退半衰期 50 天（這兩個內容不能都是 V2A-03）| 讀取 2A，確認 V2A-03/V2A-05 實際內容，修正其中一處錯誤引用 |
+| PENDING-SUPDC-CITE-02 | V2A-06 文件內衝突：Inherited_Baseline（line 21）= Reaction Strike 12–25 ms；VSUP-DC09（line 75）= C&R 後皮質醇 >150 ng/mL（SUP-D-A 亦將 V2A-06 定義為 cortisol/C&R，但 SUP-D-B/D-C 將其定義為 Reaction Strike）| 讀取 2A，確認 V2A-05/V2A-06 實際內容，全批修正 SUP-D-A/B/C 中不一致的引用編號 |
+| PENDING-SUPDC-CITE-03 | V2A-05 跨卷衝突：SUP-D-A（line 32）= 飼料印記 91% 競爭劣勢/50 天半衰期；SUP-D-C（line 20）= C&R 後皮質醇 80–180 ng/mL | 同上，一併在 2A 審核時解決 |
