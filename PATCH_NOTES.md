@@ -1504,6 +1504,17 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 
 ---
 
+## SUP-C Carry_Forward 補接（3A + 3B，2026-06-10）
+
+**觸發原因**：雙向引用稽核發現 SUP-C Carry_Forward_To_3A_3B 的 4 組量化參數（低氧迴避閾值、冒險覓食觸發條件、靜止容忍特徵、皮質醇抑制閾值）在 3A 和 3B 的 Inherited_Baseline 中均未出現任何 VSUP-C 引用，屬於遺漏接收。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-3A-SUPC | 3A Inherited_Baseline 末端 | 新增 **Section 6（毒區迴避與冒險覓食決策，引用自卷 SUP-C）**：VSUP-C03（低氧閾值 2.2-2.5/1.5-1.8 mg/L, H₂S 0.002 mg/L）、VSUP-C05（獵物密度觸發 ≥3.5×, 飢餓後 2.0-2.5×）、VSUP-C10（皮質醇 >150 ng/mL 阻斷; LVF 20-40 ng/mL → 觸發門檻升 ≥6.0×）|
+| FIX-3B-SUPC | 3B Inherited_Baseline 末端 | 新增 **Section 9（毒區迴避與冒險覓食決策，引用自卷 SUP-C）**：VSUP-C01/03（低氧迴避）+ VSUP-C04/05/07（Foraging Forays 全套觸發條件）+ VSUP-C02/11（靜止容忍）+ VSUP-C10（皮質醇抑制）|
+
+---
+
 ## 0A 卷雙向引用稽核與後處理（2026-06-05）
 
 **目標檔案**：`0A_台灣四季氣候 forcing 與區域差異.md`
