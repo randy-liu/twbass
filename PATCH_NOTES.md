@@ -1844,3 +1844,6 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 |---------|---------|---------|
 | FIX-3A-SUPD | 3A Inherited_Baseline section 6 後 | 新增 **Section 7（多模態感官辨識與追擊序列，引用自卷 SUP-D-A/B/C）**：VSUP-DA11（HVF 65-80% / LVF 15-30% Reaction Strike 觸發率）、VSUP-DA10（振頻咬餌率矩陣）、VSUP-DB01（著水衝擊物理特徵）、VSUP-DB06（印記魚行為異化）、VSUP-DB10（Commit 閾值 ≥2.5 m/s²）、VSUP-DB11（Dead Stop +30-50% HVF / -40-60% LVF）、VSUP-DC14/DC09（C&R 衰退曲線）、VSUP-DC10（印記消退 50 天）|
 | FIX-3B-SUPD | 3B Inherited_Baseline section 9 後 | 新增 **Section 10（多模態感官辨識與追擊序列，引用自卷 SUP-D-A/B/C）**：同上 + VSUP-DB09（Evaluate 拒絕權重）+ VSUP-DC02/04（Dead Drift Kármán 尾流）+ VSUP-DC03（各水體 SNR 有效距離）+ VSUP-DC08/11-13（Match the Hatch 策略切換）|
+| FIX-3B-H2S-01 | 3B V3B-03 戰術規則 | H₂S 安全高度由舊值 "60–100 cm" 更新為 **"≥100 cm（精算 99.7–100.0 cm，VSUP-B11）"**；機制來源由 V1B-05 更新為 V1B-10/VSUP-B11 |
+| FIX-3B-H2S-02 | 3B Inherited_Baseline section 2 V1B-05/V1B-10 行 | H₂S 安全高度更新為 **~100 cm（VSUP-B11）**；Fe²⁺ 安全高度更新為 VSUP-B09 三區精算值（Zone-B 25.7–32.7 cm；Zone-A 56.5–67.2 cm）；廢棄舊一行式 "60-100 cm / 30-50 cm" 格式 |
+| FIX-3B-H2S-03 | 3B Carry_Forward_To_SUPA V3B-03 驗證項目 | 預期避毒高度由舊值 "60–100 cm" 更新為 **"≥100 cm（VSUP-B11 精算；原估 60–100 cm 廢棄）"** |
