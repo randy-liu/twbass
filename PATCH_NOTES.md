@@ -2020,3 +2020,28 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX 編號 | 修改位置 | 修改內容 |
 |---------|---------|---------|
 | FIX-SUPC-CITE-01 | Inherited_Baseline 第 2 條、Correction_Instructions CI-1（×2 處）| `4A-10` → `V4A-10`（Finding ID 補 V 前綴，標準化為 V{卷號}-NN 格式；具體位置：line 23「V4A-07 / 4A-10」→「V4A-07 / V4A-10」；line 118「依據更嚴格的 4A-10 行為迴避閾值」→「依據更嚴格的 V4A-10 行為迴避閾值」）|
+
+---
+
+## SUP-D-A 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-D-A_食性選擇性與感官匹配優先序.md`
+**稽核範圍**：Inherited_Baseline 引用正確性；VSUP-DA01~DA11 完整性；Carry_Forward 與 Correction_Instructions CI 套用狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-DA01~DA11 數值內部一致；V2A/V2B/V3A 繼承值正確 |
+| P2 輸出區塊 | ⚠️ 1 件 | Inherited_Baseline 最後一條引用格式「V3A（VSUP-A04）」非標準 Finding ID，正確源頭為 VSUP-A04（SUP-A ART Q₁₀=2.0 溫度矩陣精算值） |
+| P3 引用鏈 | ✅ OK | Correction_Instructions 2 條（CI-1→2A V2A-12、CI-2→3A V3A-09）格式正確；Carry_Forward 4 項（α矩陣、NTU閾值、獵物振頻特徵、LVF/HVF 觸發率）完整 |
+| P4 Scope | ✅ OK | 食性選擇性指數與感官匹配矩陣，未跨入多模態入水辨識（SUP-D-B）或漂流偵測/策略切換（SUP-D-C） |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 7 條已標注（台灣 LVF 現場胃內容物、M. salmoides 直接 α 實測、NTU 現場驗證、化學感受性、藻毒素神經毒性、Bifurcation point、CFF 速度限制移交 2C）|
+
+**Phase 6 判定**：✅ 不需重跑（1 件引用格式修正）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-SUPDA-CITE-01 | Inherited_Baseline 最後一條（ART 溫度矩陣引用）| `V3A（VSUP-A04）` → `VSUP-A04`（移除無效的 V3A 混合引用格式；VSUP-A04 為 SUP-A 最終精算矩陣，為 ART 數值的正式來源）|
