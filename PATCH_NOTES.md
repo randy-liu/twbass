@@ -1859,3 +1859,13 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX-2A-SUPD | 2A Inherited_Baseline 末端 | 新增 **Section 3（食性選擇性與感官辨識補充，引用自卷 SUP-D-A/B/C）**：VSUP-DA01~04（Chesson's α 矩陣）、VSUP-DA08（NTU 視覺失效閾值 35/45/60 NTU）、VSUP-DB08（最小啟動速度 1.5–3.0 cm/s）、VSUP-DC02/04（Dead Drift 攻擊率降 60–75%）|
 | FIX-2B-SUPD | 2B 九、Inherited_Baseline 末端 | 新增 **補充小節（獵物生物機械振動特徵，引用自卷 SUP-D-A/B）**：VSUP-DA09（各獵物游泳/逃逸頻率特徵）、VSUP-DB01/02（Topwater 感官接力時序 <100 ms 聲學 → 100 ms–3 s 側線）|
 | FIX-SUPE-B0CF | SUP-E Inherited_Baseline 第 41 行 | `V1A-06 / B0-CF-04` 中的 `B0-CF-04`（暴雨濁度恢復時間常數，與視距 28 cm 無關）移除 → 改為單純 `V1A-06` |
+
+---
+
+## SUP-D Carry_Forward 補接（2C，2026-06-10）
+
+**觸發原因**：SUP-D-B Carry_Forward Section 2 明確指向 2C 作為下游（「下游引用卷：`2A` / `2C`」），但 2C 的 Inherited_Baseline 完全無 VSUP-D 引用。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-2C-SUPD | 2C Inherited_Baseline 第 17 條（V2B-01）之後 | 新增第 18 條：**VSUP-DB08**（明視覺條件下啟動 Orientation 及接近行為的最小移動速度邊界 **≥ 1.5 至 3.0 cm/s**；低於此速度的假餌漂移不觸發主動接近）|
