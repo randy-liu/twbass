@@ -1995,3 +1995,28 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX 編號 | 修改位置 | 修改內容 |
 |---------|---------|---------|
 | FIX-SUPB-CITE-01 | Inherited_Baseline、正文（×5 處）| `4A-10` → `V4A-10`（Finding ID 補 V 前綴，標準化為 V{卷號}-NN 格式；影響 metadata 行、Inherited_Baseline 第 3 條兩處、VSUP-B09 段、Correction_Instructions 第 3 條）|
+
+---
+
+## SUP-C 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md`
+**稽核範圍**：Inherited_Baseline 引用正確性；VSUP-C01~C12 完整性；Carry_Forward 與 Correction_Instructions CI 套用狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-C01~C12 數值內部一致；B0-10/B0-11 繼承值正確 |
+| P2 輸出區塊 | ⚠️ 1 件 | Inherited_Baseline 第 2 條及 Correction_Instructions CI-1 共 2 處使用非標準 ID「4A-10」（應為 V4A-10）；metadata Upstream_Required 行及 CI-5 已正確使用 V4A-10 |
+| P3 引用鏈 | ✅ OK | Correction_Instructions 5 條（CI-1 1B V1B-10、CI-2 3A V3A-12、CI-3 3A V3A-09、CI-4 SUP-B VSUP-B11、CI-5 4A V4A-10）均已套用（per FIX-SUPC-01~04 補丁）；Carry_Forward 4 項下游接收已確認 |
+| P4 Scope | ✅ OK | 毒理機制嚴格限於迴避行為與 OFT 能量決策；機制/神經生理詳述已歸屬 SUP-D；繁殖議題排除 |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 3 條已標注（H₂S 亞致死慢性 ART 量化缺口、雙重壓力交互作用缺口、Zone-B 精算缺口）|
+
+**Phase 6 判定**：✅ 不需重跑（1 件格式修正）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-SUPC-CITE-01 | Inherited_Baseline 第 2 條、Correction_Instructions CI-1（×2 處）| `4A-10` → `V4A-10`（Finding ID 補 V 前綴，標準化為 V{卷號}-NN 格式；具體位置：line 23「V4A-07 / 4A-10」→「V4A-07 / V4A-10」；line 118「依據更嚴格的 4A-10 行為迴避閾值」→「依據更嚴格的 V4A-10 行為迴避閾值」）|
