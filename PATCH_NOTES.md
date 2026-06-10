@@ -880,8 +880,52 @@ Zone-A 採 SD=35 cm（κ=4.86）後，水下 0.5m 月光提升至 0.018 lux，Me
 - 口觸窗 80–120 ms；吐餌 Shore A > 15 / Shore 00 > 55；吞食 < Shore 00-15
 - 新魚 10–15 ng/mL，FR < 15%；舊魚 35–45 ng/mL，FR 75–90%
 - 皮質醇峰值 110–155 ng/mL；輕度 ART：15–25 min（30°C）/ 60–90 min（15°C）
-- 重度 ART：6–8 hr（30°C）/ 24–30 hr（15°C）；慢性舊魚延長 2.0–2.5 倍
+- ~~重度 ART：6–8 hr（30°C）/ 24–30 hr（15°C）~~ → **已修正（見下方雙向引用稽核）**
 - 連投間隔：≥ 3–5 min（30°C）/ ≥ 10–15 min（15°C）
+
+---
+
+## 3A 卷雙向引用稽核（2026-06-09）
+
+**目標檔案**：`3A_高壓舊魚心理機制與誘咬本質.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX + 1A V1A-XX + 2A V2A-XX + 2B V2B-XX）、Findings V3A-01~13、Carry_Forward_To_3B；SUP-A CI 套用確認；SUP-C Carry_Forward_To_3A 確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ⚠️ 3 件 | B0-CF-02/03 非標準 ID；4-tier ART tier 1（6.0 ng/mL 基線）誤標 12.0 hr → 應為 6.3 hr；"全場驚嚇" 6-8 hr/24-30 hr 使用 HVF 值而非 LVF 值 |
+| P2 輸出區塊 | ✅ OK | Findings 13 條，Carry_Forward/Open_Assumptions 均完整 |
+| P3 引用鏈 | ⚠️ 3 件 | B0-CF-02 × 2 處（Inherited + body text）；B0-CF-03 × 1 處；Open_Assumptions item 4 引用 Q₁₀ = 2.4，與正文 Q₁₀ = 2.0 矛盾 |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | SUP-A VSUP-A09 已閉合 Open_Assumption 4；VSUP-C 確認 V3A-12 值正確 |
+
+**Phase 6 判定**：✅ 不需重跑（SUP-A/C 均已確認 3A ART 數值正確性）
+
+### Claude 後處理修改清單（雙向引用稽核，2026-06-09）
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-3A-CITE-01 | Inherited_Baseline item B0-CF-02 | `B0-CF-02` → `B0-07`（冷氣團降溫熱惰性滯後，Zone-B 18-24 hr / Zone-A 17-23 hr / Zone-C 6-12 hr）[來源：0D-Baseline_Facts] |
+| FIX-3A-CITE-02 | Inherited_Baseline item B0-CF-03 | `B0-CF-03` → `B0-18`（冷氣團後水溫回升物理 Lag，Zone-C 1.5-2.5 天 / Zone-B 3.0-4.0 天 / Zone-A 5.0-7.0 天）[來源：0D-Baseline_Facts] |
+| FIX-3A-CITE-03 | Q3.4 body text | `B0-CF-02` → `B0-07` |
+| FIX-3A-CITE-04 | Q3.1.3 四層級 ART tier 1（6.0 ng/mL 自然基準）| 30°C ART **12.0 hr** → **6.3 hr（正常範圍 6-8 hr）**；15°C ART → **21.7 hr（生理實質外推 36-42 hr）**（依據：VSUP-A07；此為 HVF 自然基準值，非 LVF 管理池老魚值） |
+| FIX-3A-CITE-05 | Q3.2 "全場驚嚇" 正文 | "6–8 hr（夏季）或 24–30 hr（冬季）" → **"12.0 hr（夏季，30°C）或 36-42 hr（冬季，15°C）"**（LVF 高壓老魚值，依據：VSUP-A09, V3A-12） |
+| FIX-3A-CITE-06 | Carry_Forward 4.1 急性應激閉口期 | "6–8 hr（30°C）；24–30 hr（15°C）" → **"12.0 hr（30°C）；36-42 hr（15°C）"**（引用 V3A-10, V3A-11；VSUP-A09 確認） |
+| FIX-3A-CITE-07 | Open_Assumptions item 4 | "Q₁₀ = 2.4（Barton 2002）" → "Q₁₀ = 2.0（已由 VSUP-A09 確認）"；說明 ART 矩陣不確定性已解決，半衰期 6.2 hr 對應 Q₁₀ ≈ 2.28 的輕微偏差不影響 ART 矩陣 |
+| FIX-3A-CITE-08 | Inherited_Baseline 新增第 5 節 | 補入 SUP-A 補充數值：VSUP-A06（LVF 慢性皮質醇 35-45 ng/mL 確認）、VSUP-A07（4-tier ART 動力學）、VSUP-A08（H₂S 行為覆蓋窗口 80-120 min）、VSUP-A09（ART 溫度矩陣對齊確認） |
+
+### 修正後正確的 ART 值
+
+| 魚隻類別 | 30°C ART | 15°C ART | 來源 |
+|---------|---------|---------|------|
+| 自然基準（HVF, 6.0 ng/mL 基線） | 6.3 hr（6-8 hr） | 21.7 hr → 36-42 hr | VSUP-A07 |
+| LVF 輕度慢性（15 ng/mL） | 13.6 hr | 46.0 hr | VSUP-A07 |
+| LVF 中度慢性（30 ng/mL，管理池典型） | 13.8 hr | 46.6 hr | VSUP-A07 |
+| **VSUP-A09 標準 ART（LVF 模型）** | **12.0 hr** | **36-42 hr** | VSUP-A09, V3A-10 |
+| 全場警報（LVF 舊魚，V3A-12） | **12.0 hr** | **36-42 hr** | V3A-12, VSUP-A09 |
+
+**注意**：Carry_Forward 至 3B 的閉口期數值應使用 LVF 標準 ART（12.0 hr / 36-42 hr）。
 
 ---
 
@@ -947,6 +991,36 @@ V1A-04（H₂S 毒性）與 V1A-08（鰾壓迫）可說明上浮行為，但不�
 
 ---
 
+## 3B 卷雙向引用稽核（2026-06-09）
+
+**目標檔案**：`3B_極端情境高壓策略推演.md`
+**稽核範圍**：Inherited_Baseline B0-XX / V1A-XX / V1B-XX / V2A-XX / V2B-XX / V3A-XX 引用正確性；SUP-A/B Carry_Forward_To_3B 接收確認；V3B-27 VSUP-B11 衝突狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | V3A-10/V3A-11/V3B-12 ART 數值（36-42 hr at 15°C）與 VSUP-A09 一致 |
+| P2 輸出區塊 | ⚠️ 1 件 | Inherited_Baseline 缺 SUP-A/B 兩節（V3B-13 引用 VSUP-A07、V3B-27 引用 VSUP-B11，但無對應 Inherited_Baseline 條目） |
+| P3 引用鏈 | ⚠️ 7 件 | 5 個 "B0-XX/B0-CF-YY" 雙格式 ID（Inherited_Baseline）；V3B-09 body text B0-CF-02；V3B-24/25 body text B0-CF-11（×2）|
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | V3B-27 vs VSUP-B11 矛盾已解決（2026-06-04，memory 記錄確認） |
+
+**V3B-27 衝突狀態**：✅ 已解決（VSUP-B11 方向確認：水車開啟後 H₂S 危險帶向上擴展，V3B-27「120-160 cm 瞬態」方向正確）
+
+**Phase 6 判定**：✅ 不需重跑
+
+### Claude 後處理修改清單（雙向引用稽核，2026-06-09）
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-3B-CITE-01 | Inherited_Baseline 第 1 節（5 處）| "B0-04/B0-CF-08"→"B0-04"；"B0-07/B0-CF-02"→"B0-07"；"B0-12/B0-CF-05"→"B0-12"；"B0-16/B0-CF-10"→"B0-16"；"B0-17/B0-CF-11"→"B0-17" |
+| FIX-3B-CITE-02 | V3B-09 機制來源 | `B0-CF-02` → `B0-07`（冷氣團底泥熱惰性保溫滯後） |
+| FIX-3B-CITE-03 | V3B-24 / V3B-25 機制來源（×2） | `B0-CF-11` → `B0-17`（暴雨能見度恢復物理 Lag） |
+| FIX-3B-CITE-04 | Inherited_Baseline 新增第 7/8 節 | 補入 SUP-A（VSUP-A06/07/09）與 SUP-B（VSUP-B11）Inherited_Baseline 條目，與 V3B-13/V3B-27 body text 引用對齊 |
+
+---
+
 ## 4A 卷完整稽核與後處理（2026-06-03）
 
 **目標檔案**：`4A：繁衍地球化學與水文干擾.md`
@@ -1002,6 +1076,41 @@ Q1–Q4 所有研究方向均有段落覆蓋；Q4-4 為子問題缺失（非整�
 - V4A-07：H₂S ≤0.01 mg/L → 孵化率 85–95%；0.05 mg/L → 45–55%；0.10 mg/L → 15–25%；≥0.50 mg/L → <2%
 - V4A-11：野生埤塘硬底質 2.0–4.5 m²/100m²；水庫 0.5–2.0 m²/100m²；管理池 1.0–3.0 m²/100m²；vs 北美 >40 m²/100m²
 - V4A-14：dH/dt <4 cm/day → 棄巢率 <10%；≥15 cm/day → 棄巢率 80–95%
+
+---
+
+## 4A 卷雙向引用稽核（2026-06-10）
+
+**目標檔案**：`4A_繁衍地球化學與水文干擾.md`
+**稽核範圍**：Inherited_Baseline B0-CF-XX 清理；SUP-B VSUP-B08 實際內容比對；V4A-05 B0-CF-01 修正
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ⚠️ 1 件 | Inherited_Baseline item 6「VSUP-B08：底棲 H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m」與 SUP-B 實際 VSUP-B08 內容完全不符（VSUP-B08 為 Fe²⁺ 濃度垂直剖面，無此 r 值） |
+| P2 輸出區塊 | ✅ OK | 區塊完整 |
+| P3 引用鏈 | ⚠️ 3 件 | Item 5 標頭 B0-CF-01/02/03 非標準 ID；V4A-05 body text B0-CF-01；B0-07 引用缺失（熱慣性阻尼 18-24 hr 未標引用） |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | |
+
+**SUP-B CI 驗證**：SUP-B Correction_Instructions 針對 1B（Fe²⁺/H₂S 安全距離）與 3A（Schreckstoff 死區），無直接 4A-specific CI。VSUP-B08/09/11 值已確認（Fe²⁺ 梯度 + Fe²⁺ 成魚安全距離 + H₂S 成魚安全距離）。
+
+**Phase 6 判定**：✅ 不需重跑
+
+### Claude 後處理修改清單（雙向引用稽核，2026-06-10）
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-4A-CITE-01 | Inherited_Baseline item 5 標頭 | "B0-CF-01, B0-CF-02, B0-CF-03, B0-18" → "B0-21, B0-07, B0-18"（B0-CF-01=B0-21 春季 12-18 天時序差；B0-CF-02=B0-07 熱慣性；B0-CF-03=B0-18 回升 Lag；消除重複的 B0-18） |
+| FIX-4A-CITE-02 | V4A-05 body text | "引用 B0-CF-01" → "引用 B0-21"；補入 "B0-07" 引用（熱慣性保溫阻尼 18-24 hr） |
+| FIX-4A-CITE-03 | Inherited_Baseline item 6 VSUP-B08 | 刪除虛假的「H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m」（此值不存在於 SUP-B 任何 Finding）；改為正確的 VSUP-B08（Fe²⁺ 垂直濃度剖面）+ VSUP-B09（Fe²⁺ 成魚安全距離）+ VSUP-B11（H₂S 成魚安全距離）三條正確內容 |
+
+### 虛假值確認
+
+| 虛假引用 | 問題說明 |
+|---------|---------|
+| "VSUP-B08：H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m" | VSUP-B08 實為 Fe²⁺ 濃度垂直剖面（Fick 第一定律解算），無橫向 H₂S 半徑概念；"r=1.6-2.3 m" 在 SUP-B 全文中不存在 |
 
 ---
 
@@ -1323,3 +1432,360 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 
 - V3B-02 Scope for Activity `<31 mg O₂/kg/hr`（降幅 >85%）維持不變（依 Díaz et al. 2007 好氧範圍上限計算，結論一致）
 - V3B-02 操作規則（<15 cm/s、停頓 3.0–5.0 s）維持不變
+
+---
+
+## 4B 卷雙向引用稽核（2026-06-10）
+
+**目標檔案**：`4B_棲位競爭、容載量與護巢防禦.md`
+**稽核範圍**：Inherited_Baseline V1B-05/10/11 H₂S 引用正確性；VSUP-B08 虛假值清查；跨卷數值一致性
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ⚠️ 2 件 | (1) Inherited_Baseline V1B-05 行「VSUP-B06 覆蓋」標注錯誤——v2 VSUP-B06 實為 Schreckstoff C&R 等待時間，非 H₂S 安全距離；(2) H₂S 值「≥86 cm（上限 100 cm）」與 VSUP-B11 精算值 ~100 cm 不一致 |
+| P2 輸出區塊 | ✅ OK | 無缺損 |
+| P3 引用鏈 | ⚠️ 2 件 | (1) "[VSUP-B06 覆蓋...]" 應改為 "[VSUP-B11 確認...]"；(2) Inherited_Baseline VSUP-B08 備注項「H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m」在 SUP-B 全文中不存在——VSUP-B08 實為 Fe²⁺ 垂直濃度剖面（與 4A 相同的虛假值） |
+| P4 Scope | ✅ OK | 無越界 |
+| P5 研究缺口 | ✅ OK | |
+
+**B0-02 Cross_Volume_Boundaries 確認**：Zone-A 野生埤塘「春雨低溫陰雨熱遲滯（B0-02）」引用正確——B0-02 含三區春季熱遲滯量化值（Zone-A -1.2 to -2.2 °C/週），citation 無誤。
+
+**Phase 6 判定**：✅ 不需重跑
+
+### Claude 後處理修改清單（雙向引用稽核，2026-06-10）
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-4B-CITE-01 | Inherited_Baseline B0-22 後備注項 | 刪除「[備注] VSUP-B08：H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m」（此值在 SUP-B 全文中不存在；VSUP-B08 實為 Fe²⁺ 垂直濃度剖面）；改為正確的 VSUP-B11 H₂S 安全距離數值（Stagnant ~100 cm；Mixed 低端 186.8 cm） |
+| FIX-4B-CITE-02 | Inherited_Baseline V1B-05/10/11 行（原 FIX-4B-07 更新） | "[VSUP-B06 覆蓋 V1B-05 舊下限 60 cm，舊值廢棄]" → "[VSUP-B11 確認；舊值 ≥86 cm 廢棄]"；H₂S 值 "≥86 cm（上限 100 cm）" → "~100 cm（靜水 Stagnant 精算 99.7–100.0 cm）" |
+| FIX-4B-CITE-03 | V4B-09 有效防禦半徑注釋 | "V1B-05 Zone-C H₂S 化學安全高度 ≥86 cm" → "V1B-10 Zone-C H₂S 化學安全高度 **~100 cm**（VSUP-B11 精算；舊值 V1B-05 ≥86 cm 已廢棄）" |
+
+### 虛假值確認
+
+| 虛假引用 | 問題說明 |
+|---------|---------|
+| "VSUP-B08：H₂S 廢棄巢穴死亡區半徑 r=1.6-2.3 m"（4B 備注項） | 與 4A 同一虛假值：VSUP-B08 實為 Fe²⁺ 濃度垂直剖面（Fick 第一定律解算）；r=1.6-2.3 m 在 SUP-B 全文任何 Finding 中均不存在 |
+| VSUP-B06 作為 H₂S 安全距離來源 | v2 VSUP-B06 = Schreckstoff C&R 等待時間（10-15 min 北部 / 30-45 min 南部）；H₂S 安全距離精算在 VSUP-B11 |
+
+---
+
+## 0A 卷雙向引用稽核與後處理（2026-06-05）
+
+**目標檔案**：`0A_台灣四季氣候 forcing 與區域差異.md`
+**執行流程**：twbass-audit 5-Phase（雙向引用稽核輪）→ Claude 後處理
+**最終 Findings 數**：V0A-01–11（不變）　**修正項目**：2 條
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化一致性 | ✅ OK | 所有 Core_Parameters 均有三區量化值，無模糊描述 |
+| P2 輸出區塊 | ⚠️ 1 件 | `Unresolved_Dependencies` 區塊缺失（instruction §八要求）；內容已隱含於 Open_Assumptions |
+| P3 引用鏈 | ✅ OK | CF0A-01~08 全部引用來源 V0A-XX 存在 |
+| P4 Scope | ✅ OK | 無越界（0B/0C 跨卷指向均為指引說明，非核心發現） |
+| P5 研究缺口 | ⚠️ 1 件 | Zone-B 春季遲滯率（-0.6 to -1.1 °C/週）存在主文但未收入任何 Finding；CF0A-02 錯誤標注同一數值適用 Zone-A 及 Zone-B |
+
+**Phase 6 判定**：✅ 不需重跑（2 分）。Claude 後處理即可。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改內容 |
+|---------|---------|
+| FIX-0A-01 | Open_Assumptions_0A 末段後補充獨立 `Unresolved_Dependencies` 區塊（缺口 1：τ_crit 實測值，影響 0C/0D；缺口 2：Zone-C 輻射冷卻極端低溫頻率分布，影響 0C/0D）|
+| FIX-0A-02 | V0A-03 補入三區分列遲滯率：Zone-A **-1.2 to -2.2 °C/週**；Zone-B **-0.6 to -1.1 °C/週**；Zone-C **< -0.1 °C/週**（可忽略）；CF0A-02 同步更新為三區分列格式，移除「適用於 Zone-A 及 Zone-B 同一數值」之錯誤標注 |
+
+### 不受影響的確認正確數值
+
+- V0A-04：Zone-B 春季 22°C 跨越提前 12–18 天
+- V0A-06：颱風直接風應力 0.915–2.342 Pa；間接 0.146–0.586 Pa
+- V0A-08：冷氣團降幅 Zone-A 4.8–6.2°C / Zone-B 5.2–6.8°C / Zone-C 2.2–4.2°C
+- V0A-09：回溫天數 Zone-A 3.8 天 / Zone-B 3.0 天 / Zone-C 2.2 天
+- V0A-10：Zone-C 旱季蒸發赤字 -415.3 mm
+- V0A-05：梅雨水量替換率 7.5–33.2%/day
+
+---
+
+## 0B 卷雙向引用稽核與後處理（2026-06-09）
+
+**目標檔案**：`0B_南北成土母質與地球化學基底.md`
+**執行流程**：twbass-audit 5-Phase（雙向引用稽核輪）→ Claude 後處理
+**最終 Findings 數**：V0B-01–12（不變）　**修正項目**：3 條
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化一致性 | ✅ OK | Stokes Law 計算、Cv 計算、蒸發濃縮倍率全部驗算正確；Q₁₀ = 2.2–2.6 vs 加速倍率 2.2–2.8× 輕微內部不一致，不影響下游傳遞值，列觀察項 |
+| P2 輸出區塊 | ⚠️ 1 件 | `Inherited_Baseline` 區塊缺失（最上游層應標注「無上游引用」）|
+| P3 引用鏈 | ⚠️ 1 件 | CF0B-06 傳遞「北部 = 3.411 J/(cm³·K)」，但 Zone-A（台北/宜蘭）正確值為 3.215，應三區分列；V0B-12 中 Zone-A 值亦缺失 |
+| P4 Scope | ✅ OK | 無魚類行為、氣候 forcing、六大水體季節評估越界 |
+| P5 研究缺口 | ✅ OK | Open_Assumptions 與 Unresolved_Dependencies 合理標注；野生埤塘 SRR 原位數據缺口已明確 |
+
+**Phase 6 判定**：✅ 不需重跑（3 分）。Claude 後處理即可。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-0B-01 | 報告正文（Inherited_Baseline 區塊） | 在標題後、第一節前新增 `Inherited_Baseline` 區塊，標注「本卷為最上游層，無上游引用（B0-XX / V-XX）」|
+| FIX-0B-02 | V0B-12 Finding | 原文僅列「北部（孔隙率 60%）= 3.411」與「南部 = 3.122」；補入 Zone-A（孔隙率 50%，文獻估算）= **3.215 J/(cm³·K)**；補入 Zone-A vs Zone-C 差異：熱容高 2.98%、溫度波動幅度小 2.89% |
+| FIX-0B-03 | CF0B-06 | 將「北部 = 3.411，南部 = 3.122」更新為三區分列：Zone-B **3.411**、Zone-A **3.215**（文獻估算）、Zone-C **3.122**；補入 Zone-A 阻尼係數 **+2.98%**，調整標題為「三區底泥多孔介質體積熱容」|
+
+### 不受影響的確認正確數值
+
+- V0B-01：Zone-B 黏粒含量 42.3%–53.8%（高嶺石 58%–67%）
+- V0B-02：Zone-B Fe_d 48.5–124.0 g/kg；磷最大固定量 780–1,250 mg P/kg
+- V0B-04：Stokes 2 μm→102.9 hr / 20 μm→1.03 hr；100× 放大
+- V0B-07：保守離子濃縮 1.88×；TP 濃縮 1.18–1.38×
+- V0B-08：Eh 逆轉 5–9 天（+450 → -100 to -220 mV）
+- V0B-09：各還原帶建立時序（1–2 / 3–5 / 7–12 天）；鐵還原速率 5.0–18.0 mmol/m²/day
+- V0B-10：Q₁₀ = 2.2–2.6；夏季加速 2.2–2.8×（以 Q₁₀ = 2.4 擬合）
+- V0B-11：Zone-C H₂S = 0.15–0.85 mg/L（亞鐵屏障耗盡後）
+- V0B-12（修正後）：Zone-B = 3.411 / Zone-A = 3.215 / Zone-C = 3.122 J/(cm³·K)
+
+---
+
+## 0C 卷雙向引用稽核與後處理（2026-06-09）
+
+**目標檔案**：`0C_六大水體 seasonal 評估.md`
+**執行流程**：twbass-audit 5-Phase（雙向引用稽核輪）→ Claude 後處理
+**最終 Findings 數**：V0C-01–14（不變）　**修正項目**：5 條
+
+### 5-Phase 稽核結果
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化一致性 | ✅ OK | 所有數值計算正確；Zone-A 熱阻 2.98%/2.89%（與 FIX-0B 修正後一致） |
+| P2 輸出區塊 | ✅ OK | Inherited_Baseline、V0C-01~14、CF0C-01~16、Open_Assumptions（5 條）、Unresolved_Dependencies（3 條）齊全 |
+| P3 引用鏈 | ⚠️ 6 件 | Inherited_Baseline 中 V0B 引用多處錯位；正文兩處引用錯誤 Finding ID |
+| P4 Scope | ✅ OK | 無魚類行為越界 |
+| P5 研究缺口 | ✅ OK | 缺口合理標注，不影響下游必要傳遞值 |
+
+**Phase 6 判定**：✅ 不需重跑（P3 純結構/引用 ID 修補，數值正確）。Claude 後處理即可。
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-0C-01 | Inherited_Baseline V0A-03 | 僅列 Zone-A 遲滯率 -1.2 to -2.2 °C/週，缺 Zone-B（-0.6 to -1.1）和 Zone-C（< -0.1） | 更新為三區分列（繼承 FIX-0A-02 修正結果）|
+| FIX-0C-02 | Inherited_Baseline V0B 區塊 | V0B-02 誤含 Zone-C Fe_d 資料（屬 V0B-06）；V0B-06 誤描述 Eh 逆轉（屬 V0B-08）和 Q₁₀（屬 V0B-10）；V0B-07 出現非 V0B-07 的絕對 TP 值；V0B-10 誤描述鐵還原速率（屬 V0B-09）；缺 V0B-03、V0B-04、V0B-08、V0B-09 條目 | 重寫整個 V0B Inherited_Baseline 區塊，補入 V0B-03/04/08/09，修正各條描述與來源 |
+| FIX-0C-03 | Waterbody-1 季節表 春季欄 | 春雨遲滯僅顯示 Zone-A 值（-1.2 to -2.2 °C/週），未分列 Zone-B（-0.6 to -1.1 °C/週） | 補入 Zone-B 值 |
+| FIX-0C-04 | 正文 Waterbody-4（南部野生埤塘） | Eh 逆轉條件引用「（V0B-06）」→ V0B-06 是磷固定量，應為 V0B-08 | 改為（V0B-08）|
+| FIX-0C-05 | 正文 Waterbody-6（南部管理池） | Zone-C Fe_d 引用「（V0B-02）」→ V0B-02 是 Zone-B 數據，應為 V0B-06 | 改為（V0B-06）|
+
+### 不受影響的確認正確數值
+
+- V0C-01：北部暴雨澄清 1–2 天；南部澄清 5–8 天
+- V0C-02：Zone-B 熱阻 18–24 hr；Zone-A 17–23 hr；Zone-C 6–12 hr；三區 Cv 正確
+- V0C-05：南部春雨回淹釋磷 25–45 μg/L；Eh 5–9 天逆轉（數值正確，引用 ID 已修正）
+- V0C-06/07：深水水庫翻轉臨界及南北時序差
+- V0C-09：南部春末藻華能見度驟降值
+- CF0C-01~16：全部 Carry_Forward 數值正確
+
+---
+
+## 卷 0D 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`0D_基底資料矩陣與極端事件整合.md`
+**稽核範圍**：Inherited_Baseline（0A/0B/0C）、Baseline_Facts B0-01~22、Carry_Forward、Open_Assumptions
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ⚠️ 2 件 | V0A-03/B0-02 僅列 Zone-A 熱遲滯值；V0B-02 誤含 Zone-C Fe_d 資料 |
+| P2 輸出區塊 | ⚠️ 1 件 | Baseline_Facts 標頭宣稱「19 條」，實際為 22 條 |
+| P3 引用鏈 | ⚠️ 2 件 | B0-05 引用漏 V0B-06；V0B-06/V0B-07 未列入 Inherited_Baseline |
+| P4 Scope 違規 | ✅ OK | — |
+| P5 研究缺口 | ✅ OK | Open_Assumptions 3 項已適當標注 |
+
+**Phase 6 判定**：✅ 不需重跑（純引用 ID 與三區補全，數值主體正確）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-0D-01 | Inherited_Baseline V0A-03 | 僅列 Zone-A 熱遲滯率（-1.2 to -2.2 °C/週），缺 Zone-B（-0.6 to -1.1）和 Zone-C（<-0.1） | 更新為三區分列（繼承 FIX-0A-02 修正結果）|
+| FIX-0D-02 | Inherited_Baseline V0B 區塊 | V0B-02 誤含 Zone-C Fe_d 資料（屬 V0B-06）；V0B-06 和 V0B-07 完全缺漏 | 修正 V0B-02 僅保留 Zone-B 資料；補入 V0B-06（Zone-C Fe_d）與 V0B-07（濃縮倍率）條目 |
+| FIX-0D-03 | B0-02 Baseline Fact | 熱遲滯值「-1.2 to -2.2 °C/週」未標明僅為 Zone-A，缺 Zone-B/C 三區分列 | 改為三區分列：Zone-A -1.2 to -2.2；Zone-B -0.6 to -1.1；Zone-C <-0.1 °C/週 |
+| FIX-0D-04 | B0-05 Baseline Fact 引用 | `[V0B-01, V0B-02]` — Zone-C Fe_d 資料來自 V0B-06，引用未列 | 改為 `[V0B-01, V0B-02, V0B-06]` |
+| FIX-0D-05 | Baseline_Facts 區塊標頭 | 「以下為本冊輸出的 19 條…」實際 B0-01~22 共 22 條 | 改為 22 條 |
+
+### 不受影響的確認正確數值
+
+- B0-03~B0-04、B0-06~B0-19：量化值與引用 ID 均正確
+- B0-07：三區體積熱容（Zone-B 3.411、Zone-A 3.215、Zone-C 3.122 J/(cm³·K)）正確
+- B0-08/B0-09：Zone-C Eh 逆轉（5-9 天降至 -100 to -220 mV）、還原帶時序正確
+- B0-20~B0-22：Zone-B 22°C 超前量、Eh 首觸時間正確
+- Waterbody_Model_Table：8 水體三區分列均正確
+- Carry_Forward B0-CF-01~12：全部數值正確
+
+---
+
+## 卷 1A 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`1A_短時間環境觸發與生理限制.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX）、Findings V1A-01~12、Carry_Forward_To_3A/3B
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ⚠️ 2 件 | B0-07 Zone-A/B 保溫滯後合併為「17–24 hr」；B0-09 Q₁₀ 引用 2.4（單值）而 B0-09 原文為 2.2–2.6 |
+| P2 輸出區塊 | ✅ OK | Inherited_Baseline/Findings/Carry_Forward/Unresolved_Dependencies 均存在 |
+| P3 引用鏈 | ⚠️ 3 件 | Inherited_Baseline B0-04 描述夏季水溫（非 B0-04 內容）；引用 B0-11 用於 53 hPa 氣壓降（B0-11 是 DO 崩潰時間）；intro「B0-01 至 B0-19」應為 B0-22 |
+| P4 Scope 違規 | ✅ OK | — |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 2 項已適當標注 |
+
+**Phase 6 判定**：✅ 不需重跑（純引用 ID/三區補全/數值範圍修正，研究內容正確）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-1A-01 | Inherited_Baseline B0-07 | 「17–24 hr」合併 Zone-A（17-23）與 Zone-B（18-24）；缺 Zone-C（6-12 hr）分列 | 改為三區分列：Zone-B 18-24 hr；Zone-A 17-23 hr；Zone-C 6-12 hr |
+| FIX-1A-02 | Inherited_Baseline B0-09 | 引用「Q₁₀ = 2.4」（單值），但 B0-09 原文為「Q₁₀ = 2.2–2.6」範圍值 | 改為 Q₁₀ = 2.2–2.6，計算使用中值 2.4 |
+| FIX-1A-03 | Inherited_Baseline B0-04 | 描述「南部水體夏季水溫 28–32°C」但 B0-04 是旱季蒸發濃縮內容 | 改引 B0-11（明確記載「夏季 30–32°C」的管理池 DO 崩潰條目）|
+| FIX-1A-04 | 正文第一章開頭（53 hPa 計算） | 「氣壓降幅達 53 hPa，見 B0-11」— B0-11 是 DO 崩潰時間，非氣壓資料 | 移除 B0-11 引用，53 hPa 作為颱風通用物理參數直接陳述 |
+| FIX-1A-05 | Intro 正文第二段 | 「B0-01 至 B0-19」—0D 現為 22 條（B0-22） | 改為「B0-01 至 B0-22」|
+
+### 不受影響的確認正確數值
+
+- V1A-01~V1A-12：所有 Findings 數值（CH₄ 氣泡速度、H₂S 閾值 0.05 mg/L、魚鰾膨脹計算、Lockjaw 時序）正確
+- B0-06：酸性絮凝澄清時間（北部 24-48 hr；南部 5-8 天）正確
+- B0-10：H₂S 峰值 0.15–0.85 mg/L；北部 <0.02 mg/L 正確
+- B0-12：深水水庫翻轉條件（ΔT ≥6.0-8.0°C；U ≥6.5-8.5 m/s；36-48 hr）正確
+- Carry_Forward_To_3A/3B 引用 V1A 編號和數值均正確
+
+---
+
+## 卷 1B 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`1B_六大水域棲位模型與風生流.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX）、Findings V1B-01~13、Carry_Forward_To_3B/4B；SUP-B CI-01/02 套用確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ⚠️ 1 件 | B0-02 熱遲滯只列 Zone-A (-1.2 to -2.2 °C/週)；SUP-B CI-01/02 尚未套用（Fe²⁺ 閾值/安全距離需更新）|
+| P2 輸出區塊 | ✅ OK | Inherited_Baseline/Findings/Carry_Forward/Unresolved_Dependencies 均存在 |
+| P3 引用鏈 | ⚠️ 2 件 | SUP-B CI 對 V1B-11（閾值）與 V1B-CF-04（北部安全距離）尚未套用 |
+| P4 Scope 違規 | ✅ OK | — |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 3 項已適當標注 |
+
+**Phase 6 判定**：✅ 不需重跑（P1/P3 均為數值修補，Research content 正確）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-1B-01 | Inherited_Baseline B0-02 | 熱遲滯僅列 Zone-A（-1.2 to -2.2 °C/週），缺 Zone-B/C 三區分列 | 更新為三區分列：Zone-A -1.2~-2.2；Zone-B -0.6~-1.1；Zone-C <-0.1 °C/週 |
+| FIX-1B-02 | V1B-11（Fe²⁺ 閾值）| 「亞致死避忌閾值 0.5 mg/L」；SUP-B 精算後應為 鰓損傷 0.35 mg/L / 行為避忌 0.10 mg/L | 更新閾值，標注 [修正，VSUP-B09] |
+| FIX-1B-03 | V1B-CF-04（北部 Fe²⁺ 安全距離）| 「北部無排除帶，10-20 cm」；SUP-B 確認北部確有排除帶 | 更新為 Zone-B 25.7-32.7 cm；Zone-A 56.5-67.2 cm，標注 [修正，VSUP-B09] |
+| FIX-1B-04 | V1B-CF-03（南部 H₂S 安全距離細化）| 缺深水槽情境（h=150 cm）VSUP-B11 細化資料 | 補入 Stagnant h=150 cm 深槽：行為避忌 149.0 cm，標注 [細化，VSUP-B11] |
+
+### 不受影響的確認正確數值
+
+- V1B-01~V1B-09：所有季節棲位深度範圍、異重流計算、翻水臨界條件正確
+- V1B-10：南部 H₂S 安全距離 60-100 cm（由 VSUP-B11 確認上界 100 cm 正確）
+- V1B-12/13：風生流速 9.0-18.0 cm/s、迎風岸富集範圍 3-15 m、OFT 切換 20 cm/s 正確
+- Carry_Forward_To_4B（V1B-CF-08~10）：底質偏好排序與化學屏障對比值正確
+
+---
+
+## 卷 2A 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`2A_覓食偏好、印記與反射咬餌.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX + 1A V1A-XX）、Findings V2A-01~12、Carry_Forward_To_2C/3A_3B；SUP-D-A CI + CI-SUPE-01 套用確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ⚠️ 1 件 | B0-CF-02 為非標準 ID（應為 B0-07）；Carry_Forward 也引用錯誤 ID |
+| P2 輸出區塊 | ✅ OK | 全部輸出區塊存在，Findings 12 條齊全 |
+| P3 引用鏈 | ⚠️ 3 件 | B0-CF-02 不存在；SUP-D-A CI（V2A-12 NTU補充）未套用；CI-SUPE-01（V2A-01 軟殼蝦補充）未套用 |
+| P4 Scope 違規 | ✅ OK | — |
+| P5 研究缺口 | ✅ OK | 3 項 Unresolved_Dependencies 已正確標注 |
+
+**Phase 6 判定**：✅ 不需重跑（均為補充數值，研究主體正確）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-2A-01 | Inherited_Baseline 第 3 條 + Carry_Forward_To_3B 引用 | 「B0-CF-02」為非標準混合 ID，不存在於 0D Baseline_Facts 命名體系 | 改為正確 ID「B0-07」；來源標注改為「0D-Baseline_Facts」 |
+| FIX-2A-02 | V2A-12（視覺失效臨界）| 僅有 SD ≤ 15 cm 指標；SUP-D-A CI 指示補充 NTU 對應閾值 | 補入 VSUP-DA08 NTU 閾值：褐水 35 NTU；綠水 45 NTU；灰水 60 NTU；平均切換點 40 NTU |
+| FIX-2A-03 | V2A-01（OFT 能效矩陣）| 日本沼蝦僅列一般個體 0.034 kcal/s；CI-SUPE-01 指示補充軟殼/抱卵母蝦 | 補入：軟殼個體 0.25–0.45 kcal/s（$T_h$ 降至 0.2 s）；抱卵母蝦 1.15 kcal/g（來源：VSUP-E06, E07） |
+| FIX-2A-04 | Carry_Forward_To_3A_3B 第 4 項 | 缺 VSUP-E25 OFT 選擇性切換門檻（3A/3B 需要）| 補入切換閾值：相對豐度 65%–80% 或 ≥2.5 enc/min；低溫（<18°C）切換閾值升至 >90% |
+
+### 不受影響的確認正確數值
+
+- V2A-02~V2A-12（修正前）：所有神經通路、臨界速度、波長衰減係數數值正確
+- V1A-06/10/11/12 在 Inherited_Baseline 的三區視距值正確（28/36/40 cm）
+- Carry_Forward_To_2C：斯涅爾窗視距矩陣（28/36/40/120 cm 高對比值）正確
+- B0-06、B0-11 引用數值正確
+
+---
+
+## 卷 2B 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`2B_側線、內耳與水下聲學傳遞.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX）、Findings V2B-01~13、Carry_Forward_To_3A_3B；B0-CF-XX 混合 ID 修正
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ⚠️ 5 件 | B0-CF-02/04/05/08 均為非標準 ID；B0-04 引用錯誤（內容為春末藻華，應為 B0-15） |
+| P2 輸出區塊 | ✅ OK | Findings 13 條，Carry_Forward/Open_Assumptions/Unresolved_Dependencies 均存在 |
+| P3 引用鏈 | ⚠️ 9 處 | B0-CF-XX 出現在 Inherited_Baseline、V2B-09、正文段落、Carry_Forward 共 9 處需修正 |
+| P4 Scope 違規 | ✅ OK | — |
+| P5 研究缺口 | ✅ OK | 2 項 Unresolved_Dependencies 已標注 |
+
+**Phase 6 判定**：✅ 不需重跑（均為 ID 格式修正，無內容缺失）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 問題描述 | 修正方向 |
+|---------|---------|---------|---------|
+| FIX-2B-01 | Inherited_Baseline（4 條）| B0-04/B0-CF-08, B0-06/B0-CF-04, B0-07/B0-CF-02, B0-12/B0-CF-05 均含非標準混合 ID | B0-04→B0-15（春末藻華應引用 B0-15）；其餘 /B0-CF-XX 部分全部移除；B0-12 補入 B0-14（中層異重流深度） |
+| FIX-2B-02 | 第六章正文 EPS 黏度描述 | "`B0-CF-08`" 非標準 ID | 改為 "`B0-15`" |
+| FIX-2B-03 | V2B-09 Finding 括號引用 | "（B0-04, B0-CF-08）" 雙重錯誤 | 改為 "（B0-15）" |
+| FIX-2B-04 | Carry_Forward 第 1 項（濁水感官切換）| "`B0-CF-04`" 非標準 | 改為 "`B0-06`" |
+| FIX-2B-05 | Carry_Forward 第 2 項（南部藻華假餌頻率）| "`B0-CF-08`" 非標準 | 改為 "`B0-15`" |
+| FIX-2B-06 | Carry_Forward 第 4 項（聲折射棲位戰術）| "`B0-CF-05`" 非標準 | 改為 "`B0-14`"（中層異重流深度 8.5–18.2 m 出自 B0-14） |
+
+### 不受影響的確認正確數值
+
+- V2B-01~V2B-13：所有側線頻率響應、聲速、阻抗、衰減斜率、有效距離數值正確
+- B0-03（冷氣團降溫幅度）、B0-15（春末藻華持續天數）引用後均正確
+- 假餌比較表中 Zone-A/B 合併說明已標注「待 v2 re-run 拆分」為合規標注
+
+---
+
+## 卷 2C 雙向引用稽核（2026-06-09）
+
+**目標檔案**：`2C_視線軸向、攻擊角度與假餌操作.md`
+**稽核範圍**：Inherited_Baseline（0D B0-XX + 1A V1A-XX + 2A V2A-XX + 2B V2B-XX）、Findings V2C-01~12、Carry_Forward_To_3A_3B
+
+### 稽核結果摘要
+
+| Phase | 結果 | 發現數 |
+|-------|------|-------|
+| P1 量化矛盾 | ✅ OK | 所有數值與上游吻合：視距矩陣（28/36/40/120 cm Zone A/B/C/水庫高對比），Reaction Strike 速度（1.5/1.2/1.1/1.0 m/s），DO 門檻（2.5/2.8/3.0 mg/L 三區分列）均正確 |
+| P2 輸出區塊 | ✅ OK | Findings 12 條，Inherited_Baseline/Carry_Forward/Unresolved_Dependencies 均完整 |
+| P3 引用鏈 | ✅ OK | 無 B0-CF-XX 非標準 ID；B0-06/B0-15/B0-03 引用正確；V1A-XX/V2A-XX/V2B-XX 全部正確引用且數值一致 |
+| P4 Scope 違規 | ✅ OK | 不含側線詳細機制（2B 範疇）或護巢行為（4B 範疇） |
+| P5 研究缺口 | ✅ OK | 3 項 Unresolved_Dependencies 已標注 |
+
+**Phase 6 判定**：✅ 不需重跑，0 項修正
+
+### 確認正確的關鍵數值
+
+- 2A Carry_Forward_To_2C 視距矩陣（Zone-A 28/39 cm；Zone-B 36/50 cm；Zone-C 40/55 cm；水庫 120/165 cm）在 2C Sightline_Trigger_Table 完整接收 ✅
+- V2C-07 三區 DO 門檻（Zone-A 2.5；Zone-B 2.8；Zone-C 3.0 mg/L）與水溫門檻（Zone-A/B <12°C；Zone-C <14°C）分列正確 ✅
+- V2C-10 Follower Rejection 近點 13.5–24 cm（成魚）正確 ✅
