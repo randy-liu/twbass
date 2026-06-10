@@ -1833,3 +1833,14 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 - 2A Carry_Forward_To_2C 視距矩陣（Zone-A 28/39 cm；Zone-B 36/50 cm；Zone-C 40/55 cm；水庫 120/165 cm）在 2C Sightline_Trigger_Table 完整接收 ✅
 - V2C-07 三區 DO 門檻（Zone-A 2.5；Zone-B 2.8；Zone-C 3.0 mg/L）與水溫門檻（Zone-A/B <12°C；Zone-C <14°C）分列正確 ✅
 - V2C-10 Follower Rejection 近點 13.5–24 cm（成魚）正確 ✅
+
+---
+
+## SUP-D Carry_Forward 補接（3A + 3B，2026-06-10）
+
+**觸發原因**：雙向引用稽核確認 3A 和 3B 均無任何 VSUP-D 引用，但 SUP-D-A/B/C 三卷的 Carry_Forward 均明確指向 3A/3B。補接模式與 SUP-C 相同。
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-3A-SUPD | 3A Inherited_Baseline section 6 後 | 新增 **Section 7（多模態感官辨識與追擊序列，引用自卷 SUP-D-A/B/C）**：VSUP-DA11（HVF 65-80% / LVF 15-30% Reaction Strike 觸發率）、VSUP-DA10（振頻咬餌率矩陣）、VSUP-DB01（著水衝擊物理特徵）、VSUP-DB06（印記魚行為異化）、VSUP-DB10（Commit 閾值 ≥2.5 m/s²）、VSUP-DB11（Dead Stop +30-50% HVF / -40-60% LVF）、VSUP-DC14/DC09（C&R 衰退曲線）、VSUP-DC10（印記消退 50 天）|
+| FIX-3B-SUPD | 3B Inherited_Baseline section 9 後 | 新增 **Section 10（多模態感官辨識與追擊序列，引用自卷 SUP-D-A/B/C）**：同上 + VSUP-DB09（Evaluate 拒絕權重）+ VSUP-DC02/04（Dead Drift Kármán 尾流）+ VSUP-DC03（各水體 SNR 有效距離）+ VSUP-DC08/11-13（Match the Hatch 策略切換）|
