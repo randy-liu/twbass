@@ -1970,3 +1970,28 @@ Phase 6 判定：⚠️ Claude 結構重建（總分 6，Q 覆蓋完整型，結
 | FIX 編號 | 修改位置 | 修改內容 |
 |---------|---------|---------|
 | FIX-SUPA-CITE-01 | Inherited_Baseline 第 4 條來源欄 | `V3A-10 / V3A-12` → `V3A-10 / V3A-11`；備注欄補充說明：「V3A-11 LVF 延長因子 2.0–2.5× 應用至 15°C 基準 36–42 hr，推算值 72–105 hr ≈ 80–120 hr；V3A-12 為驚嚇素，與 H₂S 生理 ART 無關」 |
+
+---
+
+## SUP-B 卷雙向引用稽核補丁（2026-06-10）
+
+**目標檔案**：`SUP-B_底棲水化學梯度補充研究.md`
+**稽核範圍**：Inherited_Baseline 引用正確性；VSUP-B01~B14 完整性；Carry_Forward 與 Correction_Instructions CI 套用狀態確認
+
+### 稽核結果摘要
+
+| Phase | 結果 | 主要發現 |
+|-------|------|---------|
+| P1 量化矛盾 | ✅ OK | VSUP-B01~B14 數值內部一致；Carry_Forward 5 項值正確 |
+| P2 輸出區塊 | ⚠️ 1 件 | Inherited_Baseline 及正文共 5 處使用非標準 ID「4A-10」（應為 V4A-10）|
+| P3 引用鏈 | ✅ OK | Correction_Instructions CI 3 條（3A V3A-12、1B V1B-CF-04 Fe²⁺、1B V1B-10/V1B-CF-03 H₂S）均已套用（per FIX-SUPB-01~05 及後續 1B/3B 稽核補丁）；Carry_Forward 下游接收已確認 |
+| P4 Scope | ✅ OK | 皮質醇分析嚴格限於 H₂S 直接毒理；繁殖排除語正確 |
+| P5 研究缺口 | ✅ OK | Unresolved_Dependencies 3 條已標注（H3NO 滴定缺口、Fe²⁺ 直接行為實驗缺口、低 DO+H₂S 雙重壓力交互作用缺口）|
+
+**Phase 6 判定**：✅ 不需重跑（1 件格式修正）
+
+### Claude 後處理修改清單
+
+| FIX 編號 | 修改位置 | 修改內容 |
+|---------|---------|---------|
+| FIX-SUPB-CITE-01 | Inherited_Baseline、正文（×5 處）| `4A-10` → `V4A-10`（Finding ID 補 V 前綴，標準化為 V{卷號}-NN 格式；影響 metadata 行、Inherited_Baseline 第 3 條兩處、VSUP-B09 段、Correction_Instructions 第 3 條）|
