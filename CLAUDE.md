@@ -24,6 +24,7 @@ python .claude/skills/打包技能.py
 
 This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 - `twbass-audit` — 5-phase audit of research reports against instruction.md + Phase 6 re-run necessity scoring with Gemini/Claude tool recommendation
+- `twbass-instruction-audit` — format audit of `*-instruction.md` files against `TEMPLATE-instruction.md`; outputs FMT-XX fix list
 - `twbass-pipeline-manager` — pipeline status tracking and upstream dependency resolution
 - `gemini-plan-review` — review Gemini Deep Research plans against instruction.md prompts; outputs Go/Hold/Rework signal
 
