@@ -35,7 +35,7 @@
 
 ## 執行狀態
 
-Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三區並列（Zone-A/B/C）為標準輸出格式，新產出報告將內建，無需另行補丁。
+Zone-B（桃竹苗）已納入所有卷 instruction，v2 已全面完成（主鏈 0A–4B + 補充卷 SUP-A–SUP-E）。三區並列（Zone-A/B/C）為標準輸出格式，已內建於所有現行報告，無需另行補丁。
 
 | 卷 | 現行版本 | 說明 |
 |----|---------|------|
@@ -46,8 +46,8 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | 1A | `1A_短時間環境觸發與生理限制.md` | V1A-01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 1B | `1B_六大水域棲位模型與風生流.md` | V1B-01–13；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
 | 2A | `2A_覓食偏好、印記與反射咬餌.md` | V2A-01–12；Zone-A/B/C 三區並列；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-01） |
-| 2B | `2B_側線、內耳與水下聲學傳遞.md` | V2B-01–13；2 輪 plan review + Q-SUP-01/02 補充研究（EPS 聲學衰減三成分分解、Stokes 振盪球近場修正）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
-| 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02） |
+| 2B | `2B_側線、內耳與水下聲學傳遞.md` | V2B-01–13；2 輪 plan review + Q-SUP-01/02 補充研究（EPS 聲學衰減三成分分解、Stokes 振盪球近場修正）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02）；補注 EPS 動力黏度 10% 為外部文獻推算、非 B0-15 內容（FIX-2B-CITE-01） |
+| 2C | `2C_視線軸向、攻擊角度與假餌操作.md` | V2C-01–12；Zone-A/B/C 三區並列；2 輪 plan review + Q-SUP-01/02 補充研究（Up-Strike 溫度/DO/深度門檻三區分列、全視野視敏度 CPD 換算）+ 第二輪 5-Phase 稽核 + Claude 後處理完成（2026-06-02）；Follower Rejection 近點 13.5–24 cm 引用更正為 V2A-07/V2C-04 雙來源（FIX-2C-CITE-01） |
 | 3A | `3A_高壓舊魚心理機制與誘咬本質.md` | V3A-01–13；2 輪 plan review + 深度學理推導 + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：CFF 多溫度點、ART Q₁₀ 2.0 矩陣、Schreckstoff Zone 分離（2026-06-03） |
 | 3B | `3B_極端情境高壓策略推演.md` | V3B-01–27；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；VSUP-A 補丁：V3A 條目更新、V3B-12/13/19 皮質醇基線對齊、新增 V3B-27（H₂S 水車重啟，數值待 SUP-B 確認）（2026-06-03）；**V3B-02 SMR 修正**：122.26 → 65.2 mg O₂/kg/hr（Díaz et al. 2007 直接實測，信心等級升為「高」）（2026-06-08） |
 | 4A | `4A_繁衍地球化學與水文干擾.md` | V4A-01–15；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-03）；補入 B0-22 + VSUP-B08（H₂S 巢穴死亡區）（2026-06-03） |
@@ -55,10 +55,25 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 | SUP-A | `SUP-A_感官生理閾值補充研究.md` | VSUP-A01–09；3 輪 plan review + 5-Phase 稽核 + Claude 後處理（11 條 FIX）完成（2026-06-03） |
 | SUP-B | `SUP-B_底棲水化學梯度補充研究.md` | VSUP-B01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理完成（2026-06-04）；V3B-27 H₂S 水車重啟衝突解決 |
 | SUP-C | `SUP-C_黑鱸毒區迴避實證與冒險覓食決策機制.md` | VSUP-C01–12；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（FIX-SUPC-01~04：V-code 版本漂移標注、4A V4A-10 [確認] CI 補入）完成（2026-06-04） |
-| SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口 |
+| SUP-D-A | `SUP-D-A_食性選擇性與感官匹配優先序.md` | VSUP-DA01–11；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（14 條 FIX-SDA-01~14）完成（2026-06-04）；Zone-B NTU 標注補入；Unresolved_Dependencies 補入 3 項 instruction 必列優先缺口；雙向引用稽核修正 V2A-05/06/07 引用編號偏移（FIX-SUPDA-CITE-02~04，2026-06-10）|
 | SUP-D-B | `SUP-D-B_多模態獵物辨識與追擊序列.md` | VSUP-DB01–12；3 輪 plan review + 第一輪 5-Phase 稽核（FIX-SUPDB-01~09）+ **第二輪 5-Phase 稽核（FIX-SDB-01~11：禁詞修正、信心等級降調 ×4、DB09/DB11 理論估算補標、Carry_Forward 補 2B 條目、Correction_Instructions 補 3B 確認）** 完成（2026-06-04）；Carry_Forward 8 組；Correction_Instructions 4 條 |
 | SUP-D-C | `SUP-D-C_水中漂流偵測與策略切換.md` | VSUP-DC01–14；2 輪 plan review + 5-Phase 稽核 + Claude 後處理（7 條 FIX-DC-01~07）完成（2026-06-04）；Carry_Forward 5 組；Unresolved_Dependencies 5 項 |
 | SUP-E | `SUP-E_台灣六大水體獵物群落時空圖譜——魚蝦兩棲昆蟲爬蟲類季節性爆量月曆與假餌映射.md` | VSUP-E01–E27（含 Q-SUP 補充後新增 E26/E27）；Zone-A/B/C 三區物候時間分離（B0-02）；2 輪 5-Phase 稽核 + Q-SUP 補充研究（三星攀鱸、熊蟬側線距離、稻蝗划水、SMR 修正）+ Claude 後處理（FIX-SUPE-01~21，共 21 項）完成（2026-06-09）；CI-SUPE-01~04；Hatch_Equivalent_Calendar 25 行 |
+
+---
+
+## 淡水沿岸獵物生態輔助報告
+
+四篇針對台灣淡水與沿岸獵物類群的獨立生態調查，作為 **SUP-E**（六大水體獵物群落時空圖譜）的上游素材，提供物種清單、體型、季節物候與行為基礎數據；SUP-E 的 `Hatch_Equivalent_Calendar` 與五大獵物類群量化即由這四篇彙整台灣化而來。
+
+| 檔案 | 類群 |
+|------|------|
+| `台灣淡水與沿岸甲殼類獵物報告.md` | 甲殼類（蝦、蟹） |
+| `台灣淡水與沿岸兩棲類獵物報告.md` | 兩棲類（蛙、蝌蚪） |
+| `台灣淡水與沿岸水生爬蟲類獵物報告.md` | 水生爬蟲類（龜、鱉、水蛇） |
+| `台灣淡水與沿岸水生昆蟲獵物報告.md` | 水生昆蟲（水蠆、搖蚊幼蟲、蜉蝣等） |
+
+> 這四篇是 SUP-E 的 fallback 來源；SUP-E Findings 中標注 `[覆蓋 fallback 假設：來自 XX 輔助報告]` 即指向此處。
 
 ---
 
@@ -145,11 +160,11 @@ Zone-B（桃竹苗）已納入所有卷 instruction，v2 全面重跑中。三�
 
 ---
 
-### 補充卷：SUP-A / SUP-B / SUP-C（待跑）
+### 補充卷：SUP-A / SUP-B / SUP-C / SUP-D-A / SUP-D-B / SUP-D-C / SUP-E（全數完成）
 
 > 主鏈完成後，針對特定數據缺口補跑的 Gemini Deep Research。
 
-- **SUP-A：感官生理閾值補充研究**（⏳ 待跑）
+- **SUP-A：感官生理閾值補充研究**（✅ 完成 2026-06-03）
   - 聚焦：閃光融合頻率（CFF）、聽覺閾值、感覺恢復時間（ART）
   - 下游整合至：3A `Open_Assumptions`、3B `Unresolved_Dependencies`
 
