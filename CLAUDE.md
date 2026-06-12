@@ -56,6 +56,7 @@ SUP-B ──> 1B (V1B-05/06) / 3B / 4A (CI-03/04)
 SUP-C ──> 3A (V3A-06) / 3B (Foraging Forays)
 SUP-D-A ∥ SUP-D-B ──> SUP-D-C (A/B parallel; C runs after or with fallback)
 SUP-D-A + SUP-D-B + SUP-D-C ──> 2A / 2B / 3A / 3B (behavioral mechanism framework; VSUP-DA/DB/DC)
+Prey-4 reports (crustacean / amphibian / reptile / aquatic-insect) ──> SUP-E (fallback source material)
 SUP-E ──> 2A / 1B / 3B (Taiwan ecological calendar + OFT threshold)
 SUP-D-A ∥ SUP-D-B ∥ SUP-E (parallel; no inter-dependency; SUP-D-C after A/B)
 ```

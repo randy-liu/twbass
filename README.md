@@ -232,6 +232,7 @@ SUP-B ──> 1B（V1B-05/06 精算）／3B（Unresolved 標記）／4A（CI-03/
 SUP-C ──> 3A（LVF/HVF 分類、V3A-06 皮質醇解讀）／3B（Foraging Forays、毒區容忍度）
 SUP-D-A ∥ SUP-D-B ──> SUP-D-C（A/B 先完成或用 Fallback）
 SUP-D-A + SUP-D-B + SUP-D-C ──> 2A（食性選擇指數、漂流偵測）／2B（入水辨識聲學）／3A（策略切換、Commit 觸發）／3B（戰術切換條件）
+獵物4報告（甲殼／兩棲／爬蟲／昆蟲）──> SUP-E（fallback 素材）
 SUP-E ──> 2A（台灣獵物補充）／1B（六大水體獵物棲位）／3B（戰術切換生態事實）
 
 SUP-D-A ∥ SUP-D-B ∥ SUP-E（三卷平行，無相依；SUP-D-C 在 A/B 後執行）
