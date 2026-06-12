@@ -5,25 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台灣大嘴黑鱸釣魚生態白皮書</title>
   <meta name="description" content="台灣大嘴黑鱸（Micropterus salmoides）釣魚生態白皮書——氣候、水體、感官、行為全面量化分析">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('twbass-theme');
+        document.documentElement.dataset.theme = (t === 'dark' || t === 'light') ? t : 'light';
+      } catch (e) { document.documentElement.dataset.theme = 'light'; }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
 
 :root {
-  --bg:        #0d1117;
-  --sidebar-bg:#010409;
-  --surface:   #161b22;
-  --border:    #30363d;
-  --text:      #c9d1d9;
-  --text-dim:  #8b949e;
-  --heading:   #e6edf3;
-  --accent:    #58a6ff;
-  --accent2:   #39d0d8;
-  --quote-border: #388bfd;
-  --strong:    #f0f6fc;
-  --code-bg:   #161b22;
-  --progress:  #58a6ff;
+  /* ── 亮色（學術白皮書）＝預設 ── */
+  --bg:        #fbfaf7;
+  --sidebar-bg:#f5f3ed;
+  --surface:   #f1efe8;
+  --border:    #e3ded2;
+  --border-soft:  #ece8de;
+  --text:      #2b2d2c;
+  --text-dim:  #6b7180;
+  --heading:   #15211d;
+  --accent:    #0f5e57;
+  --accent2:   #0c746b;
+  --accent-dim:   rgba(15,94,87,0.10);
+  --accent-soft:  rgba(15,94,87,0.06);
+  --accent-soft2: rgba(15,94,87,0.10);
+  --quote-border: #0f5e57;
+  --quote-bg:  rgba(15,94,87,0.06);
+  --row-hover: rgba(15,94,87,0.05);
+  --strong:    #111312;
+  --code-bg:   #efece4;
+  --progress:  #0f5e57;
+  --panel-bg:  #ffffff;
+  --float-bg:       rgba(255,255,255,0.94);
+  --float-bg-hover: rgba(241,239,232,0.98);
+  --hover-tint: rgba(0,0,0,0.05);
+  --chip-bg:    rgba(0,0,0,0.05);
+  --scrim:      rgba(20,22,26,0.38);
+  --shadow:       0 4px 16px rgba(20,30,28,0.12);
+  --shadow-hover: 0 6px 20px rgba(15,94,87,0.18);
+  --font-serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
   --sidebar-w: 260px;
+}
+
+html[data-theme="dark"] {
+  /* ── 精煉深色（炭灰）── */
+  --bg:        #14161a;
+  --sidebar-bg:#0f1114;
+  --surface:   #1c1f24;
+  --border:    #2a2e35;
+  --border-soft:  #23272d;
+  --text:      #c8ccd2;
+  --text-dim:  #8b9099;
+  --heading:   #eceef1;
+  --accent:    #2db6a6;
+  --accent2:   #45d6c6;
+  --accent-dim:   rgba(45,182,166,0.16);
+  --accent-soft:  rgba(45,182,166,0.08);
+  --accent-soft2: rgba(45,182,166,0.13);
+  --quote-border: #2db6a6;
+  --quote-bg:  rgba(45,182,166,0.08);
+  --row-hover: rgba(45,182,166,0.06);
+  --strong:    #f5f6f8;
+  --code-bg:   #1c1f24;
+  --progress:  #2db6a6;
+  --panel-bg:  #14161a;
+  --float-bg:       rgba(28,31,36,0.92);
+  --float-bg-hover: rgba(40,55,52,0.95);
+  --hover-tint: rgba(255,255,255,0.06);
+  --chip-bg:    rgba(255,255,255,0.05);
+  --scrim:      rgba(0,0,0,0.5);
+  --shadow:       0 4px 16px rgba(0,0,0,0.4);
+  --shadow-hover: 0 6px 20px rgba(45,182,166,0.2);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -38,6 +94,7 @@ body {
                system-ui, sans-serif;
   line-height: 1.8;
   display: flex;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 /* ── 進度條 ── */
@@ -88,7 +145,9 @@ body {
 }
 
 /* ── TOC ── */
-#toc { padding: 8px 0 40px; flex: 1; }
+#toc-container { flex: 1; }
+.toc { padding: 8px 0 40px; }
+.toc-pane:not(.active) { display: none; }
 .toc-root { list-style: none; margin: 0; padding: 0; }
 
 .toc-h2 > .toc-link {
@@ -104,12 +163,12 @@ body {
 }
 .toc-h2 > .toc-link:hover {
   color: var(--heading);
-  background: rgba(88,166,255,0.06);
+  background: var(--accent-soft);
 }
 .toc-h2 > .toc-link.active {
   color: var(--accent);
   border-left-color: var(--accent);
-  background: rgba(88,166,255,0.08);
+  background: var(--accent-soft2);
 }
 
 .toc-children {
@@ -146,38 +205,83 @@ body {
   transition: margin-right 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 
+/* ── 等級分頁標籤 ── */
+#level-tabs {
+  display: flex;
+  gap: 4px;
+  max-width: 800px;
+  margin: 0 auto 28px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.level-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.level-tab:hover { color: var(--heading); }
+.level-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.level-tab .lvl-en {
+  font-size: 0.7em;
+  color: var(--text-dim);
+  margin-left: 5px;
+  letter-spacing: 0.04em;
+}
+.level-tab.active .lvl-en { color: var(--accent2); }
+
+/* ── 版本內容切換 ── */
+.content-pane:not(.active) { display: none; }
+.doc-title { /* 書名沿用 #content h1 樣式 */ }
+
 /* 術語面板開啟時：桌機推擠主內容讓位（無遮罩） */
 body.glossary-open #main-wrapper {
   margin-right: 340px;
 }
 
 #content {
-  max-width: 860px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 /* ── 標題 ── */
 #content h1 {
-  font-size: 1.9rem;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--heading);
   border-bottom: 2px solid var(--accent);
-  padding-bottom: 12px;
-  margin-bottom: 28px;
+  padding-bottom: 14px;
+  margin-bottom: 30px;
   line-height: 1.35;
+  letter-spacing: 0.01em;
 }
 #content h2 {
-  font-size: 1.35rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
   color: var(--heading);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-  margin-top: 56px;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-top: 60px;
+  margin-bottom: 22px;
   scroll-margin-top: 24px;
+  letter-spacing: 0.01em;
 }
 #content h3 {
-  font-size: 1.1rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--accent);
-  margin-top: 32px;
+  margin-top: 34px;
   margin-bottom: 12px;
   scroll-margin-top: 24px;
 }
@@ -198,9 +302,9 @@ body.glossary-open #main-wrapper {
 /* ── 引用塊 ── */
 #content blockquote {
   margin: 1.2rem 0;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-left: 4px solid var(--quote-border);
-  background: rgba(56,139,253,0.07);
+  background: var(--quote-bg);
   color: var(--text);
   border-radius: 0 6px 6px 0;
 }
@@ -265,8 +369,8 @@ body.glossary-open #main-wrapper {
 }
 #content tr:last-child td { border-bottom: none; }
 #content tbody tr:nth-child(odd)  { background: var(--surface); }
-#content tbody tr:nth-child(even) { background: var(--bg); }
-#content tbody tr:hover { background: rgba(88,166,255,0.05); }
+#content tbody tr:nth-child(even) { background: transparent; }
+#content tbody tr:hover { background: var(--row-hover); }
 
 /* ── 水平線 ── */
 #content hr {
@@ -292,6 +396,30 @@ body.glossary-open #main-wrapper {
   line-height: 1;
 }
 
+/* ── 亮暗主題切換鈕 ── */
+#theme-btn {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 280;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--float-bg);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+  transition: background 0.15s, box-shadow 0.15s, color 0.15s;
+}
+#theme-btn:hover { background: var(--float-bg-hover); box-shadow: var(--shadow-hover); }
+
 /* ── RWD ── */
 @media (max-width: 768px) {
   body { display: block; }
@@ -314,7 +442,7 @@ body.glossary-open #main-wrapper {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: var(--scrim);
     z-index: 140;
   }
   #sidebar-overlay.open { display: block; }
@@ -354,7 +482,7 @@ body.glossary-open #main-wrapper {
   bottom: 28px;
   right: 28px;
   z-index: 300;
-  background: rgba(22, 27, 34, 0.92);
+  background: var(--float-bg);
   border: 1px solid var(--border);
   color: var(--accent);
   border-radius: 24px;
@@ -363,20 +491,20 @@ body.glossary-open #main-wrapper {
   font-size: 0.85rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow);
   transition: background 0.15s, box-shadow 0.15s;
   font-family: inherit;
 }
 #glossary-btn:hover {
-  background: rgba(30, 58, 95, 0.95);
-  box-shadow: 0 6px 20px rgba(88,166,255,0.2);
+  background: var(--float-bg-hover);
+  box-shadow: var(--shadow-hover);
 }
 
 #glossary-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: var(--scrim);
   z-index: 290;
 }
 /* overlay only shown on mobile (see @media block below) */
@@ -389,7 +517,7 @@ body.glossary-open #main-wrapper {
   width: 340px;
   max-width: 92vw;
   z-index: 310;
-  background: #0d1117;
+  background: var(--panel-bg);
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -425,7 +553,7 @@ body.glossary-open #main-wrapper {
   border-radius: 4px;
   transition: color 0.15s, background 0.15s;
 }
-#glossary-close:hover { color: var(--heading); background: rgba(255,255,255,0.06); }
+#glossary-close:hover { color: var(--heading); background: var(--hover-tint); }
 
 .gl-list {
   overflow-y: auto;
@@ -435,7 +563,7 @@ body.glossary-open #main-wrapper {
 }
 .gl-item {
   padding: 12px 18px;
-  border-bottom: 1px solid rgba(48,54,61,0.6);
+  border-bottom: 1px solid var(--border-soft);
 }
 .gl-item:last-child { border-bottom: none; }
 .gl-term {
@@ -471,13 +599,39 @@ body.glossary-open #main-wrapper {
 .gl-alias {
   font-size: 0.72em;
   color: var(--text-dim);
-  background: rgba(255,255,255,0.05);
+  background: var(--chip-bg);
   border-radius: 3px;
   padding: 1px 5px;
   margin-left: 6px;
   vertical-align: middle;
   font-weight: normal;
   letter-spacing: 0.02em;
+}
+/* ── 速查搜尋框 ── */
+.gl-search-wrap {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+#glossary-search {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 7px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+#glossary-search:focus { border-color: var(--accent); }
+#glossary-search::placeholder { color: var(--text-dim); }
+.gl-noresult {
+  padding: 24px 18px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.82rem;
 }
 
   </style>
@@ -486,1836 +640,1130 @@ body.glossary-open #main-wrapper {
   <div id="progress-bar"></div>
   <div id="sidebar-overlay"></div>
   <button id="menu-btn" aria-label="開啟目錄">☰</button>
+  <button id="theme-btn" aria-label="切換亮暗主題">🌙</button>
 
   <aside id="sidebar">
     <div id="sidebar-header">
       <div class="site-title">台灣大嘴黑鱸</div>
       <div class="site-subtitle">釣魚生態白皮書</div>
     </div>
-<nav id="toc"><ul class="toc-root">
-<li class="toc-h2"><a href="#_1" class="toc-link">前言：為什麼台灣的鱸魚需要一份白皮書？</a></li>
-<li class="toc-h2 has-children"><a href="#_2" class="toc-link">📖 閱讀前須知：認識幾個關鍵化學概念</a><ul class="toc-children">
-<li class="toc-h3"><a href="#ph" class="toc-link">pH：水是偏酸還是偏鹼</a></li>
-<li class="toc-h3"><a href="#eh" class="toc-link">Eh：底泥有多「新鮮」</a></li>
-<li class="toc-h3"><a href="#fe2-fe3" class="toc-link">Fe²⁺ 與 Fe³⁺：鐵的兩種狀態</a></li>
-<li class="toc-h3"><a href="#h2s" class="toc-link">H₂S：臭雞蛋的那個味道</a></li>
+    <div id="toc-container">
+<div class="toc-pane active" data-toc="junior">
+<nav class="toc"><ul class="toc-root">
+<li class="toc-h2"><a href="#junior-_1" class="toc-link">開始之前：三個你一定要先有的觀念</a></li>
+<li class="toc-h2"><a href="#junior-_2" class="toc-link">第一章：先看天、看水——決定今天好不好釣</a></li>
+<li class="toc-h2"><a href="#junior-_3" class="toc-link">第二章：魚現在躲在哪一層、哪個位置</a></li>
+<li class="toc-h2 has-children"><a href="#junior-_4" class="toc-link">第三章：選什麼顏色、用多快的速度——路亞的兩大核心</a><ul class="toc-children">
+<li class="toc-h3"><a href="#junior-_5" class="toc-link">顏色：照水色選，不要憑喜好</a></li>
+<li class="toc-h3"><a href="#junior-_6" class="toc-link">速度：太慢被看穿、夠快繞過大腦</a></li>
+<li class="toc-h3"><a href="#junior-_7" class="toc-link">濁到看不見時：交給側線</a></li>
 </ul></li>
-<li class="toc-h2 has-children"><a href="#_3" class="toc-link">第一章：認識台灣這片土地——氣候與地質的特殊性</a><ul class="toc-children">
-<li class="toc-h3"><a href="#11" class="toc-link">1.1 台灣不是單一氣候，而是兩套世界</a></li>
-<li class="toc-h3"><a href="#12" class="toc-link">1.2 迎風面與背風面的雨，根本不是同一種雨</a></li>
-<li class="toc-h3"><a href="#13" class="toc-link">1.3 冷氣團不是天氣新聞，是會把魚關機的開關</a></li>
-<li class="toc-h3"><a href="#14" class="toc-link">1.4 台灣南北土壤不同，所以池塘的「水感」真的不同</a></li>
-<li class="toc-h3"><a href="#15-zone-b" class="toc-link">1.5 北部的「中間地帶」：桃園台地（Zone-B）棲位特徵</a></li>
-<li class="toc-h3"><a href="#16-zone-c" class="toc-link">1.6 南部的「弱育土地帶」：南部（Zone-C）水體化學特徵</a></li>
+<li class="toc-h2"><a href="#junior-_8" class="toc-link">第四章：被釣怕的「老魚」，為什麼怎麼弄都不咬</a></li>
+<li class="toc-h2 has-children"><a href="#junior-match-the-hatch" class="toc-link">第五章：Match the Hatch——這個月魚在吃什麼，你就綁什麼</a><ul class="toc-children">
+<li class="toc-h3"><a href="#junior-_9" class="toc-link">全年「魚在吃什麼」月曆（北部時序；南部約再提前半個月到三週）</a></li>
+<li class="toc-h3"><a href="#junior-_10" class="toc-link">三個台灣獨有的「破防神窗口」</a></li>
+<li class="toc-h3"><a href="#junior-_11" class="toc-link">軟殼期：盛夏的暴利窗口</a></li>
+<li class="toc-h3"><a href="#junior-_12" class="toc-link">三條「絕對不要」鐵律</a></li>
 </ul></li>
-<li class="toc-h2 has-children"><a href="#_4" class="toc-link">第二章：台灣的六種鱸魚棲地——各有個性的水域</a><ul class="toc-children">
-<li class="toc-h3"><a href="#21" class="toc-link">2.1 先把釣場語言和研究模型對上</a></li>
-<li class="toc-h3"><a href="#22" class="toc-link">2.2 研究中真正有完整季節數字的六類水體</a></li>
-<li class="toc-h3"><a href="#23" class="toc-link">2.3 六種水體，個性怎麼抓？</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_5" class="toc-link">第三章：水的秘密——讀懂水質就讀懂鱸魚</a><ul class="toc-children">
-<li class="toc-h3"><a href="#31" class="toc-link">3.1 水溫：黑鱸最重要的環境指標</a></li>
-<li class="toc-h3"><a href="#32-do" class="toc-link">3.2 溶氧（DO）：水裡的空氣存款</a></li>
-<li class="toc-h3"><a href="#33" class="toc-link">3.3 透明度／能見度：你看多遠，牠就可能看多遠</a></li>
-<li class="toc-h3"><a href="#34-ph" class="toc-link">3.4 pH：水是偏酸還是偏鹼</a></li>
-<li class="toc-h3"><a href="#35-eh" class="toc-link">3.5 Eh：底有多「新鮮」</a></li>
-<li class="toc-h3"><a href="#36" class="toc-link">3.6 南北水質差異：不是誰比較好，是問題不一樣</a></li>
-<li class="toc-h3"><a href="#37-fick" class="toc-link">3.7 安全離底距離：Fick 模型告訴我們的數字</a></li>
-<li class="toc-h3"><a href="#38-schreckstoff" class="toc-link">3.8 Schreckstoff（魚的化學警報）：南北的不對稱</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_6" class="toc-link">第四章：天氣與鱸魚活性——釣手最關心的短期觸發</a><ul class="toc-children">
-<li class="toc-h3"><a href="#41" class="toc-link">4.1 氣壓：魚不會看氣象圖，但牠的魚鰾會先知道</a></li>
-<li class="toc-h3"><a href="#42" class="toc-link">4.2 低氣壓不是永遠好，颱風前後更像「先開口、再關死」</a></li>
-<li class="toc-h3"><a href="#43" class="toc-link">4.3 光照：晨昏常是窗口，但北部高濁水清晨會有盲窗</a></li>
-<li class="toc-h3"><a href="#44" class="toc-link">4.4 陰天和小雨：常是「看不那麼清楚，卻還能吃」的甜蜜點</a></li>
-<li class="toc-h3"><a href="#45" class="toc-link">4.5 強降雨：不是加分，而是重開機</a></li>
-<li class="toc-h3"><a href="#46" class="toc-link">4.6 月相：滿月在南部清水很有感，在北部濁水就小得多</a></li>
-<li class="toc-h3"><a href="#47" class="toc-link">4.7 冷鋒：為什麼「昨天咬翻，今天像關機」</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_7" class="toc-link">第五章：鱸魚住在哪裡——棲位選擇的邏輯</a><ul class="toc-children">
-<li class="toc-h3"><a href="#51" class="toc-link">5.1 什麼是棲位？把它想成魚的房地產選擇</a></li>
-<li class="toc-h3"><a href="#52" class="toc-link">5.2 不同水體的選棲邏輯</a></li>
-<li class="toc-h3"><a href="#53" class="toc-link">5.3 風生流：為什麼一吹風，魚就換邊</a></li>
-<li class="toc-h3"><a href="#54" class="toc-link">5.4 桃竹苗：有自己一套的棲位邏輯</a></li>
-<li class="toc-h3"><a href="#55-k" class="toc-link">5.5 容載量（K 值）：一片水到底養得起多少黑鱸？</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_14" class="toc-link">第六章：鱸魚的感官世界——牠如何感知獵物</a><ul class="toc-children">
-<li class="toc-h3"><a href="#61" class="toc-link">6.1 視覺：牠不是全角度都看得一樣好</a></li>
-<li class="toc-h3"><a href="#62-cff" class="toc-link">6.2 CFF（閃光融合頻率）：魚看假餌的「影像刷新率」</a></li>
-<li class="toc-h3"><a href="#63" class="toc-link">6.3 顏色與水色：怎麼選才有效</a></li>
-<li class="toc-h3"><a href="#64" class="toc-link">6.4 各水體能見度範圍對比</a></li>
-<li class="toc-h3"><a href="#65" class="toc-link">6.5 側線：魚身上的震動感應器</a></li>
-<li class="toc-h3"><a href="#66" class="toc-link">6.6 內耳（聽覺）：水裡的低頻線索</a></li>
-<li class="toc-h3"><a href="#67" class="toc-link">6.7 聲學阻抗：為什麼風大浪高時，低頻大震動常比較吃香</a></li>
-<li class="toc-h3"><a href="#68" class="toc-link">6.8 三感官整合：不同情境誰當老大？</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_15" class="toc-link">第七章：讓鱸魚開口——掠食心理解碼</a><ul class="toc-children">
-<li class="toc-h3"><a href="#71-oft" class="toc-link">7.1 最佳覓食理論（OFT）的白話版：黑鱸在算「時薪」</a></li>
-<li class="toc-h3"><a href="#72" class="toc-link">7.2 環境越差，魚越小氣</a></li>
-<li class="toc-h3"><a href="#73" class="toc-link">7.3 飼料印記效應：管理池的魚，從小就被教成另一種腦袋</a></li>
-<li class="toc-h3"><a href="#74-reaction-strike" class="toc-link">7.4 反射性咬餌（Reaction Strike）：不是餓，是嚇到來不及想</a></li>
-<li class="toc-h3"><a href="#75" class="toc-link">7.5 高壓舊魚的心理：牠不是不會被騙，是很會懷疑</a></li>
-<li class="toc-h3"><a href="#76-mid-strollingfollower-rejectionalert-reset-time" class="toc-link">7.6 Mid-Strolling、Follower Rejection、Alert Reset Time</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_16" class="toc-link">第八章：視線與假餌——讓牠看到你想讓牠看到的</a><ul class="toc-children">
-<li class="toc-h3"><a href="#81" class="toc-link">8.1 黑鱸視線軸向的三種模式</a></li>
-<li class="toc-h3"><a href="#82" class="toc-link">8.2 攻擊角度怎麼決定入水點和操作方式</a></li>
-<li class="toc-h3"><a href="#83" class="toc-link">8.3 各種透明度下，顏色與大小怎麼配</a></li>
-<li class="toc-h3"><a href="#84" class="toc-link">8.4 假餌操作映射：什麼情況用表層、中層、底層</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_17" class="toc-link">第九章：台灣的四大極端釣境</a><ul class="toc-children">
-<li class="toc-h3"><a href="#_18" class="toc-link">【情境一：南部夏季高溫爛底】</a></li>
-<li class="toc-h3"><a href="#_19" class="toc-link">【情境二：北部翻水期】</a></li>
-<li class="toc-h3"><a href="#_20" class="toc-link">【情境三：高有機負載管理池】</a></li>
-<li class="toc-h3"><a href="#_21" class="toc-link">【情境四：颱風過境前後】</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_22" class="toc-link">第十章：繁殖季節——春天的特殊行為</a><ul class="toc-children">
-<li class="toc-h3"><a href="#101" class="toc-link">10.1 繁殖水溫怎麼看</a></li>
-<li class="toc-h3"><a href="#102" class="toc-link">10.2 為什麼黑鱸愛硬底築巢</a></li>
-<li class="toc-h3"><a href="#103-ehfe2h2s" class="toc-link">10.3 Eh、Fe²⁺、H₂S：為什麼臭底不適合當育嬰房</a></li>
-<li class="toc-h3"><a href="#104" class="toc-link">10.4 護巢攻擊不是在吃，是在趕人</a></li>
-<li class="toc-h3"><a href="#105" class="toc-link">10.5 護巢期棲位：淺、水硬、穩、有遮蔭</a></li>
-<li class="toc-h3"><a href="#106" class="toc-link">10.6 水位擾動：灌溉放水為什麼很傷</a></li>
-<li class="toc-h3"><a href="#107" class="toc-link">10.7 釣手注意：護巢期釣放的代價，比你想的大</a></li>
-</ul></li>
-<li class="toc-h2 has-children"><a href="#_23" class="toc-link">第十一章：台灣黑鱸全年月曆——每個月，魚大概在想什麼</a><ul class="toc-children">
-<li class="toc-h3"><a href="#_24" class="toc-link">北部與南部，一年到底差在哪？</a></li>
-</ul></li>
-<li class="toc-h2"><a href="#_25" class="toc-link">結語：科學不是要你更複雜，而是讓你少走冤枉路</a></li>
+<li class="toc-h2"><a href="#junior-_13" class="toc-link">第六章：常見路亞種類，新手怎麼選怎麼用</a></li>
+<li class="toc-h2"><a href="#junior-_14" class="toc-link">第七章：四個常見難關，照著做就對了</a></li>
+<li class="toc-h2"><a href="#junior-_15" class="toc-link">結語：新手最該帶走的一頁</a></li>
 </ul></nav>
+</div>
+<div class="toc-pane" data-toc="senior">
+<nav class="toc"><ul class="toc-root">
+<li class="toc-h2"><a href="#senior-_1" class="toc-link">導讀：把釣況拆成一條因果鏈</a></li>
+<li class="toc-h2 has-children"><a href="#senior-_2" class="toc-link">第一部：物理底盤——你面對的環境邊界，是算得出來的</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-_3" class="toc-link">一、水溫時序：你的季節起跑線</a></li>
+<li class="toc-h3"><a href="#senior-_4" class="toc-link">二、溶氧崩潰與毒區：南部夏天的硬邊界</a></li>
+<li class="toc-h3"><a href="#senior-_5" class="toc-link">三、濁度澄清與熱滯後：暴雨/寒流後的時間窗</a></li>
+<li class="toc-h3"><a href="#senior-_6" class="toc-link">四、兩種極端事件的跨水體排序（直接拿來判斷）</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#senior-_7" class="toc-link">第二部：觸發與棲位——魚在哪一層、被什麼開關控制</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-_8" class="toc-link">五、三大短時觸發的精確邊界</a></li>
+<li class="toc-h3"><a href="#senior-_9" class="toc-link">六、棲位的三維判斷</a></li>
+<li class="toc-h3"><a href="#senior-_10" class="toc-link">七、風生流與逆流伏擊（迎風岸為什麼是黃金帶）</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#senior-_11" class="toc-link">第三部：感官解碼——魚怎麼接收、用哪條神經線判斷你的餌</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-oft" class="toc-link">八、OFT：魚為什麼挑食，又什麼時候不挑</a></li>
+<li class="toc-h3"><a href="#senior-_12" class="toc-link">九、反射咬餌：繞過大腦的攻擊（路亞最核心的神經學）</a></li>
+<li class="toc-h3"><a href="#senior-_13" class="toc-link">十、側線接管：濁水、夜間、深水的物理邏輯</a></li>
+<li class="toc-h3"><a href="#senior-_14" class="toc-link">十一、視線軸向：攻擊角度由光場驅動</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#senior-_15" class="toc-link">第四部：行為心理——高壓老魚的內分泌，與破解它的兩條路</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-_16" class="toc-link">十二、新魚老魚的二元化（量化的內分泌差異）</a></li>
+<li class="toc-h3"><a href="#senior-_17" class="toc-link">十三、四個破防機制（老手的精細活）</a></li>
+<li class="toc-h3"><a href="#senior-_18" class="toc-link">十四、連投節奏與警報素（不被自己嚇跑魚的底線）</a></li>
+<li class="toc-h3"><a href="#senior-_19" class="toc-link">十五、毒區邊緣的冒險覓食（皮質醇是總閘門）</a></li>
+<li class="toc-h3"><a href="#senior-_20" class="toc-link">十六、完整追擊序列：你的餌在哪一步被打槍</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#senior-_21" class="toc-link">第五部：繁衍與族群——為什麼台灣野生黑鱸這麼脆弱，以及釣手的倫理邊界</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-_22" class="toc-link">十七、繁殖的雙重打擊</a></li>
+<li class="toc-h3"><a href="#senior-_23" class="toc-link">十八、打巢——台灣族群衰退的核心人為機制</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#senior-match-the-hatch" class="toc-link">第六部：Match the Hatch 進階——獵物的物理訊號特徵與假餌頻率匹配</a><ul class="toc-children">
+<li class="toc-h3"><a href="#senior-_24" class="toc-link">十九、獵物的頻率指紋（背起來，這是操竿的依據）</a></li>
+<li class="toc-h3"><a href="#senior-cff" class="toc-link">二十、視覺端的修正：CFF 與水色</a></li>
+<li class="toc-h3"><a href="#senior-_25" class="toc-link">二十一、台灣全年獵物物候與假餌頻率映射（整合四報告）</a></li>
+<li class="toc-h3"><a href="#senior-_26" class="toc-link">二十二、三大台灣獨有窗口與負向鐵律</a></li>
+</ul></li>
+<li class="toc-h2"><a href="#senior-_27" class="toc-link">結語：資深釣手的決策矩陣</a></li>
+</ul></nav>
+</div>
+<div class="toc-pane" data-toc="expert">
+<nav class="toc"><ul class="toc-root">
+<li class="toc-h2"><a href="#expert-_1" class="toc-link">導讀：專家的工作不是記答案，是逆向診斷</a></li>
+<li class="toc-h2 has-children"><a href="#expert-_2" class="toc-link">第一部：逆向診斷框架——從症狀反推限制變數</a><ul class="toc-children">
+<li class="toc-h3"><a href="#expert-_3" class="toc-link">症狀對照診斷表</a></li>
+<li class="toc-h3"><a href="#expert-15" class="toc-link">三個快速驗證動作（落地前 15 分鐘做完）</a></li>
+</ul></li>
+<li class="toc-h2"><a href="#expert-_4" class="toc-link">第二部：信心校準——哪些數字是硬的、哪些該打折</a></li>
+<li class="toc-h2"><a href="#expert-_5" class="toc-link">第三部：把極端事件恢復表當成作戰時間表</a></li>
+<li class="toc-h2"><a href="#expert-_6" class="toc-link">第四部：多變數最佳化——當規則互相打架</a></li>
+<li class="toc-h2 has-children"><a href="#expert-_7" class="toc-link">第五部：分區 × 水體 × 季節 × 時段 整合戰術手冊</a><ul class="toc-children">
+<li class="toc-h3"><a href="#expert-_8" class="toc-link">劇本一：北部管理池・盛夏・高壓老魚</a></li>
+<li class="toc-h3"><a href="#expert-_9" class="toc-link">劇本二：南部管理池/野塘・盛夏・高溫關機</a></li>
+<li class="toc-h3"><a href="#expert-_10" class="toc-link">劇本三：北部水庫・夏季・溫躍層期</a></li>
+<li class="toc-h3"><a href="#expert-_11" class="toc-link">劇本四：南部野塘・春末・藻華爆發</a></li>
+<li class="toc-h3"><a href="#expert-_12" class="toc-link">劇本五：北部野塘/管理池・秋末初冬・冷休克翻水</a></li>
+<li class="toc-h3"><a href="#expert-_13" class="toc-link">劇本六：颱風前後・任一水體</a></li>
+</ul></li>
+<li class="toc-h2 has-children"><a href="#expert-match-the-hatch" class="toc-link">第六部：Match the Hatch 的頻率工程與獵物報告深度</a><ul class="toc-children">
+<li class="toc-h3"><a href="#expert-cff" class="toc-link">視覺端工程：CFF × 水色 × 波長</a></li>
+<li class="toc-h3"><a href="#expert-_14" class="toc-link">兩條負向鐵律（職業級必守，違反直接全場崩）</a></li>
+<li class="toc-h3"><a href="#expert-_15" class="toc-link">資料缺口（職業選手該知道哪裡不能盡信報告）</a></li>
+</ul></li>
+<li class="toc-h2"><a href="#expert-_16" class="toc-link">第七部：職業選手的資源責任</a></li>
+<li class="toc-h2"><a href="#expert-_17" class="toc-link">結語：專家的後設原則</a></li>
+</ul></nav>
+</div>
+    </div>
   </aside>
 
   <div id="main-wrapper">
+    <div id="level-tabs" role="tablist" aria-label="釣手等級">
+<button class="level-tab active" data-version="junior" role="tab">初階<span class="lvl-en">Junior</span></button>
+<button class="level-tab" data-version="senior" role="tab">中階<span class="lvl-en">Senior</span></button>
+<button class="level-tab" data-version="expert" role="tab">專業<span class="lvl-en">Expert</span></button>
+    </div>
     <article id="content">
-<h1 id="micropterus-salmoides">台灣大嘴黑鱸（Micropterus salmoides）釣魚生態白皮書</h1>
+<div class="content-pane active" data-content="junior">
+<h1 class="doc-title">台灣大嘴黑鱸白皮書（路亞新手 Junior 版）</h1>
 <blockquote>
-<p>依據多份研究文件整合撰寫。文中若標註「<strong>基於理論推測</strong>」，代表原始研究已明示為估算、類推或模型推演，不把推測當成現地實測。</p>
+<p>寫給剛入坑、想搞懂「為什麼咬、為什麼不咬」的台灣路亞釣友</p>
+<p>這份是「新手友善版」。它把二十多卷學術研究＋四份台灣獵物生態報告（昆蟲、兩棲、爬蟲、甲殼），濃縮成你站在岸邊真正用得到的判斷與選餌邏輯。<strong>每一章開頭都有一個「先講白話」小框框，把這章的科學名詞一次講清楚</strong>，你看完框框再往下讀就不會卡。所有公式都被翻成國中生能懂的說法，看不懂可以跳過框框，直接看「怎麼釣」。</p>
 </blockquote>
 <hr />
-<h2 id="_1">前言：為什麼台灣的鱸魚需要一份白皮書？</h2>
-<p>大嘴黑鱸在台灣的身分很特別：牠是<strong>外來種</strong>，卻也早已成為最重要的路亞對象魚之一。很多釣友第一次真正認真學路亞，往往就是從黑鱸開始。問題是，台灣釣黑鱸，不能直接照搬美國的書。</p>
-<p>原因很簡單：台灣太小，卻太複雜。北部迎風、南部背風；北部多微酸性極育土，南部多中性到微鹼性的新成土與弱育土；有些水域春天還在慢慢回溫，有些地方卻已經熱到藻華、缺氧、爛底一起來。你在北部埤塘遇到的「突然不咬」，可能是清晨光致盲；你在南部管理池遇到的「整池像死掉」，可能是<strong>高溫、低氧、<span class="gl-trigger" data-term="h2s">H₂S</span>、<span class="gl-trigger" data-term="pizichun">皮質醇</span>壓力</strong>同時疊加。</p>
-<p>所以，這份白皮書的目的不是教你背招，而是幫你建立一套比較像樣的判斷方式：</p>
-<ul>
-<li>先讀氣候與地質。</li>
-<li>再讀水體本身。</li>
-<li>再讀水質、光線、風、聲音。</li>
-<li>最後才讀魚的位置、感官與開口邏輯。</li>
-</ul>
-<p>一句話總結：<strong>在台灣，會不會咬，常常不是魚想不想吃，而是牠還有沒有條件去吃。</strong></p>
-<hr />
-<h2 id="_2">📖 閱讀前須知：認識幾個關鍵化學概念</h2>
-<p>這份白皮書大量引用水質數據，幾個化學符號會反覆出現。它們看起來陌生，其實不難——你不需要記公式，只需要對這幾個名字有感覺。</p>
-<p><strong>等你讀完這四個概念，後面遇到「爛底為什麼讓魚上浮」「南部夏天為什麼這麼難釣」這類問題，你才能真正看懂，而不是只知道「反正底層不好」。</strong></p>
-<hr />
-<h3 id="ph"><span class="gl-trigger" data-term="ph">pH</span>：水是偏酸還是偏鹼</h3>
-<p><span class="gl-trigger" data-term="ph">pH</span> 可以想成「從胃酸到小蘇打水」的一條尺，從 0（強酸）到 14（強鹼），7 是中性。</p>
-<ul>
-<li><strong>北部常見：<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>，偏酸，像稍微發酸的雨水。</li>
-<li><strong>南部常見：<span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>，接近中性到微鹼，比較穩定。</li>
-</ul>
-<p><span class="gl-trigger" data-term="ph">pH</span> 不一定立刻讓魚死，但會一路影響：水色會不會久濁不退、底部鐵離子何時釋放、繁殖期魚卵能不能正常發育。</p>
-<hr />
-<h3 id="eh"><span class="gl-trigger" data-term="eh">Eh</span>：底泥有多「新鮮」</h3>
-<p><span class="gl-trigger" data-term="eh">Eh</span>（氧化還原電位，單位是 <strong>mV 毫伏特</strong>——電壓的千分之一，你可以把它想成「水底環境的鬆緊指數」：有氧氣時電位偏正，氧氣耗盡開始腐爛時電位就往負的方向跑）是底泥「新鮮度」的指標——數值越正，底部越健康；數值越負，底部越像在腐爛。</p>
-<ul>
-<li><strong>+300 到 +500 mV</strong>：像剛煮好的清湯，氧夠、狀態新鮮。</li>
-<li><strong>+200 到 0 mV</strong>：開始悶、開始耗氧。</li>
-<li><strong>0 到 -100 mV</strong>：鐵還原開始明顯，底部已不太妙。</li>
-<li><strong>&lt; -150 mV</strong>：進入「臭底」等級，<span class="gl-trigger" data-term="h2s">H₂S</span> 風險高，魚通常已離開底層。</li>
-</ul>
-<p>你只需要記一件事：<strong><span class="gl-trigger" data-term="eh">Eh</span> 越負，底下越糟，魚越不敢待。</strong></p>
-<hr />
-<h3 id="fe2-fe3"><span class="gl-trigger" data-term="fe">Fe²⁺</span> 與 <span class="gl-trigger" data-term="fe">Fe³⁺</span>：鐵的兩種狀態</h3>
-<p><strong>Fe</strong> 是鐵的化學元素符號（源自拉丁文 <em>ferrum</em>）。鐵在水中以「帶電粒子（離子）」存在，右上角的數字代表帶了幾個電荷：</p>
-<ul>
-<li><strong><span class="gl-trigger" data-term="fe">Fe³⁺</span></strong>（三價鐵離子）：鐵的「氧化型態」，不溶於水，形成我們熟悉的<strong>鐵鏽色沉澱</strong>，穩定待在底泥裡。</li>
-<li><strong><span class="gl-trigger" data-term="fe">Fe²⁺</span></strong>（二價亞鐵離子）：鐵的「還原型態」，<strong>可溶於水</strong>，能到處移動。當底泥缺氧（<span class="gl-trigger" data-term="eh">Eh</span> 降低），細菌會把 <span class="gl-trigger" data-term="fe">Fe³⁺</span> 轉化成 <span class="gl-trigger" data-term="fe">Fe²⁺</span>，釋放進水體後對魚鰓和魚卵造成傷害。</li>
-</ul>
-<p><strong>簡單記法：<span class="gl-trigger" data-term="fe">Fe³⁺</span> = 生鏽但穩定、待在泥裡不動；<span class="gl-trigger" data-term="fe">Fe²⁺</span> = 溶入水中、到處亂跑、可能惹事。</strong></p>
-<hr />
-<h3 id="h2s"><span class="gl-trigger" data-term="h2s">H₂S</span>：臭雞蛋的那個味道</h3>
-<p><span class="gl-trigger" data-term="h2s">H₂S</span> 就是「硫化氫」——H₂ 是氫，S 是硫，合在一起就是那個臭雞蛋味。</p>
-<ul>
-<li>在極度缺氧的底泥中，細菌把硫酸鹽（SO₄²⁻）還原，產生 <span class="gl-trigger" data-term="h2s">H₂S</span> 氣體。</li>
-<li><span class="gl-trigger" data-term="h2s">H₂S</span> 的毒性遠比缺氧更直接：<strong>濃度超過約 0.002 mg/L 就可能讓魚中毒</strong>，即使溶氧還勉強夠用也一樣。</li>
-<li>聞到底水有臭雞蛋味，或看到黑色底泥，就是 <span class="gl-trigger" data-term="h2s">H₂S</span> 的警訊。</li>
-</ul>
-<hr />
-<p>記住這四個概念，後面的章節讀起來會順很多。</p>
-<hr />
-<h2 id="_3">第一章：認識台灣這片土地——氣候與地質的特殊性</h2>
-<h3 id="11">1.1 台灣不是單一氣候，而是兩套世界</h3>
-<p>研究資料把台灣的黑鱸環境，最重要地切成兩塊：</p>
-<ul>
-<li><strong>北部迎風面</strong>：台北、基隆、宜蘭這一帶。</li>
-<li><strong>南部背風面</strong>：台南、高雄與更南側平原水域。</li>
-</ul>
-<p>差別不是「一點點」，而是整個水體起跑線都不同。</p>
+<h3 id="junior-_1">開始之前：三個你一定要先有的觀念</h3>
+<p><strong>觀念一：魚咬不咬，不是運氣，是條件。</strong> 天氣決定水溫和氧氣，土壤決定水底會不會發臭中毒，這些決定魚待在哪、敢不敢動、看不看得到你的餌、以及那顆被釣怕的腦袋肯不肯冒險。學會讀這些條件，你就從「碰運氣」升級成「會推理」。</p>
+<p><strong>觀念二：台灣要分三個區，不能只分南北。</strong></p>
 <table>
 <thead>
 <tr>
-<th>指標</th>
-<th style="text-align: right;">北部迎風面</th>
-<th style="text-align: right;">南部背風面</th>
-<th>對釣魚的意思</th>
+<th>你在哪</th>
+<th>區域</th>
+<th>一句話特徵</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>2 月均溫</td>
-<td style="text-align: right;"><strong>16.9°C</strong></td>
-<td style="text-align: right;"><strong>20.7°C</strong></td>
-<td>同樣是冬末，南部已經比較像早春</td>
+<td>台北、基隆、宜蘭</td>
+<td>北部迎風</td>
+<td>冬春又濕又陰，難得出太陽</td>
 </tr>
 <tr>
-<td>3 月均溫</td>
-<td style="text-align: right;"><strong>18.8°C</strong></td>
-<td style="text-align: right;"><strong>23.0°C</strong></td>
-<td>南部往往比北部早進入活性帶</td>
+<td>桃園、新竹、苗栗</td>
+<td>北部背風</td>
+<td>被山擋雨，冬春常出太陽，但降溫更急</td>
 </tr>
 <tr>
-<td>4 月均溫</td>
-<td style="text-align: right;"><strong>22.3°C</strong></td>
-<td style="text-align: right;"><strong>25.7°C</strong></td>
-<td>南部很多水域已接近高活性甚至繁殖觸發</td>
-</tr>
-<tr>
-<td>春季北南溫差</td>
-<td style="text-align: right;">約 <strong>3.4–3.8°C</strong></td>
-<td style="text-align: right;">—</td>
-<td>這個溫差足以讓魚的位置、活性、繁殖節奏全部錯開</td>
+<td>高雄、台南、屏東</td>
+<td>南部</td>
+<td>乾濕季分明，冬天可連旱半年</td>
 </tr>
 </tbody>
 </table>
-<p>北部春天常常「看起來到了」，但水其實還沒完全到；南部則是太陽一出來，進度就會跑得很快。研究甚至估算，北部春雨雲層會讓淺水水體的升溫<strong>每週落後 1.5–2.5°C</strong>。你站在岸邊覺得今天不冷，不代表魚也這麼想。</p>
-<h3 id="12">1.2 迎風面與背風面的雨，根本不是同一種雨</h3>
-<p>台灣最容易被忽略的，不是溫度，而是<strong>雨的型態</strong>。</p>
-<p>春季（2–4 月）北部幾乎長時間被華南雲雨帶罩住：</p>
-<ul>
-<li>台北 2 月月雨量 <strong>129.4 mm</strong>，3 月 <strong>157.8 mm</strong>，4 月 <strong>151.4 mm</strong>。</li>
-<li>春季每月降雨天數高達 <strong>12.0–14.5 天</strong>。</li>
-<li>一波春雨常可持續 <strong>3–5 天</strong>。</li>
-</ul>
-<p>南部同期卻乾很多：</p>
-<ul>
-<li>高雄 2 月僅 <strong>17.7 mm</strong>，3 月 <strong>32.3 mm</strong>，4 月 <strong>68.4 mm</strong>。</li>
-<li>每月降雨天數只有 <strong>3.2–5.4 天</strong>。</li>
-</ul>
-<p>也就是說，2 月北南降雨量差到<strong>7.3 倍</strong>。這會帶來什麼？</p>
-<ul>
-<li>北部：雲多、光少、升溫慢、水色常偏褐、魚的節奏容易拖。</li>
-<li>南部：日照足、升溫快、蒸發強、水位縮、濃縮與藻華風險更早出現。</li>
-</ul>
-<p>秋冬差異也很大。台北從 10 月到隔年 1 月累積降雨約 <strong>442.6 mm</strong>，高雄同期只有 <strong>117.3 mm</strong>，差不多又是 <strong>4 倍</strong>。北部常是「濕冷」，南部常是「乾冷」。這種差別，直接決定黑鱸冬天躲在哪裡、春天什麼時候動起來。</p>
-<h3 id="13">1.3 冷氣團不是天氣新聞，是會把魚關機的開關</h3>
-<p>研究指出，10 月到隔年 3 月這段時間，大陸冷氣團平均約有 <strong>3–4 次／月</strong>。其中比較強的強烈大陸冷氣團或寒流，年均約 <strong>2–5 次／年</strong>。</p>
-<p>量化來看：</p>
-<ul>
-<li><strong>北部</strong>：每次冷鋒過境常在 <strong>12–24 小時</strong>內降 <strong>4–8°C</strong>，強的可達 <strong>8–10°C</strong>。</li>
-<li><strong>南部</strong>：平均會晚北部 <strong>16.94 小時</strong>感受到冷空氣，降幅多半較小，約 <strong>2–5°C</strong>。</li>
-<li>一次冷氣團核心影響多半會持續 <strong>3–5 天</strong>。</li>
-</ul>
-<p>這就是為什麼常常會出現「昨天還有口，今天像空池」：</p>
-<p>因為對魚來說，不是「變涼一點」，而是<strong>環境在 1 天內整個換季</strong>。</p>
-<h3 id="14">1.4 台灣南北土壤不同，所以池塘的「水感」真的不同</h3>
-<p>很多釣友會說：「北部的水比較澀、比較茶色；南部的水比較亮、比較綠、比較會臭底。」這不是錯覺。</p>
-<p>北部多是<strong>極育土</strong>，經過長年強降雨淋洗後，鹼性礦物被洗掉，留下較多鐵、鋁與酸性條件，所以水體常落在 <strong><span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>。</p>
-<p>南部多是<strong>弱育土、新成土</strong>，保留較多碳酸鹽與原生礦物，緩衝能力較強，水體常在 <strong><span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>。</p>
-<p>可以這樣想：</p>
-<ul>
-<li><strong>北部水</strong>像是用紅土和落葉慢慢泡出來的茶，微酸，泥細，但有時雨後會很快沉。</li>
-<li><strong>南部水</strong>像是加了礦物粉和太陽曝曬過的湯，酸鹼比較穩，但一旦濁起來、藻起來，會拖很久。</li>
-</ul>
-<p>這種地質差異後面會一路影響到：濁度會不會很快退、底部會不會缺氧、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 與 <span class="gl-trigger" data-term="h2s">H₂S</span> 何時跑出來、春天巢做得成不成、夏天底還能不能待。</p>
-<h3 id="15-zone-b">1.5 北部的「中間地帶」：桃園台地（Zone-B）棲位特徵</h3>
-<p>這份白皮書所有「北部」的氣候數據，<strong>主要引用的代表測站是台北（台北市）</strong>，南部則是高雄。這是原始研究文件依照中央氣象署 1991–2020 氣候平均值的選站標準，反映的是<strong>台北–基隆–宜蘭一帶的「北部迎風面」（Zone-A）氣候特徵</strong>。</p>
-<p>然而，台灣最重要的鱸魚釣場，有很大一部分集中在<strong>桃園台地的埤塘群（「千塘之鄉」）</strong>。研究文件（1B1）已針對桃園台地建立了量化分析，稱為 <strong>Zone-B</strong>，並確認它和台北（Zone-A）的行為規律確實有不同：</p>
-<table>
-<thead>
-<tr>
-<th>特徵</th>
-<th>台北 Zone-A</th>
-<th>桃園台地 Zone-B</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>東北季風降雨</td>
-<td>強烈，冬春多雨</td>
-<td><strong>明顯偏少</strong>，受北側山地遮蔽</td>
-</tr>
-<tr>
-<td>冬春日照</td>
-<td>長期陰霾多</td>
-<td><strong>比台北多</strong>，冬晴天較常見</td>
-</tr>
-<tr>
-<td>春季升溫</td>
-<td>偏慢（雲覆多、輻射少）</td>
-<td><strong>較台北快 1–2 週</strong></td>
-</tr>
-<tr>
-<td>土壤類型</td>
-<td>極育土，<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</td>
-<td><strong>同屬極育土</strong>，化學特性類似</td>
-</tr>
-<tr>
-<td>典型風速</td>
-<td>3–5 m/s 東北風</td>
-<td><strong>6–10 m/s</strong>，風驅環流更強</td>
-</tr>
-</tbody>
-</table>
-<h4 id="zone-b-1b1">Zone-B 的特殊行為規律（1B1 量化）</h4>
-<p><strong>1. 強迫伏擊模式（Absolute Ambush Mode）</strong></p>
-<p>冬春季東北風持續 6–10 m/s 時，桃園台地埤塘會產生 <strong>8–24 cm/s</strong> 的表層風驅環流，比 Zone-A 強了不少。黑鱸在這樣的風場裡沒辦法輕鬆巡游，反而被「逼」進一種伏擊策略：<br />
-- 水深 <strong>0.2–0.8 m</strong>，沿岸邊障礙物壓低身體等待；<br />
-- 不主動追，等獵物被風流推過來再突擊；<br />
-- 這和 Zone-A（台北）春天的 0.5–2.0 m 巡游搜索模式完全不同。</p>
-<p><strong>實戰意義</strong>：桃園冬春季釣鱸，用「找障礙物、守定點、讓假餌流過」常比廣搜更有效。</p>
-<p><strong>2. <span class="gl-trigger" data-term="fanshui">翻水</span>時機比台北早</strong></p>
-<p>Zone-B（桃竹苗）的水體面積普遍較淺、散熱快，冷鋒來時散熱更急：<br />
-- Zone-B <span class="gl-trigger" data-term="fanshui">翻水</span>首次出現：<strong>11 月</strong>（Zone-A 台北：<strong>12 月</strong>）；<br />
-- Zone-B 全年<span class="gl-trigger" data-term="fanshui">翻水</span>次數：<strong>2–4 次</strong>（Zone-A：1–2 次）；<br />
-- 每次<span class="gl-trigger" data-term="fanshui">翻水</span>持續 <strong>24–48 小時</strong>，底層毒水上湧，魚被迫懸浮於中層。</p>
-<p><strong>實戰意義</strong>：桃園的秋末釣手要比台北更早警覺<span class="gl-trigger" data-term="fanshui">翻水</span>，10 月下旬到 11 月初就要留意。</p>
-<p><strong>3. <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶比台北更早出現</strong></p>
-<p>Zone-B 土壤同屬極育土，底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 問題和台北類似；但因春季升溫早，底泥開始缺氧的時間也提前：<br />
-- Zone-B <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動：<strong>5 月下旬</strong>（Zone-A：<strong>6 月中旬</strong>）；<br />
-- 高危持續約 <strong>4 個月</strong>（Zone-A 約 3.5 個月）；<br />
-- 安全離底距離同樣需要 <strong>40 cm</strong>（<span class="gl-trigger" data-term="fe">Fe²⁺</span> Fick 擴散精算值）。</p>
-<p><strong>實戰意義</strong>：桃園埤塘在 5 月下旬以後就不能太貼底，這比台北模型早了 3–4 週。</p>
-<p><strong>總結</strong>：桃園在「氣候節奏」上和台北模型有差異（春季進場早 1–2 週、<span class="gl-trigger" data-term="fanshui">翻水</span>早一個月、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 早啟動），但在「土壤水質化學」上高度一致（同屬極育土、<span class="gl-trigger" data-term="fe">Fe²⁺</span>/高嶺石/快回清等全部適用）。<strong>Zone-B 棲位邏輯詳見第五章 §5.4。</strong></p>
-<h3 id="16-zone-c">1.6 南部的「弱育土地帶」：南部（Zone-C）水體化學特徵</h3>
-<p>這份白皮書的南部代表測站為<strong>高雄</strong>，覆蓋台灣南部（台中以南）所有水體。除了高溫季節更長、雨季更集中以外，南部水體最重要的差異在<strong>土壤類型</strong>：南部以<strong>弱育土（Inceptisol）</strong>為主，和北部的極育土完全不同。研究文件稱此環境為 <strong>Zone-C</strong>。</p>
-<table>
-<thead>
-<tr>
-<th>特徵</th>
-<th>北部 Zone-A/B</th>
-<th>南部（Zone-C）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>土壤類型</td>
-<td>極育土（Ultisol），高嶺石主體</td>
-<td>弱育土（Inceptisol），礦質較豐富</td>
-</tr>
-<tr>
-<td>水體 <span class="gl-trigger" data-term="ph">pH</span></td>
-<td><strong>4.5–5.5</strong>，強酸性</td>
-<td><strong>6.5–7.5</strong>，接近中性</td>
-</tr>
-<tr>
-<td>底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 釋放</td>
-<td>酸性促進，夏季進入高危帶</td>
-<td><span class="gl-trigger" data-term="ph">pH</span> 緩衝作用明顯，釋放程度較低</td>
-</tr>
-<tr>
-<td><span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 半衰期</td>
-<td>數分鐘（有效半徑 <strong>&lt;0.5 m</strong>）</td>
-<td><span class="gl-trigger" data-term="cdom">CDOM</span> 保護，延續 <strong>12–36 小時</strong>（有效半徑 <strong>4–7 m</strong>）</td>
-</tr>
-<tr>
-<td>濁度回清速度</td>
-<td>快（高嶺石細顆粒，48–72 小時回清）</td>
-<td>慢（有機膠體懸浮力強，暴雨後可拖 <strong>14–30 天</strong>）</td>
-</tr>
-</tbody>
-</table>
-<h4 id="zone-c">南部（Zone-C）的關鍵行為差異</h4>
-<p><strong>1. 化學警報效力遠高於北部——中魚後「換點」更關鍵</strong></p>
-<p>南部水體的腐植酸（<span class="gl-trigger" data-term="cdom">CDOM</span>）包裹住 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 分子，使化學警報信號可持續 <strong>12–36 小時</strong>、影響半徑達 <strong>4–7 m</strong>。北部中魚後等 5–10 分鐘就可回原點；<strong>南部一旦中魚或跑魚，那個點可能整天都廢掉</strong>。釣手比北部更需要「拿了就走」的換點紀律（詳見 §3.8）。</p>
-<p><strong>2. 護巢雄魚感知範圍更廣</strong></p>
-<p>北部護巢雄魚幾乎完全依賴視覺與側線；南部的護巢雄魚可透過 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 感知 <strong>4–7 m</strong> 外的危險，警戒圈比北部大一個數量級，護巢攻擊也更容易被遠距觸發（詳見 §10.5）。</p>
-<p><strong>3. 北部的底泥化學規則，在南部不完全適用</strong></p>
-<p>北部極育土帶來的強酸、快回清、<span class="gl-trigger" data-term="fe">Fe²⁺</span> 高危帶等規則，在南部中顯著減弱。南部釣手重點關注的是<strong>高溫下的溶氧梯度</strong>與<strong>高有機負載</strong>，而非底泥 <span class="gl-trigger" data-term="fe">Fe²⁺</span>。</p>
-<p><strong>總結</strong>：南部（Zone-C）涵蓋台灣南部（台中以南）三類南部水體。它和北部（Zone-A/B）最大的差異不在氣候節奏，而在<strong>土壤化學與水體 <span class="gl-trigger" data-term="ph">pH</span> 所引發的感官生態學差異</strong>。<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 詳見 §3.8；護巢化學感知詳見 §10.5；南部極端情境策略見第九章。</p>
+<p><strong>觀念三：記住一個關鍵差別——北部土含鐵多、南部土含鐵少。</strong> 這一個差別後面會一路決定：水底會不會冒毒氣、暴雨後幾天能釣、寒流後底層多久回溫。先記著就好。</p>
+<p>六種常見釣場：北部野塘、北部水庫、北部管理池、南部野塘、南部水庫、南部管理池。</p>
 <hr />
-<h2 id="_4">第二章：台灣的六種鱸魚棲地——各有個性的水域</h2>
-<h3 id="21">2.1 先把釣場語言和研究模型對上</h3>
-<p>釣友平常講的六種場景，和研究檔真正有完整數據的六類水體，並不是一模一樣。為了不失真，這份白皮書用「<strong>釣場語言</strong>」介紹，再用「<strong>研究量化模型</strong>」放數字。</p>
-<table>
-<thead>
-<tr>
-<th>釣友常見場景</th>
-<th>研究量化對應</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>山區水庫</td>
-<td>北部深水水庫、南部深水水庫</td>
-<td>最接近實戰常見的大型水庫模式</td>
-</tr>
-<tr>
-<td>低地蓄水池（埤塘）</td>
-<td>北部野生埤塘</td>
-<td>淺、封閉、受降雨與土壤影響大</td>
-</tr>
-<tr>
-<td>河川感潮段</td>
-<td>⚠️ <strong>本白皮書不涵蓋此場景</strong></td>
-<td>無量化數據支撐，後續章節均不適用於河川環境，請勿直接套用</td>
-</tr>
-<tr>
-<td>漁業魚塭</td>
-<td>南部管理池</td>
-<td>高有機負載、高溫、易缺氧</td>
-</tr>
-<tr>
-<td>人工管理湖</td>
-<td>北部管理池</td>
-<td>有水車曝氣（paddle wheel aerator）、人為投餌與高壓垂釣</td>
-</tr>
-<tr>
-<td>灌溉埤塘</td>
-<td>南部野生埤塘</td>
-<td>淺、日照強、蒸發濃縮明顯</td>
-</tr>
-</tbody>
-</table>
-<h3 id="22">2.2 研究中真正有完整季節數字的六類水體</h3>
-<table>
-<thead>
-<tr>
-<th>水體模型</th>
-<th>典型場景</th>
-<th>基本特徵</th>
-<th>四季水溫（°C）</th>
-<th>四季溶氧 <span class="gl-trigger" data-term="do">DO</span>（mg/L）</th>
-<th>四季能見度（cm）</th>
-<th>白話重點</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>北部野生埤塘</strong></td>
-<td>低地蓄水池</td>
-<td>淺、水量小、受雨和底泥影響大</td>
-<td>春 <strong>17–22</strong>／夏 <strong>28–32</strong>／秋 <strong>22–26</strong>／冬 <strong>13–18</strong></td>
-<td>春 <strong>5.5–8.5</strong>／夏 <strong>3.0–7.5</strong>／秋 <strong>4.5–8.0</strong>／冬 <strong>6.5–9.5</strong></td>
-<td>春 <strong>30–50</strong>／夏 <strong>25–45</strong>／秋 <strong>30–50</strong>／冬 <strong>35–55</strong></td>
-<td>暴雨後會濁，但常在 <strong>48–72 小時</strong>內回清；夏天有 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 風險</td>
-</tr>
-<tr>
-<td><strong>北部深水水庫</strong></td>
-<td>山區水庫</td>
-<td>深、庫容大、會<span class="gl-trigger" data-term="fenceng">分層</span></td>
-<td>春 <strong>16–21</strong>／夏 <strong>27–30</strong>／秋 <strong>23–26</strong>／冬 <strong>15–19</strong></td>
-<td>春 <strong>6.0–9.0</strong>／夏 <strong>4.0–8.0</strong>／秋 <strong>5.0–8.0</strong>／冬 <strong>7.0–9.5</strong></td>
-<td>春 <strong>100–140</strong>／夏 <strong>20–150</strong>／秋 <strong>80–120</strong>／冬 <strong>120–180</strong></td>
-<td>夏天有 <strong>3–5 m</strong> 躍溫層；秋冬可能<span class="gl-trigger" data-term="fanshui">翻水</span></td>
-</tr>
-<tr>
-<td><strong>北部管理池</strong></td>
-<td>人工管理湖</td>
-<td>淺、高有機質、靠水車維持</td>
-<td>春 <strong>18–23</strong>／夏 <strong>29–33</strong>／秋 <strong>24–27</strong>／冬 <strong>14–19</strong></td>
-<td>春 <strong>4.5–8.0</strong>／夏 <strong>2.5–7.0</strong>／秋 <strong>3.5–7.5</strong>／冬 <strong>6.0–9.0</strong></td>
-<td>春 <strong>30–50</strong>／夏 <strong>25–40</strong>／秋 <strong>30–45</strong>／冬 <strong>35–50</strong></td>
-<td>夏天停機 <strong>4–6 小時</strong>就能重新<span class="gl-trigger" data-term="fenceng">分層</span>，底層很快缺氧</td>
-</tr>
-<tr>
-<td><strong>南部野生埤塘</strong></td>
-<td>灌溉埤塘</td>
-<td>淺、砂質底、蒸發強</td>
-<td>春 <strong>23–28</strong>／夏 <strong>30–34</strong>／秋 <strong>25–29</strong>／冬 <strong>19–23</strong></td>
-<td>春 <strong>3.5–7.5</strong>／夏 <strong>1.5–6.0</strong>／秋 <strong>4.0–7.0</strong>／冬 <strong>5.5–8.5</strong></td>
-<td>春 <strong>&lt;10–40</strong>／夏 <strong>15–30</strong>／秋 <strong>20–40</strong>／冬 <strong>30–50</strong></td>
-<td>春末常因濃縮與藻華讓能見度掉到 <strong>&lt;10 cm</strong></td>
-</tr>
-<tr>
-<td><strong>南部深水水庫</strong></td>
-<td>大型水庫</td>
-<td>深、庫灣大、旱季消落明顯</td>
-<td>春 <strong>22–27</strong>／夏 <strong>29–32</strong>／秋 <strong>26–29</strong>／冬 <strong>20–24</strong></td>
-<td>春 <strong>5.5–8.0</strong>／夏 <strong>3.0–7.5</strong>／秋 <strong>4.5–7.5</strong>／冬 <strong>6.0–8.5</strong></td>
-<td>春 <strong>60–100</strong>／夏 <strong>10–60</strong>／秋 <strong>40–80</strong>／冬 <strong>70–120</strong></td>
-<td>夏季暴雨後細顆粒沉得慢，高濁度可拖 <strong>14–30 天</strong></td>
-</tr>
-<tr>
-<td><strong>南部管理池</strong></td>
-<td>漁業魚塭</td>
-<td>極淺、高密度、高有機負載</td>
-<td>春 <strong>24–29</strong>／夏 <strong>31–35.5</strong>／秋 <strong>27–31</strong>／冬 <strong>20–25</strong></td>
-<td>春 <strong>3.0–7.0</strong>／夏 <strong>1.0–6.0</strong>／秋 <strong>3.0–6.5</strong>／冬 <strong>5.0–8.0</strong></td>
-<td>春 <strong>&lt;10–30</strong>／夏 <strong>10–25</strong>／秋 <strong>15–30</strong>／冬 <strong>25–40</strong></td>
-<td>最容易出現高溫、低氧、<span class="gl-trigger" data-term="eh">Eh</span> 崩塌與 <span class="gl-trigger" data-term="h2s">H₂S</span> 風險</td>
-</tr>
-</tbody>
-</table>
-<h3 id="23">2.3 六種水體，個性怎麼抓？</h3>
-<ul>
-<li><strong>水庫</strong>：體積大，變化慢，但一出事往往是整層出事，例如<span class="gl-trigger" data-term="fenceng">分層</span>、<span class="gl-trigger" data-term="fanshui">翻水</span>、<span class="gl-trigger" data-term="yizhongliu">異重流</span>。</li>
-<li><strong>野生埤塘</strong>：看起來平靜，其實很吃風、雨、日照與底質；一場雨就能變一個世界。</li>
-<li><strong>管理池／魚塭</strong>：水不是「自然穩定」，而是靠人撐住。水車一停，風一靜，問題很快就爆。</li>
-</ul>
-<p>所以你不能只問「這裡有沒有魚」，而是要問：<strong>這種水體，在這個季節、這個天氣、這個時間點，還有沒有魚願意站在那裡。</strong></p>
-<hr />
-<h2 id="_5">第三章：水的秘密——讀懂水質就讀懂鱸魚</h2>
-<h3 id="31">3.1 水溫：黑鱸最重要的環境指標</h3>
-<p>黑鱸是<strong>變溫動物</strong>。意思不是牠怕冷而已，而是牠的體溫、代謝、消化、追擊速度，幾乎都被水溫牽著走。</p>
-<p>可以把黑鱸想成一台沒有恆溫空調的引擎：</p>
-<ul>
-<li>水夠舒服，反應靈、油門順。</li>
-<li>太冷，轉速上不來。</li>
-<li>太熱，引擎快冒煙。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>水溫帶</th>
-<th>白話解讀</th>
-<th>黑鱸反應</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>18–28°C</strong></td>
-<td>實戰上的高活性帶；研究檔最佳成長更集中在 <strong>23–28.6°C</strong></td>
-<td>最願意巡游、追餌、換位</td>
-</tr>
-<tr>
-<td><strong>10–18°C</strong></td>
-<td>還能動，但動作慢、決策更保守</td>
-<td>常偏向結構邊、深淺交界</td>
-</tr>
-<tr>
-<td><strong>&gt;32°C</strong></td>
-<td>熱壓力很重</td>
-<td>容易停食、縮在陰影或高氧小區</td>
-</tr>
-<tr>
-<td><strong>&lt;10°C</strong></td>
-<td>代謝很慢</td>
-<td>常呈現「看得到、追不動」</td>
-</tr>
-<tr>
-<td><strong>&lt;4°C 或 &gt;36°C</strong></td>
-<td>接近危險邊界</td>
-<td>已經不是好不好釣，而是能不能活</td>
-</tr>
-</tbody>
-</table>
-<p>研究也指出，當水溫升到 <strong>32–33°C</strong>，黑鱸耗氧率可升到 <strong>69.4 mg O₂/kg/hr</strong>，有氧空間接近被榨乾。這就是很多南部夏天池子裡的魚，看起來還活著，但其實已經不太有本錢去追。</p>
-<h3 id="32-do">3.2 溶氧（<span class="gl-trigger" data-term="do">DO</span>）：水裡的空氣存款</h3>
-<p>溶氧可以想成水裡的「可用呼吸額度」。額度高，魚有餘裕；額度低，魚只能縮手縮腳。</p>
-<table>
-<thead>
-<tr>
-<th><span class="gl-trigger" data-term="do">DO</span> 狀態</th>
-<th style="text-align: right;">數字</th>
-<th>黑鱸反應</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>正常好用</td>
-<td style="text-align: right;"><strong>6–10 mg/L</strong></td>
-<td>能巡游、追餌、打架、護巢</td>
-</tr>
-<tr>
-<td>開始緊迫</td>
-<td style="text-align: right;"><strong>&lt;3 mg/L</strong></td>
-<td>呼吸加快、活動半徑縮小</td>
-</tr>
-<tr>
-<td>被迫逃離</td>
-<td style="text-align: right;"><strong>2.0 mg/L</strong>（夏季野外遙測起始：1.8 mg/L）</td>
-<td>放棄原本好點位，往上或往外移</td>
-</tr>
-<tr>
-<td>很危險</td>
-<td style="text-align: right;"><strong>1.5–2 mg/L 以下</strong></td>
-<td>可能急性窒息甚至死亡</td>
-</tr>
-</tbody>
-</table>
-<p>再加一個很重要的事實：<strong>溫度越高，水能裝的氧越少。</strong></p>
-<ul>
-<li><strong>30°C</strong> 飽和 <span class="gl-trigger" data-term="do">DO</span> 約 <strong>7.55 mg/L</strong>。</li>
-<li><strong>35°C</strong> 只剩 <strong>6.94 mg/L</strong>。</li>
-</ul>
-<p>也就是說，最熱的時候，魚最需要氧，偏偏水最裝不下氧。這就是南部夏季魚塭和管理池最麻煩的基本矛盾。</p>
-<h3 id="33">3.3 透明度／能見度：你看多遠，牠就可能看多遠</h3>
-<p>能見度就是「在水下能看多遠」。</p>
-<ul>
-<li><strong>&gt;120 cm</strong>：算清，視覺餌很好發揮。</li>
-<li><strong>30–60 cm</strong>：還能看，但更吃輪廓、色塊、震動。</li>
-<li><strong>&lt;10–20 cm</strong>：很多時候已經不是顏色問題，而是魚根本只能靠近場震動與輪廓。</li>
-</ul>
-<p>研究顯示，北部微酸性水域暴雨後常在 <strong>48–72 小時</strong>內恢復；南部中性到微鹼性水域則可能要 <strong>14–30 天</strong>。同樣一場大雨，北部可能是「兩天後重新開局」，南部卻是「接下來半個月都在打濁水」。</p>
-<h3 id="34-ph">3.4 <span class="gl-trigger" data-term="ph">pH</span>：水是偏酸還是偏鹼</h3>
-<p>北部常見 <strong><span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5</strong>（偏酸），南部常見 <strong><span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5</strong>（接近中性到微鹼）。詳細說明見閱讀前須知。</p>
-<h3 id="35-eh">3.5 <span class="gl-trigger" data-term="eh">Eh</span>：底有多「新鮮」</h3>
-<p><span class="gl-trigger" data-term="eh">Eh</span>（氧化還原電位）是底泥「新鮮度」的指標，詳細說明見閱讀前須知。量化區間對照：</p>
-<table>
-<thead>
-<tr>
-<th><span class="gl-trigger" data-term="eh">Eh</span> 範圍</th>
-<th>底質狀態</th>
-<th>對魚的意義</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>+300 ~ +500 mV</strong></td>
-<td>充氧、健康</td>
-<td>可放心探底</td>
-</tr>
-<tr>
-<td><strong>+200 ~ 0 mV</strong></td>
-<td>開始消耗氧氣</td>
-<td><span class="gl-trigger" data-term="fe">Fe²⁺</span> 低濃度釋放，謹慎</td>
-</tr>
-<tr>
-<td><strong>0 ~ −100 mV</strong></td>
-<td>鐵還原明顯</td>
-<td><span class="gl-trigger" data-term="fe">Fe²⁺</span> 大量溶出，離底 ≥40 cm（北部）</td>
-</tr>
-<tr>
-<td><strong>&lt; −150 mV</strong></td>
-<td>臭底危險區</td>
-<td><span class="gl-trigger" data-term="h2s">H₂S</span> 大量釋放，離底 ≥86 cm（南部）/ ≥40 cm（北部）</td>
-</tr>
-</tbody>
-</table>
-<p>研究指出，南部底泥淹水後通常：</p>
-<ul>
-<li><strong>1–3 天</strong>進入反硝化帶；</li>
-<li><strong>3–7 天</strong>進入鐵還原；</li>
-<li><strong>7–14 天</strong>可能跌入硫酸鹽還原帶。</li>
-</ul>
-<p>這就是為什麼有些池子不是一下雨立刻爛，而是<strong>淹了幾天後開始發臭、發黑、魚浮頭</strong>。</p>
-<h3 id="36">3.6 南北水質差異：不是誰比較好，是問題不一樣</h3>
-<ul>
-<li><strong>北部</strong>：偏酸、褐、雨多、回溫慢、濁得快也清得快；麻煩在春寒、光線、<span class="gl-trigger" data-term="fe">Fe²⁺</span>、<span class="gl-trigger" data-term="fanshui">翻水</span>。</li>
-<li><strong>南部</strong>：偏中性到微鹼、日照強、蒸發大、濁得慢也清得慢；麻煩在高溫、濃縮、藻華、低氧、<span class="gl-trigger" data-term="h2s">H₂S</span>。</li>
-</ul>
-<p>所以北部魚常是「想吃但環境讓牠不敢上來」；南部魚常是「連想吃的生理餘裕都快沒了」。</p>
-<h3 id="37-fick">3.7 安全離底距離：Fick 模型告訴我們的數字</h3>
+<h2 id="junior-_2">第一章：先看天、看水——決定今天好不好釣</h2>
 <blockquote>
-<p><strong>什麼是 Fick 擴散？</strong><br />
-想像底泥像一塊發臭的海綿，裡面的毒氣（<span class="gl-trigger" data-term="fe">Fe²⁺</span> 或 <span class="gl-trigger" data-term="h2s">H₂S</span>）會慢慢往上「滲透」到水裡。Fick 擴散模型就是用物理方程式計算這個毒氣往上滲透的速度，再算出：「從泥面往上多遠，濃度才能低到對魚安全？」這個距離，就是「安全離底距離」。</p>
+<p><strong>先講白話：</strong><br />
+- <strong>水溫</strong>：黑鱸最有活力是 22～28°C。低於 12°C 變很懶，高於 30°C 開始喘。釣前先有個概念：現在的水大概幾度。<br />
+- <strong>溶氧</strong>：水裡的氧氣，魚靠它呼吸。低於 3 魚就難受、不太想吃；低於 1.5 是保命邊緣，只會浮頭喘氣。<br />
+- <strong>能見度</strong>：水有多清，用「看得到幾公分」算。越小越濁。這直接決定你選什麼顏色的餌。<br />
+- <strong>氣壓</strong>：空氣壓水面的力道。低氣壓（鋒面、颱風前）天空變陰，反而常是好咬的時機——但主因是光線，不是氣壓本身。</p>
 </blockquote>
-<p>研究透過 Fick 擴散模型精算（VSUP-B04、VSUP-B06），得出以下兩個重要數字：</p>
-<p><strong>北部水體：<span class="gl-trigger" data-term="fe">Fe²⁺</span> 安全離底距離 = 40 cm</strong></p>
-<p>北部缺氧底泥的 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 釋放通量峰值約 50 mmol/m²/day（每平方公尺每天釋出約 2.79 g 的 <span class="gl-trigger" data-term="fe">Fe²⁺</span>）。模型計算結果：魚必須距離底泥<strong>至少 40 cm</strong>，才能避開 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 膠體對魚鰓的氧化損傷。</p>
-<p><strong>南部水體：<span class="gl-trigger" data-term="h2s">H₂S</span> 安全離底距離 = ≥86 cm</strong></p>
-<p>南部高有機負載底泥的 <span class="gl-trigger" data-term="h2s">H₂S</span> 釋放通量峰值高達 281 mmol/m²/day，遠高於北部。在有微流場的正常情況下，安全距離 = <strong>86 cm</strong>。但要注意：<br />
-- 靜水（完全無流動）：安全距離縮至 <strong>55–65 cm</strong>；<br />
-- <span class="gl-trigger" data-term="fanshui">翻水</span>攪動劇烈時：毒氣可被帶到 <strong>120–160 cm</strong> 高度。</p>
-<p>這些數字比「離底 35–45 cm 就好」的舊說法更嚴格。在南部池的實戰上，代表的是：如果水深只有 1.2–1.5 m，那麼安全的水層就只剩上面那 <strong>30–60 cm</strong> 左右。</p>
-<h3 id="38-schreckstoff">3.8 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>（魚的化學警報）：南北的不對稱</h3>
+<p>新手最常問：「今天能不能釣？」先看四件事。</p>
+<p><strong>一、水溫對不對。</strong> 22°C 是黑鱸的「開機線」。南部 2 月中就過了，桃竹苗大約 4 月中，台北要拖到 5 月初——<strong>所以同一個春天，桃竹苗的魚比台北早 12～18 天進入活躍期</strong>。冬天水溫掉到 12°C 以下，魚會很懶、只在中午暖一點時短暫開口。</p>
+<p><strong>二、天氣是不是剛變。</strong> 大晴天大太陽未必好釣（魚會被強光「閃瞎」躲起來，這叫「上午關機」，水越清關得越早）。反而<strong>陰天、鋒面前、起風</strong>常常好咬。原因是天空變陰後，刺眼的反光消失、水下變柔和，魚看餌的輪廓更清楚、更敢追。</p>
+<p><strong>三、最近有沒有暴雨或寒流。</strong> 暴雨後水會變超濁；<strong>北部 1～2 天就清，南部要等 5～8 天</strong>（因為北部的土會讓泥巴快速「抱團沉底」，南部不會）。寒流剛過、水還在回溫時也難釣。</p>
+<p><strong>四、管理池有沒有開水車。</strong> 養很肥的管理池半夜關水車，清晨 4～6 點全池會嚴重缺氧，那陣子魚幾乎不咬；水車一開、氧氣回來才會恢復。</p>
 <blockquote>
-<p><strong>什麼是 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>？</strong><br />
-這是德文，意思是「恐懼物質」。魚受傷或被捕食時，皮膚細胞會破裂，釋放出一種叫做 <strong>H3NO（次黃嘌呤-3-N-氧化物）</strong> 的化學物質。附近的魚聞到這個氣味，就知道「有危險！」——這是魚類的天然警報系統。</p>
-</blockquote>
-<p>但是，這個警報在台灣南北水體的有效性<strong>差別非常大</strong>：</p>
-<p><strong>北部酸水（<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5）：化學竊聽幾乎失效</strong></p>
-<p>在強酸性水體中，H3NO 分子會很快水解失活，半衰期壓縮至<strong>僅數分鐘</strong>。這代表：<br />
-- 受傷的魚發出的化學警報，還沒漂到幾公尺外就消失了；<br />
-- 北部鱸魚靠化學感知偵測同伴危險的有效半徑 <strong>&lt;0.5 m</strong>（純水理論值是 8 m）；<br />
-- 北部魚被迫主要依賴<strong>視覺和側線</strong>來感知環境危險。</p>
-<p><strong>南部弱育土水體（<span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5）：警報熱點可延續 12–36 小時</strong></p>
-<p>南部水體中的 <span class="gl-trigger" data-term="cdom">CDOM</span>（腐植酸、黃腐酸）會像「保護套」一樣包裹住 H3NO 分子，讓它不容易被光線分解，同時讓它慢慢釋放：<br />
-- 一旦中魚觸發 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 釋放，有效死區半徑可達 <strong>4–7 m</strong>；<br />
-- 這個警報熱點可維持 <strong>12–36 小時</strong>。</p>
-<p><strong>釣魚實戰意義</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>情況</th>
-<th>北部</th>
-<th>南部</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>中魚一尾後換點的必要性</td>
-<td>通常 5–10 分鐘就可以回來試</td>
-<td>那個點整天可能就廢了</td>
-</tr>
-<tr>
-<td>活魚艙放魚後原點</td>
-<td>影響範圍小</td>
-<td>影響可持續數小時</td>
-</tr>
-<tr>
-<td>跑魚後原點</td>
-<td>稍待 10–15 分鐘再嘗試</td>
-<td>至少換到 8 m 外，等待數小時</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="_6">第四章：天氣與鱸魚活性——釣手最關心的短期觸發</h2>
-<h3 id="41">4.1 氣壓：魚不會看氣象圖，但牠的魚鰾會先知道</h3>
-<p>為了方便釣場判讀，這裡先給一個<strong>操作型分級</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>壓力區間</th>
-<th>系統類型</th>
-<th>魚的典型反應</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>&gt;1020 hPa</strong></td>
-<td>高壓系統</td>
-<td>固守結構、貼陰影、貼層線；找最穩定的水層</td>
-</tr>
-<tr>
-<td><strong>1010–1020 hPa</strong></td>
-<td>一般穩定</td>
-<td>正常巡游，常規策略</td>
-</tr>
-<tr>
-<td><strong>&lt;1005 hPa</strong></td>
-<td>低壓活躍</td>
-<td>緩降期短暫爆發覓食；颱風等級驟降則先開後關機（見 §4.2）</td>
-</tr>
-</tbody>
-</table>
-<p>要先誠實說明：研究檔直接量化的硬數字，是 <strong>1013→1000 hPa</strong> 的一般低壓，以及 <strong>1013→960 hPa</strong> 的颱風極端情境。上面這個高低壓分級，是把研究結果整理成釣場較好用的讀法。</p>
-<h4 id="1020-hpa">高壓（&gt;1020 hPa）時，魚通常怎麼了？</h4>
-<p>高壓多半代表冷鋒後、天氣穩、天空亮。魚不一定完全不咬，但常變得更固定、更保守，喜歡貼結構、貼陰影、貼穩定水層。這種時候亂跑找魚，常不如耐心找<strong>最穩定的那條層線</strong>。</p>
-<h4 id="1005-hpa">低壓（&lt;1005 hPa）時，為什麼常有機會？</h4>
-<p>研究顯示，一般低壓若從 <strong>1013 hPa</strong> 緩降到 <strong>1000 hPa</strong>，黑鱸魚鰾只會多膨脹約 <strong>0.54 cm³</strong>，補償深度大約只要<strong>下潛 13 cm</strong>。對多數魚來說，這還不至於造成全面性崩潰。</p>
-<p>所以在<strong>水不太淺、氧不太差</strong>的前提下，低壓前緣常常是比較有機會的時間。</p>
-<h4 id="24-8-hpa">氣壓驟降（24 小時內 &gt;8 hPa）為什麼會有感？</h4>
-<p>因為這代表水下魚鰾需要快速補償，魚的垂直位置、舒適深度與警戒感會一起動。研究裡連 <strong>13 hPa</strong> 的變化都已經需要下修 <strong>13 cm</strong>；如果是颱風等級的 <strong>53 hPa</strong>，就得硬下 <strong>53 cm</strong>。在淺池裡，這常常根本沒地方可退。</p>
-<h3 id="42">4.2 低氣壓不是永遠好，颱風前後更像「先開口、再關死」</h3>
-<p>當氣壓從 <strong>1013 hPa</strong> 一路掉到 <strong>960 hPa</strong>，研究估算一尾約 <strong>35 cm、1 kg</strong> 的黑鱸，魚鰾會被動膨脹 <strong>2.27 cm³</strong>。如果牠原本在 <strong>1.5 m</strong> 水深，理論上得多往下 <strong>53 cm</strong> 才能維持中性浮力。</p>
-<p>問題是，台灣很多管理池和埤塘本來就只有 <strong>1.5–2.0 m</strong> 深。魚退不了，接下來就得用胸鰭和軀幹一直對抗浮力，功率可高達 <strong>17–137 W/kg</strong>。這會帶來兩個結果：</p>
-<ol>
-<li><strong>前面短暫開口</strong>：颱風前緣 <strong>0–12 小時</strong>可能出現爆發性覓食。</li>
-<li><strong>後面全面關機</strong>：再往後常進入 <strong>24–72 小時</strong> 的絕對 <span class="gl-trigger" data-term="lockjaw">Lockjaw</span>。</li>
-</ol>
-<p>所以「低壓前魚會咬」這句話，只說對一半。<strong>太劇烈的低壓，最後常把魚逼進完全不想吃的狀態。</strong></p>
-<h3 id="43">4.3 光照：晨昏常是窗口，但北部高濁水清晨會有盲窗</h3>
-<p>黑鱸是很吃視覺的魚，但牠的眼睛不是瞬間切換模式。研究指出，從暗適應切到亮適應，視網膜真正完成重組要 <strong>45–60 分鐘</strong>。</p>
-<p>這在北部高濁水很要命。研究估算，在北部高濁度水體，黑鱸若從 <strong>1.5 m</strong> 深處往 <strong>0.5 m</strong> 發動上衝，眼睛接收到的光強可以從 <strong>17 <span class="gl-trigger" data-term="lux">lux</span></strong> 一口氣跳到 <strong>1197 <span class="gl-trigger" data-term="lux">lux</span></strong>，等於<strong>暴增 70.4 倍</strong>。這足以讓牠發生「閃光致盲」，然後縮回去。</p>
-<p>所以：</p>
-<ul>
-<li><strong>晨昏有效</strong>，但不是每一池都一樣有效。</li>
-<li><strong>北部褐水、雨後濁水</strong>，清晨常有一段 <strong>45–60 分鐘</strong> 的視覺尷尬期。</li>
-<li><strong>南部清水</strong>，光變比較平順，清晨常比北部更容易直接開局。</li>
-</ul>
-<h3 id="44">4.4 陰天和小雨：常是「看不那麼清楚，卻還能吃」的甜蜜點</h3>
-<p>輕微降雨或陰天，通常會做兩件事：</p>
-<ol>
-<li>降低直射光與水下對比過強的問題；</li>
-<li>讓邊線、輪廓、陰影帶更好用。</li>
-</ol>
-<p>所以小雨、毛毛雨、陰天，常是中層餌、邊線餌、背風面搜索的好時機。</p>
-<h3 id="45">4.5 強降雨：不是加分，而是重開機</h3>
-<p>研究指出，梅雨或強對流降水常達 <strong>40–100 mm/day</strong>，而淺水封閉埤塘在集水面積足夠時，<strong>單日就可能換掉約 12% 水體</strong>。連續幾天後，等於整池都被洗過一輪。</p>
-<p>這和小雨完全不同。強降雨常會造成：</p>
-<ul>
-<li>水溫重設；</li>
-<li>濁度暴衝；</li>
-<li>底泥翻攪；</li>
-<li>北部形成<span class="gl-trigger" data-term="yizhongliu">異重流</span>、南部形成長濁期；</li>
-<li>視覺改成側線主導。</li>
-</ul>
-<p>所以輕微降雨像「調味」，強降雨更像「打掉重來」。</p>
-<h3 id="46">4.6 月相：滿月在南部清水很有感，在北部濁水就小得多</h3>
-<p>研究對月相給了非常漂亮的量化：</p>
-<ul>
-<li>魚類褪黑激素受光抑制的閾值大約只有 <strong>0.01 <span class="gl-trigger" data-term="lux">lux</span></strong>。</li>
-<li>標準滿月夜的地表照度約 <strong>0.3 <span class="gl-trigger" data-term="lux">lux</span></strong>。</li>
-</ul>
-<p>在南部清水，滿月光穿到 <strong>1.5 m</strong> 深後，還可能保有 <strong>0.039 <span class="gl-trigger" data-term="lux">lux</span></strong>，<strong>高於 0.01 <span class="gl-trigger" data-term="lux">lux</span></strong>。這代表什麼？代表魚的身體會把月夜誤判成「還沒下班」，夜裡跑去狂吃，隔天早上反而飽到不理你。</p>
-<p>但在北部濁水，同樣穿到 <strong>1.5 m</strong>，可能只剩 <strong>0.0005 <span class="gl-trigger" data-term="lux">lux</span></strong>，低於閾值，等於月光打不進去，魚照樣睡。</p>
-<p>所以可以這樣抓：</p>
-<ul>
-<li><strong>南部清水</strong>：滿月前後 3 天，夜間活性常上升，隔天晨間可能變差。<strong>基於研究機制推估</strong>，滿月夜的夜間活躍度可比新月夜高約 <strong>1.5–2 倍</strong>。</li>
-<li><strong>北部濁水</strong>：滿月效應常弱得多。</li>
-</ul>
-<h3 id="47">4.7 冷鋒：為什麼「昨天咬翻，今天像關機」</h3>
-<p>因為北部冷鋒不是小降溫，而是<strong>一天掉 4–8°C</strong>，強的可達 <strong>8–10°C</strong>。魚的代謝、位置、視覺、壓力荷爾蒙，全部都要重算一次。</p>
-<p>冷鋒後常見三件事：</p>
-<ol>
-<li>魚往更穩的層位縮；</li>
-<li>追餌距離縮短；</li>
-<li>先追後不咬、或乾脆只看不動。</li>
-</ol>
-<p>這不是魚變聰明，而是牠在節能。</p>
-<hr />
-<h2 id="_7">第五章：鱸魚住在哪裡——棲位選擇的邏輯</h2>
-<h3 id="51">5.1 什麼是棲位？把它想成魚的房地產選擇</h3>
-<p>棲位不是單純「躲在哪裡」，而是魚在找一間同時滿足三件事的房子：</p>
-<ol>
-<li><strong>溫度住得下去</strong>；</li>
-<li><strong>氧氣吸得到</strong>；</li>
-<li><strong>吃東西划算</strong>。</li>
-</ol>
-<p>研究把黑鱸的非繁殖期選位，整理成一個很好懂的三角平衡：</p>
-<ul>
-<li><strong>溫度<span class="gl-trigger" data-term="fenceng">分層</span></strong>：太熱不行、太冷也不行；</li>
-<li><strong>溶氧帶</strong>：低於 <strong>2–3 mg/L</strong> 就得撤；</li>
-<li><strong>覓食效率</strong>：旁邊要有餌、有遮蔽、有出手角度。</li>
-</ul>
-<h3 id="52">5.2 不同水體的選棲邏輯</h3>
-<h4 id="_8">水庫：在舒服層和安全層之間來回算帳</h4>
-<p>深水水庫夏季常建立 <strong>3–5 m</strong> 躍溫層。平常黑鱸常卡在躍溫層上方到中層結構帶，因為那裡通常同時具備：還不算太熱、氧還夠、餌魚會沿著<span class="gl-trigger" data-term="fenceng">分層</span>線走。</p>
-<p>但一遇到暴雨<span class="gl-trigger" data-term="yizhongliu">異重流</span>，北部深水水庫可被 <strong>20°C、<span class="gl-trigger" data-term="tss">TSS</span>（總懸浮固體，數值越高代表水越混濁）&gt;3000 mg/L</strong> 的重泥冷水切進去，形成 <strong>5.55 kg/m³</strong> 的密度差，甚至直搗 <strong>25 m</strong> 深槽。這時原本躲在 <strong>10–15 m</strong> 的魚，會被迫一次往上逃 <strong>10–15 m</strong>。</p>
-<h4 id="_9">埤塘：淺水暖區和深水避熱區輪流值班</h4>
-<p>淺水埤塘的魚位通常很立體：</p>
-<ul>
-<li>早晚、陰天、小風：靠淺、靠邊、靠背風面。</li>
-<li>中午、大太陽、缺氧：退到稍深處、陰影、進排水口。</li>
-</ul>
-<p>但若底部已經臭掉，就不是「深比較好」。<strong>研究精算後確認</strong>：<br />
-- 南部高溫爛底時，黑鱸反而必須離底至少 <strong>≥86 cm</strong> 才能避開 <span class="gl-trigger" data-term="h2s">H₂S</span> 毒帶（有微流場的一般情況；靜水下縮至 55–65 cm，詳見 §3.7）；<br />
-- 北部 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 問題水域，安全離底距離為 <strong>40 cm</strong>。</p>
-<p>這些數字的細節與推導原理，請見第三章 §3.7。</p>
-<h4 id="_10">魚塭／管理池：邊緣結構很重要，但機器比地形更重要</h4>
-<p>管理池的魚位，常先問一句：<strong>水車有沒有開？</strong></p>
-<ul>
-<li>北部管理池：停機後底層 <span class="gl-trigger" data-term="do">DO</span> 約以 <strong>0.85 mg/L/hr</strong> 速度下滑，約 <strong>6 小時</strong>跌破 <strong>2.0 mg/L</strong>。</li>
-<li>南部管理池：極端高溫下可達 <strong>1.41 mg/L/hr</strong>，<strong>3.5 小時</strong>就可能出事。</li>
-</ul>
-<p>所以魚不只是沿邊、靠障礙物而已，牠還會沿著「氧氣留下來的地方」站。很多時候最有價值的不是草、不是石，是<strong>殘存高氧核心區</strong>。</p>
-<h3 id="53">5.3 風生流：為什麼一吹風，魚就換邊</h3>
-<p>風生流可以用最白話的方法理解：</p>
-<p><strong>風吹水面 → 水面推動表層水 → 表層水把浮游生物和小魚往一邊送 → 鱸魚去堵那條路。</strong></p>
-<p>研究量化得很漂亮：</p>
-<ul>
-<li>當風速持續 <strong>&gt;5 m/s</strong>，1 公頃、平均 <strong>1.5 m</strong> 深的淺水塘會形成穩定風驅環流。</li>
-<li>背風岸會出現 <strong>1.5–2.5 cm/s</strong> 的下沉流。</li>
-<li>迎風岸會有 <strong>1.0–2.0 cm/s</strong> 的補償上升流。</li>
-<li>表層約 <strong>10 cm/s</strong> 的風驅流，可以在 <strong>16.6 分鐘</strong>內把東西推 <strong>100 m</strong>。</li>
-</ul>
-<p>結果就是：餌魚被推到背風側，黑鱸最常埋伏在<strong>背風岸水下 0.8–1.2 m</strong>，等待從斜上方被壓下來的食物。研究推算，牠最省力的出擊角度約在 <strong>45–60°</strong>。</p>
-<h3 id="54">5.4 桃竹苗：有自己一套的棲位邏輯</h3>
-<p>桃園台地的埤塘群因冬春季東北風強、水體較淺，形成了和台北/宜蘭不同的棲位規律。以下是實戰上最需要知道的幾點：</p>
-<h4 id="absolute-ambush-mode">強迫伏擊模式（Absolute Ambush Mode）</h4>
-<p>冬春季東北風持續 6–10 m/s 時，1 公頃的埤塘產生的表層風驅流可達 <strong>8–24 cm/s</strong>，遠超台北/宜蘭的 10 cm/s。在這種強風場下，黑鱸無法維持有效巡游搜索，被迫轉為「守株待兔」模式：</p>
-<ul>
-<li>典型棲位水深：<strong>0.2–0.8 m</strong>（沿岸壁、碎石邊、蘆葦根系下壓身體）；</li>
-<li>不主動出擊，靜待被風流推送而來的食物；</li>
-<li>與台北/宜蘭春天的「0.5–2.0 m 主動巡游」完全不同。</li>
-</ul>
-<p><strong>釣手策略</strong>：桃園冬春季要把假餌「讓給風」——讓假餌順風流漂過障礙物前方，比廣搜更有效。</p>
-<h4 id="_11">能見度循環快，感官切換也快</h4>
-<p>桃園台地雨後回清快，但強風又容易重新掀底，能見度常在 <strong>15–60 cm</strong> 之間以 <strong>48 小時</strong>為周期循環切換。這意味著同一個釣場，今天可能要打視覺餌，明天可能就得改側線餌——備兩套方案很重要。</p>
-<h4 id="_12"><span class="gl-trigger" data-term="fanshui">翻水</span>比台北早，頻率更高</h4>
-<ul>
-<li>桃竹苗<span class="gl-trigger" data-term="fanshui">翻水</span>首次出現：<strong>11 月</strong>（台北/宜蘭：12 月）；</li>
-<li>全年<span class="gl-trigger" data-term="fanshui">翻水</span>次數：<strong>2–4 次</strong>（台北/宜蘭：1–2 次）；</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>持續：<strong>24–48 小時</strong>；</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>後：底層毒水上湧，魚被迫懸浮 <strong>1.0–1.5 m</strong> 中層。</li>
-</ul>
-<p><strong>秋末策略</strong>：桃園釣手要比台北模型早一個月警覺<span class="gl-trigger" data-term="fanshui">翻水</span>，10 月下旬起就要留意冷鋒後的<span class="gl-trigger" data-term="fanshui">翻水</span>訊號。</p>
-<h4 id="fe2-34"><span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶比台北早 3–4 週</h4>
-<p>桃竹苗春季升溫早，底泥缺氧時間提前，<strong>5 月下旬</strong>就可能進入 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 高危帶（台北/宜蘭：6 月中旬）。安全離底距離同樣是 <strong>40 cm</strong>（Fick精算值）。</p>
-<h4 id="_13">管理池水車停機重啟的額外危險</h4>
-<p>桃園許多管理池若水車停機 <strong>≥4 小時</strong>後重新啟動，頭 <strong>1–2 小時</strong>因底層翻攪，<span class="gl-trigger" data-term="h2s">H₂S</span> 可能湧升至水面下 <strong>30–50 cm</strong> 的位置。這段時間即使水面看起來正常，底層附近也可能是危險帶。</p>
-<h3 id="55-k">5.5 容載量（K 值）：一片水到底養得起多少黑鱸？</h3>
-<p>K 值你可以把它理解成「這間公寓最多能住幾戶，而且還不會亂掉」。</p>
-<p>研究估算，台灣不同水體的自然 K 值大約落在 <strong>30–180 尾／公頃（ind/ha）</strong>，但「理論能養」不等於「最後養得住」。</p>
-<table>
-<thead>
-<tr>
-<th>水體</th>
-<th style="text-align: right;">自然 K 值（ind/ha）</th>
-<th style="text-align: right;">外來種與環境壓縮後有效 K 值</th>
-<th>白話解讀</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>北部野生埤塘</td>
-<td style="text-align: right;"><strong>50–80</strong></td>
-<td style="text-align: right;"><strong>15–25</strong></td>
-<td>能養一些，但很脆弱</td>
-</tr>
-<tr>
-<td>北部深水水庫</td>
-<td style="text-align: right;"><strong>30–60</strong></td>
-<td style="text-align: right;"><strong>10–20</strong></td>
-<td>深水多，不代表穩；受暴雨與<span class="gl-trigger" data-term="fanshui">翻水</span>很大</td>
-</tr>
-<tr>
-<td>北部管理池</td>
-<td style="text-align: right;"><strong>120–150</strong></td>
-<td style="text-align: right;"><strong>19–24</strong></td>
-<td>看起來很多，其實多半靠放流維持</td>
-</tr>
-<tr>
-<td>南部野生埤塘</td>
-<td style="text-align: right;"><strong>80–100</strong></td>
-<td style="text-align: right;"><strong>10–15</strong></td>
-<td>條件最好，但最怕蛇頭魚科壓上來</td>
-</tr>
-<tr>
-<td>南部深水水庫</td>
-<td style="text-align: right;"><strong>40–60</strong></td>
-<td style="text-align: right;"><strong>15–25</strong></td>
-<td>可養，但水位一掉，繁殖就很傷</td>
-</tr>
-<tr>
-<td>南部管理池</td>
-<td style="text-align: right;"><strong>150–180</strong></td>
-<td style="text-align: right;"><strong>&lt;5</strong></td>
-<td>理論高、實際常接近崩潰</td>
-</tr>
-</tbody>
-</table>
-<p>所以 K 值不是「哪裡魚多」而已，更是提醒你：<strong>有些池看起來有很多魚，其實是用人力和放流硬撐出來的。</strong></p>
-<hr />
-<h2 id="_14">第六章：鱸魚的感官世界——牠如何感知獵物</h2>
-<h3 id="61">6.1 視覺：牠不是全角度都看得一樣好</h3>
-<p>黑鱸眼睛長在頭兩側偏上方，所以牠的世界不是人類那種正前方高清畫面，而比較像：</p>
-<ul>
-<li>前方和前上方最好；</li>
-<li>正下方最差；</li>
-<li>往上看水面的輪廓很敏感。</li>
-</ul>
-<p>實戰上最關鍵的軸向，可以抓成：<strong>前上方約 30–45°</strong>。這也是很多魚為什麼喜歡從下往上頂、從前下方追、卻不愛直接朝腳下啄。</p>
-<h3 id="62-cff">6.2 <span class="gl-trigger" data-term="cff">CFF</span>（閃光融合頻率）：魚看假餌的「影像刷新率」</h3>
-<blockquote>
-<p><strong>什麼是 <span class="gl-trigger" data-term="cff">CFF</span>？</strong><br />
-閃爍融合頻率（Critical Flicker Fusion，<span class="gl-trigger" data-term="cff">CFF</span>）是一個描述「眼睛多快才能分辨兩個閃爍是兩個事件，而不是一個殘影」的指標。就像電視螢幕的更新率——人眼大約 24–30 Hz 以上就看不出在閃爍，感覺是連續畫面；低於這個頻率才覺得在閃。對魚來說，<span class="gl-trigger" data-term="cff">CFF</span> 決定了牠能否清楚識別假餌的動作節奏。</p>
-</blockquote>
-<p><strong>黑鱸的 <span class="gl-trigger" data-term="cff">CFF</span> 不是固定的，光線條件不同，數值差很多：</strong></p>
-<table>
-<thead>
-<tr>
-<th>光線環境</th>
-<th>黑鱸 <span class="gl-trigger" data-term="cff">CFF</span></th>
-<th>白話意思</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>白天、充足陽光（明視覺）</td>
-<td><strong>30–60 Hz</strong></td>
-<td>魚眼的<strong>視覺上限</strong>——假餌動作只要低於這個頻率，牠都能看清楚；超過才會模糊成殘影。人力操控的假餌（0.5–7 Hz）和假餌本身的搖擺（5–20 Hz）都遠低於這個上限，白天清水下魚可以清楚辨識動作細節</td>
-</tr>
-<tr>
-<td>傍晚、陰天、弱光（過渡）</td>
-<td><strong>15–30 Hz</strong></td>
-<td>上限開始下移，高頻自振假餌（如無嘴路亞）可能開始讓魚看到殘影</td>
-</tr>
-<tr>
-<td>夜間、暗視覺</td>
-<td><strong>10–15 Hz</strong></td>
-<td>每秒超過 10–15 次的動作就開始融合；連一般假餌的自振頻率都可能超標</td>
-</tr>
-<tr>
-<td>低溫（&lt;13°C）+ 極低光</td>
-<td><strong>&lt;10 Hz</strong></td>
-<td>稍快的假餌動作就是模糊光團；此時側線刺激遠比視覺重要</td>
-</tr>
-</tbody>
-</table>
-<p><strong>這有什麼釣魚意義？</strong></p>
-<p>假餌的搖擺頻率如果超過當時的 <span class="gl-trigger" data-term="cff">CFF</span>，魚眼的視神經無法區分個別擺動，會把連續動作訊號<strong>融合成一個穩定影像</strong>——就像日光燈以 60 Hz 閃爍，人眼卻看不出閃爍、只感覺是穩定白光。這時黑鱸無法確認這是有動作的食物，<span class="gl-trigger" data-term="oft">OFT</span> 的「可否下嘴」審查通不過，通常就不咬。</p>
-<p>還有一個更細膩的問題叫做 <strong>Foveal Fusion（中心視野融合）</strong>：</p>
-<blockquote>
-<p>黑鱸在遠處用眼睛邊緣（周邊視網膜）追蹤假餌；當牠切入攻擊角度、把假餌對準中央銳視區（眼睛解析度最高的區域）時，視網膜的時間解析模式可能改變——部分魚類研究顯示中央與周邊的時間融合閾值存在差異，但黑鱸尚無直接量測數據，以下為推論性解釋：</p>
-<p><strong>結果就是：你以為 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 的速度夠慢，但對進入攻擊視角的魚來說，假餌的動作節奏可能突然超出有效感知範圍。</strong> 這就是有些魚追到最後一刻卻中途離場的可能原因之一。</p>
-</blockquote>
-<p><strong>怎麼實際操作？</strong></p>
-<p>📌 <strong>先搞清楚你控制的是什麼</strong></p>
-<p>在 <span class="gl-trigger" data-term="cff">CFF</span> 這個框架下，釣手對假餌振動頻率有<strong>兩個獨立的可控維度</strong>：</p>
-<p><strong>① 收線速度（m/s）→ 路亞自振頻率（Hz）</strong><br />
-收線速度直接決定路亞前進速度，而路亞的自振頻率（擺尾或搖擺次數）會隨速度變化。<br />
-關係是：<strong>收線速度（m/s）→ 決定路亞自振頻率（Hz）→ 和魚的 <span class="gl-trigger" data-term="cff">CFF</span> 比大小。</strong><br />
-同樣的速度，不同路亞振出不同 Hz——所以路亞種類選對了才有意義。</p>
-<p><strong>② 竿尖抖動（2–5 Hz）→ 視覺對比脈衝（10–20 Hz）</strong><br />
-收線的同時，釣手可透過<strong>竿尖左右小幅抖動</strong>，在假餌上疊加一層額外的視覺對比脈衝。<br />
-竿尖抖動頻率約 2–5 Hz 時，路亞在魚眼中產生約 <strong>10–20 Hz 的明暗對比脈衝</strong>——嚴格低於明視覺 <span class="gl-trigger" data-term="cff">CFF</span>（30–60 Hz），魚能清楚分辨每一下脈衝，不會融合成殘影。<br />
-這等於在「速度」之外，多給了魚一個可識別的<strong>節奏訊號</strong>。</p>
-<blockquote>
-<p>⚠️ 竿尖抖動的有效前提是<strong>明視覺條件（<span class="gl-trigger" data-term="cff">CFF</span> 30–60 Hz）</strong>。進入低光/傍晚（<span class="gl-trigger" data-term="cff">CFF</span> 15–30 Hz）或夜間（<span class="gl-trigger" data-term="cff">CFF</span> &lt;15 Hz），竿尖抖動產生的 10–20 Hz 脈衝就可能接近或超過閾值，應減少或停止。</p>
+<p><strong>「溶氧看不到，我怎麼知道？」——五個免費判斷法</strong><br />
+沒人會帶溶氧機去釣魚，但溶氧不用量、用「推」的就好，看五件事：<br />
+1. <strong>看時間。</strong> 水裡的氧白天靠水草、藻類「吐」出來，從早累積到<strong>下午最多</strong>；晚上沒光卻一直被消耗，<strong>天亮前最少</strong>。所以夏天清晨天還沒亮其實最缺氧，上午太陽出來之後反而才足——別把夏天清晨當成必勝時段。<br />
+2. <strong>看熱不熱。</strong> 水越熱、能裝的氧越少（像熱可樂放著氣會跑光）。大熱天悶熱的淺水，氧本來就偏低。<br />
+3. <strong>看有沒有「在動」。</strong> 有風吹皺水面、有入水口流水、有水車在打——都是在補氧；死悶無風像鏡子的水面、背風的死角、停掉的水車，氧就一直往下掉。<br />
+4. <strong>看水多綠。</strong> 綠到爆的藻水是雙面刃：白天氧高、晚上狂掉，<strong>清晨最危險</strong>。<br />
+5. <strong>看魚有沒有浮頭。</strong> 清晨看到吳郭魚、鯰魚在水面一張一合「啊啊」吸氣，就是氧已經低到牠們在求生——這時黑鱸多半也不咬，趕快換點、換時段。<br />
+<strong>一句話：</strong> 幾點、多熱、有沒有風/流/水車、水多綠、魚有沒有浮頭——把這五件疊起來，就知道現在氧夠不夠，完全不用儀器。</p>
+<p><strong>新手懶人包：</strong> 陰天、微風、水溫 20～28°C、水不是剛被暴雨打濁、管理池有在打氣——這就是好日子。大晴正午、剛下完暴雨的南部濁水、寒流剛過——先別抱太大期待，或改用後面教的「濁水打法」。</p>
 </blockquote>
 <hr />
-<p><strong>① 情境一：白天、陽光充足</strong></p>
-<ul>
-<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span>：<strong>30–60 Hz</strong>（上限最高）</li>
-<li>收線速度：<strong>0.5–1.0 m/s</strong> 正常收</li>
-<li>路亞振動：軟蟲約 1–5 Hz、搖擺假餌約 5–12 Hz、鐵板可達 20+ Hz</li>
-<li><strong>結論</strong>：白天怎麼收都沒問題，所有常見路亞振動頻率都遠低於上限，魚看得很清楚</li>
-</ul>
+<h2 id="junior-_3">第二章：魚現在躲在哪一層、哪個位置</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong><span class="gl-trigger" data-term="qiwei">棲位</span></strong>：魚現在待的地方（深度＋位置）。找對<span class="gl-trigger" data-term="qiwei">棲位</span>，等於找到魚。<br />
+- <strong>毒區</strong>：南部夏天水底缺氧會冒出硫化氫（臭雞蛋味的毒氣），魚會自動離底躲開。<br />
+- <strong><span class="gl-trigger" data-term="wind-driven-current">風生流</span></strong>：風把表層水往岸邊推形成的水流，會把小蟲小魚蝦推去下風岸堆積，魚就跟去吃。</p>
+</blockquote>
+<p>路亞最重要的一半，是「把餌丟對位置」。三條線索幫你判斷魚在哪。</p>
+<p><strong>線索一：氧氣往哪邊夠。</strong> 缺氧的底層魚不會待，會被迫上浮。夏天悶熱無風、或管理池停水車時，魚常浮在表層 0～30 公分——這時候打表層系反而對。</p>
+<p><strong>線索二：南部夏天「魚常浮、北部魚常底」。</strong> 南部底層夏天有毒氣，魚會離底懸浮（大約離底 1 公尺以上）；北部沒毒氣，魚敢貼底埋伏。所以<strong>南部夏天打中上層、北部多打貼底結構</strong>，這是個好用的起手式。</p>
+<p><strong>線索三：風往哪吹，就往下風岸找。</strong> 風把食物推去下風岸，魚跟去埋伏，所以<strong>迎風岸（風吹過去那一側）通常是黃金釣點</strong>。魚會躲在水流稍弱的結構物（石頭、倒木、橋墩）後方逆流等。但風太大、水流太急時，魚會退進結構後方的靜水區定點等——這時把餌慢慢送進那個靜水角落。</p>
+<p><strong>找結構永遠沒錯。</strong> 不管哪一區、哪一季，倒木、石堆、水草邊緣、橋墩、陡坎、進出水口，都是魚最愛待的地方。新手與其盲拋開闊水面，不如把餌準確送到結構旁邊。</p>
 <hr />
-<p><strong>② 情境二：傍晚 / 陰天 / 光線明顯變暗</strong></p>
-<ul>
-<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span> 下移到：<strong>15–30 Hz</strong></li>
-<li>鐵板類路亞（20+ Hz）開始超標——魚可能看不清楚</li>
-<li>必須<strong>放慢速度到 0.2–0.4 m/s</strong>；改用軟蟲（0.5–2 Hz）或搖擺假餌（2–5 Hz）</li>
-<li><strong>結論</strong>：光線暗了，路亞要換慢、換軟，速度也要降</li>
-</ul>
-<hr />
-<p><strong>③ 情境三：夜間</strong></p>
-<ul>
-<li>魚的 <span class="gl-trigger" data-term="cff">CFF</span> 再降到：<strong>10–15 Hz</strong></li>
-<li>幾乎所有高頻自振路亞都超標（鐵板、無嘴路亞直接out）</li>
-<li><strong>改用軟蟲慢漂</strong>，目標振動 &lt; 10 Hz</li>
-<li>夜釣的重點是讓魚用<strong>側線</strong>感知你，視覺退為次要</li>
-</ul>
-<hr />
-<p><strong>④ 情境四：低水溫（水溫 &lt; 13°C）</strong></p>
-<ul>
-<li>低溫會讓 <span class="gl-trigger" data-term="cff">CFF</span> 再往下掉，<strong>不論白天還是晚上都適用</strong></li>
-<li>低溫 + 夜間同時發生：<span class="gl-trigger" data-term="cff">CFF</span> 可能跌到 <strong>&lt; 5 Hz</strong>，路亞幾乎要靜止漂流才有效</li>
-<li>此時視覺幾乎失效，<strong>完全依靠側線和化學感知</strong>驅動咬餌</li>
-</ul>
-<h3 id="63">6.3 顏色與水色：怎麼選才有效</h3>
-<p>研究顯示，黑鱸是<strong>二色視覺</strong>：</p>
-<ul>
-<li>對 <strong>535 nm</strong> 的黃綠光敏感；</li>
-<li>對 <strong>614 nm</strong> 的橙紅光敏感；</li>
-<li>對真正的藍光並不擅長。</li>
-</ul>
-<p>這就導出很重要的台灣在地規則：</p>
-<ul>
-<li><strong>北部褐色、腐植酸水</strong>：橙紅、紅棕、深色輪廓常更有存在感。</li>
-<li><strong>南部綠水、藍綠菌水</strong>：因 <strong>620 nm</strong> 附近常被吸掉，螢光黃、白色、亮黃綠反而常更醒目。</li>
-</ul>
-<h3 id="64">6.4 各水體能見度範圍對比</h3>
+<h2 id="junior-_4">第三章：選什麼顏色、用多快的速度——路亞的兩大核心</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>反射咬餌</strong>：魚的視覺有兩條神經線路，一條「不過腦」超快、來不及思考就咬，一條「會過腦」會分析這是不是假的。讓餌動得夠快，就逼魚走那條不過腦的快線——這就是為什麼「快抽、突然逃竄」能逼大魚開口。<br />
+- <strong>側線</strong>：魚身體兩側的「水下觸覺雷達」，全黑也能感覺到附近水流的震動。視覺失效時就靠它。<br />
+- <strong>水色吃顏色</strong>：不同顏色的光在不同水色裡會被吃掉，所以選餌顏色要看水色。</p>
+</blockquote>
+<p>這一章是新手最該背熟的兩件事：<strong>顏色看水色、速度決定破防。</strong></p>
+<h3 id="junior-_5">顏色：照水色選，不要憑喜好</h3>
 <table>
 <thead>
 <tr>
-<th>水體</th>
-<th style="text-align: right;">常見能見度</th>
+<th>水色</th>
+<th>該用的顏色</th>
+<th>千萬別用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>北部深水水庫</td>
-<td style="text-align: right;"><strong>100–180 cm</strong></td>
+<td>北部褐濁水</td>
+<td>黑、深紅、橙等高對比暗色</td>
+<td>藍色（很快就消失看不到）</td>
 </tr>
 <tr>
-<td>北部野生埤塘</td>
-<td style="text-align: right;"><strong>25–55 cm</strong></td>
-</tr>
-<tr>
-<td>北部管理池</td>
-<td style="text-align: right;"><strong>25–50 cm</strong></td>
-</tr>
-<tr>
-<td>南部野生埤塘</td>
-<td style="text-align: right;"><strong>&lt;10–50 cm</strong></td>
-</tr>
-<tr>
-<td>南部深水水庫</td>
-<td style="text-align: right;"><strong>10–120 cm</strong></td>
-</tr>
-<tr>
-<td>南部管理池</td>
-<td style="text-align: right;"><strong>&lt;10–40 cm</strong></td>
-</tr>
-</tbody>
-</table>
-<p>這些數字的意思很簡單：</p>
-<ul>
-<li>清水要玩<strong>看見</strong>；</li>
-<li>濁水要玩<strong>感到</strong>；</li>
-<li>爛水要玩<strong>逼近了才有機會</strong>。</li>
-</ul>
-<h3 id="65">6.5 側線：魚身上的震動感應器</h3>
-<p>側線就像一排裝在皮膚上的「水波雷達」。</p>
-<p>整體來說，黑鱸側線對 <strong>10–200 Hz</strong> 的水中機械波都能有反應；若細分：</p>
-<table>
-<thead>
-<tr>
-<th>感受器</th>
-<th>學名縮寫</th>
-<th>敏感頻率</th>
-<th>感知特性</th>
-<th>對應路亞示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>表淺神經丘</td>
-<td><strong><span class="gl-trigger" data-term="sns">SNs</span></strong></td>
-<td><strong>1–30 Hz</strong></td>
-<td>穩定流速方向感知</td>
-<td>Spinnerbait 葉片<span class="gl-trigger" data-term="tuishui">推水</span>、緩速大尾軟餌</td>
-</tr>
-<tr>
-<td>管狀神經丘</td>
-<td><strong>CNs</strong></td>
-<td><strong>30–100+ Hz</strong></td>
-<td>加速度與壓力梯度</td>
-<td>快速尾擺、震動型路亞</td>
-</tr>
-</tbody>
-</table>
-<p>這意味著：</p>
-<ul>
-<li>大尾軟餌的尾擺、Spinnerbait 的<strong><span class="gl-trigger" data-term="tuishui">推水</span></strong>（路亞移動時擠壓前方水體所產生的壓力波，由魚的側線感知）、波浪邊的翻滾，都能被側線讀到。</li>
-<li>當濁度高、夜裡黑、或視覺死區擴大時，側線的重要性會急速上升。</li>
-</ul>
-<p>研究甚至指出，當濁度高到 <strong>40 <span class="gl-trigger" data-term="ntu">NTU</span></strong>（濁度單位，數值越高越混濁；清水約 1–5 <span class="gl-trigger" data-term="ntu">NTU</span>，台灣豪雨後可達數百 <span class="gl-trigger" data-term="ntu">NTU</span>）以上，感官主導權常會從視覺轉移到側線。</p>
-<h3 id="66">6.6 內耳（聽覺）：水裡的低頻線索</h3>
-<p>黑鱸不是只靠「聽見聲音」，更像是在感受<strong>聲波帶來的粒子加速度</strong>。</p>
-<ul>
-<li>低頻感知範圍大致可抓 <strong>10–1000 Hz</strong>。</li>
-<li>內耳最敏感的核心帶大約在 <strong>100 Hz</strong>。</li>
-<li>遠場有效感知多在 <strong>100–600 Hz</strong>。</li>
-</ul>
-<p>因為水中聲音傳得比空氣快很多，約是空氣的 <strong>4.4 倍</strong>，所以在低光、濁水、<span class="gl-trigger" data-term="fanshui">翻水</span>後，魚常比你想像得更早「知道有東西來了」。</p>
-<h3 id="67">6.7 聲學阻抗：為什麼風大浪高時，低頻大震動常比較吃香</h3>
-<p>聲學阻抗可以把它想成「這團水對震動有多不友善」。</p>
-<ul>
-<li>水越濁、黏液越多、藻越厚，高頻訊號越容易被吃掉。</li>
-<li>研究指出，南部藻華水若讓黏度增加 <strong>10%</strong>，那 <strong>2000 Hz</strong> 的衰減增加量會是 <strong>500 Hz</strong> 的 <strong>16 倍</strong>。</li>
-</ul>
-<p>翻成釣魚話就是：</p>
-<ul>
-<li>風大浪高、藻多、水黏、很濁時，太細碎的高頻響珠，不一定比大低頻<span class="gl-trigger" data-term="tuishui">推水</span>有用。</li>
-<li>這時候<strong>大片葉、低頻震動、強水壓脈衝</strong>常更有效。</li>
-</ul>
-<h3 id="68">6.8 三感官整合：不同情境誰當老大？</h3>
-<table>
-<thead>
-<tr>
-<th>情境</th>
-<th>主導感官</th>
-<th>次要感官</th>
-<th>釣手該抓的重點</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>清水白天</td>
-<td>視覺</td>
-<td>內耳、側線</td>
-<td>顏色、輪廓、角度、追擊線；確保假餌節奏在 <span class="gl-trigger" data-term="cff">CFF</span> 閾值內</td>
-</tr>
-<tr>
-<td>濁水或雨後</td>
-<td>側線</td>
-<td>內耳</td>
-<td><span class="gl-trigger" data-term="tuishui">推水</span>、低頻、近距離存在感</td>
-</tr>
-<tr>
-<td>夜間</td>
-<td>側線＋內耳</td>
-<td>視覺（<span class="gl-trigger" data-term="cff">CFF</span> 已下移！）</td>
-<td>輪廓、節奏、震動；速度要放慢至 0.2–0.4 m/s</td>
-</tr>
-<tr>
-<td>南部清水滿月夜</td>
-<td>視覺重新變重要</td>
-<td>側線</td>
-<td>夜裡可能狂吃，隔天早上反而難釣</td>
-</tr>
-<tr>
-<td>北部<span class="gl-trigger" data-term="fanshui">翻水</span>後</td>
-<td>側線</td>
-<td>內耳（化學感知幾乎失效）</td>
-<td>低頻<span class="gl-trigger" data-term="tuishui">推水</span>；<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 傳遞範圍 &lt;0.5 m，中魚後需換點但稍候即可回</td>
-</tr>
-<tr>
-<td>南部中魚後原點</td>
+<td>北部中濁黃水</td>
+<td>亮黃、橘</td>
 <td>—</td>
-<td>—</td>
-<td><span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 可持續 12–36 hr，4–7 m 範圍；換到 8 m 外</td>
+</tr>
+<tr>
+<td>南部優養綠水</td>
+<td>黃綠、螢光綠（Chartreuse）、半透明</td>
+<td><strong>純紅（38 公分外就變死灰色）</strong></td>
+</tr>
+<tr>
+<td>清澈深水／清水</td>
+<td>自然仿真色＋一點金屬閃光</td>
+<td>太鮮豔不自然的顏色</td>
 </tr>
 </tbody>
 </table>
+<p>兩條鐵則背起來：<strong>南部綠水嚴禁純紅餌</strong>；<strong>水越濁越要靠「剪影」</strong>——濁水裡魚看不到細節，只看得到黑黑的輪廓，所以濁水用純黑、深色最清楚。</p>
+<h3 id="junior-_6">速度：太慢被看穿、夠快繞過大腦</h3>
+<ul>
+<li><strong>新手最常犯的錯：收太慢、又太規律。</strong> 勻速慢慢收，等於給魚充足時間看穿你的假餌，老魚會「只跟不咬」。</li>
+<li><strong>破防靠「變化」</strong>：突然加速、突然急停、突然轉向。在零點幾秒內製造一個變化，就能觸發那條不過腦的快反射，咬餌率暴增。</li>
+<li><strong>不同情況的速度感</strong>：清水、老魚多 → 要快、要多變化；濁水、低溫 → 要慢，但慢之中仍要有抽停的節奏。</li>
+</ul>
+<h3 id="junior-_7">濁到看不見時：交給側線</h3>
+<p>當能見度低於 15 公分（暴雨後、爆藻時），魚的眼睛基本沒用了，全靠側線。這時候只有一個原則：<strong>慢、近、貼結構</strong>。因為魚要等餌進到大約一個身長（40 公分）內側線才感覺得到。選會製造震動的餌（有尾巴擺動、會發出聲響的），慢慢貼著結構操作。</p>
 <hr />
-<h2 id="_15">第七章：讓鱸魚開口——掠食心理解碼</h2>
-<h3 id="71-oft">7.1 最佳覓食理論（<span class="gl-trigger" data-term="oft">OFT</span>）的白話版：黑鱸在算「時薪」</h3>
-<p>黑鱸不是看到什麼都咬。牠更像在心裡算一個很快的帳：</p>
-<p><strong>這一口要花多少力氣？值不值得？</strong></p>
-<p>如果一口要追很遠、轉很急、吞很久、還不一定吞得下，那對牠來說就是低時薪工作。</p>
-<p>研究把黑鱸偏好的獵物大小抓得很明確：最佳獵物大約是自己體長的 <strong>22–29%</strong>。</p>
-<p>例如一尾 <strong>35 cm</strong> 的黑鱸，最順手的獵物常落在 <strong>7.7–10.1 cm</strong>。</p>
-<p>太小，不划算；太大，處理時間變長，乳酸堆積，反而虧。</p>
-<h3 id="72">7.2 環境越差，魚越小氣</h3>
-<p>當魚處在：</p>
-<ul>
-<li><strong>高溫</strong>；</li>
-<li><strong>低氧</strong>；</li>
-<li><strong>高壓老魚環境</strong>；</li>
-<li><strong>剛受驚嚇</strong>；</li>
-</ul>
-<p>牠願意付出的代價會一路往下掉。這時不是「牠不餓」，而是「牠覺得不值得」。</p>
-<h3 id="73">7.3 飼料印記效應：管理池的魚，從小就被教成另一種腦袋</h3>
-<p>研究指出，養殖或長期管理環境中的黑鱸，會對顆粒飼料的聲音、大小、下沉節奏形成印記。這種印記可能持續<strong>數週到數月</strong>。</p>
-<p>所以有些管理池魚為什麼特別吃某些下沉式假餌？因為牠不是在辨識「餌魚」，而是在辨識「熟悉的投餌邏輯」。</p>
-<h3 id="74-reaction-strike">7.4 反射性咬餌（<span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span>）：不是餓，是嚇到來不及想</h3>
-<p>當假餌以足夠快的速度切過視野，黑鱸不一定是因為想吃，可能是因為大腦<strong>來不及理性否決</strong>。</p>
-<p>研究指出，真正能逼出反射性咬餌的最小線性速度，大約是 <strong>1.5–1.8 m/s</strong>。</p>
-<p>低於這個速度，魚還有時間想；高於這個速度，中腦<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>直接下命令：「先咬再說。」</p>
-<p>所以 <span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span> 常見於：</p>
-<ul>
-<li>快速移動；</li>
-<li>突然轉向；</li>
-<li>瞬間閃出視線；</li>
-<li>搭配高頻或強節奏震動。</li>
-</ul>
-<p><strong>釣手如何操作觸發？</strong></p>
-<p>「突然轉向」和「瞬間閃出視線」這兩項，主要靠<strong>竿子操作</strong>而非收線速度來實現：<br />
-- <strong>竿子橫向快速揮帶</strong>：讓假餌在水中橫切，速度變化量（ΔV）可超過 <strong>&gt;30 cm/s</strong>，在視網膜上產生角速度突變，強制觸發<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>反射。<br />
-- 這個 ΔV 閾值（&gt;30 cm/s）是靠竿身施力產生的，慢速收線本身很難做到——換句話說，「高速誘咬」不一定要用快捲，用竿子彈一下往往更精確。</p>
-<h3 id="75">7.5 高壓舊魚的心理：牠不是不會被騙，是很會懷疑</h3>
-<p>所謂高壓魚，通常是：</p>
-<ul>
-<li>被釣放過多次；</li>
-<li>常看見人造餌；</li>
-<li>長期待在高噪聲、高干擾池；</li>
-<li>基礎<span class="gl-trigger" data-term="pizichun">皮質醇</span>偏高。</li>
-</ul>
-<p>SUP-C 研究確認，<strong><span class="gl-trigger" data-term="hvf-lvf">老鱸</span></strong>的靜息<span class="gl-trigger" data-term="pizichun">皮質醇</span>長期維持在 <strong>20–40 ng/mL</strong>（<strong><span class="gl-trigger" data-term="hvf-lvf">新鱸</span></strong>自然靜息基線：<strong>1.68±0.69 ng/mL</strong>，健康範圍 ≤6 ng/mL）。這種 HPI 軸重塑是長期不可逆的，端腦否決權會更強。</p>
-<h3 id="76-mid-strollingfollower-rejectionalert-reset-time">7.6 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>、<span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>、<span class="gl-trigger" data-term="art">Alert Reset Time</span></h3>
-<h4 id="mid-strolling"><span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>（游走不咬）</h4>
-<p>當假餌以 <strong>0.5–1.0 m/s</strong> 緩慢移動，路亞在水中產生<strong>低頻自振節奏</strong>（軟蟲約 1–5 Hz、搖擺假餌約 5–12 Hz；此為路亞本身的自振頻率，釣手手動操控實際不超過 3–7 Hz），魚會進入一種像被催眠的慢速跟隨狀態。牠有興趣，但還沒下最後決心。</p>
+<h2 id="junior-_8">第四章：被釣怕的「老魚」，為什麼怎麼弄都不咬</h2>
 <blockquote>
-<p>⚠️ <strong>光線條件修正（SUP-A）</strong>：0.5–1.0 m/s 的速度設定，只在<strong>白天、明視覺</strong>條件下有效（<span class="gl-trigger" data-term="cff">CFF</span> 30–60 Hz，路亞自振節奏遠低於閾值）。在<strong>低光、傍晚、夜間或寒冷水域</strong>，黑鱸的 <span class="gl-trigger" data-term="cff">CFF</span> 已下移至 10–15 Hz 甚至 &lt;10 Hz；此時搖擺假餌（5–12 Hz）或無嘴路亞（20+ Hz）的自振節奏就超過 <span class="gl-trigger" data-term="cff">CFF</span> 極限，個別擺動在魚眼中融合成一個連續平滑的動作，魚無法識別擺動節奏，<span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 失效。<strong>低光條件下，移動速度必須降至 0.2–0.4 m/s</strong>，改用低自振頻率軟蟲，才能讓假餌節奏回到暗視覺 <span class="gl-trigger" data-term="cff">CFF</span> 以內。</p>
+<p><strong>先講白話：</strong><br />
+- <strong>新魚 vs 老魚</strong>：差別不在大小，在「被釣怕的程度」。剛放的新魚天真好騙；被反覆釣放的老魚，壓力荷爾蒙長期偏高，疑神疑鬼。<br />
+- <strong>習慣化（看膩）</strong>：餌如果用固定速度直直拖，魚的腦會慢慢看膩，判定成沒威脅的假東西，於是只跟不咬。<br />
+- <strong>警報素</strong>：魚受傷時釋放的化學警報，會讓附近同類集體閉口逃離，像有人在巷子裡喊「危險」。</p>
 </blockquote>
-<h4 id="follower-rejection"><span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>（跟餌不咬）</h4>
-<p>研究指出，當魚靠近到 <strong>13.5–24 cm</strong>，已進入眼球近點極限，影像開始失焦。這時若你停太久，讓假餌靜下來超過 <strong>100 ms</strong>，魚就有時間把「看起來不太對」「沒有味道」「震動消失」「我以前好像被這玩意搞過」全部湊起來，然後轉頭走人。</p>
-<p><strong>解方：在停頓發生之前，用竿子主動製造突變</strong></p>
-<p>靜待魚咬是最常見的直覺反應——也是最常觸發 <span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span> 的錯誤。正確做法是<strong>在假餌停止前搶先一步</strong>：</p>
+<p>管理池、熱門野塘的魚特別難釣，不是因為大，是因為被釣怕了。懂這章，你就知道為什麼別人空軍、高手卻能上魚。</p>
+<p><strong>老魚的三個壞習慣，和對應的破解：</strong></p>
+<p><strong>一、只跟不咬（看膩了）。</strong> 餌勻速直拖超過 3 秒或 60 公分，魚就看膩判定無害。<strong>破解：在牠跟上來時，突然加速、急停、或轉向 45 度以上</strong>，把牠嚇得反射性咬下去。</p>
+<p><strong>二、追到嘴邊卻甩頭跑。</strong> 太近了魚對不到焦，而且餌在眼前快速放大會被牠誤判成天敵撲過來。<strong>破解：不要把餌勻速收到魚嘴前 15 公分以內</strong>，要在還有 30 公分以上時就製造變化，逼牠在遠一點開口。</p>
+<p><strong>三、要「等」夠久。</strong> 急停後魚需要一點時間決定咬不咬：南部夏天約 0.8 秒，北部冬天要 2.5 秒。<strong>破解：冬天做停頓要停滿 2.5～3.5 秒，停太短魚還沒決定你就又動了。</strong></p>
+<p><strong>還有兩個新手常忽略的細節：</strong></p>
 <ul>
-<li>當觀察到魚已進入跟隨，<strong>用竿尖橫向快速彈出一次跳躍動作</strong>，使假餌產生 ΔV <strong>&gt;30 cm/s</strong> 的突然位移。</li>
-<li>這個角速度突變會強制重啟<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>的定向反射神經元，讓魚的大腦重新進入「獵物逃竄」的反射迴路，繞過端腦的否決審查。</li>
-<li>關鍵：<strong>用竿身力量帶動，不是加快收線</strong>。收線加速達不到這個瞬間 ΔV；竿子橫甩一下就夠了。</li>
+<li><strong>老魚會用嘴「試咬」測軟硬</strong>，太硬的餌（硬塑膠、鉛頭）會被牠在 0.1 秒內吐掉。所以對付老魚，<strong>用越軟越好的軟餌</strong>。</li>
+<li><strong>善用結構壓縮牠的判斷時間</strong>：把餌貼著池壁、石頭、倒木 12 公分內操作，魚逃路被擋、又要快速決定，更容易上鉤。</li>
 </ul>
-<h4 id="alert-reset-time"><span class="gl-trigger" data-term="art">Alert Reset Time</span>（警覺重置時間）</h4>
-<p>魚被釣、被驚、被跑魚事件嚇到後，不是幾分鐘就忘記。</p>
-<p>研究提供了一份<strong>完整的 <span class="gl-trigger" data-term="art">ART</span>（<span class="gl-trigger" data-term="art">Alert Reset Time</span>）溫度矩陣</strong>，各欄數據來源如下：</p>
-<ul>
-<li><strong>20°C = 24 小時</strong>：來自實證研究（血乳酸與血糖回到靜息基線的量測值）</li>
-<li><strong>其他溫度</strong>：依 <span class="gl-trigger" data-term="q10">Q₁₀</span>=2.0 原則計算（溫度每降 10°C，化學反應速率減半，恢復時間約變兩倍）</li>
-<li><strong>5°C 外插行</strong>：研究範圍外的外插估算值；信心等級：中</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>水溫</th>
-<th><span class="gl-trigger" data-term="art">ART</span>（警覺重置時間）</th>
-<th>釣手白話</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>5°C</strong></td>
-<td>~<strong>67.9 小時</strong> ⚠️ 外插估算</td>
-<td>接近三天，研究未直接量測此溫度</td>
-</tr>
-<tr>
-<td><strong>10°C</strong></td>
-<td><strong>48.0 小時</strong></td>
-<td>整整兩天</td>
-</tr>
-<tr>
-<td><strong>15°C</strong></td>
-<td>~<strong>33.9 小時</strong></td>
-<td>超過一天半</td>
-</tr>
-<tr>
-<td><strong>20°C</strong></td>
-<td><strong>24.0 小時</strong></td>
-<td>一整天（實證基準點）</td>
-</tr>
-<tr>
-<td><strong>22°C</strong></td>
-<td>~<strong>20.9 小時</strong></td>
-<td>接近一天</td>
-</tr>
-<tr>
-<td><strong>25°C</strong></td>
-<td>~<strong>17.0 小時</strong></td>
-<td>約半天多</td>
-</tr>
-<tr>
-<td><strong>30°C</strong></td>
-<td><strong>12.0 小時</strong></td>
-<td>半天可以回來試</td>
-</tr>
-<tr>
-<td><strong>35°C</strong></td>
-<td><strong>8.5 小時</strong></td>
-<td>高溫時恢復最快，但若又遇缺氧，肝臟的<span class="gl-trigger" data-term="pizichun">皮質醇</span>清除機制會失效，<span class="gl-trigger" data-term="art">ART</span> 反而趨近無窮大</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注意：<strong>35°C + 缺氧（<span class="gl-trigger" data-term="do">DO</span> &lt;2 mg/L）時，<span class="gl-trigger" data-term="art">ART</span> 不適用上表，實際上魚可能根本不會重置。</strong></p>
-</blockquote>
-<p>💡 <strong><span class="gl-trigger" data-term="art">ART</span> 的適用範圍：端腦主導的主動覓食，不是「完全不咬」</strong></p>
-<p><span class="gl-trigger" data-term="art">ART</span> 描述的是「主動覓食驅力（由端腦認知決策主導）」回到正常所需的時間。但是<strong>反射咬餌（<span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span>）在 <span class="gl-trigger" data-term="art">ART</span> 窗口內仍然可以觸發</strong>——只要假餌速度夠快（&gt;1.5 m/s），<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>的反射迴路會直接繞過<span class="gl-trigger" data-term="pizichun">皮質醇</span>阻斷的端腦，照樣攻擊。</p>
-<p>這也解釋了為什麼有時同一個點短時間再釣，換成快速系假餌偶爾仍能得手：不是魚「忘記了」，而是你換了一條繞路。但這條繞路只對反射系假餌有效；慢吞吞的 Finesse 在 <span class="gl-trigger" data-term="art">ART</span> 窗口內通常還是沒用。</p>
-<p>所以很多時候不是這個點沒魚，而是<strong>這個點剛剛發生過一件讓魚全體進入警戒的事，主動覓食驅力要很久才能恢復——除非你能繞過端腦、直接打<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>反射</strong>。</p>
+<p><strong>連投節奏別太密：</strong> 同一個點連續拋，魚會越來越警覺。北部冬天管理池至少隔 10～20 分鐘換點再回頭，南部夏天至少隔 3～5 分鐘。<strong>中魚或跑魚後更要換點</strong>——尤其南部清水，警報素會讓那個點半小時內報廢，直接換 8 公尺以上。</p>
 <hr />
-<h2 id="_16">第八章：視線與假餌——讓牠看到你想讓牠看到的</h2>
-<h3 id="81">8.1 黑鱸視線軸向的三種模式</h3>
-<h4 id="1">1）朝上模式</h4>
-<p>常見於：</p>
-<ul>
-<li>高溫、低氧時魚待較低處；</li>
-<li>夜間；</li>
-<li>清晨表層有剪影時。</li>
-</ul>
-<p>這時魚像是在用天空當背景，去抓上方那個黑影。</p>
-<h4 id="2">2）朝前模式</h4>
-<p>常見於：</p>
-<ul>
-<li><strong>18–28°C</strong> 適溫帶；</li>
-<li>能見度還不錯；</li>
-<li>魚願意巡游追餌時。</li>
-</ul>
-<p>這是最典型的中層追擊模式。</p>
-<h4 id="3">3）朝下模式</h4>
-<p>少見，但存在。多出現在：</p>
-<ul>
-<li>深水水庫追下沉餌；</li>
-<li>魚站在較高結構上看下面；</li>
-<li>高濁或低光下改用近距離壓制時。</li>
-</ul>
-<h3 id="82">8.2 攻擊角度怎麼決定入水點和操作方式</h3>
-<p>如果魚多半是<strong>往上看</strong>，你就不要把餌一直拖在牠眼睛下死角。</p>
-<p>如果魚多半是<strong>往前追</strong>，你要讓餌穿過牠的前方雙眼區，而不是丟到身後。</p>
-<p>研究顯示，風生流條件下，黑鱸常從 <strong>45–60°</strong> 角度往上打。這就代表：</p>
-<ul>
-<li>丟點不必正中頭上；</li>
-<li>讓餌從牠前上方切過，常比砸在牠鼻子前更自然。</li>
-</ul>
-<h3 id="83">8.3 各種透明度下，顏色與大小怎麼配</h3>
-<table>
-<thead>
-<tr>
-<th>能見度</th>
-<th>北部褐水建議</th>
-<th>南部綠水建議</th>
-<th>尺寸與輪廓</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>&gt;120 cm</strong></td>
-<td>自然紅棕、透明、餌魚色</td>
-<td>白、自然、淡黃綠</td>
-<td>細長、<strong>6–10 cm</strong></td>
-</tr>
-<tr>
-<td><strong>60–120 cm</strong></td>
-<td>橙紅、紅棕、深背亮腹</td>
-<td>白、螢光黃、黃綠</td>
-<td>中等、<strong>7–12 cm</strong></td>
-</tr>
-<tr>
-<td><strong>20–60 cm</strong></td>
-<td>深色剪影＋少量紅橙</td>
-<td>白＋螢黃，或亮腹深背</td>
-<td>稍大一點、<strong>8–14 cm</strong></td>
-</tr>
-<tr>
-<td><strong>&lt;20 cm</strong></td>
-<td>黑、黑藍、強輪廓</td>
-<td>黑、白、強對比＋強震動</td>
-<td>追求存在感，不再糾結細節</td>
-</tr>
-</tbody>
-</table>
-<p>一句話：</p>
-<ul>
-<li><strong>北部褐水</strong>，常選紅橙和深色輪廓。</li>
-<li><strong>南部綠水</strong>，常選白和螢光黃綠。</li>
-<li><strong>超濁</strong>時，顏色的重要性會輸給震動和輪廓。</li>
-</ul>
-<h3 id="84">8.4 假餌操作映射：什麼情況用表層、中層、底層</h3>
-<table>
-<thead>
-<tr>
-<th>情況</th>
-<th>建議水層</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>清晨、傍晚、夜間、低光</td>
-<td>表層～上層</td>
-<td>朝上視線模式容易成立</td>
-</tr>
-<tr>
-<td>適溫、願意追、能見度中等以上</td>
-<td>中層</td>
-<td>前向追擊最自然</td>
-</tr>
-<tr>
-<td>冷鋒後、深水水庫、結構邊</td>
-<td>中下層</td>
-<td>魚縮短追擊距離，偏吃路過</td>
-</tr>
-<tr>
-<td>爛底、<span class="gl-trigger" data-term="h2s">H₂S</span>、<span class="gl-trigger" data-term="fanshui">翻水</span>剛發生</td>
-<td><strong>避免真貼底</strong></td>
-<td>底部可能不是魚位，而是死亡層</td>
-</tr>
-</tbody>
-</table>
-<p>底層餌不是不能用，而是你要先確定：<strong>底，是棲位，還是毒區。</strong></p>
-<p>野外聲學遙測指出，嚴重缺氧事件（<span class="gl-trigger" data-term="do">DO</span> &lt; 2.0 mg/L）期間仍有約 <strong>15–22% 的個體</strong>（具高血細胞比容代償表型）選擇滯留或徘徊毒區邊緣，不執行完全撤離。中小型或<strong><span class="gl-trigger" data-term="hvf-lvf">新鱸</span></strong>在底層獵物密度達表層 <strong>3.5–5.0 倍</strong>的條件下，可能執行單次 <strong>&lt; 30 秒</strong> 的「<strong><span class="gl-trigger" data-term="foraging-forays">覓食突進</span>（<span class="gl-trigger" data-term="foraging-forays">Foraging Forays</span>）</strong>」——短暫衝入底層後迅速返回含氧水層。</p>
-<p><strong>實戰含義</strong>：底層標點並非完全無效，但每個標點的有效額度有限——<span class="gl-trigger" data-term="h2s">H₂S</span> ≤ 0.01 mg/L 條件下，前 <strong>10–15 次</strong>操作有機會誘發<strong><span class="gl-trigger" data-term="hvf-lvf">新鱸</span></strong>的突進反應；超過此頻率後，已參與突進的魚群需 <strong>45–60 分鐘</strong> <span class="gl-trigger" data-term="cox">COX</span> 重置冷卻期，標點進入強制休息。⚠️ <strong><span class="gl-trigger" data-term="hvf-lvf">老鱸</span>（<span class="gl-trigger" data-term="pizichun">皮質醇</span> ≥ 20 ng/mL）在任何 <span class="gl-trigger" data-term="h2s">H₂S</span> 存在條件下幾乎不發動底層衝入</strong>。</p>
-<hr />
-<h2 id="_17">第九章：台灣的四大極端釣境</h2>
-<h3 id="_18">【情境一：南部夏季高溫爛底】</h3>
-<p><strong>水質特徵（附數值）</strong>：</p>
-<ul>
-<li>水溫常 <strong>&gt;32°C</strong>，管理池可到 <strong>35.5°C</strong>；此溫區飽和溶氧已大幅縮水（<strong>32°C = 7.55 mg/L、35°C = 6.94 mg/L</strong>），是物理上限，不是水質問題。</li>
-<li>魚的靜態代謝耗氧率（<span class="gl-trigger" data-term="mo2">MO₂</span>）：<strong>33°C 時約 69.4 mg O₂/kg/h</strong>，相比 20°C 的 48.8 mg/kg/h 高出約 <strong>42%</strong>；魚本身耗氧已大幅增加，水中氧氣物理上限卻更低。</li>
-<li>臨界低氧點（<span class="gl-trigger" data-term="pcrit">Pcrit</span>）：<strong>15°C = 1.15 mg/L / 20°C ≈ 1.12 mg/L</strong>；<span class="gl-trigger" data-term="do">DO</span> 低於此值魚開始面臨窒息風險。</li>
-<li><span class="gl-trigger" data-term="do">DO</span> 常掉到 <strong>&lt;3 mg/L</strong>；水車停機後可在 <strong>3.5 小時</strong>內崩盤。積水 <strong>&gt;6 小時</strong>後，底層 <span class="gl-trigger" data-term="do">DO</span> 與 <span class="gl-trigger" data-term="eh">Eh</span> 往往同步惡化。</li>
-<li><span class="gl-trigger" data-term="eh">Eh</span> <strong>&lt; -150 mV</strong> 時，<span class="gl-trigger" data-term="h2s">H₂S</span> 釋放速率 <strong>19–281 mmol/m²/day</strong>；0.8 m 水深可累積至 <strong>8.5 mg/L</strong>（黑鱸 96 小時 <span class="gl-trigger" data-term="lc50">LC₅₀</span> 精確值：<strong>0.0297–0.0316 mg/L</strong>；底層峰值濃度已超出 <span class="gl-trigger" data-term="lc50">LC₅₀</span> 約 270 倍）。</li>
-</ul>
-<p><strong>鱸魚行為預測</strong>：</p>
-<ul>
-<li>底部毒區（<span class="gl-trigger" data-term="h2s">H₂S</span>）+ 表層熱緊迫（&gt;34°C），魚被夾擠進 <strong>0.5–1.0 m 或 0.8–1.2 m</strong> 的微氧帶懸浮。</li>
-<li>在此溫度下 <span class="gl-trigger" data-term="mo2">MO₂</span> 已佔生理資源的絕大部分，機動獵食能力極度受限，追擊半徑縮到極短。</li>
-<li><strong>體型依賴性</strong>：大型個體（<strong>&gt; 1 kg</strong>）鰓表面積/體積比偏低，缺氧脆弱性顯著高於 500 g 以下小型魚；高溫爛底情境下，大型個體幾乎不出現在底層附近；小型個體相對耐受缺氧邊緣水域。</li>
-<li>高氧核心一旦中魚，同區魚群迅速進入高警戒；密集池塘可形成連鎖拒咬。</li>
-</ul>
-<p><strong>對應策略與邏輯</strong>：</p>
-<ul>
-<li>找進排水口、水車殘流、高氧核心，不要迷戀深底。</li>
-<li>線性速度放慢，必要時接近 <strong>&lt;0.1 m/s</strong>。</li>
-<li>與底保持<strong>至少 ≥86 cm</strong> 安全距離（Fick 精算值；若水深只有 1.2–1.5 m，上方只剩 30–60 cm 可用水層！）。</li>
-<li><strong>離場信號</strong>：<span class="gl-trigger" data-term="do">DO</span> <strong>&lt;1.5 mg/L</strong> 且 <span class="gl-trigger" data-term="eh">Eh</span> <strong>&lt; -150 mV</strong> 即停釣；<span class="gl-trigger" data-term="mo2">MO₂</span> 已達 69.4 mg/kg/h 而 <span class="gl-trigger" data-term="do">DO</span> 趨近 <span class="gl-trigger" data-term="pcrit">Pcrit</span>，咬餌機率接近零。</li>
-<li>若水已發黑、冒臭、魚浮頭，最好的策略常常是：<strong>別釣。</strong></li>
-</ul>
-<h3 id="_19">【情境二：北部<span class="gl-trigger" data-term="fanshui">翻水</span>期】</h3>
-<p><strong>水質特徵（附數值）</strong>：</p>
-<p>▌<strong>深水水庫（水體 2、5）— 密度驅動<span class="gl-trigger" data-term="fanshui">翻水</span></strong></p>
-<ul>
-<li>夏季溫躍層通常在 <strong>3–5 m</strong> 深，梯度 <strong>2–5°C/m</strong>；</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>觸發門檻：<strong>表層水溫驟降 2–4°C</strong> + 風速 <strong>&gt;5 m/s</strong> + 持續 <strong>≥48 hr</strong>（台灣水溫不會接近 4°C；<span class="gl-trigger" data-term="fanshui">翻水</span>靠的是相對密度差，而非到達某個絕對溫度）；</li>
-<li>冷鋒可使氣溫 <strong>4–8°C/day</strong> 下滑；門檻達成後全混合只需 <strong>2–4 小時</strong>；</li>
-<li>積累半年的厭氧底水、<span class="gl-trigger" data-term="h2s">H₂S</span> 與 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 全部上湧至透光層；</li>
-<li><span class="gl-trigger" data-term="do">DO</span> 可能以 <strong>1.5–2.0 mg/L/hr</strong> 下降。</li>
-</ul>
-<p>▌<strong>野生埤塘 / 管理池（淺水，水深 &lt;2 m）— 風雨直接混合</strong></p>
-<ul>
-<li>無深層穩定溫躍層，不需密度驅動前提；</li>
-<li><strong>強風（&gt;5 m/s，2–4 hr）或豪雨（≥30 mm/hr）</strong> 即可觸發全水體混合；</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>速度更快（<strong>&lt;1 hr</strong>），因有機底泥較薄，通常 <strong>24–36 hr</strong> 即可初步恢復；</li>
-<li>管理池有水車，水車停機 ≥4 hr 後重啟前後也會翻攪底層（詳見【情境三】）。</li>
-</ul>
+<h2 id="junior-match-the-hatch">第五章：<span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span>——這個月魚在吃什麼，你就綁什麼</h2>
 <blockquote>
-<p><strong>台北/宜蘭（Zone-A）vs 桃竹苗（Zone-B）特別注意</strong>：台北/宜蘭地形相對開放，常態風速 <strong>3–6 m/s</strong>，深水水庫<strong>首次<span class="gl-trigger" data-term="fanshui">翻水</span></strong>通常在 <strong>10 月中下旬</strong>，全年 <strong>1–2 次</strong>。桃竹苗受林口台地與雪山山脈地形狹管效應影響，常態風速高達 <strong>6–10 m/s</strong>，<span class="gl-trigger" data-term="fanshui">翻水</span>門檻在任何冷鋒過境時幾乎都能達成，全年 <strong>2–4 次</strong>；每次<span class="gl-trigger" data-term="fanshui">翻水</span>後需 <strong>10–15 天</strong>才能恢復穩定釣況，反覆<span class="gl-trigger" data-term="fanshui">翻水</span>嚴重壓縮桃竹苗的冬季有效作釣期。桃園釣手要從 <strong>10 月上旬</strong>起就留意每次冷鋒後的<span class="gl-trigger" data-term="fanshui">翻水</span>訊號。</p>
+<p><strong>先講白話：</strong><br />
+- <strong><span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span></strong>：「對上正在大量出現的食物」。魚會挑食——當某種獵物爆量，牠會專一只吃那種。你綁的餌越像當季主食，越好咬。<br />
+- <strong>挑食門檻</strong>：水溫越高魚越挑（盛夏必須對上主食），水溫越低反而不挑（冬天可以隨便一點，靠變化破防）。<br />
+- <strong>軟殼期</strong>：蝦蟹剛脫殼那段，沒有硬殼防禦、超好消化，魚會專一搜尋——是被低估的超級窗口。</p>
 </blockquote>
-<p><strong>鱸魚行為預測</strong>：</p>
-<ul>
-<li>底層毒水上湧時，魚會往 <strong>1.0–1.5 m</strong> 的中層懸浮；</li>
-<li>0–24 hr 最亂、最難；</li>
-<li>48–72 hr 後，北部高嶺石絮凝常讓能見度重新回升。</li>
-</ul>
-<p><strong>對應策略與邏輯</strong>：</p>
-<ul>
-<li><strong>0–24 hr</strong>：別硬敲底，先鎖中層懸浮。</li>
-<li><strong>24–48 hr</strong>：以震動、側線餌為主。</li>
-<li><strong>48–72 hr</strong>：若水已回清，可切回高對比視覺餌，必要時用 <strong>1.5–1.8 m/s</strong> 的反射節奏。</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>剛發生時<strong>避開主湖區</strong>，轉往活水注入的淺水灣澳——入流可在局部形成相對低毒的緩衝帶，魚會主動聚集此區。</li>
-<li><span class="gl-trigger" data-term="fanshui">翻水</span>後水體偏 <span class="gl-trigger" data-term="cdom">CDOM</span> 褐色、藍綠光吸收強，優先選<strong>黑色或深色高對比假餌</strong>（紅色背景水中黑色提供最大負對比度）。</li>
-<li>冬季極端冷鋒後：優先找<strong>極育土厚泥底區</strong>（體積熱容 <strong>1.55–3.50 MJ/m³·°C</strong>），厚泥提供 <strong>72–96 hr 熱緩衝</strong>，魚在低水溫中仍會棲留；沙礫底率先降溫，不優先。</li>
-</ul>
-<blockquote>
-<p>🌱 <strong>春末延伸危機：<span class="gl-trigger" data-term="fe">Fe²⁺</span> 翻騰（V3B-06/07）</strong><br />
-桃竹苗水庫約在 <strong>5 月下旬</strong>、台北/宜蘭約在 <strong>6 月中旬</strong>，隨水體升溫底層 <span class="gl-trigger" data-term="eh">Eh</span> 跌破 0 mV，<span class="gl-trigger" data-term="fe">Fe²⁺</span> 開始大量釋出（<strong>10–50 mmol/m²/day</strong>）。此時底部 <span class="gl-trigger" data-term="do">DO</span> 極低但水表看起來正常，魚會主動離開底層；應把 Jig 與底層軟蟲的目標水層改為<strong>中層游路</strong>，不貼底。桃竹苗比台北/宜蘭早約 <strong>12–18 天</strong>進入此窗口。</p>
-</blockquote>
-<h3 id="_20">【情境三：高有機負載管理池】</h3>
-<p><strong>水質特徵（附數值）</strong>：</p>
-<ul>
-<li>常見 <strong><span class="gl-trigger" data-term="cod">COD</span> &gt;20 mg/L</strong>（化學需氧量，測量水中有機廢物總量；乾淨水體通常 &lt;5 mg/L，超過 20 代表飼料殘渣與排泄物大量堆積，耗氧嚴重、臭底風險高）；</li>
-<li>水車噪聲：<strong>125–135 dB re 1 μPa</strong>，頻率 <strong>25–1,000 Hz</strong>，形成<span class="gl-trigger" data-term="acoustic-masking">聲學遮蔽</span>（<span class="gl-trigger" data-term="acoustic-masking">Acoustic Masking</span>），有效遮蔽魚的側線與內耳在此頻段的感知；</li>
-<li>停機後很快<span class="gl-trigger" data-term="fenceng">分層</span>；重啟前後底層翻攪，<span class="gl-trigger" data-term="h2s">H₂S</span> 可能湧升至水面下 <strong>30–50 cm</strong>；</li>
-<li>視覺常受濁度、藻與有機懸浮壓制。</li>
-</ul>
-<p><strong>鱸魚行為預測</strong>：</p>
-<ul>
-<li><strong><span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 死區</strong>：釣壓下受傷魚釋放警報化學物質，在南部（台中以南）水體（<span class="gl-trigger" data-term="ph">pH</span> 6.5–7.5）形成 <strong>2–8 m 半徑</strong>（面積約 <strong>201 m²</strong>）的覓食抑制死區；北部（台北/宜蘭、桃竹苗，<span class="gl-trigger" data-term="ph">pH</span> &lt;5.5，高 <span class="gl-trigger" data-term="cdom">CDOM</span>）因酸性水解與有機絡合，有效半徑縮至 <strong>&lt;0.5 m</strong>。</li>
-<li><strong><span class="gl-trigger" data-term="art">ART</span>（警覺重置時間）</strong>：<span class="gl-trigger" data-term="cr">C&amp;R</span> 後<span class="gl-trigger" data-term="pizichun">皮質醇</span>飆升 <strong>&gt;150 ng/mL</strong>，魚陷入 <span class="gl-trigger" data-term="lockjaw">Lockjaw</span>；恢復時間依水溫（完整矩陣見 §7.6）：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">水溫</th>
-<th style="text-align: left;"><span class="gl-trigger" data-term="art">ART</span></th>
-<th style="text-align: right;">水溫</th>
-<th style="text-align: left;"><span class="gl-trigger" data-term="art">ART</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"><strong>10°C</strong></td>
-<td style="text-align: left;">48.0 hr</td>
-<td style="text-align: right;"><strong>22°C</strong></td>
-<td style="text-align: left;">20.9 hr</td>
-</tr>
-<tr>
-<td style="text-align: right;"><strong>15°C</strong></td>
-<td style="text-align: left;">33.9 hr</td>
-<td style="text-align: right;"><strong>25°C</strong></td>
-<td style="text-align: left;">17.0 hr</td>
-</tr>
-<tr>
-<td style="text-align: right;"><strong>20°C</strong></td>
-<td style="text-align: left;">24.0 hr</td>
-<td style="text-align: right;"><strong>30°C</strong></td>
-<td style="text-align: left;">12.0 hr</td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: right;"><strong>35°C</strong></td>
-<td style="text-align: left;">8.5 hr</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>⚠️ <strong>&gt;30°C + <span class="gl-trigger" data-term="do">DO</span> &lt;2.0 mg/L</strong> 時代謝清除率崩潰，<span class="gl-trigger" data-term="art">ART</span> 延長至無效。<br />
-- <strong><span class="gl-trigger" data-term="hvf-lvf">老鱸</span></strong>：長期釣壓下，偏好 <strong>0.22–0.29 <span class="gl-trigger" data-term="tl">TL</span></strong> 的小獵物（<span class="gl-trigger" data-term="oft">OFT</span> 能效比）；攻擊 <strong>&gt;0.30 <span class="gl-trigger" data-term="tl">TL</span></strong> 的目標，肌肉 <span class="gl-trigger" data-term="ldh">LDH</span> 活化代謝代價超過獵物熱量約 <strong>20%</strong>，<span class="gl-trigger" data-term="hvf-lvf">老鱸</span>不會主動啟動。<br />
-- 水車開時噪聲遮蔽側線，需夠大的壓力波才能突破感知門檻。<br />
-- 水車停後，老魚常進入「跟、看、拒絕」模式；假餌進入近點（&lt;24 cm）若停留超過 <strong>60–100 ms</strong>，觸發 <span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>。</p>
-</blockquote>
-<p><strong>對應策略與邏輯</strong>：</p>
-<ul>
-<li><strong>水車開</strong>：用大<span class="gl-trigger" data-term="tuishui">推水</span>、強震動路亞（Swimbait 等），突破<span class="gl-trigger" data-term="acoustic-masking">聲學遮蔽</span>。</li>
-<li><strong>水車停</strong>：切微物、細線、低侵略感；對老魚可用 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>（白天條件），但進近點後<strong>不要停超過 100 ms</strong>。</li>
-<li><strong><span class="gl-trigger" data-term="cr">C&amp;R</span> 後等 <span class="gl-trigger" data-term="art">ART</span></strong>：用 <span class="gl-trigger" data-term="art">ART</span> 表估算等待時間，22°C 時約等 <strong>20–21 hr</strong> 再試同區。</li>
-<li><strong>新魚 vs 老魚</strong>：池塘剛新放的新魚有 Feed Imprinting，優先投飼料型或擬活餌型路亞，速度匹配其印記食物；老魚則需 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> + <span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span> 轉換策略（ΔV &gt;30 cm/s 急拉觸發 <span class="gl-trigger" data-term="optic-tectum">Optic Tectum</span> 重置）。</li>
-<li>⚠️ <strong>水車停機 ≥4 hr 後重啟頭 1–2 hr</strong>：底層翻攪，<span class="gl-trigger" data-term="h2s">H₂S</span> 可能湧升至水面下 <strong>30–50 cm</strong>；不要把假餌沉到中下層，魚可能本身也在往上躲。</li>
-</ul>
-<h3 id="_21">【情境四：颱風過境前後】</h3>
-<p><strong>水質特徵（附數值）</strong>：</p>
-<ul>
-<li><strong>颱前</strong>：氣壓可在 <strong>12–24 小時</strong>內大降，極端可達 <strong>53 hPa</strong>（1,013 hPa → 960 hPa）；</li>
-<li>氣壓急降引發底泥中溶解氣體（CO₂、CH₄）從孔隙水釋出，形成<strong><span class="gl-trigger" data-term="ebullition">氣泡釋放</span></strong>（<span class="gl-trigger" data-term="ebullition">Ebullition</span>）；底泥翻攪、局部水質急速惡化；</li>
-<li><strong>颱後</strong>：全水層翻攪，能見度常掉到 <strong>&lt;10 cm</strong>，<span class="gl-trigger" data-term="tss">TSS</span>（懸浮固體）大幅增加；</li>
-<li><strong>北部</strong>（台北/宜蘭、桃竹苗）：<span class="gl-trigger" data-term="zeta">Zeta 電位</span> <strong>-15~-40 mV</strong>，高嶺石主導，絮凝沉降快，<span class="gl-trigger" data-term="stokes">Stokes 沉降</span>速約 <strong>3 cm/s</strong>（0.108 m/hr），通常 <strong>48–72 小時</strong>回清；</li>
-<li><strong>南部</strong>（台中以南）：<span class="gl-trigger" data-term="zeta">Zeta 電位</span> <strong>-42~-52 mV</strong>，<span class="gl-trigger" data-term="ddl">DDL</span> 排斥力強，沉降速約 <strong>0.35 m/day</strong>，通常需 <strong>14–30 天</strong>才能回清；懸浮有機物約 <strong>5%</strong> 可供魚消化，南部鱸魚短期食物來源反而不匱乏。</li>
-</ul>
-<p><strong>颱後回清差異：北部 vs 南部</strong></p>
-<table>
-<thead>
-<tr>
-<th>指標</th>
-<th>北部（台北/宜蘭、桃竹苗）</th>
-<th>南部（台中以南）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>主體顆粒</td>
-<td>高嶺石（礦物顆粒）</td>
-<td>有機膠體</td>
-</tr>
-<tr>
-<td><span class="gl-trigger" data-term="zeta">Zeta 電位</span></td>
-<td><strong>-15 ~ -40 mV</strong>（斥力較弱，易絮凝）</td>
-<td><strong>-42 ~ -52 mV</strong>（<span class="gl-trigger" data-term="ddl">DDL</span> 排斥力強）</td>
-</tr>
-<tr>
-<td><span class="gl-trigger" data-term="stokes">Stokes 沉降</span>速</td>
-<td><strong>3 cm/s</strong>（≈0.108 m/hr）</td>
-<td><strong>0.35 m/day</strong></td>
-</tr>
-<tr>
-<td>回清時間</td>
-<td>通常 <strong>48–72 小時</strong></td>
-<td>通常 <strong>14–30 天</strong></td>
-</tr>
-<tr>
-<td>特殊備注</td>
-<td>—</td>
-<td>懸浮有機物 ≈ <strong>5%</strong> 可供魚消化；短期食物來源不匱乏</td>
-</tr>
-</tbody>
-</table>
-<p><strong>鱸魚行為預測</strong>：</p>
-<p>▌<strong>颱前壓降窗口（壓降啟動後 0–12 小時）</strong></p>
-<ul>
-<li>魚鰾需主動膨脹約 <strong>53 cm</strong> 來補償浮力；這個補償過程消耗 <strong>137 W/kg</strong>，魚會主動覓食補充能量；</li>
-<li>爆吃窗口通常持續 <strong>6–12 小時</strong>，壓降幅度越大、速度越快，窗口越短。</li>
-</ul>
-<p>▌<strong><span class="gl-trigger" data-term="ebullition">Ebullition</span> 啟動後</strong></p>
-<ul>
-<li>氣泡大量釋出，底泥翻攪，視覺與側線均受干擾；</li>
-<li>魚進入 <span class="gl-trigger" data-term="lockjaw">Lockjaw</span>；強行作釣通常無效。</li>
-</ul>
-<p>▌<strong>颱後渾水期（24–72 hr 或更長）</strong></p>
-<ul>
-<li>視覺幾乎失效；側線與低頻聲學（<span class="gl-trigger" data-term="sns">SNs</span> <strong>1–30 Hz</strong>）成為主要感知通道；</li>
-<li>北部 48–72 hr 後可逐步恢復視覺感知；南部則可能整個月維持渾水狀態。</li>
-</ul>
-<p><strong>對應策略與邏輯</strong>：</p>
-<ul>
-<li><strong>颱前搶視窗（V3B-01）</strong>：壓降啟動後快速移動廣搜，使用能產生大壓力波的路亞（Spinnerbait、硬餌）；<span class="gl-trigger" data-term="ebullition">Ebullition</span> 啟動前撤退。</li>
-<li><strong><span class="gl-trigger" data-term="ebullition">Ebullition</span> 即撤（V3B-02）</strong>：底泥開始翻騰後立即放棄，強行作釣是資源浪費。</li>
-<li><strong>北部颱後 48–72 hr（V3B-03）</strong>：<span class="gl-trigger" data-term="zeta">Zeta 電位</span>（-15~-40 mV）促進絮凝，<span class="gl-trigger" data-term="stokes">Stokes 沉降</span> 3 cm/s，水色回清後改用<strong>高對比旋轉餌</strong>（Colorado / Spinnerbait）；視覺感知已恢復，可加入視覺訊號。</li>
-<li><strong>南部颱後 14–30 天（V3B-04）</strong>：<span class="gl-trigger" data-term="zeta">Zeta 電位</span> -42~-52 mV，<span class="gl-trigger" data-term="ddl">DDL</span> 排斥效率差，不要期待快速回清；持續使用<strong>低頻震動路亞</strong>，目標 <span class="gl-trigger" data-term="sns">SNs</span> 頻率 <strong>1–30 Hz</strong>，不要過早換回清水打法。</li>
-</ul>
-<hr />
-<h2 id="_22">第十章：繁殖季節——春天的特殊行為</h2>
-<h3 id="101">10.1 繁殖水溫怎麼看</h3>
-<p>實戰上，黑鱸在台灣常於 <strong>18–22°C</strong> 進入大家最有感的繁殖觸發帶；研究給的較完整活動窗口則是 <strong>15.5–22.5°C</strong>。</p>
-<p>因為南部春季均溫通常比北部高 <strong>3.4–3.8°C</strong>，所以常出現：</p>
-<ul>
-<li><strong>南部先啟動</strong>；</li>
-<li><strong>北部晚 2–4 週</strong>左右；</li>
-<li>同樣是春天，南北可能完全不同戲碼。</li>
-</ul>
-<h3 id="102">10.2 為什麼黑鱸愛硬底築巢</h3>
-<p>雄魚常把巢做在：</p>
-<ul>
-<li><strong>0.3–1.5 m</strong> 淺水；</li>
-<li>直徑約 <strong>45–60 cm</strong>；</li>
-<li>中央凹下約 <strong>10–15 cm</strong>；</li>
-<li>底質偏好是 <strong>礫石 &gt; 粗砂 &gt; 淤泥 &gt; 軟泥</strong>。</li>
-</ul>
-<p>原因很簡單：硬底像通風良好的嬰兒床，水流能穿、氧能到、泥不容易把蛋悶住。</p>
-<p>研究顯示：</p>
-<ul>
-<li>砂礫硬底或健康根系巢，孵化率常有 <strong>90–93%</strong>；</li>
-<li>軟泥巢常直接掉到 <strong>20% 以下</strong>，甚至整巢覆沒。</li>
-</ul>
-<h3 id="103-ehfe2h2s">10.3 <span class="gl-trigger" data-term="eh">Eh</span>、<span class="gl-trigger" data-term="fe">Fe²⁺</span>、<span class="gl-trigger" data-term="h2s">H₂S</span>：為什麼臭底不適合當育嬰房</h3>
-<p>若底泥太還原：</p>
-<ul>
-<li>北部會冒出較多 <strong><span class="gl-trigger" data-term="fe">Fe²⁺</span></strong>；</li>
-<li>南部更怕 <strong><span class="gl-trigger" data-term="h2s">H₂S</span></strong>。</li>
-</ul>
-<p>對蛋和稚魚來說，這不是「有點不舒服」，而是會直接切斷氧進不去、細胞活不下去。研究還指出，北部高嶺石泥殼若把卵包住，當懸浮黏土濃度達 <strong>139 mg/L</strong> 時，孵化率就可能掉到 <strong>57.7% 以下</strong>；若 <strong>&gt;500 mg/L</strong>，常跌到 <strong>30% 以下</strong>。</p>
-<p><strong>廢棄巢穴的 <span class="gl-trigger" data-term="h2s">H₂S</span> 死亡區</strong></p>
-<p>這是一個常被忽略的問題：<strong>被遺棄的黑鱸巢穴</strong>（卵未孵化、親魚棄巢），巢穴裡有機物腐敗，往往會在底部形成一個強烈的 <span class="gl-trigger" data-term="h2s">H₂S</span> 濃度中心，向四周擴散。</p>
-<p>研究用半球體擴散方程計算：直徑 50 cm 的廢棄巢穴，周圍會產生一個三維半球體死亡區，半徑 <strong>r = 1.6–2.3 m</strong>（直徑 3.2–4.6 m，佔底床面積約 <strong>8–17 m²</strong>）。</p>
-<p>更嚴重的是，當多個廢棄巢穴距離 <strong>&lt;4.6 m</strong>（各自毒氣雲開始交疊），相鄰死亡區疊加，會直接把底層大面積變成不可用的危險帶——這就是「骨牌效應」。當年度的幼魚招募率（多少幼魚成功存活）會因此大幅下降。</p>
-<p><strong>釣魚意義</strong>：春季繁殖後若釣場有明顯的廢棄巢跡象（大量沉底死卵、發黑底泥），原本的繁殖淺灘區反而可能變成地雷區，此時拉高假餌水層比貼底更安全。</p>
-<h3 id="104">10.4 護巢攻擊不是在吃，是在趕人</h3>
-<p>這點非常重要。護巢雄魚咬東西，很多時候不是因為餓，而是因為你進到牠的警戒圈了。</p>
-<p>研究整理出一個很實用的尺度：</p>
-<ul>
-<li>警戒區半徑大約 <strong>200 cm</strong>；</li>
-<li>真正強烈反應區約 <strong>50–100 cm</strong>。</li>
-</ul>
-<p>所以春季很多「咬餌意願高」的魚，並不是覓食魚，而是被你逼到不得不驅離目標。</p>
-<h3 id="105">10.5 護巢期棲位：淺、水硬、穩、有遮蔭</h3>
-<p>雄魚最喜歡的巢位通常同時具備：</p>
-<ul>
-<li>淺水但不會馬上曝露；</li>
-<li>硬底或植物根系；</li>
-<li>微流能過但不會把巢沖掉；</li>
-<li>有一點遮蔭或立體結構。</li>
-</ul>
-<p>健康水草根際甚至能靠泌氧，做出一圈較高 <span class="gl-trigger" data-term="eh">Eh</span> 的小安全帶，替蛋和稚魚擋掉部分化學毒害。</p>
-<p><strong>北部護巢魚化學警戒範圍很小</strong></p>
-<p>提到護巢防禦，很多人想象「魚聞到危險就會保護巢穴」。但北部酸水（<span class="gl-trigger" data-term="ph">pH</span> 4.5–5.5）中，<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>（魚受傷時釋放的化學警報）半衰期只有數分鐘，有效感知半徑 <strong>&lt;0.5 m</strong>。這代表北部護巢雄魚對<strong>化學告警幾乎完全依賴視覺和側線</strong>，側翼的危險需要靠得更近才能感知到。這也解釋了為什麼北部護巢魚有時候「直到很近才反應」。</p>
-<p>南部的護巢雄魚則可透過 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 熱點感知 4–7 m 外的傷亡事件，相對警戒範圍更廣。</p>
-<h3 id="106">10.6 水位擾動：灌溉放水為什麼很傷</h3>
-<p>研究指出，只要：</p>
-<ul>
-<li>水位下降速率 <strong>&gt;5 cm/day</strong>；或</li>
-<li>巢上安全水深掉到 <strong>&lt;0.3 m</strong>；</li>
-</ul>
-<p>就很可能觸發棄巢。</p>
-<p>南部旱季每月淨水分虧損約 <strong>80 mm</strong>，若再疊上抽水，很多原本還安全的巢，會在幾天內變成暴露區。</p>
-<h3 id="107">10.7 釣手注意：護巢期釣放的代價，比你想的大</h3>
-<p>研究裡最殘酷的數字有三個：</p>
-<ul>
-<li>雄魚若被留在活魚艙 <strong>15 分鐘</strong>後放回，平均要<strong>30 分鐘</strong>才能回巢；</li>
-<li>掠食者常在雄魚離巢後<strong>5 分鐘內</strong>進入；</li>
-<li>吞食速率可達 <strong>20.9 尾／分鐘／每隻掠食者</strong>。</li>
-</ul>
-<p>意思是，你拍一組照的時間，對那個巢來說可能就是整窩沒了。</p>
-<p>所以春季釣到疑似護巢魚時，最負責任的做法很簡單：</p>
-<ul>
-<li>原地、就近、快速放；</li>
-<li>不拖延、不移位、不長拍；</li>
-<li>最理想甚至是主動避開床區。</li>
-</ul>
-<hr />
-<h2 id="_23">第十一章：台灣黑鱸全年月曆——每個月，魚大概在想什麼</h2>
-<blockquote>
-<p>下表為依 0A–0D、1A–4B、SUP-A/B 的季節數據整合後，做成的「台灣月尺度實戰版」。水溫為代表性估值，用來抓節奏，不是替代現場量測。桃竹苗特殊注記以括號補充。</p>
-</blockquote>
+<p>這一章是新手最實用、也最有趣的部分——直接告訴你<strong>幾月、什麼水、綁什麼餌、怎麼操</strong>。內容來自台灣昆蟲、兩棲、爬蟲、甲殼四大獵物生態調查。</p>
+<h3 id="junior-_9">全年「魚在吃什麼」月曆（北部時序；南部約再提前半個月到三週）</h3>
 <table>
 <thead>
 <tr>
 <th>月份</th>
-<th>北部淺水（埤塘/管理池）</th>
-<th>北部深水水庫</th>
-<th>南部野生埤塘</th>
-<th>南部管理池</th>
-<th>魚的活性</th>
-<th>主要棲位</th>
-<th>釣手建議</th>
+<th>當季主食</th>
+<th>綁什麼、怎麼操</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1 月</td>
-<td><strong>13–17°C</strong></td>
-<td><strong>15–18°C</strong></td>
-<td><strong>17–21°C</strong></td>
-<td><strong>18–22°C</strong></td>
-<td>北低、南中</td>
-<td>北部偏深或避風結構；南部日照淺區有窗口</td>
-<td>北部慢、貼底或中層；南部可找中午升溫。<span class="gl-trigger" data-term="art">ART</span> ~34–48 hr（10–15°C），驚魚後約兩天</td>
+<td>1–2 月</td>
+<td>紅蟲（搖蚊幼蟲）貼底、蝦蟹深水避寒</td>
+<td>深色小軟蟲貼底慢拖微顫；深色蝦型軟蟲深水長停</td>
 </tr>
 <tr>
-<td>2 月</td>
-<td><strong>15–18°C</strong></td>
-<td><strong>16–19°C</strong></td>
-<td><strong>19–22°C</strong></td>
-<td><strong>20–24°C</strong></td>
-<td>北低中、南中高</td>
-<td>南部開始靠岸挑位；北部仍偏保守</td>
-<td>南部注意繁殖前段；北部找午後硬底。（桃竹苗：比台北早 1–2 週有春感）</td>
+<td>3–4 月</td>
+<td>米蝦繁殖、毛蟹幼蟹溯溪、蝌蚪、搖蚊群飛</td>
+<td>1.5 吋半透明亮片米蝦軟蟲沿岸礫石跳；深色小軟蟲貼底</td>
 </tr>
 <tr>
-<td>3 月</td>
-<td><strong>17–20°C</strong></td>
-<td><strong>17–20°C</strong></td>
-<td><strong>21–25°C</strong></td>
-<td><strong>22–26°C</strong></td>
-<td>北中、南高</td>
-<td>南部大量進入繁殖帶；北部開始春啟動</td>
-<td>南部留意淺灘硬底；北部抓回暖後 1–2 天</td>
+<td>5–6 月</td>
+<td><strong>白蟻分飛（大水蟻，台灣神級窗口）</strong>、樹蛙蝌蚪雨、米蝦、束腰蟹</td>
+<td>半透明針尾軟蟲水面慢拖；深褐蝌蚪軟蟲樹蔭下自由下擺</td>
 </tr>
 <tr>
-<td>4 月</td>
-<td><strong>20–23°C</strong></td>
-<td><strong>18–21°C</strong></td>
-<td><strong>24–28°C</strong></td>
-<td><strong>25–29°C</strong></td>
-<td>北高、南高</td>
-<td>北部最佳前向追擊期；南部清晨與陰影區好</td>
-<td>中層最萬用；南部午後慎防過熱。<span class="gl-trigger" data-term="art">ART</span> 約 20–24 hr</td>
+<td>6–7 月</td>
+<td><strong>蝦蟹軟殼潮</strong>、豆娘水蠆、稻蝗落水</td>
+<td>帶鹽軟殼螯蝦軟蟲結構區定點微抖；草區小軟蟲微顫</td>
 </tr>
 <tr>
-<td>5 月</td>
-<td><strong>23–27°C</strong></td>
-<td><strong>20–23°C</strong></td>
-<td><strong>27–31°C</strong></td>
-<td><strong>28–32°C</strong></td>
-<td>北高、南中高</td>
-<td>北部埤塘旺季；南部魚開始躲陰與高氧帶</td>
-<td>北部可廣搜；南部改早晚與進水口。<strong>（桃竹苗 5月下旬 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動，已需離底 40 cm！）</strong></td>
+<td>7–8 月</td>
+<td>蟬落水、幼蛙跳水潮、牛蛙巨型蝌蚪、鱉苗孵化</td>
+<td>蟬型／雷蛙水面系；微型雷蛙岸邊製造跳水波紋</td>
 </tr>
 <tr>
-<td>6 月</td>
-<td><strong>26–30°C</strong></td>
-<td><strong>22–25°C</strong></td>
-<td><strong>29–33°C</strong></td>
-<td><strong>30–34°C</strong></td>
-<td>北中、南中低</td>
-<td>南部魚逐漸上浮離底；北部梅雨後依濁度換招</td>
-<td>南部優先氧氣；北部把握雨後回清。台北/宜蘭 6 月中旬 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 危險帶啟動</td>
+<td>8–9 月</td>
+<td><strong>颱風後陸蟲、蛇、蜥蜴、溪蟹被沖落水</strong></td>
+<td>泥水交界區用大餌或雙尾軟蟲大跳，製造強波動</td>
 </tr>
 <tr>
-<td>7 月</td>
-<td><strong>28–32°C</strong></td>
-<td><strong>24–27°C</strong></td>
-<td><strong>30–34°C</strong></td>
-<td><strong>31–35.5°C</strong></td>
-<td>北中低、南低</td>
-<td>南部高氧核心 <strong>0.8–1.2 m</strong>；北部早晚較佳</td>
-<td>少追大範圍；打陰影、水車出水區、背風流。南部 <span class="gl-trigger" data-term="h2s">H₂S</span> 安全距離 ≥86 cm，水柱只剩上方 30–60 cm</td>
+<td>9–10 月</td>
+<td>搖蚊秋飛、幼蛙末波、螯蝦秋繁</td>
+<td>半透明灰軟蟲黃昏攻水面；南瓜紅點軟蟲攻草邊</td>
 </tr>
 <tr>
-<td>8 月</td>
-<td><strong>28–32°C</strong></td>
-<td><strong>24–27°C</strong></td>
-<td><strong>30–34°C</strong></td>
-<td><strong>31–35.5°C</strong></td>
-<td>北中低、南低</td>
-<td>南部最怕臭底缺氧；北部仍有清晨窗口</td>
-<td>南部以保命層為主；北部可打晨昏表中層。35°C 高溫下 <span class="gl-trigger" data-term="art">ART</span>=8.5 hr（但若缺氧則 <span class="gl-trigger" data-term="art">ART</span> 無限大）</td>
-</tr>
-<tr>
-<td>9 月</td>
-<td><strong>27–31°C</strong></td>
-<td><strong>23–26°C</strong></td>
-<td><strong>29–33°C</strong></td>
-<td><strong>30–34°C</strong></td>
-<td>北中、南中低</td>
-<td>颱風前後波動大，魚常因壓力劇變改層</td>
-<td>盯氣壓與濁度，不要套固定劇本</td>
-</tr>
-<tr>
-<td>10 月</td>
-<td><strong>23–27°C</strong></td>
-<td><strong>21–24°C</strong></td>
-<td><strong>26–30°C</strong></td>
-<td><strong>27–31°C</strong></td>
-<td>北高、南中高</td>
-<td>北部秋季回穩最好；南部仍需避午後高溫</td>
-<td>北部是全年黃金月；南部抓早晚與風口。<strong>（桃竹苗 10月下旬開始注意<span class="gl-trigger" data-term="fanshui">翻水</span>前兆！）</strong></td>
-</tr>
-<tr>
-<td>11 月</td>
-<td><strong>18–22°C</strong></td>
-<td><strong>18–21°C</strong></td>
-<td><strong>23–27°C</strong></td>
-<td><strong>24–28°C</strong></td>
-<td>北中、南中高</td>
-<td>北部冷鋒與<span class="gl-trigger" data-term="fanshui">翻水</span>風險升；南部進舒適帶</td>
-<td>北部注意冷鋒後 48–72 hr；南部常很穩。<strong>（桃竹苗 11月已進入<span class="gl-trigger" data-term="fanshui">翻水</span>季，比台北/宜蘭早 1 個月！）</strong></td>
-</tr>
-<tr>
-<td>12 月</td>
-<td><strong>14–18°C</strong></td>
-<td><strong>16–19°C</strong></td>
-<td><strong>19–23°C</strong></td>
-<td><strong>20–24°C</strong></td>
-<td>北低中、南中</td>
-<td>北部回冬季邏輯；南部仍有不錯日照窗</td>
-<td>北部放慢、找穩定深度；南部依天氣可續玩。桃竹苗強北風期：強迫伏擊模式（0.2–0.8 m 沿障礙物）</td>
+<td>11–12 月</td>
+<td>蝦往深水越冬、兩棲甲殼沉底</td>
+<td>灰／南瓜色蝦型軟蟲（Ned/Carolina Rig）攻深水斜坡；重型軟餌長停</td>
 </tr>
 </tbody>
 </table>
-<h3 id="_24">北部與南部，一年到底差在哪？</h3>
-<p>如果把全年節奏濃縮成一句話，那就是：</p>
-<ul>
-<li><strong>北部的問題常是變化太快</strong>：冷鋒、東北季風、<span class="gl-trigger" data-term="fanshui">翻水</span>、暴雨後回清都快，魚常在「今天行、明天不行」的劇烈切換裡。</li>
-<li><strong>南部的問題常是壓力太長</strong>：高溫、高有機負載、低氧、臭底、濁水延長，魚不是短暫失常，而是整段季節都被壓在生理極限邊緣。</li>
-</ul>
-<p>所以北部釣手要學的是<strong>追節奏</strong>；南部釣手要學的是<strong>找生存條件</strong>。</p>
-<p>再講白一點：</p>
-<ul>
-<li>北部很多時候贏在「你有沒有抓到那個 48–72 hr 的回穩窗」。</li>
-<li>南部很多時候贏在「你有沒有先找到那塊還能呼吸、還能讓魚願意動的水」。</li>
-</ul>
+<h3 id="junior-_10">三個台灣獨有的「破防神窗口」</h3>
+<p><strong>1. 白蟻分飛（5～7 月梅雨黃昏）。</strong> 氣壓驟降又濕熱的傍晚，成千上萬白蟻撲向水面路燈、掉滿水面（每分鐘超過 50 隻）。連最警覺的老魚都會解除戒備浮上水面狂咬。<strong>這是高壓池新手最容易上魚的天然窗口</strong>——看到大水蟻出來，趕快用半透明小軟蟲或微型表層鉛筆，在水面劃出極細的 V 型波紋慢拖。</p>
+<p><strong>2. 樹蛙「蝌蚪雨」（5～7 月雨後）。</strong> 斑腿樹蛙的泡沫卵泡在雨後孵化，蝌蚪成批掉進水裡（每分鐘 20～60 隻）。魚會聚在懸空樹枝正下方等。<strong>做法超簡單</strong>：把輕的半透明針尾軟蟲丟到樹枝正下方，讓它自由下沉，什麼都不用做。</p>
+<p><strong>3. 幼蛙跳水潮（6～8 月）。</strong> 剛變態的小幼蛙在岸邊草際線超密集，受驚就成批跳回水裡。用微型雷蛙或表層軟蟲，<strong>丟到岸上再「撥」入水</strong>，製造「噗通」聲和小波紋，引爆岸邊埋伏的魚。</p>
+<h3 id="junior-_11">軟殼期：盛夏的暴利窗口</h3>
+<p>蝦蟹剛脫殼那段（水溫超過 26°C 會頻繁脫殼），沒有硬殼、超好吃，魚會專一搜尋軟殼蝦蟹，價值瞬間翻 5～10 倍。<strong>盛夏在結構區（倒木、石堆）用「帶鹽、超軟」的螯蝦／蝦型軟蟲貼底定點微抖</strong>，正中這個窗口。記住：軟餌的「軟」和「帶鹽味」在這裡是關鍵，因為魚會用嘴試咬，太硬牠就吐了。</p>
+<h3 id="junior-_12">三條「絕對不要」鐵律</h3>
+<ol>
+<li><strong>不要用純黑、渾圓、慢游的軟蟲模擬蝌蚪。</strong> 那長得像有毒的蟾蜍蝌蚪，魚吞一兩次就終生避忌、見到就躲。要模擬蝌蚪請用半透明、帶亮片、細長條的（像無毒的小雨蛙、澤蛙蝌蚪）。</li>
+<li><strong>南部夏天別打深水槽底。</strong> 那是硫化氫致死帶。改打淺水砂礫灘、硬石脊頂部，或深水區離底 1 公尺以上。</li>
+<li><strong>南部中魚後一定換點 8 公尺以上。</strong> 警報素會讓原點半小時內廢掉。</li>
+</ol>
 <hr />
-<h2 id="_25">結語：科學不是要你更複雜，而是讓你少走冤枉路</h2>
-<p>這份白皮書一路從台灣氣候、地質、水體型態，一路走到黑鱸的感官、生理、心理、繁殖與月尺度行為，最後其實只想回答一件事：<strong>為什麼同樣是黑鱸，在台灣會這麼難用一句話講完？</strong></p>
-<p>答案很簡單：因為牠不是活在抽象的「魚池」裡，而是活在一個會被季風、暴雨、土壤、藻華、曝氣、水位、濁度、光線與釣壓一起揉爛的真實環境裡。</p>
-<p>這也是為什麼，真正穩定的釣手，到最後都會慢慢長成同一種樣子：</p>
+<h2 id="junior-_13">第六章：常見路亞種類，新手怎麼選怎麼用</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>水層</strong>：表層系（浮在水面）、中層系（潛一點）、底層系（沉到底）。先決定要打哪一層，再選餌。<br />
+- <strong>節奏（操竿手法）</strong>：抽、停、拖、跳的組合。同一顆餌，節奏不同效果天差地遠。</p>
+</blockquote>
+<p>把前面所有原理，落到你會買到的幾種餌上。這裡用「模擬什麼獵物、什麼場景、怎麼操」三句話講清楚。</p>
+<p><strong>雷蛙／中空蛙（表層、攻重草倒木）。</strong> 模擬澤蛙、樹蛙成蛙。丟到水草表面，輕抽讓它左右擺頭（像青蛙蹬水），<strong>每擺幾下一定要停 1.5～3 秒</strong>——魚通常在它停在草洞邊緣那一瞬間從草下爆水攻擊。北部濁水用純黑／深色，南部清水用亮綠背＋白肚仿真色。</p>
+<p><strong>微型雷蛙／表層軟蟲（表層、攻岸邊淺水）。</strong> 模擬剛變態的小幼蛙跳水。丟到岸上「撥」入水，落水後做連續小幅微抖，模擬幼蛙慌張回游。專打岸邊極淺水（0～15 公分）埋伏的魚。</p>
+<p><strong>蟬型路亞／羽狂貝 Crawler（表層、夏天樹蔭下）。</strong> 模擬落水的蟬、蜥蜴。緊貼岸邊樹蔭丟，<strong>落水後先靜止 3～5 秒</strong>，再極慢收讓雙翼持續拍水發出「唧唧唧」聲。夏天大物水面爆咬就靠它。</p>
+<p><strong>蝦型軟蟲＋精細釣組 Ned Rig／Drop Shot（中底層、攻草區礫石）。</strong> 模擬米蝦、沼蝦。落底後<strong>向上短抽 2～3 下</strong>讓它跳起來，再放線讓它自然飄落——這個「跳起」模擬蝦的後彈逃逸，最能逼結構區老魚反射咬。新手最該先練熟這套，因為它穩、好上魚。</p>
+<p><strong>螯蝦／蟹型軟蟲＋德州釣組／橡皮頭 Jig（底層、攻倒木亂石泥底）。</strong> 模擬螯蝦、溪蟹。沉底後小幅拖底 10～20 公分、<strong>停 3～5 秒</strong>。越過木頭或石頭落下那一瞬間，軟餌的大螯會翹起來呈「防禦姿態」，魚常在這個停頓的 2～3 秒咬下去。秋冬大魚的主力。</p>
+<p><strong>多節 Swimbait／大帶尾軟蟲（中表層、模擬水蛇）。</strong> 模擬水面巡游的水蛇。極慢勻速收，讓它在水面下劃出 S 型 V 字波紋。大物專用，遭遇率低但中的常是大傢伙。</p>
+<p><strong>蝦／蟹色微型 Crankbait（中底層、攻水庫斜坡消落帶）。</strong> 勻速收讓它的導板持續「敲底」，撞起底泥煙霧，模擬驚慌逃竄的溪蟹。攻陡峭礫石斜坡很有效。</p>
+<blockquote>
+<p><strong>新手選餌懶人流程：</strong> ①先看水色定顏色（濁→深色剪影、清→自然色）。②看季節月曆定「像什麼獵物」。③看魚在哪層定表／中／底。④用對應釣組，記得「抽—停」要有停頓，別一路勻速收。</p>
+</blockquote>
+<hr />
+<h2 id="junior-_14">第七章：四個常見難關，照著做就對了</h2>
+<blockquote>
+<p><strong>先講白話：</strong> 這章把前面所有觀念，組合成你最常遇到的四個「難釣情境」的標準解法。直接照做。</p>
+</blockquote>
+<p><strong>難關一：南部盛夏、大熱天、水又綠又濁、魚不咬。</strong><br />
+水底有毒、魚浮在中上層且極度挑食。做法：找有大樹蔭的淺區；餌離底 1 公尺以上、或直接打表層 0～20 公分；超慢收、每次移動停 3～5 秒；綠水視覺失效，用會擺尾的大軟餌靠側線誘咬，顏色黃綠或半透明；同點隔 3～5 分鐘。</p>
+<p><strong>難關二：北部秋末初冬、寒流剛過、水變混、魚下沉。</strong><br />
+全池可能<span class="gl-trigger" data-term="fanshui">翻水</span>缺氧。做法：放棄底層、打表層 0～30 公分，貼避風岸的殘荷倒木；超慢收，每個動作後死等 2.5～3.5 秒；把握寒流剛來的第一天（北部底層保溫好還有機會貼底）；同點隔 15～20 分鐘，中魚立刻移開。</p>
+<p><strong>難關三：熱門管理池、老魚一堆、別人都空軍。</strong><br />
+做法：用越軟越好的軟餌（牠會試咬）；停水車的靜水期原地微顫，開水車期改用會發聲的 Spinnerbait 穿透噪音；破防靠「速度突變＋貼結構＋不收到嘴邊 15 公分」；新魚用大亮色高速餌誘搶、老魚用無聲超軟餌慢操，分開對付。</p>
+<p><strong>難關四：颱風前後。</strong><br />
+颱風前一兩天（氣壓降、天空陰）反而是好窗口，魚被趕到中上層，用大餌中速搜岸邊植被。颱風後水超濁（看不到 10 公分）視覺全廢，用大尾、低頻震動的軟餌較快速度突然掠過觸發側線。澄清切換：北部 1～2 天就能切回視覺餌（此時魚剛被「重置」最好騙），南部要等 5～8 天。</p>
+<hr />
+<h2 id="junior-_15">結語：新手最該帶走的一頁</h2>
+<p>如果整本你只記一頁，記這個釣前自問清單：</p>
+<ol>
+<li><strong>今天條件如何？</strong> 陰天微風、水溫 20～28°C、水不是剛被打濁、管理池有打氣 → 好日子。</li>
+<li><strong>魚在哪一層？</strong> 南部夏天打中上層、北部多打貼底；缺氧或停水車時打表層；永遠優先打結構（倒木、石堆、草邊、橋墩、進出水口）。</li>
+<li><strong>水什麼顏色？</strong> 濁水用黑／深色剪影，清水用自然色，南部綠水絕不用純紅。能見度低於 15 公分就慢、近、貼結構交給側線。</li>
+<li><strong>這個月魚在吃什麼？</strong> 翻第五章月曆，綁最像當季主食的餌；看到白蟻分飛、蝌蚪雨、幼蛙跳水、蝦軟殼期，就是你的破防窗口。</li>
+<li><strong>怎麼操？</strong> 別一路勻速慢收。抽—停要有停頓，老魚要製造速度突變、貼結構、別收到嘴邊。</li>
+<li><strong>別做三件事：</strong> 不用純黑渾圓蝌蚪餌、南部夏天不打深水槽底、南部中魚後換點 8 公尺。</li>
+</ol>
+<p>把這頁練熟，你就從「碰運氣的新手」變成「會讀水、會推理的釣手」。剩下的，交給時間和水邊的累積。</p>
+<hr />
+<blockquote>
+<p><em>本版所有數值來自二十多卷量化研究報告與四份台灣淡水獵物生態調查（昆蟲、兩棲、爬蟲、甲殼）的整合。部分參數屬理論估算或外推，台灣本土黑鱸仍有許多生理數據缺乏直接實驗驗證；本新手版為求好讀，省略了公式推導與引用編號。請以實際水況為準，保留彈性。釣魚愉快，記得春季繁殖期不打巢、給魚一條活路。</em></p>
+</blockquote>
+</div>
+<div class="content-pane" data-content="senior">
+<h1 class="doc-title">台灣大嘴黑鱸白皮書（資深路亞 Senior 版）</h1>
+<blockquote>
+<p>寫給已經會釣、想把「為什麼」搞到通透的台灣路亞老手</p>
+<p>這份是三個版本裡payload最重的一份。新手版教你「怎麼做」，這份告訴你「為什麼這樣做、什麼時候這條規則會失效、邊界在哪」。它整合二十多卷量化研究＋四份台灣淡水獵物生態調查（昆蟲、兩棲、爬蟲、甲殼），保留關鍵的精確數值與機制，讓你能在現場做微調、做取捨，而不是死背套路。</p>
+<p><strong>每章開頭仍有「先講白話」小框框</strong>，把該章的科學名詞用國中程度講一次——資深釣手不一定是理工背景，但需要精確的物理直覺。看完框框，後面的數字才有意義。</p>
+</blockquote>
+<hr />
+<h3 id="senior-_1">導讀：把釣況拆成一條因果鏈</h3>
+<p>資深釣手和新手最大的差別，是新手問「魚今天咬不咬」，老手問「在這個水溫、這個水色、這種底質、這個釣壓下，魚的決策被卡在哪一個環節」。整套白皮書就是把這條鏈拆開：</p>
+<p><strong>氣候 → 底質地球化學 → 水體物理（水溫/溶氧/<span class="gl-trigger" data-term="eh">Eh</span>/能見度）→ <span class="gl-trigger" data-term="qiwei">棲位</span> → 感官接收 → 神經決策 → 攻擊或否決。</strong></p>
+<p>你能介入的只有最後三環（讓餌被正確接收、繞過或滿足神經決策、觸發攻擊），但前面四環決定了你今天面對的是哪一種魚、在哪一層、用哪個感官在判斷。讀不懂前四環，後三環就是亂槍打鳥。</p>
+<p><strong>三氣候區</strong>（全書不可合併北部為單一區）：Zone-A 北部迎風（台北/基隆/宜蘭）、Zone-B 北部背風（桃竹苗）、Zone-C 南部（高雄/台南/屏東）。<strong>六水體</strong>：北/南 × 野塘（淺 ~1.5/1.2 m）、深水水庫（&gt;10 m）、管理池。<strong>核心地質分野</strong>：北部極育土含游離鐵高（48.5–124 g/kg），南部弱育土含鐵極低（8–22 g/kg）——這一個變數一路決定毒性、澄清、保溫。</p>
+<hr />
+<h2 id="senior-_2">第一部：物理底盤——你面對的環境邊界，是算得出來的</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>溶氧（<span class="gl-trigger" data-term="do">DO</span>）</strong>：水中含氧量，mg/L。3 是覓食下限、1.5 是保命線、4.5 以上才全力活動。<br />
+- <strong><span class="gl-trigger" data-term="eh">Eh</span>（氧化還原電位）</strong>：水底「新鮮 vs 腐敗」指標，mV。正值有氧，負值缺氧腐敗。跌破 −150 mV 開始產硫化氫毒氣。<br />
+- <strong><span class="gl-trigger" data-term="volumetric-heat-capacity">體積熱容</span></strong>：底泥的「保溫棉厚度」。數字大＝寒流時底層降溫慢。<br />
+- <strong>風應力</strong>：風<span class="gl-trigger" data-term="tuishui">推水</span>面的力道，Pa。超過約 0.05–0.1 Pa 就能掀動淺塘底泥。</p>
+</blockquote>
+<h3 id="senior-_3">一、水溫時序：你的季節起跑線</h3>
+<p>黑鱸高活性門檻 22°C 的跨越時序，三區差到一個多月：Zone-C 2 月中、Zone-B 4 月中、Zone-A 5 月初。<strong>Zone-B 比 Zone-A 早 12–18 天開機</strong>——這不是模糊印象，是雨遮效應的量化結果（Zone-B 秋冬雨量比 Zone-A 少 47%、晴天多）。春雨期間雲層擋掉 65–80% 陽光，淺塘升溫從晴天的 1.8–2.8°C/週壓到 0.2–0.6°C/週，所以連續春雨會讓你的「開機日」往後延。</p>
+<p>實戰意義：<strong>追早春第一波，往 Zone-B（桃竹苗）的淺塘跑，比留在台北早將近兩週</strong>；南部則 2 月就能動。</p>
+<h3 id="senior-_4">二、溶氧崩潰與毒區：南部夏天的硬邊界</h3>
+<p>富營養管理池夏季飽和溶氧只有 7.28–7.53 mg/L，夜間呼吸耗氧 0.8–2.2 mg/L/hr 遠超復氧。<strong>半夜關水車後，全池 <span class="gl-trigger" data-term="do">DO</span> 在 3–4 小時內崩到 &lt;1.5（北）或 &lt;0.5（南），最低點清晨 4–6 點。</strong> 這就是清晨關氣池難釣的硬數據。</p>
+<blockquote>
+<p><strong>不用儀器判讀溶氧：把 mg/L 換成「現場長相」。</strong> 你拿不到 <span class="gl-trigger" data-term="do">DO</span> 讀數，但它由幾個看得到的東西決定，可以反推：<br />
+- <strong>時間（溶氧日週期）</strong>：水草藻類白天光合產氧、午後最高，整夜被呼吸耗掉、清晨 4–6 點觸底。所以「清晨缺氧、午後足氧」是常態，別把夏天清晨當黃金時段。<br />
+- <strong>水溫</strong>：越熱溶解度越低，悶熱無風的盛夏淺水＝上限低＋耗氧快，雙重夾擊。<br />
+- <strong>擾動</strong>：風皺水面、入水口、水車＝正在復氧；死角、靜水、停機＝往下崩。<br />
+- <strong><span class="gl-trigger" data-term="algal-bloom">藻華</span></strong>：濃綠水日夜落差最大，清晨谷最深、最危險。<br />
+- <strong>浮頭（<span class="gl-trigger" data-term="asr">ASR</span>）</strong>：看到雜魚水面一張一合吸氣，代表已跌破約 2 mg/L 求生線，黑鱸同步閉口。<br />
+把數字對回畫面就有感覺：<strong>4.5+（全力活動）</strong> ≈ 有風有流的清爽水、上午到午後；<strong>3（覓食下限）</strong> ≈ 悶熱午後、魚開始往有流或結構處擠；<strong>1.5（保命線）</strong> ≈ 清晨關水車或盛夏死角、開始出現浮頭。</p>
+</blockquote>
+<p>南部弱育土含鐵低，夏季底層 <span class="gl-trigger" data-term="eh">Eh</span> 跌破 −150 mV 後硫化氫飆到 0.15–0.85 mg/L。黑鱸對 <span class="gl-trigger" data-term="h2s">H₂S</span> 的<strong>行為迴避閾值低到 0.002 mg/L</strong>（只有<span class="gl-trigger" data-term="lc50">半致死濃度</span>的 6.5%），且無法生理適應，只能空間迴避。算出來的避毒安全高度：<strong>停機時離底約 100 公分（深槽 150 公分）</strong>。北部含鐵高，<span class="gl-trigger" data-term="h2s">H₂S</span> 被鎖成 FeS 維持 &lt;0.02 mg/L，魚能安心貼底。</p>
+<p><strong>最反直覺的一條：盛夏毒氣濃時開水車，反而把底層高濃度 <span class="gl-trigger" data-term="h2s">H₂S</span> 攪散全池，整池（1.2 m 深）都超過致死濃度</strong>——這是「水車重啟<span class="gl-trigger" data-term="fanshui">翻水</span>死魚」的物理機制。所以南部夏季停機期的正解不是等開水車，而是放棄深水槽底，改打淺水砂礫灘、硬石脊頂部（有機質低、無 <span class="gl-trigger" data-term="h2s">H₂S</span>），或深水區離底 1 公尺以上懸浮。</p>
+<blockquote>
+<p>💡 <strong>深入一點（可跳過）：<span class="gl-trigger" data-term="eh">Eh</span> 與 <span class="gl-trigger" data-term="h2s">H₂S</span> 是「門檻」，不是「斜坡」。</strong> 你可能直覺以為水底毒性是隨深度慢慢變濃的漸層。其實不是——<span class="gl-trigger" data-term="eh">Eh</span> 跌破約 −150 mV 之前幾乎不產 <span class="gl-trigger" data-term="h2s">H₂S</span>，跌破之後才「斷崖式」快速累積；而魚的行為迴避閾值又低到 0.002 mg/L（半致死量的 6.5%），等於「一驗到就閃」。對你的意義：避毒高度不是「越高越安全的漸層」，而是「過了某條線才安全」的硬界線，那條線受擾動與底質影響、容錯很小，南部夏天寧可抓保守、多離底一點。</p>
+<p>💡 <strong>深入一點（可跳過）：Q10——溫度每升 10°C，反應速率約翻一倍。</strong> 這套研究實測底泥微生物的 Q10 約 2.2–2.6，意思是 30°C 的腐敗、耗氧、產毒速率是 20°C 的兩倍多。對你的意義：南部盛夏的毒區與夜間缺氧不是線性變嚴重，而是隨高溫加速惡化——同一池水，盛夏停機後崩潰的速度遠快於春秋，你的反應時間和離場判斷要跟著縮短。</p>
+</blockquote>
+<h3 id="senior-_5">三、濁度澄清與熱滯後：暴雨/寒流後的時間窗</h3>
+<p><strong>暴雨後澄清的南北分野，是膠體化學決定的。</strong> 北部極育土偏酸，暴雨讓水酸到 <span class="gl-trigger" data-term="ph">pH</span> 4.5 時，黏土顆粒從 2 微米「抱團」成 20 微米絮體，沉降速度暴增 100 倍——1.5 m 水深澄清時間從 102.9 小時壓到 1.03 小時，所以<strong>北部 1–2 天清</strong>。南部中性水無此絮凝，單顆 2 微米慢慢沉，<strong>要 5–8 天</strong>（深水水庫 10–15 天）。</p>
+<p><strong>寒流後底層回溫的熱滯後</strong>：北部紅泥<span class="gl-trigger" data-term="volumetric-heat-capacity">體積熱容</span>高（3.411 vs 南部 3.122 J/cm³·K），寒流時底層保溫滯後 Zone-A 17–23 hr、Zone-B 18–24 hr，南部只有 6–12 hr。實戰：<strong>北部寒流剛來的第一天（0–24 hr），底層比表層高 2–3°C，貼底還有黃金窗口</strong>；南部底層降溫陡峭，沒這個緩衝。</p>
+<h3 id="senior-_6">四、兩種極端事件的跨水體排序（直接拿來判斷）</h3>
+<p><strong>颱風暴雨後缺氧速度（快→慢）</strong>：南部管理池（4–8 hr，最低 0.2–0.5，撐 2–3 天）→ 北部管理池 → 南部野塘（12–24 hr）→ 北部野塘 → 深水水庫表層（不會整池崩）。</p>
+<p><strong>暴雨後澄清速度（快→慢）</strong>：Zone-B 野塘（24–48 hr）→ Zone-A 野塘 → 北部水庫（3–5 天）→ 南部野塘（5–8 天）→ 南部管理池 → 南部水庫（10–15 天）。</p>
+<p><strong>冬季強冷氣團<span class="gl-trigger" data-term="fanshui">翻水</span>毒性風險</strong>：南部管理池最高（表底溫差≥4°C＋風≥5 m/s 觸發全池<span class="gl-trigger" data-term="fanshui">翻水</span>，把底泥 <span class="gl-trigger" data-term="h2s">H₂S</span> 0.15–0.85 mg/L 一次捲起，2–4 hr 耗光 <span class="gl-trigger" data-term="do">DO</span>，毒性持續 24–48 hr）；北部管理池雖翻但含鐵高無毒氣威脅。</p>
+<p>深水水庫翻轉時序：北部（石門/寶山）11 月中–12 月下；南部（曾文）延到 1 月中–2 月下。翻轉期間底層缺氧水湧升，全水柱短暫難釣。</p>
+<blockquote>
+<p><strong>第一部精要：</strong> 北部＝韌性系統（快澄清、強保溫、<span class="gl-trigger" data-term="h2s">H₂S</span> 免疫、快復氧），南部＝脆弱系統（慢澄清、弱保溫、易爆毒、慢復氧）。同一場颱風寒流，在南北觸發的是完全不同的魚反應。把這套物理邊界記成「時間表」，你就知道暴雨後第幾天該回去、寒流後底層還能不能打。</p>
+</blockquote>
+<hr />
+<h2 id="senior-_7">第二部：觸發與<span class="gl-trigger" data-term="qiwei">棲位</span>——魚在哪一層、被什麼開關控制</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>魚鰾</strong>：魚的浮力氣囊，黑鱸排氣極慢（每小時只調 0.2–0.5% 體積），所以氣壓一變牠很久才舒服。<br />
+- <strong>斯涅爾窗</strong>：魚從水下往上看，只有正上方一個圓錐形窗口看得到水面外的世界，窗外是鏡面反射。光線狀態會改變這個窗口的對比度。<br />
+- <strong><span class="gl-trigger" data-term="lux">lux</span></strong>：亮度單位。正午戶外 ~100,000，陰天 ~10,000，滿月水面 ~0.2。<br />
+- <strong>rheotaxis（逆流定向）</strong>：魚會本能地頭朝水流上游，逆流伏擊。</p>
+</blockquote>
+<h3 id="senior-_8">五、三大短時觸發的精確邊界</h3>
+<p><strong>氣壓——真相是光學，不是壓力。</strong> 低壓前「瘋咬」的主因（貢獻約 65%）是積雨雲把直射光變散射光，水面反光與背景散射光劇降，假餌在斯涅爾窗內的邊緣對比度提升 35–50%，視覺獵食半徑拓寬。魚鰾微脹的不適只是配角（35%）。但氣壓對<strong>大物</strong>確實有額外效應：降壓 53 hPa（颱風級）時，50 cm/2.5 kg 個體魚鰾膨脹絕對量是 35 cm 個體的 2.5 倍，內臟擠壓更嚴重，所以<strong>驟降時大物優先棄淺潛深，進入 24–48 hr 閉口</strong>。追大物者：降壓初期搶中上層那個窗口，降太深就收工。</p>
+<p><strong>光照——「上午關機」的閾值與水色強相關。</strong> 視網膜明暗適應有 30–45 分鐘遲滯，照度突破約 20,000 <span class="gl-trigger" data-term="lux">lux</span> 錐細胞飽和致盲，視距縮 40%+。關機時序看水色：Zone-A 褐水（1 m 處終日 &lt;510 <span class="gl-trigger" data-term="lux">lux</span>）幾乎不關機，能釣到接近中午；Zone-B 中濁約 08:30–09:00 關、15:30 解；Zone-C 清水 07:00–07:30 就被閃瞎、關到 16:00。<strong>南部清水必須在 07:30 前打完淺灘視覺窗口，之後轉 &gt;2.5 m 深水或陡壁陰影（&lt;3,000 <span class="gl-trigger" data-term="lux">lux</span> 避難圈）。</strong></p>
+<blockquote>
+<p>💡 <strong>深入一點（可跳過）：亮度是「對數尺度」，不是線性。</strong> 魚眼（和我們的眼睛）對光的反應，不是「光增加多少、反應就跟著增加多少」，而是「光增加約 10 倍，感覺才差一格」——<span class="gl-trigger" data-term="lux">lux</span> 這個單位背後就是這種倍率關係。對你的意義：日出後光線不是平緩變亮，而是在某個短時間內「跨過致盲門檻」就突然關機，所以「上午關機」是斷崖式的、有明確的那 20–30 分鐘，不是慢慢變難釣。水越清，那條關機線來得越早越狠，就是這個道理——你的視覺窗口比想像的窄、要更果斷地搶。</p>
+</blockquote>
+<p><strong>月相——只在清水有效。</strong> 褪黑激素半抑制照度低到 0.01 <span class="gl-trigger" data-term="lux">lux</span>。滿月晴天南部清水水下 1 m 仍有 0.064 <span class="gl-trigger" data-term="lux">lux</span>，抑制褪黑激素 90%，引發整夜瘋狂視覺捕食，<strong>隔天白天荷爾蒙反彈＋體力透支，重度閉口 &gt;8 hr</strong>。北部濁水（35 cm）水下 1 m 只剩 0.0015 <span class="gl-trigger" data-term="lux">lux</span>、抑制率 9%，月相幾乎無效。實戰：南部清水滿月期，主攻夜間 19:30–23:30 與第一道曙光 05:00–06:00，白天 07:30–15:30 當規避期。</p>
+<h3 id="senior-_9">六、<span class="gl-trigger" data-term="qiwei">棲位</span>的三維判斷</h3>
+<p><strong>垂直<span class="gl-trigger" data-term="qiwei">棲位</span>由溶氧（下限 3.0、極限 1.5）、溫度、毒區共同決定。</strong> 非繁衍期季節<span class="gl-trigger" data-term="qiwei">棲位</span>深度（摘要）：</p>
+<table>
+<thead>
+<tr>
+<th>水體</th>
+<th>春</th>
+<th>夏</th>
+<th>秋</th>
+<th>冬</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>北部淺塘</td>
+<td>0.6–1.2 m</td>
+<td>1.0–1.4 m</td>
+<td>0.8–1.3 m</td>
+<td>1.2–1.5 m 貼底保溫</td>
+</tr>
+<tr>
+<td>南部野塘</td>
+<td>0.4–1.0 m</td>
+<td><strong>0.6–0.8 m <span class="gl-trigger" data-term="qiwei">棲位</span>壓縮</strong></td>
+<td>0.6–1.0 m</td>
+<td>0.8–1.2 m</td>
+</tr>
+<tr>
+<td>北部水庫</td>
+<td>1.5–4 m</td>
+<td>2.5–5 m 躍溫層上緣</td>
+<td>4–8 m</td>
+<td>5–10 m</td>
+</tr>
+<tr>
+<td>南部水庫</td>
+<td>2–5 m</td>
+<td>3–6 m</td>
+<td>5–9 m</td>
+<td>6–12 m</td>
+</tr>
+</tbody>
+</table>
+<p>南部夏季野塘最艱困：高蒸發把水深壓到 0.8 m，魚被「<span class="gl-trigger" data-term="qiwei">棲位</span>壓縮」擠在 60–80 cm 的樹蔭高氧微區（<span class="gl-trigger" data-term="do">DO</span> ≥5 的 &lt;1.5 m² 小範圍），開闊淺水盲搜沒意義。曾文乾季水位降 15–30 m，消落帶裸露，魚外移 100–300 m、壓在<span class="gl-trigger" data-term="thermocline">溫躍層</span>上方 2–5 m 中表層。</p>
+<p><strong>「南部魚常浮、北部魚常底」是毒區造成的結構性差異</strong>——記住南部夏天底層那道離底 100 cm 的 <span class="gl-trigger" data-term="h2s">H₂S</span> 屏障＋30–50 cm 的 <span class="gl-trigger" data-term="fe">Fe²⁺</span> 協同屏障。北部春末到初秋底層也會釋放亞鐵，仍有 25–67 cm 的化學排除帶（修正「北部可隨意貼底」的舊觀念），只是沒南部那麼劇烈。</p>
+<h3 id="senior-_10">七、<span class="gl-trigger" data-term="wind-driven-current">風生流</span>與逆流伏擊（迎風岸為什麼是黃金帶）</h3>
+<p>6 m/s 強風在淺塘表面產生約 0.05 Pa 風應力，驅動表層吹風流 9–18 cm/s，把弱游泳的浮游生物輸送到迎風岸聚積，級聯吸引餌料魚在迎風沿岸帶（向外 3–15 m）高密度集中。黑鱸在 0.5–1 m 深的結構後方，以 15°–30° 仰角逆流伏擊。<strong>關鍵閾值</strong>：<span class="gl-trigger" data-term="wind-driven-current">風生流</span> 5–12 cm/s 時逆流伏擊淨能量獲取率最大（迎風岸黃金帶的流體力學本質）；<strong>超過 20 cm/s 游泳耗能暴增、淨回報轉負，魚瞬間退入結構後方靜水渦流定點等</strong>。所以風太大時別硬打迎風開闊面，把餌送進結構背流的死角。</p>
+<blockquote>
+<p><strong>第二部精要：</strong> 「魚在哪」＝溶氧（下限 3）＋毒區（南部離底 100 cm）＋風向（迎風岸，但流速 5–12 cm/s 才是甜區）。「魚動不動」＝光照（上午關機、水越清越早）＋氣壓（大物對驟降敏感、主因其實是光學）＋月相（只在南部清水有效，隔天重度閉口）。</p>
+</blockquote>
+<hr />
+<h2 id="senior-_11">第三部：感官解碼——魚怎麼接收、用哪條神經線判斷你的餌</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong><span class="gl-trigger" data-term="oft">OFT</span>（最佳覓食理論）</strong>：魚會算 CP 值——獵物熱量除以（搜尋時間＋處理時間），值越高越優先吃。<br />
+- <strong>快/慢視覺通路</strong>：魚有兩條神經線。快通路（12–25 毫秒）不過腦、來不及思考就咬；慢通路（150–350 毫秒）過腦、會識破假餌。餌速控制走哪條。<br />
+- <strong>側線神經丘</strong>：側線上的感應細胞，分兩種——表淺神經丘（<span class="gl-trigger" data-term="sns">SNs</span>）感低頻、管狀神經丘（CNs）感高頻。<br />
+- <strong><span class="gl-trigger" data-term="cff">CFF</span>（臨界閃爍融合頻率）</strong>：魚眼的「畫面更新率」，Hz。高＝看得清快速細節，低＝只看得到輪廓。</p>
+</blockquote>
+<h3 id="senior-oft">八、<span class="gl-trigger" data-term="oft">OFT</span>：魚為什麼挑食，又什麼時候不挑</h3>
+<p>CP 值排序（台灣常見獵物）：吳郭魚幼魚（0.272 kcal/s）&gt; 大肚魚 &gt; 鯽魚幼魚 &gt; 蝌蚪 &gt; 鰕虎 &gt; 硬殼沼蝦（0.034）。兩個關鍵衍生規則：</p>
 <ul>
-<li>先看天氣，不先看餌盒；</li>
-<li>先看水色、聞底味，不先換顏色；</li>
-<li>先判斷魚能不能呼吸、敢不敢動，再決定要不要逼牠；</li>
-<li>先尊重繁殖與極端壓力時段，再談技巧。</li>
+<li><strong>尺寸篩選</strong>：<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>有「尺寸篩選神經元」，視角小於約 1.5° 的獵物被當背景雜訊濾掉。這就是為什麼魚無視近岸大肚魚群、卻猛攻 10 cm 大假餌（預期能效 2.06 kcal/s，是單隻大肚魚的 13.9 倍）。</li>
+<li><strong>軟殼期暴利</strong>：沼蝦/螯蝦脫殼軟殼期處理時間從 1.2–2.0 s 暴跌到 0.2 s，CP 值躍升 5–13 倍。水溫 &gt;26°C 觸發脫殼潮，魚會專一搜尋軟殼個體——這是夏季結構區用帶鹽超軟蝦/蟹軟蟲的學理。</li>
 </ul>
-<p>科學的價值，不是把釣魚變成考試；而是讓你知道哪些東西真的重要，哪些只是自我安慰。</p>
-<p>當你開始能用水溫 <strong>18–22°C</strong> 去看繁殖啟動、用 <strong><span class="gl-trigger" data-term="do">DO</span> 2–3 mg/L</strong> 去判斷魚是不是只剩保命模式、用 <strong><span class="gl-trigger" data-term="eh">Eh</span> -150 mV</strong> 去猜底下是不是已經不能待、用路亞速度 <strong>1.5–1.8 m/s</strong> 去理解什麼叫真正的反射咬餌、用<strong>完整的 <span class="gl-trigger" data-term="art">ART</span> 矩陣</strong>去理解老魚在不同水溫下需要多久才能忘記驚嚇（5°C 要等 68 小時、20°C 要等 24 小時、30°C 只要 12 小時）、用安全離底距離 <strong>≥86 cm</strong>（南部）或 <strong>≥40 cm</strong>（北部）去判斷底是棲位還是毒區、用暗視覺的路亞速度 <strong>0.2–0.4 m/s</strong> 替代白天的 0.5–1.0 m/s <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span>，你看水的方式就會完全不同。</p>
-<p>而當你看水的方式變了，釣魚自然就會變。</p>
-<p>你不一定每次都中魚。</p>
-<p>但你會越來越知道：</p>
+<p><strong>挑食門檻隨水溫移動</strong>（這是 senior 級的微調關鍵）：高溫（&gt;30°C）每次追擊機會成本極高，切換到專一 <span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span> 的門檻降到相對豐度 50–60%——盛夏必須精準擬真；低溫（&lt;18°C）主動搜尋成本高、反而不挑食，門檻升到 &gt;90%——冬天擬真度可放寬，改靠反射刺激破防。</p>
+<p>冬季 <span class="gl-trigger" data-term="oft">OFT</span> 還會<strong>反轉偏好</strong>：低溫肌肉收縮慢、處理硬棘獵物成本暴增，魚從「高能量優先」切到「低處理成本優先」，偏好轉向無硬棘的大肚魚——<strong>冬季餌應偏小、軟、無阻力</strong>。</p>
+<h3 id="senior-_12">九、反射咬餌：繞過大腦的攻擊（路亞最核心的神經學）</h3>
+<p>兩條通路的切換由<strong>餌速</strong>控制：餌速 ≥1.2 m/s 時，它在魚攻擊區滯留 &lt;150 ms，徹底阻斷慢通路，強迫反射咬。這就是「快抽、瞬間逃逸」能逼大魚開口的本質——<strong>它繞過<span class="gl-trigger" data-term="pizichun">皮質醇</span>避忌記憶</strong>（被釣怕的餌也照咬）。觸發最終 commit 的最強物理因子是<strong>逃跑加速度 ≥2.5 m/s²</strong>（150–200 ms 內從 0.5 加到 1.0 m/s 以上）。</p>
+<p>各水色的反射咬臨界速度不同：Zone-A 褐水 ≥1.5 m/s、Zone-B ≥1.2、Zone-C ≥1.1、清澈深水 ≥1.0 m/s ＋突發加速 ≥2.5 m/s²。<strong>清水越要靠抖停加速截斷慢通路審查，濁水則靠絕對速度。</strong></p>
+<h3 id="senior-_13">十、側線接管：濁水、夜間、深水的物理邏輯</h3>
+<p>能見度跌破 15 cm（對應 <span class="gl-trigger" data-term="ntu">NTU</span> 約 40：褐水 35、綠水 45、洪水灰水 60），高解析視距縮到 &lt;5 cm，視覺 100% 癱瘓，攻擊全交側線。雙系統分工要記清楚：</p>
+<table>
+<thead>
+<tr>
+<th>系統</th>
+<th>頻率</th>
+<th>有效距離</th>
+<th>對應假餌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>游離側線（<span class="gl-trigger" data-term="sns">SNs</span>，速度型/低頻）</td>
+<td>1–20 Hz（峰 5–10）</td>
+<td>&lt;40–80 cm</td>
+<td>Swimbait 尾擺、近場定位</td>
+</tr>
+<tr>
+<td>管道側線（CNs，加速度型/高頻）</td>
+<td>20–200 Hz（峰 40–80）</td>
+<td>&lt;80 cm</td>
+<td>快速振動、<span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span></td>
+</tr>
+<tr>
+<td>內耳聽石（聲壓，配魚鰾）</td>
+<td>20–1000 Hz（峰 200–300）</td>
+<td>遠場 15–25 m</td>
+<td>遠距搜尋引導</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心：聽石負責遠距招魚（15–25 m 引導粗略方位），側線負責近距觸發（&lt;40 cm 啟動咬餌）。</strong> 濁水必須慢、近、貼結構，因為魚要等餌進到約一個體長（40 cm）的側線核心圈才能攻擊。</p>
+<p>幾個 senior 級的側線微調：<br />
+- <strong><span class="gl-trigger" data-term="thermocline">溫躍層</span>聲學折射</strong>：夏季強<span class="gl-trigger" data-term="fenceng">分層</span>（−5°C/m）使聲線向底層彎曲，躍溫層下方聲能被異常聚焦——<strong>夏季深水魚反而更容易被聲學餌定向</strong>。<br />
+- <strong>南部<span class="gl-trigger" data-term="algal-bloom">藻華</span>期 EPS 黏度增加</strong>約 10%，Spinnerbait 金屬聲有效傳播從清水 15–20 m 萎縮到 8–12 m，且軟蟲尾部擺幅衰減 30–45%——<strong>爆藻期高頻金屬聲招魚半徑明顯下降，改近距無聲超軟餌</strong>。</p>
+<h3 id="senior-_14">十一、視線軸向：攻擊角度由光場驅動</h3>
+<p>雙眼重疊區只有正前方水平 25°–30°、垂直 −10°～+35°，這是唯一精準鎖定咬合區——<strong>餌軌跡必須橫切過這個重疊視錐</strong>，側方或下方盲區只會引來跟隨。三種攻擊軸向：</p>
+<table>
+<thead>
+<tr>
+<th>軸向</th>
+<th>觸發光場</th>
+<th>路徑/速度</th>
+<th>對應操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Up-Strike 朝上</td>
+<td>晨昏弱光（10–1000 <span class="gl-trigger" data-term="lux">lux</span>）</td>
+<td>+20°～+45°，1.4–2.8 m/s</td>
+<td>Topwater，餌呈現在魚上方 20–50 cm</td>
+</tr>
+<tr>
+<td>Forward-Strike 朝前</td>
+<td>中等照度</td>
+<td>−10°～+10°，1.05–2.1 m/s</td>
+<td>Crank/Jerk 同層 ±15 cm</td>
+</tr>
+<tr>
+<td>Down-Strike 朝下</td>
+<td>正午強光（&gt;10000 <span class="gl-trigger" data-term="lux">lux</span>）</td>
+<td>−15°～−45°，0.7–1.4 m/s</td>
+<td>貼底 0–15 cm 慢拖</td>
+</tr>
+</tbody>
+</table>
+<p>Up-Strike 還受溫度/溶氧/水色閘門：水溫 &lt;12°C（Zone-C &lt;14）仰攻抑制、&lt;10°C 全停；<span class="gl-trigger" data-term="do">DO</span> 1.6–2.0 進入水表呼吸即 100% 拒絕仰攻；發動深度受水色約束（Zone-A &lt;30 cm、Zone-C &lt;50 cm、深水水庫 &lt;120 cm）。冬季 &lt;12°C 視敏度衰退 30–50%、掃描頻率萎縮 65–70%，搜索視錐縮到前方 ±10°——<strong>必須極慢把餌直接送到魚避難所正前方，橫向位移不得超過 10 cm</strong>。</p>
+<blockquote>
+<p><strong>第三部精要：</strong> 速度決定走哪條神經通路（≥1.2 m/s 繞過大腦、加速度 ≥2.5 m/s² 觸發 commit）；能見度 15 cm/<span class="gl-trigger" data-term="ntu">NTU</span> 40 是視覺與側線的交班線；側線分遠場聽石招魚＋近場 <span class="gl-trigger" data-term="sns">SNs</span>/CNs 觸發；光場決定攻擊軸向，餌務必橫切 25°–30° 雙眼重疊錐。</p>
+</blockquote>
+<hr />
+<h2 id="senior-_15">第四部：行為心理——高壓老魚的內分泌，與破解它的兩條路</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong><span class="gl-trigger" data-term="pizichun">皮質醇</span></strong>：壓力荷爾蒙。被反覆釣放的老魚基礎值慢性升高，把腦中的「危險警報」音量整個調大。<br />
+- <strong>習慣化/脫習慣化</strong>：固定刺激會「看膩」（習慣化），突變刺激會「喚醒」（脫習慣化）。<br />
+- <strong>警報素（<span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span>）</strong>：魚受傷釋放的化學警報，讓附近同類集體閉口。</p>
+</blockquote>
+<h3 id="senior-_16">十二、新魚老魚的二元化（量化的內分泌差異）</h3>
+<table>
+<thead>
+<tr>
+<th>族群</th>
+<th><span class="gl-trigger" data-term="pizichun">皮質醇</span>基線</th>
+<th><span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span></th>
+<th>不匹配餌反射咬率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新魚（放流 &lt;30 天）</td>
+<td>1.68 ng/mL（放流期 10–15）</td>
+<td>&lt;15%</td>
+<td>65–80%</td>
+</tr>
+<tr>
+<td>老魚（反覆釣放）</td>
+<td>20–40 ng/mL（台灣高壓池實測 35–45）</td>
+<td>75–90%</td>
+<td>15–30%</td>
+</tr>
+</tbody>
+</table>
+<p>老魚的糖皮質激素受體下調 50%、負反饋受損、端腦「風險警報權重」被慢性放大——它對任何不自然訊號都觸發拒咬。<strong>破解只有兩條路：繞過大腦（觸發 12–25 ms 反射）或徹底擬真（讓慢通路審查找不到破綻）。</strong></p>
+<h3 id="senior-_17">十三、四個破防機制（老手的精細活）</h3>
+<p><strong><span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 視覺催眠與脫習慣化。</strong> 餌以 15–30 cm/s 勻速平移（視網膜角速度 17°–34°/s）會鎖住魚的方向選擇性神經元、引發跟隨凝視；但持續勻速 &gt;3.0 秒或 60 cm，<span class="gl-trigger" data-term="optic-tectum">視頂蓋</span>突觸後電位衰減 60%、判定無害。<strong>脫習慣化破防</strong>：在 150–200 ms 內施加速度突增 ΔV ≥35 cm/s、急停 1.5–2.5 s、或轉向 ≥45°，咬餌率從 &lt;5% 暴增到 65–85%。</p>
+<p><strong><span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span> 的物理雙因子。</strong> 老魚跟到 13.5–24 cm 突然甩頭逃，因為：①晶狀體近點極限 15 cm，逼近就失焦（解析度從 5.5 崩到 &lt;1.2 cycles/degree）；②物距從 20→10 cm 時角膨脹速度暴增 4 倍、突破 1.2 rad/s 緊急避難閾值，被中腦 Mauthner 細胞誤判成天敵喙。<strong>結論：不要把餌勻速收到嘴前 15 cm，要在物距 &gt;30 cm 就發動速度突變或偏轉。</strong></p>
+<p><strong>急停決策窗口（受酶動力學/水溫控制）。</strong> 南部夏 30°C 僅 0.8 s（0.68–0.95），北部冬 15°C 拉長到 2.5 s（2.22–2.85）。<strong><span class="gl-trigger" data-term="dead-stop">Dead Stop</span> 該停多久直接由此決定</strong>：冬季停滿 2.5–3.5 s，短於 2.0 s 魚還沒比對完就拒咬。注意 <span class="gl-trigger" data-term="dead-stop">Dead Stop</span> 對新老魚相反——新魚 +30–50%（省力最優），老魚 −40–60%（給了慢通路審查時間），除非在結構 &lt;12 cm 內（邊緣效應壓縮決策窗口 40–60%）。</p>
+<p><strong>口觸測試與選材硬指標。</strong> 老魚吞前用 80–120 ms 輕吸把餌前緣吸到唇部測硬度，硬度超過 Shore A 15（硬 PVC/ABS/鉛頭）在 80 ms 內反向噴出。<strong>只有 Shore 00-15 以下超軟矽膠/高鹽 Plastisol、接觸 ≥100 ms 才能繞過口觸審查</strong>——這是精細作釣選材的硬門檻，也解釋為何同型號軟硬不同效果天差地遠。</p>
+<h3 id="senior-_18">十四、連投節奏與警報素（不被自己嚇跑魚的底線）</h3>
+<p><strong><span class="gl-trigger" data-term="art">Alert Reset Time</span>（<span class="gl-trigger" data-term="art">ART</span>）由<span class="gl-trigger" data-term="pizichun">皮質醇</span>清除動力學決定</strong>（<span class="gl-trigger" data-term="q10">Q₁₀</span>=2.0，隨水溫變）：重度釣獲後 5°C 要 67.9 hr、15°C 36–42 hr、22°C 20–24 hr、30°C 12 hr、35°C 8.5 hr。導出同標點連投安全間隔：北部冬季管理池（15°C）≥10–20 min，南部夏季（30°C）≥3–5 min。低於此間隔<span class="gl-trigger" data-term="pizichun">皮質醇</span>階梯累積，魚 100% 進入 Lure-shyness。</p>
+<p><strong>警報素死區的南北差異極大</strong>（<span class="gl-trigger" data-term="cdom">CDOM</span> 在北部酸水把警報素鈍化、光解加速）：Zone-A 死區半徑 3.35 m、Zone-B 3.90 m、10–15 min 恢復；Zone-C 死區 4.91 m、30–45 min 恢復、活性比例高達 94%。<strong>南部一旦中魚/跑魚，該點 45–90 min 內失效，必須換點 ≥8 m</strong>；斷線帶鉤狂奔會引發全場系統性閉口（夏 12 hr、冬 36–42 hr）。<span class="gl-trigger" data-term="cr">C&amp;R</span> 累積傷害呈指數：1 次降接近率 30–45%、5 次以上降 80–90%——這就是週末高壓後老魚「見餌就走」。</p>
+<h3 id="senior-_19">十五、毒區邊緣的冒險覓食（<span class="gl-trigger" data-term="pizichun">皮質醇</span>是總閘門）</h3>
+<p>底層缺氧/毒化時魚三選一：健康魚主動逃（75–85%，逃逸速度從 12–18 飆到 45–110 m/hr）；高壓老魚靜止容忍（代謝抑制、主動索餌率 0%，只剩超近反射咬）；或<strong>冒險覓食</strong>（毒區邊緣獵物密度 ≥3.5 倍正常時，健康魚「衝入—吸食—退回」，單次 15–25 s、上限 30 s，之後 45–60 min <span class="gl-trigger" data-term="cox">COX</span> 冷卻）。</p>
+<p><strong><span class="gl-trigger" data-term="pizichun">皮質醇</span>閘門</strong>（senior 級判斷）：急性應激（&gt;150 ng/mL，剛被釣/<span class="gl-trigger" data-term="fanshui">翻水</span>）→ 冒險覓食 100% 阻斷，獵物 10 倍也不衝；慢性應激（老魚 20–40）→ 門檻從 3.5 升到 ≥6.0 倍、發動率降 &gt;90%；飢餓 3–5 天（<span class="gl-trigger" data-term="ghrelin">Ghrelin</span> 短路<span class="gl-trigger" data-term="pizichun">皮質醇</span>）→ 門檻下修到 2.0–2.5 倍。<strong>這解釋了剛翻過水/剛收竿過的池子為什麼死，以及久未開放的池子為什麼炸——飢餓會解鎖風險否決。</strong></p>
+<h3 id="senior-_20">十六、完整追擊序列：你的餌在哪一步被打槍</h3>
+<p>主動覓食五階段：偵測（0–100 ms）→ 辨識（100–500 ms）→ 接近（0.5–2 s）→ <strong>評估（2–5 s，老魚否決點）</strong> → commit（吸水 30–40 ms）。評估否決權重：尺寸不匹配（85–95%）&gt; 振動不自然（70–85%）&gt; 輪廓不對稱（50–65%）&gt; 化學線索缺失（30–40%）。</p>
+<p>兩個 senior 級套路：<strong>社交促進</strong>——兩尾以上競爭能把評估時間縮短 80%、咬餌率提升 2–3 倍（競爭池比單魚池好釣，找魚群聚的點下竿）；<strong>Dead Drift 微振動辨識</strong>——活體/受傷生物有 1–5 Hz、15–40 μm/s 自主微振動（高於側線閾值 10 μm/s），剛性碎屑完全惰性，所以漂流誘咬必須用 Shore 00-15 以下超軟餌靠水流產生 2–8 Hz 被動微晃，硬餌近距必被拒。被動漂流攻擊率比主動游動低 60–75%。</p>
+<blockquote>
+<p><strong>第四部精要：</strong> 老魚難釣＝慢性高<span class="gl-trigger" data-term="pizichun">皮質醇</span>把端腦鎖在風險否決。繞過大腦（脫習慣化 ΔV≥35 cm/s、加速度 ≥2.5 m/s²、結構 &lt;12 cm 壓縮決策）或徹底擬真（Shore 00-15 超軟餌、尺寸優先、1–5 Hz 微振動、Dead Drift）。守住 <span class="gl-trigger" data-term="art">ART</span> 連投間隔（南 3–5、北 15–20 min）與警報素換點（南 ≥8 m）。記住<span class="gl-trigger" data-term="pizichun">皮質醇</span>閘門：剛被擾過的水死、久封＋飢餓的水炸。</p>
+</blockquote>
+<hr />
+<h2 id="senior-_21">第五部：繁衍與族群——為什麼台灣野生黑鱸這麼脆弱，以及釣手的倫理邊界</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>護巢雄魚</strong>：黑鱸由公魚顧巢護卵。公魚一離巢，整窩卵就暴露。<br />
+- <strong>容載量</strong>：一片水體能養活多少黑鱸；被外來種瓜分後剩越少。</p>
+</blockquote>
+<h3 id="senior-_22">十七、繁殖的雙重打擊</h3>
+<p>台灣天然砂礫底匱乏度 &gt;90%（可用硬底質僅 2–4.5 m²/100m²，北美常 &gt;40），逼魚軟泥築巢，孵化率只剩 12–28%（礫石巢 75–90%）。南北各有殺手：<strong>北部</strong>春雨高嶺石黏粒 12 hr 內在卵表形成 80–180 μm 裹層、氧擴散驟降 72.5%（孵化率折損 65–85%），且酸水 <span class="gl-trigger" data-term="ph">pH</span> &lt;6 使受精率崩盤；<strong>南部</strong>春雨回淹後 10–20 天 <span class="gl-trigger" data-term="h2s">H₂S</span> 達 0.15–0.85 mg/L 峰值（3 月中–4 月初），與產卵高峰重疊 &gt;80%，軟泥巢失敗率 60–80%。護巢公魚對水位極敏感：日降 ≥15 cm/day（水庫洩洪/管理池放水）棄巢率 80–95%。倒春寒水溫跌破 13.5°C 母魚立即停止排卵。</p>
+<h3 id="senior-_23">十八、打巢——台灣族群衰退的核心人為機制</h3>
+<p>護巢雄魚的攻擊由防禦神經迴路（視前區＋下視丘，11-酮睪酮＋<span class="gl-trigger" data-term="pizichun">皮質醇</span>介導）主導，<strong>繞過了一般老魚的習得性避難抑制</strong>——這就是打巢魚被釣多次仍反覆攻擊入巢假餌、看似「好釣」的生理本質。防禦攻擊 80% 依賴視覺輪廓/顏色（對亮橘、白色等威脅色攻擊速度快 1.8–2.5 倍）。</p>
+<p>致命的是空窗期：公魚原地釣放 2–5 min 回巢、卵折損 15–35%；但離巢 5–15 min 或放 &gt;50 m，需 25–60 min 找回巢、30–55% 直接棄巢，<strong>25 min 空窗整窩被掠食率 100%</strong>。吳郭魚在公魚離場 30 秒內群集入侵率 85%，5–12 min 把整窩 5,000–20,000 粒卵吃掉 98–100%。</p>
+<p>台灣外來種密度是北美 5–10 倍、又無產卵禁釣期立法，<strong>一次打巢＝整窩 100% 失敗</strong>，構成野外族群年均補充損耗 &gt;70% 的核心機制。<strong>這是 senior 釣手該守的倫理邊界：春季繁殖期辨識護巢公魚（定點守一小塊砂礫/硬底、反覆驅趕、對入巢物攻擊但不真吞），辨識出來就放生離開——打巢釣的是這片水的未來。</strong></p>
+<blockquote>
+<p><strong>第五部精要：</strong> 先天缺砂礫（孵化率本就 12–28%）＋後天三重夾殺（南部 <span class="gl-trigger" data-term="h2s">H₂S</span> 撞產卵期、北部黏土酸水雙殺、外來種壓縮＋吃卵＋無禁釣期打巢）＝ &gt;70% 補充損耗。資深釣手的價值不只在技術，也在於知道什麼時候該收手。</p>
+</blockquote>
+<hr />
+<h2 id="senior-match-the-hatch">第六部：<span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span> 進階——獵物的物理訊號特徵與假餌頻率匹配</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>頻率（Hz）</strong>：每秒震動幾次。不同獵物動起來會產生不同頻率的水波，魚用側線「聽」這個頻率來辨識。<br />
+- <strong><span class="gl-trigger" data-term="sns">SNs</span> / CNs</strong>：側線兩種感應器。<span class="gl-trigger" data-term="sns">SNs</span> 感低頻（慢游、爬行），CNs 感高頻（彈跳、掙扎）。<br />
+- <strong><span class="gl-trigger" data-term="cff">CFF</span></strong>：魚眼畫面更新率，高溫 62–68 Hz、低溫黃昏降到 35–42 Hz。</p>
+</blockquote>
+<p>這一部是四份獵物報告的精華——把「<span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span>」從「形狀像不像」升級到<strong>「物理訊號頻率對不對」</strong>。資深釣手的選餌與操竿，本質上是在複製獵物的頻率特徵。</p>
+<h3 id="senior-_24">十九、獵物的頻率指紋（背起來，這是操竿的依據）</h3>
+<table>
+<thead>
+<tr>
+<th>獵物動作</th>
+<th>頻率</th>
+<th>主感應器</th>
+<th>觸發的攻擊類型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>搖蚊幼蟲蠕動</td>
+<td>0.5–2 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>啜食</td>
+</tr>
+<tr>
+<td>成蛙 Kick-Glide 游泳</td>
+<td>1–3 Hz（蹬夾爆發 0.5–1 m/s）</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>滑行停頓瞬間吸入</td>
+</tr>
+<tr>
+<td>水蛇 S 型正弦游動</td>
+<td>1–3 Hz（大波幅剪切波，擴散 40–120 cm）</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>Up-Strike 攔截</td>
+</tr>
+<tr>
+<td>蟹/螯蝦底棲爬行</td>
+<td>1–5 Hz（固體聲＋近場位移）</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>慢速貼底定位吸入</td>
+</tr>
+<tr>
+<td>蝌蚪尾擺（落水下沉）</td>
+<td>4–8 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span>/CNs 交界</td>
+<td>自由下擺攔截</td>
+</tr>
+<tr>
+<td>蟬/蜥蜴落水掙扎</td>
+<td>5–12 Hz（高振幅同心圓）</td>
+<td>CNs</td>
+<td>水表 <span class="gl-trigger" data-term="reaction-strike">Reaction Strike</span></td>
+</tr>
+<tr>
+<td>幼蛙跳水</td>
+<td>5–15 Hz</td>
+<td>CNs</td>
+<td>爆水截擊</td>
+</tr>
+<tr>
+<td>軟蟲微抖（人為）</td>
+<td>15–30 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span>/CNs</td>
+<td>超近反射咬</td>
+</tr>
+<tr>
+<td>沼蝦/米蝦後彈逃逸</td>
+<td>20–50 Hz（噴射流，瞬速 1.5–2.5 m/s）</td>
+<td>CNs</td>
+<td>15–30 cm 內 100% 精準反射咬</td>
+</tr>
+<tr>
+<td>Spinnerbait 金屬撞擊</td>
+<td>80–250 Hz</td>
+<td>聽石</td>
+<td>遠距招魚定向</td>
+</tr>
+</tbody>
+</table>
+<p><strong>操竿的本質就是複製這些頻率。</strong> 例：你想引爆結構區老魚，就用 Ned Rig/Drop Shot 落底後向上短抽 2–3 下——那個「跳起」複製的正是沼蝦 20–50 Hz 後彈逃逸的 CNs 訊號；你想喚醒水面大物，用羽狂貝/Crawler 製造 5–12 Hz 拍水，複製蟬/蜥蜴掙扎。</p>
+<h3 id="senior-cff">二十、視覺端的修正：<span class="gl-trigger" data-term="cff">CFF</span> 與水色</h3>
+<p><span class="gl-trigger" data-term="cff">CFF</span>（魚眼更新率）高溫 62–68 Hz（看得清快速拍翅細節）、低溫 15°C 或黃昏降到 35–42 Hz（退化成黑白高對比輪廓）。配合水色：</p>
 <ul>
-<li>今天該快還是該慢；</li>
-<li>該打表層、中層，還是根本該離底；</li>
-<li>該換餌，還是其實該換的是點位與時間；</li>
-<li>該再拚一口，還是該承認今天這池子的條件根本不值得硬打。</li>
+<li><strong>Zone-A 濁褐水（能見度 &lt;35 cm）</strong>：細節無效，魚靠暗色剪影。落水昆蟲/兩棲/爬蟲模擬一律黑、深紅高對比。</li>
+<li><strong>Zone-C 清綠水（能見度 50–100 cm）</strong>：細節核對嚴格。需半透明、寫實仿生色——例如麗紋石龍子的亮藍尾（450–475 nm 藍光在清水穿透強，是強視覺錨）、米蝦的半透明幾丁質反光（帶細亮片）、抱卵母蝦的亮綠/黃卵塊。</li>
 </ul>
-<p>如果這份白皮書最後能留下什麼，我希望不是一份死背的攻略，而是一套看台灣黑鱸的方法：</p>
-<p><strong>先看環境，再看魚；先懂限制，再談技巧；先知道牠為什麼不咬，才有資格談怎麼讓牠咬。</strong></p>
+<h3 id="senior-_25">二十一、台灣全年獵物物候與假餌頻率映射（整合四報告）</h3>
+<table>
+<thead>
+<tr>
+<th>月</th>
+<th>爆量獵物（北部時序；南部約早 15–20 天）</th>
+<th>假餌與頻率操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–2</td>
+<td>紅蟲貼底、蝦蟹深水避寒</td>
+<td>深色小軟蟲貼底 0.5–2 Hz 微顫；深色螯蝦軟蟲深水長停 5–8 s</td>
+</tr>
+<tr>
+<td>3–4</td>
+<td>米蝦繁殖、毛蟹幼蟹溯溪、石蠅、搖蚊群飛</td>
+<td>1.5" 半透明亮片米蝦軟蟲沿礫石跳；春季黃昏水面吸入波紋</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td><strong>白蟻分飛</strong>、樹蛙蝌蚪雨、豆娘水蠆、束腰蟹</td>
+<td>半透明針尾軟蟲水面慢拖 V 波紋；深褐蝌蚪軟蟲樹枝正下方自由下擺</td>
+</tr>
+<tr>
+<td>6–7</td>
+<td><strong>蝦蟹軟殼潮</strong>、稻蝗落水、鱉苗孵化</td>
+<td>帶鹽超軟螯蝦軟蟲結構定點微抖；蝗蟲落水「噗通」後停 2–3 s</td>
+</tr>
+<tr>
+<td>7–8</td>
+<td>熊蟬/暮蟬落水、幼蛙跳水、牛蛙巨蝌蚪</td>
+<td>Crawler 5–12 Hz 拍水；微型雷蛙岸邊撥入水 5–15 Hz；3–4" 大軟蟲攻牛蛙蝌蚪</td>
+</tr>
+<tr>
+<td>8–9</td>
+<td><strong>颱風後陸蟲/蛇/蜥蜴/溪蟹脈衝</strong></td>
+<td>泥水交界大跳；多節 Swimbait 1–3 Hz S 波模擬水蛇</td>
+</tr>
+<tr>
+<td>9–10</td>
+<td>搖蚊秋飛、幼蛙末波、螯蝦秋繁、毛蟹降海</td>
+<td>半透明灰軟蟲黃昏水面；南瓜紅點軟蟲攻草邊</td>
+</tr>
+<tr>
+<td>11–12</td>
+<td>沼蝦往深水越冬、兩棲甲殼沉底</td>
+<td>灰/南瓜蝦型軟蟲 Ned/Carolina 攻斜坡；重 Jig 長停 5–8 s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="senior-_26">二十二、三大台灣獨有窗口與負向鐵律</h3>
+<p><strong>獨有窗口</strong>：①白蟻分飛（5–7 月梅雨黃昏，氣壓驟降＋濕度 &gt;85% 觸發，遭遇率 &gt;50/min，連老魚都解除避忌浮表狂咬——高壓池最易破防的天然窗口）；②小雨蛙透明蝌蚪（3–9 月，全透明懸浮中表層，必須半透明 Clear/Smoke 夾亮片模擬光學折射，實色餌失效）；③南部吳郭魚全年供應扁身仔魚（Zone-C 終年 &gt;20°C，扁身假餌全年有基礎勝率）。</p>
+<p><strong>負向鐵律（資深釣手必守）</strong>：<br />
+1. <strong>嚴禁純黑、渾圓、慢游軟蟲模擬蝌蚪</strong>——黑眶/盤古蟾蜍蝌蚪含蟾蜍二烯內酯（Bufadienolides，干擾心臟 Na⁺/K⁺-ATPase 泵），魚吞 1–2 次建立 100% 終生味覺厭惡並泛化到所有黑色渾圓慢物。模擬蝌蚪請用半透明、帶亮片、細長條（仿無毒的小雨蛙/澤蛙蝌蚪）。<br />
+2. <strong>硬殼幼龜同理</strong>——斑龜/巴西龜幼龜爪尖刮喉，黑鱸 1–2 次後建立學習性迴避，硬殼龜型假餌能效極低。<br />
+3. <strong>南部夏停機別打深水槽底</strong>（<span class="gl-trigger" data-term="h2s">H₂S</span> 致死帶），<strong>南部中魚後換點 ≥8 m</strong>（警報素死區）。</p>
+<blockquote>
+<p><strong>第六部精要：</strong> 把 <span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span> 從「像不像」升級到「頻率對不對」——<span class="gl-trigger" data-term="sns">SNs</span> 低頻（1–5 Hz 蛇/蟹/慢游）、CNs 高頻（5–50 Hz 掙扎/彈跳）。操竿就是複製獵物頻率指紋。視覺端靠 <span class="gl-trigger" data-term="cff">CFF</span>＋水色決定剪影 vs 寫實。守住蟾蜍毒避忌與硬殼避忌兩條負向鐵律。</p>
+</blockquote>
+<hr />
+<h2 id="senior-_27">結語：資深釣手的決策矩陣</h2>
+<p>把六部濃縮成一套你站在水邊能跑完的推理流程：</p>
+<ol>
+<li><strong>判物理底盤</strong>：南/北？含鐵少（<span class="gl-trigger" data-term="h2s">H₂S</span> 易爆、慢澄清、弱保溫）還是含鐵多（<span class="gl-trigger" data-term="h2s">H₂S</span> 免疫、快澄清、強保溫）？→ 決定水底有沒有毒、暴雨後第幾天回去、寒流後底層還有沒有窗口。</li>
+<li><strong>定<span class="gl-trigger" data-term="qiwei">棲位</span>三維</strong>：溶氧（下限 3）×毒區（南部離底 100 cm）×風向（迎風岸，流速 5–12 cm/s 甜區、&gt;20 退靜水角）。</li>
+<li><strong>讀觸發開關</strong>：光照（上午關機，水越清越早；正午打下、晨昏打上）×氣壓（大物對驟降敏感，主因光學）×月相（只在南部清水有效，隔天 &gt;8 hr 閉口）。</li>
+<li><strong>解感官接收</strong>：能見度 15 cm/<span class="gl-trigger" data-term="ntu">NTU</span> 40 是視覺↔側線交班線；速度走哪條神經通路（≥1.2 m/s 繞過大腦、加速度 ≥2.5 m/s² commit）；側線遠場聽石招魚＋近場 <span class="gl-trigger" data-term="sns">SNs</span>/CNs 觸發；餌橫切 25°–30° 雙眼錐。</li>
+<li><strong>攻神經決策</strong>：判新魚（搶食、大亮色高速）還是老魚（<span class="gl-trigger" data-term="pizichun">皮質醇</span> 20–40，繞過大腦或徹底擬真 Shore 00-15）；用脫習慣化（ΔV≥35 cm/s）、急停窗口（冬 2.5–3.5 s）、口觸（超軟＋接觸 ≥100 ms）、邊緣效應（結構 &lt;12 cm）。守 <span class="gl-trigger" data-term="art">ART</span> 連投間隔與警報素換點。判<span class="gl-trigger" data-term="pizichun">皮質醇</span>閘門（剛擾過的死、久封飢餓的炸）。</li>
+<li><strong>頻率匹配 <span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span></strong>：看月曆對當季主食，高溫精準擬真（門檻 50–60%）、低溫放寬靠反射（門檻 &gt;90%）；操竿複製獵物頻率指紋；守兩條負向鐵律。</li>
+</ol>
+<p>走完這六步，你面對的不再是一片沉默水面，而是一個可以逐環診斷的系統——知道魚的決策卡在哪一環，就知道今天該調哪一個變數。</p>
+<hr />
+<blockquote>
+<p><em>本版整合二十多卷量化研究報告與四份台灣淡水獵物生態調查（昆蟲、兩棲、爬蟲、甲殼）。部分參數標註為理論估算或外推，台灣本土黑鱸許多生理數據仍缺乏直接實驗驗證——數值代表的是「目前最佳推估的決策方向」，現場應保留不確定性裕度。本版為求可讀省略了公式推導與引用編號（如 B0-XX / V-XX / VSUP-XX）；需要精確來源與信心等級，請對照各卷原始研究報告。釣魚愉快，春季辨識護巢公魚請放生離開。</em></p>
+</blockquote>
+</div>
+<div class="content-pane" data-content="expert">
+<h1 class="doc-title">台灣大嘴黑鱸白皮書（專業 Expert 版）</h1>
+<blockquote>
+<p>寫給以結果為導向的台灣職業/競技級釣手</p>
+<p>前三個版本（大眾/新手/老手）教的是「機制」——魚為什麼這樣。這一份假設你已經把那些機制內化了，要處理的是更上一層的問題：<strong>站在陌生水邊、資訊不全、時間有限的情況下，怎麼從魚的行為反推出今天的『<span class="gl-trigger" data-term="limiting-variable">限制變數</span>』，怎麼判斷手上哪個數字可信、哪個該打折，怎麼把零散的觀察組裝成一套完整的當日 pattern，以及當兩條規則互相矛盾、或研究本身資料不足時，怎麼用判斷力補位。</strong></p>
+<p>這是四份裡最不像「攻略」的一份——它教的是診斷學與決策學，不是套路。<strong>每章開頭仍有「先講白話」框框</strong>，因為精確的物理直覺比術語重要。</p>
+</blockquote>
+<hr />
+<h3 id="expert-_1">導讀：專家的工作不是記答案，是<span class="gl-trigger" data-term="reverse-inference">逆向診斷</span></h3>
+<p>新手背套路，老手懂機制，<strong>專家做的是逆向推理（reverse inference）</strong>：機制是「因 → 果」（這個水溫 → 魚會這樣），但你在水邊拿到的是「果」（魚只跟不咬、<span class="gl-trigger" data-term="short-bite">短口</span>、浮頭、整場突然閉口），要反推「因」（到底是哪一個環節在卡），然後只調那一個變數。</p>
+<p>整套白皮書的因果鏈是：<strong>氣候 → 底質 → 水體物理 → <span class="gl-trigger" data-term="qiwei">棲位</span> → 感官接收 → 神經決策 → 攻擊/否決</strong>。七個環節，任何一個都可能是今天的瓶頸。專家的價值在於——<strong>用最少的試誤，鎖定是哪一環，而不是把所有餌、所有點、所有手法盲目輪一遍。</strong></p>
+<p>同樣關鍵的是知道<strong>自己手上的數字有多硬</strong>。這套研究裡的數值分三種等級：台灣在地實測（可信度高）、理論估算/文獻估算（方向對、絕對值有彈性）、地理外推（用東亞或熱帶類比，誤差最大）。職業選手在臨場下注前，會先在心裡幫每個關鍵數字標上信心等級——下面每一部都會明講哪些數字是硬的、哪些該打折。</p>
+<hr />
+<h2 id="expert-_2">第一部：<span class="gl-trigger" data-term="reverse-inference">逆向診斷</span>框架——從症狀反推<span class="gl-trigger" data-term="limiting-variable">限制變數</span></h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong><span class="gl-trigger" data-term="limiting-variable">限制變數</span></strong>：今天卡住魚不咬的那一個主因。可能是環境（缺氧、有毒、水太濁）、也可能是神經（被釣怕了、看穿了餌）。找到它，只調它。<br />
+- <strong><span class="gl-trigger" data-term="short-bite">短口</span></strong>：魚有反應、有碰餌，但沒真正吞下、刺不中。代表「想吃但有顧慮」，通常是神經決策環節在卡，不是環境。</p>
+</blockquote>
+<p>這是 expert 版的核心章。把現場最常見的「症狀」對應到「最可能的<span class="gl-trigger" data-term="limiting-variable">限制變數</span>」與「該動的那一根桿子」。</p>
+<h3 id="expert-_3">症狀對照診斷表</h3>
+<table>
+<thead>
+<tr>
+<th>你觀察到的症狀</th>
+<th>最可能的<span class="gl-trigger" data-term="limiting-variable">限制變數</span></th>
+<th>該調的那一個</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>完全沒反應、像沒魚</strong></td>
+<td>環境邊界（缺氧/毒區/低溫關機）或魚根本不在這層</td>
+<td>先驗證溶氧與水層，別急著換餌；南部夏天先假設魚浮在中上層、底層有毒</td>
+</tr>
+<tr>
+<td><strong>跟到嘴邊甩頭走</strong></td>
+<td>神經（<span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span>：失焦＋威脅誤判）</td>
+<td>物距 &gt;30 cm 就製造速度突變/偏轉，別收到嘴前 15 cm</td>
+</tr>
+<tr>
+<td><strong>只跟不咬、長距離尾隨</strong></td>
+<td>神經（<span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 視覺催眠/習慣化）</td>
+<td>150–200 ms 內 ΔV≥35 cm/s 或轉向≥45° 脫習慣化</td>
+</tr>
+<tr>
+<td><strong><span class="gl-trigger" data-term="short-bite">短口</span>、碰了不吞</strong></td>
+<td>神經（口觸測試判定太硬/異物感）</td>
+<td>換 Shore 00-15 超軟餌、延長接觸 ≥100 ms 再揚竿</td>
+</tr>
+<tr>
+<td><strong>浮頭、貼水面不動</strong></td>
+<td>環境（溶氧 1.6–2.0 進入水表呼吸 <span class="gl-trigger" data-term="asr">ASR</span>）</td>
+<td>已是保命模式，仰攻 100% 拒絕；改超慢表層微氧帶或撤點</td>
+</tr>
+<tr>
+<td><strong>某時段開、某時段死</strong></td>
+<td>觸發（光照上午關機 / 月相隔日閉口）</td>
+<td>對照水色推關機時序，把火力壓在窗口期</td>
+</tr>
+<tr>
+<td><strong>中一隻後全場突然閉口</strong></td>
+<td>神經（警報素 <span class="gl-trigger" data-term="schreckstoff">Schreckstoff</span> 擴散）</td>
+<td>南部立刻換點 ≥8 m、避 45–90 min；別在原點硬磨</td>
+</tr>
+<tr>
+<td><strong>久封的池子一開就炸</strong></td>
+<td>神經閘門被飢餓解鎖（<span class="gl-trigger" data-term="ghrelin">Ghrelin</span> 短路<span class="gl-trigger" data-term="pizichun">皮質醇</span>）</td>
+<td>把握頭幾竿黃金期、用大亮色高效率餌最大化 <span class="gl-trigger" data-term="oft">OFT</span></td>
+</tr>
+<tr>
+<td><strong>清晨好、太陽一高就停</strong></td>
+<td>觸發（致盲閾值 20,000 <span class="gl-trigger" data-term="lux">lux</span>＋上午關機）</td>
+<td>清水 07:30 前打完淺灘，之後轉 &gt;2.5 m 深水/陰影</td>
+</tr>
+<tr>
+<td><strong>餌一停就死、一動才追</strong></td>
+<td>老魚（<span class="gl-trigger" data-term="dead-stop">Dead Stop</span> 給了慢通路審查時間）</td>
+<td>老魚別死停；除非貼結構 &lt;12 cm 壓縮決策窗口</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用法</strong>：先分流「環境型」還是「神經型」。環境型（缺氧、毒、低溫、關機）——再厲害的操竿也救不回來，該做的是換層、換時段、換水體；神經型（跟不咬、<span class="gl-trigger" data-term="short-bite">短口</span>、甩頭）——魚在這、想吃、有顧慮，這才是技術能介入的戰場。<strong>職業選手最常犯的錯，是把環境型症狀當神經型在硬解，浪費整個窗口期換餌換手法。</strong></p>
+<blockquote>
+<p><strong>「先驗證溶氧」——你沒儀器，但有五個代理指標（都免費）。</strong> 診斷表第一行叫你先排除環境邊界，但 <span class="gl-trigger" data-term="do">DO</span> 不可現場直讀，只能由決定它的變數反推，並標明信心：<br />
+- <strong>日週期（硬）</strong>：光合產氧累積到午後峰、整夜耗到清晨 4–6 點谷；停水車的富營養池 3–4 hr 內崩。「現在幾點」幾乎能定 <span class="gl-trigger" data-term="do">DO</span> 的趨勢方向。<br />
+- <strong>溫度 × 擾動（硬）</strong>：溶解度隨溫升下降，風／流／曝氣決定復氧率；悶熱無風＝高耗低補。<br />
+- <strong>浮頭 <span class="gl-trigger" data-term="asr">ASR</span>（硬，直接證據）</strong>：雜魚水面吸氣＝已 &lt;2 mg/L；黑鱸 1.6–2.0 即 100% 拒仰攻——這條一出現，環境型確診，操竿無解。<br />
+- <strong><span class="gl-trigger" data-term="algal-bloom">藻華</span>振幅（中）</strong>：優養水日夜 <span class="gl-trigger" data-term="do">DO</span> 擺幅最大，清晨谷更深。<br />
+- <strong><span class="gl-trigger" data-term="fenceng">分層</span>底死區（推定，軟）</strong>：南部＋深＋靜＋夏＋爛底 → 合理假設底層缺氧／有毒，但無原位讀數，只定方向不定值。<br />
+<strong>決策</strong>：把「幾點＋多熱＋風流水車＋水色＋有無浮頭」疊成一個 <span class="gl-trigger" data-term="do">DO</span> 信心估計，<strong>不要在環境型缺氧場硬換餌</strong>——那是整場最貴的誤判。</p>
+</blockquote>
+<h3 id="expert-15">三個快速驗證動作（落地前 15 分鐘做完）</h3>
+<ol>
+<li><strong>驗水層</strong>：先用一顆能涵蓋多層的搜索餌（中速 swimbait）掃一遍表/中/底，看反應發生在哪層——這比換顏色重要得多。</li>
+<li><strong>驗活性</strong>：丟一次明確的反射刺激（≥1.2 m/s 快抽＋急停）。有追沒咬＝魚在但保守（神經戰）；完全無視＝多半環境型，魚不在或關機。</li>
+<li><strong>驗水色 <span class="gl-trigger" data-term="ntu">NTU</span></strong>：能見度 &gt;15 cm 走視覺（顏色、輪廓重要），&lt;15 cm 走側線（震動、貼近、慢），這條交班線決定你整套打法的框架。</li>
+</ol>
+<blockquote>
+<p><strong>第一部精要：</strong> 專家先分流環境型 vs 神經型症狀。環境型換層/換時段/換水體，神經型才上技術。落地前用「驗水層→驗活性→驗 <span class="gl-trigger" data-term="ntu">NTU</span>」三動作鎖定框架，再下注，而不是盲目輪餌。</p>
+</blockquote>
+<hr />
+<h2 id="expert-_4">第二部：信心校準——哪些數字是硬的、哪些該打折</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>信心等級</strong>：研究對每個數字的把握程度。台灣實測＝硬；理論計算＝方向對但有彈性；地理外推＝拿別國類比、誤差最大。<br />
+- <strong>誤差裕度</strong>：一個數字實際可能偏多少。下注前要在心裡留這個空間。</p>
+</blockquote>
+<p>職業選手和業餘最大的差別之一，是知道<strong>什麼時候不能盡信數字</strong>。這套研究自己標了信心等級，把它讀進來：</p>
+<p><strong>可以當硬數據下注的（台灣在地實測/高信心）：</strong><br />
+- 三區水溫跨越 22°C 時序（Zone-B 比 Zone-A 早 12–18 天）、雨遮效應 47%、冷氣團降幅與回溫天數。<br />
+- 北部酸性絮凝澄清 1–2 天 vs 南部 5–8 天（膠體化學＋Stokes 計算，硬）。<br />
+- 底泥<span class="gl-trigger" data-term="volumetric-heat-capacity">體積熱容</span>與保溫滯後（Zone-B 18–24 hr、南部 6–12 hr）。<br />
+- 管理池夜間關水車 3–4 hr 內 <span class="gl-trigger" data-term="do">DO</span> 崩潰（生化平衡，硬）。<br />
+- 水庫翻轉時序（北 11–12 月、南 1–2 月）。</p>
+<p><strong>方向可信、絕對值要打折的（理論估算/文獻估算）：</strong><br />
+- 反射咬臨界速度（≥1.2 m/s）、commit 加速度（≥2.5 m/s²）、急停決策窗口（0.8–2.5 s）——這些是生理模型推估，<strong>個體差異大，當「相對關係」用（快比慢有效、冬比夏要停更久），別當絕對開關</strong>。<br />
+- <span class="gl-trigger" data-term="pizichun">皮質醇</span>基線數字（老魚 20–40 ng/mL）、<span class="gl-trigger" data-term="art">ART</span> 連投間隔——方向極可靠（高溫恢復快、低溫慢），但確切小時數因魚因池而異。<br />
+- 側線頻率分工、<span class="gl-trigger" data-term="cff">CFF</span> 值——機制可信，現場無法量測，當「設計原則」用。</p>
+<p><strong>最該保守、可能整個翻盤的（地理外推/資料缺口）：</strong><br />
+- <strong>南部 <span class="gl-trigger" data-term="h2s">H₂S</span> 絕對濃度（0.15–0.85 mg/L）與避毒高度</strong>：標的是「地理外推」，且研究自己承認<strong>台灣野生埤塘缺乏原位 <span class="gl-trigger" data-term="h2s">H₂S</span> 長期監測</strong>。方向（南部底層夏天有毒、魚離底）極可靠，但確切高度與濃度別當精密儀器讀數。<br />
+- <strong>水車重啟後的 <span class="gl-trigger" data-term="h2s">H₂S</span> 危險高度</strong>：這裡有一個已知的內部張力——一份卷推估重啟後 1.5 hr 內毒氣攪散全水柱、避毒高度擴大到 120–160 cm，另一份底棲化學卷的精算給出開機混合情境下安全高度 155–187 cm（甚至全池致死）。<strong>兩者方向一致（重啟後上層才安全、可能全池中毒），但確切高度未定案。實戰結論不變：南部夏季水車剛重啟那 1–2 小時，避開下風、往上風或注水口、打中上層。</strong><br />
+- 爬蟲類在黑鱸胃內容物的真實佔比——缺大規模解剖統計，所以爬蟲型假餌「絕不會建立專一搜索映像、只能靠機會性反射」這個定性結論可信，但別期待它像白蟻潮那樣穩定爆發。</p>
+<blockquote>
+<p>💡 <strong>深入一點（可跳過）：為什麼 <span class="gl-trigger" data-term="h2s">H₂S</span> 的數字「方向硬、絕對值軟」。</strong> <span class="gl-trigger" data-term="eh">Eh</span> 與 <span class="gl-trigger" data-term="h2s">H₂S</span> 是門檻型關係——<span class="gl-trigger" data-term="eh">Eh</span> 跌破約 −150 mV 才開始產毒、跨過就斷崖式累積，所以「南部夏天底層會變毒區、魚被趕離底」這個方向幾乎一定對；但確切濃度與避毒高度取決於擾動、底質、有機質，是門檻線的位置問題，受外推與資料缺口影響大。魚的迴避閾值又低到 0.002 mg/L（一驗到就閃），等於容錯極小。<strong>所以這類數字你只拿來定方向（離底、避深槽），不拿來精算高度——寧可多離底一點。</strong></p>
+</blockquote>
+<p><strong>Expert 心法</strong>：硬數據拿來定框架（時序、水層、毒區方向），軟數據拿來定相對手法（誰快誰慢、誰先誰後），外推數據只拿來定方向、絕不精算下注。<strong>當現場觀察和某個外推數字打架時，相信現場。</strong></p>
+<blockquote>
+<p><strong>第二部精要：</strong> 把每個關鍵數字標信心等級。時序/澄清/保溫/缺氧＝硬，可下注；速度/<span class="gl-trigger" data-term="pizichun">皮質醇</span>/頻率＝方向可信、當相對關係；<span class="gl-trigger" data-term="h2s">H₂S</span> 絕對值與重啟高度＝外推＋資料缺口，只定方向。現場觀察永遠優先於外推數字。</p>
+</blockquote>
+<hr />
+<h2 id="expert-_5">第三部：把極端事件恢復表當成作戰時間表</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>恢復遲滯（Lag）</strong>：暴雨或寒流結束後，水體要過幾天才回到正常。物理 Lag 是濁度/水溫，地球化學 Lag 是底泥 <span class="gl-trigger" data-term="eh">Eh</span>（缺不缺氧）。<br />
+- <strong>重置窗口</strong>：劇烈擾動後魚短暫「失憶天真」、好破防的那段時間。</p>
+</blockquote>
+<p>職業選手最值錢的能力之一，是<strong>算準什麼時候回到那片水</strong>。把 0 系列的恢復數據當成行事曆：</p>
+<p><strong>暴雨後的回場時機（物理 Lag）</strong>：<br />
+- Zone-B 野塘 1–2 天、Zone-A 1.5–2.5 天就清——<strong>北部暴雨後第 2–3 天是黃金期</strong>：水剛清、魚處 naive 重置狀態、可切回視覺暖色餌破防。<br />
+- 南部野塘 5–8 天、南部水庫 10–15 天才清——<strong>南部暴雨後前 5 天靠側線（大尾低頻、貼近、慢），第 6–8 天澄清才切回視覺黃綠系</strong>。早回去只能側線戰。</p>
+<p><strong>暴雨後底層復氧（地球化學 Lag）</strong>：Zone-A 4–6 天、Zone-B 2–3 天、Zone-C 7–12 天才回到底泥有氧。<strong>這決定『底層能不能打』比『水清不清』更關鍵</strong>——南部水看起來清了但底層 <span class="gl-trigger" data-term="eh">Eh</span> 還沒回，貼底仍是死區。</p>
+<blockquote>
+<p>💡 <strong>深入一點（可跳過）：Q10 解釋了為什麼南部復氧慢、夏天又壞得快。</strong> Q10 指「溫度每升 10°C，化學/微生物速率約翻一倍」（這套研究實測約 2.2–2.6）。它是雙面刃：高溫讓南部底泥的耗氧與產毒在夏天加速惡化（崩潰更快），但低游離鐵又讓它復氧本來就慢。對你的意義：南部的「地球化學 Lag」不只是比北部長，還會隨季節變動——盛夏的崩潰與恢復都被高溫拉扯，回場時機的估算要把水溫一起算進去，別只看天數。</p>
+</blockquote>
+<p><strong>寒流後的回溫（物理 Lag）</strong>：Zone-A 5–7 天（持續陰雨）、Zone-B 3–4 天（迅速轉晴）、Zone-C 1.5–2.5 天（陡峭 V 反彈）。<strong>南部寒流後反彈最快，第 2–3 天就能回；北部迎風面要等近一週。</strong> 但注意第一天的反向操作：北部寒流剛來 0–24 hr，底泥保溫讓底層比表層高 2–3°C，是貼底黃金窗口，過了這天底層才真正變冷。</p>
+<p><strong><span class="gl-trigger" data-term="fanshui">翻水</span>/翻轉後</strong>：南部管理池冷休克<span class="gl-trigger" data-term="fanshui">翻水</span>後 <span class="gl-trigger" data-term="do">DO</span> 恢復要 24–48 hr（伴隨 <span class="gl-trigger" data-term="h2s">H₂S</span>）；深水水庫季節翻轉後北部 48–72 hr、南部 72–120 hr。<strong>翻轉進行中別去，翻完隔 2–3 天再去。</strong></p>
+<p><strong>Expert 用法</strong>：把這些 Lag 排進一週行程。同一場颱風，北部你排第 2 天去（視覺重置期），南部你排第 6 天去（澄清切換期）；同一波寒流，南部排第 2 天、北部迎風排第 5 天。<strong>贏在時機，不只贏在技術。</strong></p>
+<hr />
+<h2 id="expert-_6">第四部：多變數最佳化——當規則互相打架</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>多變數</strong>：影響咬餌的因素不只一個，它們會互相作用、甚至互相抵消。專家要同時轉好幾個鈕。<br />
+- <strong>EPS</strong>：<span class="gl-trigger" data-term="algal-bloom">藻華</span>期藍綠菌分泌的黏液，會讓水變黏、影響聲音和震動的傳遞。</p>
+</blockquote>
+<p>業餘照單一規則操作，專家處理規則之間的衝突。幾個常見的交互與取捨：</p>
+<p><strong>速度 × 水色 × 釣壓的三方拉扯。</strong> 反射咬要快（≥1.2 m/s），但濁水要慢、近（側線核心圈 40 cm），而高壓老魚又要超軟慢擬真——這三條會打架。解法看<strong><span class="gl-trigger" data-term="limiting-variable">限制變數</span>誰最大</strong>：濁水（<span class="gl-trigger" data-term="ntu">NTU</span>&gt;40）時側線優先，慢近貼結構壓過速度規則；清水高壓池時神經戰優先，用「快抽繞過大腦」對付那條被釣怕的避忌記憶；清水低壓力新魚多時，純效率優先，大亮色高速搜。<strong>沒有一條速度通吃，看當下哪個環節在卡。</strong></p>
+<p><strong>側線頻率 × EPS × 距離。</strong> 南部爆藻期 EPS 讓水黏度增約 10%：Spinnerbait 金屬聲有效傳播從清水 15–20 m 萎縮到 8–12 m，軟蟲尾擺幅衰減 30–45%。<strong>後果：爆藻期遠距聲學招魚半徑大降、近場側線微抖吸引半徑也降——必須整體把作戰距離拉近，改近距無聲超軟餌，別再指望遠投聲學餌招魚。</strong></p>
+<p><strong><span class="gl-trigger" data-term="cff">CFF</span> × 水溫 × 時段。</strong> 魚眼更新率高溫 62–68 Hz、低溫黃昏降到 35–42 Hz。低溫或弱光時魚只看輪廓、不看細節——<strong>所以冬季/晨昏的擬真重點是『剪影對比』不是『顏色寫實』</strong>；盛夏正午清水才需要色彩細節到位。別在冬天黃昏糾結顏色，那時魚根本看不清。</p>
+<blockquote>
+<p>💡 <strong>深入一點（可跳過）：亮度是對數尺度，這讓「關機」是斷崖、不是斜坡。</strong> 眼睛對光的反應是「光增加約 10 倍才差一格」（<span class="gl-trigger" data-term="lux">lux</span> 背後就是這種倍率）。配合 <span class="gl-trigger" data-term="cff">CFF</span> 一起看：光一旦在短時間內跨過致盲門檻，魚的高頻細節辨識（<span class="gl-trigger" data-term="cff">CFF</span>）和錐細胞同時失效，於是「上午關機」是斷崖式的那 20–30 分鐘，水越清來得越早。對你的診斷意義：當你看到「某時段開、某時段死」，先別懷疑餌或點，那多半是光跨過門檻的時間訊號——對照水色推出那條斷崖線，把火力壓在門檻前的窗口，比換餌有效得多。</p>
+</blockquote>
+<p><strong><span class="gl-trigger" data-term="pizichun">皮質醇</span>閘門 × 飢餓 × 釣壓。</strong> 急性高壓（剛<span class="gl-trigger" data-term="fanshui">翻水</span>/剛收竿過）100% 阻斷冒險覓食，獵物 10 倍也不衝；但飢餓 3–5 天會把門檻從 6.0 倍下修到 2.0–2.5 倍。<strong>這解釋兩個極端：剛被一票人輪過的熱點再強的餌也死；久封又食物稀少的水隨便都炸。職業排點時，優先找『久未受擾＋食物壓力大』的水，避開『剛被掃過』的點。</strong></p>
+<p><strong>Up-Strike 的多重閘門。</strong> 仰攻同時受光場（晨昏漫射才開）、水溫（&lt;12°C 抑制、&lt;10 全停）、溶氧（&lt;2.0 進入 <span class="gl-trigger" data-term="asr">ASR</span> 即拒絕）、水色幾何（發動深度 Zone-A&lt;30、Zone-C&lt;50 cm）四重控制。<strong>任一閘門關閉，表層系就失效</strong>——所以低溫清晨溶氧又低時，再漂亮的 Topwater 操作也不會有仰攻，該果斷改中下層 Forward-Strike。</p>
+<blockquote>
+<p><strong>第四部精要：</strong> 規則會打架，解衝突的方法是判斷「當下<span class="gl-trigger" data-term="limiting-variable">限制變數</span>最大的是哪個環節」，讓那條規則壓過其他。濁水側線優先、高壓神經優先、低壓效率優先；爆藻拉近距離；低溫晨昏拚剪影不拚顏色；排點避開剛被擾過的水。</p>
+</blockquote>
+<hr />
+<h2 id="expert-_7">第五部：分區 × 水體 × 季節 × 時段 整合戰術手冊</h2>
+<blockquote>
+<p><strong>先講白話：</strong> 這章把所有環節組合成「完整的當日 pattern」——一個職業選手到了特定水體、特定季節，腦中該跑完的整套劇本：魚在哪層、用什麼感官、幾點是窗口、用什麼餌什麼節奏、什麼時候該離開。</p>
+</blockquote>
+<p>以下六本「劇本」，每本是一套完整 pattern of the day。</p>
+<h3 id="expert-_8">劇本一：北部管理池・盛夏・高壓老魚</h3>
+<p><strong>環境</strong>：含鐵高、無 <span class="gl-trigger" data-term="h2s">H₂S</span> 威脅，但夜間關水車清晨 <span class="gl-trigger" data-term="do">DO</span> &lt;1.5。<strong>魚</strong>：老魚<span class="gl-trigger" data-term="pizichun">皮質醇</span> 35–45、<span class="gl-trigger" data-term="follower-rejection">Follower Rejection</span> 75–90%。<strong>時段</strong>：避開清晨缺氧低點（4–6 點），等水車開、<span class="gl-trigger" data-term="do">DO</span> 回升後。<strong>打法</strong>：停水車靜水期用 Shore 00-10 超軟高鹽軟蟲原地 15–30 Hz 微顫、感應口觸後延遲 100–150 ms 揚竿；水車運轉期（80–250 Hz 噪聲遮蔽側線）改 Spinnerbait 金屬聲穿透。破防靠 <span class="gl-trigger" data-term="mid-strolling">Mid-Strolling</span> 15–30 cm/s 後 150–200 ms 內 ΔV≥35 cm/s、貼結構 12 cm 內、不收到嘴前 15 cm。新老分治：新魚 10 cm 大亮色高速（<span class="gl-trigger" data-term="oft">OFT</span> 2.06 kcal/s）誘搶、老魚無聲超軟貼結構慢操。<strong>連投</strong>：≥10–15 min，中魚立刻換點。</p>
+<h3 id="expert-_9">劇本二：南部管理池/野塘・盛夏・高溫關機</h3>
+<p><strong>環境</strong>：底層 <span class="gl-trigger" data-term="h2s">H₂S</span> 0.15–0.85（外推，方向硬）、<span class="gl-trigger" data-term="do">DO</span> &lt;3、能見度 &lt;20。<strong>魚</strong>：淨可用代謝能 降幅 &gt;85%，懸浮離底。<strong><span class="gl-trigger" data-term="qiwei">棲位</span></strong>：鎖 60–80 cm 樹蔭高氧微區（<span class="gl-trigger" data-term="do">DO</span>≥5、面積 &lt;1.5 m²），放棄開闊盲搜。<strong>水層</strong>：餌離底 ≥100 cm 或打表層 0–20 cm 微氧避毒帶，<strong>絕不打深水槽底</strong>。<strong>打法</strong>：綠水視覺失效，大 paddle swimbait 2–8 Hz 尾擺、5–10 cm/s 逆流靠 40–70 cm 側線；排除高頻金屬聲（EPS 萎縮到 8–12 m），改無聲 Shore 00-15。<strong>連投</strong>：≥3–5 min；中魚換點 ≥8 m（警報素死區近 5 m、活性 94%）。</p>
+<h3 id="expert-_10">劇本三：北部水庫・夏季・<span class="gl-trigger" data-term="thermocline">溫躍層</span>期</h3>
+<p><strong>環境</strong>：<span class="gl-trigger" data-term="thermocline">溫躍層</span> 3–5 m（強度 1.5–2.5°C/m），底層 &lt;0.5 <span class="gl-trigger" data-term="do">DO</span>。<strong>機會</strong>：<span class="gl-trigger" data-term="thermocline">溫躍層</span>下方聲能被異常聚焦，深水魚反而易被聲學餌定向。<strong><span class="gl-trigger" data-term="qiwei">棲位</span></strong>：躍溫層上緣 2.5–5 m。<strong>暴雨後</strong>：避開 8–18 m 中層<span class="gl-trigger" data-term="yizhongliu">異重流</span>帶（高濁低溫斷層），魚向上垂直位移 5–10 m、在 epilimnion &lt;5 m 沿陡坡倒木超高密度集聚——<strong><span class="gl-trigger" data-term="yizhongliu">異重流</span>期反而把魚趕成集中群，找對陡坡是爆連的機會</strong>。<strong>回場</strong>：暴雨後 3–5 天澄清。</p>
+<h3 id="expert-_11">劇本四：南部野塘・春末・<span class="gl-trigger" data-term="algal-bloom">藻華</span>爆發</h3>
+<p><strong>環境</strong>：水溫 &gt;26°C＋高磷觸發藍綠菌，能見度 40–60 暴跌到 10–15 cm，持續 15–25 天。<strong>打法</strong>：視覺近乎全廢、EPS 削弱聲學與側線——整體拉近作戰距離、近距無聲超軟黃綠/半透明、慢。<strong>注意</strong>：這是「環境型」難關，別當神經型硬解；<span class="gl-trigger" data-term="algal-bloom">藻華</span>窗口期效率低，職業排程可考慮避開或只打晨昏短窗。</p>
+<h3 id="expert-_12">劇本五：北部野塘/管理池・秋末初冬・冷休克<span class="gl-trigger" data-term="fanshui">翻水</span></h3>
+<p><strong>環境</strong>：寒流 48h 降溫 &gt;8°C＋風≥6.5–8.5 觸發<span class="gl-trigger" data-term="fanshui">翻水</span>，24–48 hr <span class="gl-trigger" data-term="do">DO</span> 降 1.5–2.5。<strong><span class="gl-trigger" data-term="qiwei">棲位</span></strong>：棄底、表層 0–30 cm，貼避風岸殘荷倒木 10 cm 內。<strong>黃金窗口</strong>：寒流剛來 0–24 hr，底泥保溫讓底層高 2–3°C，貼底 10–20 cm 無鉛軟蟲微抖（&lt;2 cm/s、15–30 Hz）。<strong>速度</strong>：極慢 &lt;5 cm/s，<span class="gl-trigger" data-term="dead-stop">Dead Stop</span> 滿 2.5–3.5 s（冬季決策窗口 2.5 s，短於 2.0 直接拒）。<strong>連投</strong>：≥15–20 min（低溫<span class="gl-trigger" data-term="pizichun">皮質醇</span>半衰期長）。</p>
+<h3 id="expert-_13">劇本六：颱風前後・任一水體</h3>
+<p><strong>颱風前 24–48 hr 降壓期</strong>：底層毒化＋魚鰾壓迫把魚趕中上層，epilimnion 0–50 cm 用 10 cm 大餌中速（0.5–1.0 m/s）搜岸邊植被邊緣；大物對降壓最敏感，搶這個窗口。<strong>颱風後 24–72 hr 極濁期（&lt;10 cm）</strong>：視覺 100% 癱瘓，大體高 paddle、10–30 Hz 低頻 wake、≥1.1–1.5 m/s 突掠觸發側線。<strong>澄清切換</strong>：北部第 2–3 天切視覺暖色（重置黃金期），南部前 5 天側線、第 6–8 天才切視覺黃綠。</p>
+<blockquote>
+<p><strong>第五部精要：</strong> 一套完整 pattern＝<span class="gl-trigger" data-term="qiwei">棲位</span>（哪層）＋感官框架（視覺 or 側線）＋時段窗口＋餌與頻率節奏＋連投紀律＋離場條件。到任何陌生水體，先把它歸到六本劇本之一，再用前四部的診斷與校準做現場微調。</p>
+</blockquote>
+<hr />
+<h2 id="expert-match-the-hatch">第六部：<span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span> 的頻率工程與獵物報告深度</h2>
+<blockquote>
+<p><strong>先講白話：</strong><br />
+- <strong>頻率指紋</strong>：每種獵物動起來產生的特定水波頻率（Hz），魚靠側線「聽」它來辨識。操竿就是複製這個頻率。<br />
+- <strong><span class="gl-trigger" data-term="sns">SNs</span>/CNs</strong>：側線兩種感應器，<span class="gl-trigger" data-term="sns">SNs</span> 感低頻（慢游爬行）、CNs 感高頻（彈跳掙扎）。</p>
+</blockquote>
+<p>職業級的 <span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span> 不是「綁得像」，是<strong>工程級地複製獵物的物理訊號</strong>。四份獵物報告的精華是這張頻率指紋表：</p>
+<table>
+<thead>
+<tr>
+<th>獵物動作</th>
+<th>頻率/速度</th>
+<th>感應器</th>
+<th>操竿複製方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>搖蚊幼蟲蠕動</td>
+<td>0.5–2 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>貼底軟蟲極微顫</td>
+</tr>
+<tr>
+<td>成蛙 Kick-Glide</td>
+<td>1–3 Hz（爆發 0.5–1 m/s 後滑行停）</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>雷蛙「抽一下—停 1.5 s—抽」</td>
+</tr>
+<tr>
+<td>水蛇 S 正弦</td>
+<td>1–3 Hz（剪切波擴散 40–120 cm）</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>多節 swimbait 極慢勻速 S 擺</td>
+</tr>
+<tr>
+<td>蟹/螯蝦爬行</td>
+<td>1–5 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span></td>
+<td>Jig 拖底＋落底大螯翹起停 3–5 s</td>
+</tr>
+<tr>
+<td>蝌蚪落水尾擺</td>
+<td>4–8 Hz</td>
+<td><span class="gl-trigger" data-term="sns">SNs</span>/CNs</td>
+<td>半透明針尾軟蟲自由下擺</td>
+</tr>
+<tr>
+<td>蟬/蜥蜴落水掙扎</td>
+<td>5–12 Hz</td>
+<td>CNs</td>
+<td>Crawler 拍水、落水靜 3–10 s 再原地高頻抖</td>
+</tr>
+<tr>
+<td>幼蛙跳水</td>
+<td>5–15 Hz</td>
+<td>CNs</td>
+<td>微型雷蛙岸上撥入水＋連續小抖</td>
+</tr>
+<tr>
+<td>沼蝦/米蝦後彈逃逸</td>
+<td>20–50 Hz（瞬速 1.5–2.5 m/s）</td>
+<td>CNs</td>
+<td>Ned/Drop Shot 落底向上短抽 2–3 下</td>
+</tr>
+<tr>
+<td>Spinnerbait 金屬聲</td>
+<td>80–250 Hz</td>
+<td>聽石</td>
+<td>遠距招魚定向</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程思維</strong>：想引爆結構區老魚，複製沼蝦 20–50 Hz CNs 訊號（落底短抽）；想喚醒水面大物，複製蟬/蜥蜴 5–12 Hz（Crawler 拍水）；想騙過清水高壓老魚的視覺＋側線雙審查，複製蝌蚪 4–8 Hz 被動下擺＋半透明光學折射。<strong>選餌與操竿，本質是選一個頻率去匹配當季在爆的那個獵物。</strong></p>
+<h3 id="expert-cff">視覺端工程：<span class="gl-trigger" data-term="cff">CFF</span> × 水色 × 波長</h3>
+<ul>
+<li><strong>濁水（Zone-A &lt;35 cm）</strong>：<span class="gl-trigger" data-term="cff">CFF</span> 低、細節無效，全靠剪影——純黑/深紅高對比。</li>
+<li><strong>清水（Zone-C 50–100 cm）</strong>：細節核對嚴格——半透明寫實。可利用特定光學錨：麗紋石龍子亮藍尾（450–475 nm 藍光清水穿透強）、米蝦半透明幾丁質反光（細亮片）、抱卵母蝦亮綠/黃卵塊。</li>
+</ul>
+<h3 id="expert-_14">兩條負向鐵律（職業級必守，違反直接全場崩）</h3>
+<ol>
+<li><strong>嚴禁純黑、渾圓、慢游軟蟲擬蝌蚪</strong>——蟾蜍蝌蚪含蟾蜍二烯內酯（干擾心臟離子泵），魚吞 1–2 次建立 100% 終生味覺厭惡並泛化到所有黑色渾圓慢物。擬蝌蚪一律半透明、亮片、細長條。</li>
+<li><strong>硬殼幼龜同理</strong>——爪尖刮喉，1–2 次建立學習性迴避。</li>
+</ol>
+<h3 id="expert-_15">資料缺口（職業選手該知道哪裡不能盡信報告）</h3>
+<ul>
+<li>爬蟲類落水高度偶發、缺胃內容物統計——爬蟲型餌「只能機會性反射、不形成專一搜索映像」是可信定性結論，但別期待穩定爆發。</li>
+<li>不同底質對蟹爬行 1–5 Hz 低頻波的吸收衰減未定界——泥底會強烈吸收，鯰/鱸鰻夜釣的 <span class="gl-trigger" data-term="sns">SNs</span> 定位距離可能比理論短。</li>
+<li>甲殼幾丁質殼的胃排空時間長於魚肉——硬殼蝦蟹餵飽後二次攻擊慾恢復慢，連續作釣同一尾的間隔該拉長（缺實驗數據，現場保守抓）。</li>
+</ul>
+<blockquote>
+<p><strong>第六部精要：</strong> 職業 <span class="gl-trigger" data-term="match-the-hatch">Match the Hatch</span>＝複製當季主食的頻率指紋（<span class="gl-trigger" data-term="sns">SNs</span> 低頻/CNs 高頻）＋視覺端按 <span class="gl-trigger" data-term="cff">CFF</span> 與水色決定剪影或寫實。守蟾蜍與硬殼兩條負向鐵律。知道爬蟲佔比、底質衰減、胃排空三處資料薄弱，現場用判斷力補。</p>
+</blockquote>
+<hr />
+<h2 id="expert-_16">第七部：職業選手的資源責任</h2>
+<blockquote>
+<p><strong>先講白話：</strong> 職業/競技選手影響力大、示範效應強。你怎麼對待這片水，會被很多人模仿。</p>
+</blockquote>
+<p>台灣野生黑鱸族群年均補充損耗 &gt;70%，核心是無禁釣期下的打巢壓力。護巢公魚的攻擊由防禦迴路驅動、繞過習得性避難抑制，所以<strong>打巢魚「看似好釣」是陷阱</strong>——公魚離巢 25 min 整窩被掠食率 100%，吳郭魚 30 秒群集、5–12 min 吃光 5,000–20,000 粒卵。</p>
+<p>職業選手該做的：<strong>春季繁殖期辨識護巢行為（定點守一小塊硬底、反覆驅趕入巢物、攻擊但不真吞），辨識出來主動離開</strong>；公開場合不示範、不炫耀打巢漁獲。<span class="gl-trigger" data-term="cr">C&amp;R</span> 累積傷害呈指數（5 次以上接近率降 80–90%），熱點輪釣壓力是台灣高壓池老魚難釣的根源——<strong>你今天怎麼釣，決定這片水明年好不好釣。</strong> 這不是道德口號，是資源可持續性的硬計算。</p>
+<hr />
+<h2 id="expert-_17">結語：專家的後設原則</h2>
+<p>把整本收斂成幾條 meta 原則——不是套路，是決策習慣：</p>
+<ol>
+<li><strong>先診斷，再下注。</strong> 從症狀逆推<span class="gl-trigger" data-term="limiting-variable">限制變數</span>，分流環境型 vs 神經型，只調那一環。別把環境型當神經型硬解。</li>
+<li><strong>數字帶信心等級。</strong> 時序/澄清/保溫/缺氧是硬數據（定框架）；速度/<span class="gl-trigger" data-term="pizichun">皮質醇</span>/頻率是相對關係（定手法）；<span class="gl-trigger" data-term="h2s">H₂S</span> 絕對值/重啟高度/爬蟲佔比是外推（只定方向）。現場觀察永遠壓過外推數字。</li>
+<li><strong>贏在時機。</strong> 把暴雨/寒流/<span class="gl-trigger" data-term="fanshui">翻水</span>的恢復 Lag 排進行事曆——北部暴雨第 2–3 天去、南部第 6 天去；該水體在哪本劇本，回場窗口就定了。</li>
+<li><strong>解規則衝突看<span class="gl-trigger" data-term="limiting-variable">限制變數</span>。</strong> 濁水側線優先、高壓神經優先、低壓效率優先；爆藻拉近、低溫拚剪影、排點避開剛被擾過的水。</li>
+<li><strong>頻率工程。</strong> 選餌操竿＝複製當季主食的頻率指紋，視覺端按 <span class="gl-trigger" data-term="cff">CFF</span>×水色決定剪影或寫實。</li>
+<li><strong>留下可持續的水。</strong> 不打巢、控 <span class="gl-trigger" data-term="cr">C&amp;R</span> 強度——職業的影響力是雙面刃。</li>
+</ol>
+<p>走完這六條，你面對任何陌生水面，都能在最短時間內鎖定「今天卡在哪一環」，用信心加權的判斷下對那一注——這就是 expert 與 senior 的差別：senior 知道所有機制，expert 知道在資訊不全、時間有限、規則打架時，該相信哪一個、該動哪一根桿子。</p>
+<hr />
+<blockquote>
+<p><em>本版整合二十多卷量化研究報告與四份台灣淡水獵物生態調查（昆蟲、兩棲、爬蟲、甲殼）。全書刻意標明了數值的信心層級（台灣在地實測／理論估算／地理外推）與已知資料缺口（野生埤塘原位 <span class="gl-trigger" data-term="h2s">H₂S</span> 監測、水車重啟避毒高度、爬蟲胃內容物佔比、蟹類低頻波底質衰減、甲殼胃排空時間），因為專業判斷的前提是知道數據的邊界。本版為可讀性省略公式推導與引用編號（B0-XX/V-XX/VSUP-XX）；需精確來源與信心等級，請對照各卷原始報告。釣魚愉快，把水留好。</em></p>
+</blockquote>
+</div>
     </article>
   </div>
 
@@ -2323,6 +1771,9 @@ body.glossary-open #main-wrapper {
   <div class="gl-header">
     <span class="gl-title">📖 術語速查</span>
     <button id="glossary-close" aria-label="關閉術語面板">✕</button>
+  </div>
+  <div class="gl-search-wrap">
+    <input id="glossary-search" type="search" placeholder="搜尋術語…（名稱／別名／解說）" autocomplete="off" aria-label="搜尋術語">
   </div>
   <dl class="gl-list">
 <div class="gl-item" id="gl-do"><dt class="gl-term">DO <span class="gl-alias">溶氧</span></dt><dd class="gl-desc">溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。</dd></div>
@@ -2366,7 +1817,20 @@ body.glossary-open #main-wrapper {
 <div class="gl-item" id="gl-foraging-forays"><dt class="gl-term">Foraging Forays <span class="gl-alias">覓食突進</span></dt><dd class="gl-desc">非 LVF 中小型黑鱸在底層獵物密度超出表層 <strong>3.5–5.0 倍</strong>時，從含氧表層短暫衝入底層毒區（&lt; 30 秒）發動攻擊後迅速返回的冒險覓食行為。<br><br><strong>生理極限</strong><ul class="gl-list-inner"><li>單次安全衝入時間：<strong>15–25 秒</strong>（絕對上限 30 秒）</li><li>單日有效突進次數：<strong>10–15 次</strong>（H₂S ≤ 0.01 mg/L，12 小時覓食期）</li><li>每次突進後強制 COX 重置冷卻期：<strong>45–60 分鐘</strong></li></ul><strong>限制條件</strong><ul class="gl-list-inner"><li>H₂S &lt; 0.05 mg/L 且非 LVF 個體才可能觸發</li><li>LVF 舊魚（皮質醇 ≥ 20 ng/mL）：即使底層獵物密度達 10 倍，端腦仍完全抑制突進反射</li><li>超額突進會導致 ROS 階梯累積與延遲性器官損傷</li></ul>⚠️ 超過 10–15 次額度後，標點進入強制冷卻，底層誘咬失效。</dd></div>
 <div class="gl-item" id="gl-cox"><dt class="gl-term">COX <span class="gl-alias">細胞色素 c 氧化酶</span></dt><dd class="gl-desc">粒線體電子傳遞鏈最末端的酵素，全名 Cytochrome c Oxidase（細胞色素 c 氧化酶，複合體 IV）。負責將電子從細胞色素 c 傳遞至分子氧，是有氧 ATP 生產的最後一道關卡。<br><br><strong>H₂S 如何攻擊 COX</strong><ul class="gl-list-inner"><li>H₂S 直接鎖住 COX 核心的鐵—銅雙核中心（Heme a₃–CuB），阻斷電子傳遞</li><li>有氧 ATP 生產瞬間停擺 → 即使水中含氧充足，魚仍陷入「<strong>組織毒性缺氧</strong>」</li><li>堵塞的電子傳遞鏈大量洩漏，產生 ROS（活性氧），對細胞膜造成脂質過氧化損傷</li></ul><strong>可逆性與冷卻期</strong><ul class="gl-list-inner"><li>短暫暴露後抑制是<strong>動態可逆</strong>的（魚返回含氧水層後 H₂S 逐漸脫離結合位點）</li><li>每次突進底層後，COX 活性需 <strong>45–60 分鐘</strong>才能完全恢復至基準線（COX 重置冷卻期）</li><li>超頻突進 → ROS 階梯累積 → 延遲性器官損傷</li></ul><strong>大嘴黑鱸的脆弱性</strong>：黑鱸保留脊椎動物標準易感構象，無 SQR 去毒基因過度表現，無法像 <em>Poecilia mexicana</em> 硫泉族群那樣靠分子免疫抵抗 H₂S，完全依賴「短時空間迴避」存活。</dd></div>
 <div class="gl-item" id="gl-lc50"><dt class="gl-term">LC₅₀ <span class="gl-alias">半致死濃度</span></dt><dd class="gl-desc">半致死濃度（Lethal Concentration 50%）：在標準測試條件下，使受試族群中 <strong>50%</strong> 個體死亡的水中化學物質濃度。<br><br><strong>標準測試規格</strong><ul class="gl-list-inner"><li>暴露時間：<strong>96 小時</strong>（96-h LC₅₀，硬骨魚類急性毒性標準試驗）</li><li>測試條件：靜止水體、控溫、無食物</li><li>結果單位：mg/L</li></ul><strong>大嘴黑鱸對 H₂S 的精確值</strong><ul class="gl-list-inner"><li>96-h LC₅₀ = <strong>0.0297–0.0316 mg/L</strong>（ASTM 標準測試，精確測量值）</li><li>台灣南部爛底水體底層 H₂S 峰值：<strong>8.5 mg/L</strong> → 超出 LC₅₀ 約 <strong>270 倍</strong></li></ul>⚠️ LC₅₀ 是「50% 會死」的濃度，不是安全閾值。行為迴避閾值（魚開始主動逃離）約為 <strong>0.002 mg/L</strong>，已比 LC₅₀ 低一個數量級以上。</dd></div>
+<div class="gl-item" id="gl-match-the-hatch"><dt class="gl-term">Match the Hatch <span class="gl-alias">仿餌匹配</span></dt><dd class="gl-desc">模仿當下水域正在大量出現的獵物——<strong>種類、大小、動作節奏、頻率指紋</strong>——來選擇對應假餌的核心思路。台灣全年獵物物候不同（春季搖蚊／孑孓、初夏甲殼<strong>軟殼期</strong>、夏季吳郭魚苗、秋季溪哥…），<strong>對的月份綁對的餌</strong>，往往比換顏色更關鍵。</dd></div>
+<div class="gl-item" id="gl-qiwei"><dt class="gl-term">棲位 <span class="gl-alias">Habitat</span></dt><dd class="gl-desc">魚當下所處的位置 ＝ <strong>深度 ＋ 平面點位</strong>（結構、水層）。找對棲位幾乎等於找到魚。由溶氧、毒區、水溫、風生流與結構共同決定：南部夏天魚常離底懸浮（避 H₂S），北部沒毒氣則敢貼底埋伏。不管哪區哪季，倒木、石堆、水草邊緣、橋墩、陡坎、進出水口都是高機率棲位。</dd></div>
+<div class="gl-item" id="gl-ghrelin"><dt class="gl-term">Ghrelin <span class="gl-alias">飢餓素</span></dt><dd class="gl-desc">飢餓荷爾蒙。長期飢餓會<strong>短路皮質醇對覓食的抑制</strong>（解開神經閘門），所以久封的池子一開放，連高警覺老魚（LVF）都會在頭幾竿『炸口』。對策：把握黃金期，用大亮色、高效率搜索餌，在窗口內最大化 OFT 收益。</dd></div>
+<div class="gl-item" id="gl-dead-stop"><dt class="gl-term">Dead Stop <span class="gl-alias">死停</span></dt><dd class="gl-desc">把假餌完全靜止不動。<br><br>靜止給了老魚<strong>端腦慢通路（認知審查）</strong>充足時間做違和交叉比對，反而容易被識破——所以對老魚（LVF）別輕易死停，除非餌已貼結構 <strong>&lt;12 cm</strong>、用空間壓縮牠的決策窗口。新魚（HVF）反射主導，停頓誘咬仍常有效。</dd></div>
+<div class="gl-item" id="gl-thermocline"><dt class="gl-term">溫躍層 <span class="gl-alias">Thermocline</span></dt><dd class="gl-desc">水體垂直方向溫度（密度）急變的界面，台灣水庫夏季約在 <strong>3–5 m</strong> 深，上為溫暖表水層、下為低溫低氧深水層。黑鱸常卡在<strong>躍溫層上方到中層結構帶</strong>（溫度適中、DO 仍足、餌魚也沿分層線聚集）。延伸見『分層』條目。</dd></div>
+<div class="gl-item" id="gl-volumetric-heat-capacity"><dt class="gl-term">體積熱容</dt><dd class="gl-desc">底泥的『保溫棉厚度』，單位 J/cm³·K。<ul class="gl-list-inner"><li>北部紅泥 <strong>3.411</strong> ＞ 南部 <strong>3.122</strong></li><li>數字越大＝寒流時底層降溫越慢、保溫滯後越久（Zone-A 17–23 hr、Zone-B 18–24 hr，南部僅 6–12 hr）</li></ul>實戰：北部寒流第一天 0–24 hr 底層比表層高 <strong>2–3°C</strong>，貼底還有黃金窗口；南部底層降溫陡峭、沒有這個緩衝。</dd></div>
+<div class="gl-item" id="gl-algal-bloom"><dt class="gl-term">藻華</dt><dd class="gl-desc">優養水體藻類爆量。白天光合產氧、<strong>夜間與陰天大量耗氧</strong>，使 DO 劇烈擺盪、清晨崩到保命線以下；同時改變水色與能見度（綠濁），壓縮視覺有效距離。南部野塘春末常見，直接影響選色與打法（偏向側線系、慢、貼近）。</dd></div>
+<div class="gl-item" id="gl-wind-driven-current"><dt class="gl-term">風生流</dt><dd class="gl-desc">風推動表層水往下風（迎風）岸堆積形成的水流，把浮游與小型獵物集中到<strong>迎風岸</strong>，魚跟去結構後方逆流伏擊——<strong>迎風岸常是黃金帶</strong>。風太大時魚退入結構後方靜水區定點等，需把餌慢慢送進那個靜水角落。</dd></div>
+<div class="gl-item" id="gl-asr"><dt class="gl-term">ASR <span class="gl-alias">水表呼吸</span></dt><dd class="gl-desc">水表呼吸（Aquatic Surface Respiration）。DO 低到約 <strong>1.6–2.0 mg/L</strong> 時，魚貼上水面吸取表層含氧較高薄水層的保命行為。<br><br>此時已進入<strong>環境型關機</strong>，仰攻（上攻）幾乎 100% 被拒絕；正解是改超慢表層微氧帶，或直接撤點換水體，硬解無效。</dd></div>
+<div class="gl-item" id="gl-short-bite"><dt class="gl-term">短口</dt><dd class="gl-desc">魚有反應、會碰餌，但沒真正吞下、刺不中。代表<strong>『想吃但有顧慮』</strong>，通常卡在神經決策環節（口觸測試判定假餌太硬／異物感），不是環境問題。對策：換超軟餌（如 Shore 00–15）、延長接觸 <strong>≥100 ms</strong> 再揚竿。</dd></div>
+<div class="gl-item" id="gl-limiting-variable"><dt class="gl-term">限制變數</dt><dd class="gl-desc">今天卡住魚不咬的那<strong>一個</strong>主因。分兩型：<ul class="gl-list-inner"><li><strong>環境型</strong>：缺氧、毒區、水太濁、低溫關機——再厲害的操竿也救不回，該換層／換時段／換水體</li><li><strong>神經型</strong>：被釣怕、看穿餌——魚在這、想吃、有顧慮，才是技術能介入的戰場</li></ul>專家逆向診斷的目標：用最少試誤鎖定它、<strong>只調它</strong>，而非盲目輪餌輪點。</dd></div>
+<div class="gl-item" id="gl-reverse-inference"><dt class="gl-term">逆向診斷 <span class="gl-alias">reverse inference</span></dt><dd class="gl-desc">專家的核心方法。機制是『因 → 果』（這個水溫 → 魚會這樣），但現場拿到的是『果』（只跟不咬、短口、浮頭、突然閉口），要<strong>反推『因』</strong>（哪一環在卡），然後只調那一個變數。落地前先用『驗水層 → 驗活性 → 驗 NTU』三動作分流<strong>環境型 vs 神經型</strong>，再下注。</dd></div>
   </dl>
+  <div class="gl-noresult" hidden>找不到相符的術語</div>
 </div>
 <button id="glossary-btn" aria-label="開啟術語速查">📖 術語</button>
 <div id="glossary-overlay"></div>
@@ -2380,40 +1844,70 @@ window.addEventListener('scroll', () => {
   bar.style.width = total > 0 ? (window.scrollY / total * 100) + '%' : '0%';
 }, { passive: true });
 
-// ── TOC: expand/collapse & active highlight ───────────────
-const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
-const allHeadings = Array.from(document.querySelectorAll('#content h2, #content h3'));
+// ── 亮暗主題切換 ─────────────────────────────────────────
+const themeBtn = document.getElementById('theme-btn');
+function applyThemeIcon() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeBtn.textContent = dark ? '☀' : '🌙';
+  themeBtn.setAttribute('aria-label', dark ? '切換為亮色主題' : '切換為深色主題');
+}
+applyThemeIcon();
+themeBtn.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('twbass-theme', next); } catch (e) {}
+  applyThemeIcon();
+});
 
-// 點 H2 鏈結展開/收合子清單
-document.querySelectorAll('.toc-h2.has-children > .toc-link').forEach(link => {
-  link.addEventListener('click', e => {
-    const li = link.closest('.toc-h2');
-    li.classList.toggle('open');
+// ── 手機側欄元素 ─────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+const menuBtn = document.getElementById('menu-btn');
+
+// ── 版本（等級）切換 ─────────────────────────────────────
+const STORAGE_KEY     = 'twbass-level';
+const DEFAULT_VERSION = 'junior';
+const tabs         = Array.from(document.querySelectorAll('#level-tabs .level-tab'));
+const contentPanes = Array.from(document.querySelectorAll('.content-pane'));
+const tocPanes     = Array.from(document.querySelectorAll('.toc-pane'));
+const validVids    = tabs.map(t => t.dataset.version);
+
+// 每個 TOC pane 的展開/收合與手機關閉行為（一次性綁定）
+tocPanes.forEach(pane => {
+  pane.querySelectorAll('.toc-h2.has-children > .toc-link').forEach(link => {
+    link.addEventListener('click', () => link.closest('.toc-h2').classList.toggle('open'));
+  });
+  const firstH2 = pane.querySelector('.toc-h2.has-children');
+  if (firstH2) firstH2.classList.add('open');
+  pane.querySelectorAll('.toc-link').forEach(a => {
+    a.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
   });
 });
 
-// 初始展開第一個 H2
-const firstH2 = document.querySelector('.toc-h2.has-children');
-if (firstH2) firstH2.classList.add('open');
+// 包裝所有版本的表格（隱藏的 pane 也先包好）
+document.querySelectorAll('.content-pane table').forEach(t => {
+  if (t.parentElement.classList.contains('table-wrap')) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+  t.parentNode.insertBefore(wrap, t);
+  wrap.appendChild(t);
+});
 
-// Intersection Observer：追蹤當前可見標題
-let activeSlug = null;
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      activeSlug = e.target.id;
-      updateActive();
-    }
-  });
-}, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
-allHeadings.forEach(h => observer.observe(h));
+const getActivePane    = () => document.querySelector('.content-pane.active');
+const getActiveTocPane = () => document.querySelector('.toc-pane.active');
 
-function updateActive() {
-  tocLinks.forEach(a => a.classList.remove('active'));
-  const active = tocLinks.find(a => a.getAttribute('href') === '#' + activeSlug);
+// 目前可見標題 → 高亮對應 TOC 連結
+function updateActive(activeSlug) {
+  const tocPane = getActiveTocPane();
+  if (!tocPane) return;
+  const links = Array.from(tocPane.querySelectorAll('.toc-link'));
+  links.forEach(a => a.classList.remove('active'));
+  const active = links.find(a => a.getAttribute('href') === '#' + activeSlug);
   if (!active) return;
   active.classList.add('active');
-  // 確保父 H2 也展開
   const parentLi = active.closest('.toc-h2');
   if (parentLi) {
     parentLi.classList.add('open');
@@ -2422,11 +1916,36 @@ function updateActive() {
   }
 }
 
-// ── 手機選單 ─────────────────────────────────────────────
-const sidebar  = document.getElementById('sidebar');
-const overlay  = document.getElementById('sidebar-overlay');
-const menuBtn  = document.getElementById('menu-btn');
+// 每次切版重建 IntersectionObserver，只觀察目前版本的標題
+let observer = null;
+function rebuildObserver() {
+  if (observer) observer.disconnect();
+  const pane = getActivePane();
+  if (!pane) return;
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) updateActive(e.target.id); });
+  }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+  pane.querySelectorAll('h2, h3').forEach(h => observer.observe(h));
+}
 
+function selectVersion(vid, persist) {
+  if (!validVids.includes(vid)) vid = DEFAULT_VERSION;
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.version === vid));
+  contentPanes.forEach(p => p.classList.toggle('active', p.dataset.content === vid));
+  tocPanes.forEach(p => p.classList.toggle('active', p.dataset.toc === vid));
+  if (persist) { try { localStorage.setItem(STORAGE_KEY, vid); } catch (e) {} }
+  rebuildObserver();
+  window.scrollTo({ top: 0 });
+}
+
+tabs.forEach(tab => tab.addEventListener('click', () => selectVersion(tab.dataset.version, true)));
+
+// 初始版本：localStorage → 預設初階
+let initialVid = DEFAULT_VERSION;
+try { const saved = localStorage.getItem(STORAGE_KEY); if (saved) initialVid = saved; } catch (e) {}
+selectVersion(initialVid, false);
+
+// ── 手機選單 ─────────────────────────────────────────────
 menuBtn.addEventListener('click', () => {
   sidebar.classList.toggle('open');
   overlay.classList.toggle('open');
@@ -2436,28 +1955,27 @@ overlay.addEventListener('click', () => {
   overlay.classList.remove('open');
 });
 
-// 點 TOC 鏈結後關閉手機側欄
-tocLinks.forEach(a => {
-  a.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
-  });
-});
-
-// ── 表格加上橫向滾動包裝 ────────────────────────────────
-document.querySelectorAll('#content table').forEach(t => {
-  if (t.parentElement.classList.contains('table-wrap')) return;
-  const wrap = document.createElement('div');
-  wrap.className = 'table-wrap';
-  t.parentNode.insertBefore(wrap, t);
-  wrap.appendChild(t);
-});
-
 // ── 術語速查面板 ─────────────────────────────────────────
 const glossaryPanel   = document.getElementById('glossary-panel');
 const glossaryBtn     = document.getElementById('glossary-btn');
 const glossaryClose   = document.getElementById('glossary-close');
 const glossaryOverlay = document.getElementById('glossary-overlay');
+const glossarySearch  = document.getElementById('glossary-search');
+const glItems         = Array.from(document.querySelectorAll('.gl-item'));
+const glNoResult      = document.querySelector('.gl-noresult');
+
+// 全文過濾（術語名＋別名＋解說內文）
+function filterGlossary() {
+  const q = (glossarySearch.value || '').trim().toLowerCase();
+  let shown = 0;
+  glItems.forEach(it => {
+    const hit = !q || it.textContent.toLowerCase().includes(q);
+    it.style.display = hit ? '' : 'none';
+    if (hit) shown++;
+  });
+  if (glNoResult) glNoResult.hidden = (shown !== 0);
+}
+glossarySearch.addEventListener('input', filterGlossary);
 
 function openGlossary() {
   glossaryPanel.classList.add('open');
@@ -2471,6 +1989,7 @@ function closeGlossary() {
   glossaryBtn.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('glossary-open');
   if (activeGlItem) { activeGlItem.classList.remove('gl-highlighted'); activeGlItem = null; }
+  if (glossarySearch && glossarySearch.value) { glossarySearch.value = ''; filterGlossary(); }
 }
 
 glossaryBtn.addEventListener('click', () => {
@@ -2487,6 +2006,8 @@ document.getElementById('content').addEventListener('click', e => {
   if (!trigger) return;
   const termId = trigger.dataset.term;
   openGlossary();
+  // 清掉搜尋過濾，確保目標條目可見
+  if (glossarySearch && glossarySearch.value) { glossarySearch.value = ''; filterGlossary(); }
   const item = document.getElementById('gl-' + termId);
   if (!item) return;
   if (activeGlItem) activeGlItem.classList.remove('gl-highlighted');

@@ -4,10 +4,16 @@ build.py — 台灣大嘴黑鱸白皮書靜態網站產生器
 輸出: docs/index.html（自含 HTML，無需外部資源除 Google Fonts）
 """
 import re
+import sys
 import markdown
 from pathlib import Path
 
-SRC = Path(__file__).parent / "台灣大嘴黑鱸白皮書.md"
+# Windows 主控台預設 cp950，無法輸出 ✓ 與部分中文；強制 stdout 走 UTF-8
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 OUT = Path(__file__).parent / "docs" / "index.html"
 
 # ── 術語速查資料 ──────────────────────────────────────────────────────────
@@ -55,6 +61,19 @@ GLOSSARY = [
     ("foraging-forays",     "Foraging Forays",  "覓食突進",     "非 LVF 中小型黑鱸在底層獵物密度超出表層 <strong>3.5–5.0 倍</strong>時，從含氧表層短暫衝入底層毒區（&lt; 30 秒）發動攻擊後迅速返回的冒險覓食行為。<br><br><strong>生理極限</strong><ul class=\"gl-list-inner\"><li>單次安全衝入時間：<strong>15–25 秒</strong>（絕對上限 30 秒）</li><li>單日有效突進次數：<strong>10–15 次</strong>（H₂S ≤ 0.01 mg/L，12 小時覓食期）</li><li>每次突進後強制 COX 重置冷卻期：<strong>45–60 分鐘</strong></li></ul><strong>限制條件</strong><ul class=\"gl-list-inner\"><li>H₂S &lt; 0.05 mg/L 且非 LVF 個體才可能觸發</li><li>LVF 舊魚（皮質醇 ≥ 20 ng/mL）：即使底層獵物密度達 10 倍，端腦仍完全抑制突進反射</li><li>超額突進會導致 ROS 階梯累積與延遲性器官損傷</li></ul>⚠️ 超過 10–15 次額度後，標點進入強制冷卻，底層誘咬失效。"),
     ("cox",                 "COX",              "細胞色素 c 氧化酶", "粒線體電子傳遞鏈最末端的酵素，全名 Cytochrome c Oxidase（細胞色素 c 氧化酶，複合體 IV）。負責將電子從細胞色素 c 傳遞至分子氧，是有氧 ATP 生產的最後一道關卡。<br><br><strong>H₂S 如何攻擊 COX</strong><ul class=\"gl-list-inner\"><li>H₂S 直接鎖住 COX 核心的鐵—銅雙核中心（Heme a₃–CuB），阻斷電子傳遞</li><li>有氧 ATP 生產瞬間停擺 → 即使水中含氧充足，魚仍陷入「<strong>組織毒性缺氧</strong>」</li><li>堵塞的電子傳遞鏈大量洩漏，產生 ROS（活性氧），對細胞膜造成脂質過氧化損傷</li></ul><strong>可逆性與冷卻期</strong><ul class=\"gl-list-inner\"><li>短暫暴露後抑制是<strong>動態可逆</strong>的（魚返回含氧水層後 H₂S 逐漸脫離結合位點）</li><li>每次突進底層後，COX 活性需 <strong>45–60 分鐘</strong>才能完全恢復至基準線（COX 重置冷卻期）</li><li>超頻突進 → ROS 階梯累積 → 延遲性器官損傷</li></ul><strong>大嘴黑鱸的脆弱性</strong>：黑鱸保留脊椎動物標準易感構象，無 SQR 去毒基因過度表現，無法像 <em>Poecilia mexicana</em> 硫泉族群那樣靠分子免疫抵抗 H₂S，完全依賴「短時空間迴避」存活。"),
     ("lc50",                "LC₅₀",             "半致死濃度",   "半致死濃度（Lethal Concentration 50%）：在標準測試條件下，使受試族群中 <strong>50%</strong> 個體死亡的水中化學物質濃度。<br><br><strong>標準測試規格</strong><ul class=\"gl-list-inner\"><li>暴露時間：<strong>96 小時</strong>（96-h LC₅₀，硬骨魚類急性毒性標準試驗）</li><li>測試條件：靜止水體、控溫、無食物</li><li>結果單位：mg/L</li></ul><strong>大嘴黑鱸對 H₂S 的精確值</strong><ul class=\"gl-list-inner\"><li>96-h LC₅₀ = <strong>0.0297–0.0316 mg/L</strong>（ASTM 標準測試，精確測量值）</li><li>台灣南部爛底水體底層 H₂S 峰值：<strong>8.5 mg/L</strong> → 超出 LC₅₀ 約 <strong>270 倍</strong></li></ul>⚠️ LC₅₀ 是「50% 會死」的濃度，不是安全閾值。行為迴避閾值（魚開始主動逃離）約為 <strong>0.002 mg/L</strong>，已比 LC₅₀ 低一個數量級以上。"),
+    # ── 新版（初/中/專）補充術語 ──────────────────────────────────────────
+    ("match-the-hatch",     "Match the Hatch",  "仿餌匹配",     "模仿當下水域正在大量出現的獵物——<strong>種類、大小、動作節奏、頻率指紋</strong>——來選擇對應假餌的核心思路。台灣全年獵物物候不同（春季搖蚊／孑孓、初夏甲殼<strong>軟殼期</strong>、夏季吳郭魚苗、秋季溪哥…），<strong>對的月份綁對的餌</strong>，往往比換顏色更關鍵。"),
+    ("qiwei",               "棲位",             "Habitat",     "魚當下所處的位置 ＝ <strong>深度 ＋ 平面點位</strong>（結構、水層）。找對棲位幾乎等於找到魚。由溶氧、毒區、水溫、風生流與結構共同決定：南部夏天魚常離底懸浮（避 H₂S），北部沒毒氣則敢貼底埋伏。不管哪區哪季，倒木、石堆、水草邊緣、橋墩、陡坎、進出水口都是高機率棲位。"),
+    ("ghrelin",             "Ghrelin",          "飢餓素",       "飢餓荷爾蒙。長期飢餓會<strong>短路皮質醇對覓食的抑制</strong>（解開神經閘門），所以久封的池子一開放，連高警覺老魚（LVF）都會在頭幾竿『炸口』。對策：把握黃金期，用大亮色、高效率搜索餌，在窗口內最大化 OFT 收益。"),
+    ("dead-stop",           "Dead Stop",        "死停",         "把假餌完全靜止不動。<br><br>靜止給了老魚<strong>端腦慢通路（認知審查）</strong>充足時間做違和交叉比對，反而容易被識破——所以對老魚（LVF）別輕易死停，除非餌已貼結構 <strong>&lt;12 cm</strong>、用空間壓縮牠的決策窗口。新魚（HVF）反射主導，停頓誘咬仍常有效。"),
+    ("thermocline",         "溫躍層",           "Thermocline", "水體垂直方向溫度（密度）急變的界面，台灣水庫夏季約在 <strong>3–5 m</strong> 深，上為溫暖表水層、下為低溫低氧深水層。黑鱸常卡在<strong>躍溫層上方到中層結構帶</strong>（溫度適中、DO 仍足、餌魚也沿分層線聚集）。延伸見『分層』條目。"),
+    ("volumetric-heat-capacity", "體積熱容",     "",            "底泥的『保溫棉厚度』，單位 J/cm³·K。<ul class=\"gl-list-inner\"><li>北部紅泥 <strong>3.411</strong> ＞ 南部 <strong>3.122</strong></li><li>數字越大＝寒流時底層降溫越慢、保溫滯後越久（Zone-A 17–23 hr、Zone-B 18–24 hr，南部僅 6–12 hr）</li></ul>實戰：北部寒流第一天 0–24 hr 底層比表層高 <strong>2–3°C</strong>，貼底還有黃金窗口；南部底層降溫陡峭、沒有這個緩衝。"),
+    ("algal-bloom",         "藻華",             "",            "優養水體藻類爆量。白天光合產氧、<strong>夜間與陰天大量耗氧</strong>，使 DO 劇烈擺盪、清晨崩到保命線以下；同時改變水色與能見度（綠濁），壓縮視覺有效距離。南部野塘春末常見，直接影響選色與打法（偏向側線系、慢、貼近）。"),
+    ("wind-driven-current", "風生流",           "",            "風推動表層水往下風（迎風）岸堆積形成的水流，把浮游與小型獵物集中到<strong>迎風岸</strong>，魚跟去結構後方逆流伏擊——<strong>迎風岸常是黃金帶</strong>。風太大時魚退入結構後方靜水區定點等，需把餌慢慢送進那個靜水角落。"),
+    ("asr",                 "ASR",              "水表呼吸",     "水表呼吸（Aquatic Surface Respiration）。DO 低到約 <strong>1.6–2.0 mg/L</strong> 時，魚貼上水面吸取表層含氧較高薄水層的保命行為。<br><br>此時已進入<strong>環境型關機</strong>，仰攻（上攻）幾乎 100% 被拒絕；正解是改超慢表層微氧帶，或直接撤點換水體，硬解無效。"),
+    ("short-bite",          "短口",             "",            "魚有反應、會碰餌，但沒真正吞下、刺不中。代表<strong>『想吃但有顧慮』</strong>，通常卡在神經決策環節（口觸測試判定假餌太硬／異物感），不是環境問題。對策：換超軟餌（如 Shore 00–15）、延長接觸 <strong>≥100 ms</strong> 再揚竿。"),
+    ("limiting-variable",   "限制變數",         "",            "今天卡住魚不咬的那<strong>一個</strong>主因。分兩型：<ul class=\"gl-list-inner\"><li><strong>環境型</strong>：缺氧、毒區、水太濁、低溫關機——再厲害的操竿也救不回，該換層／換時段／換水體</li><li><strong>神經型</strong>：被釣怕、看穿餌——魚在這、想吃、有顧慮，才是技術能介入的戰場</li></ul>專家逆向診斷的目標：用最少試誤鎖定它、<strong>只調它</strong>，而非盲目輪餌輪點。"),
+    ("reverse-inference",   "逆向診斷",         "reverse inference", "專家的核心方法。機制是『因 → 果』（這個水溫 → 魚會這樣），但現場拿到的是『果』（只跟不咬、短口、浮頭、突然閉口），要<strong>反推『因』</strong>（哪一環在卡），然後只調那一個變數。落地前先用『驗水層 → 驗活性 → 驗 NTU』三動作分流<strong>環境型 vs 神經型</strong>，再下注。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -112,6 +131,19 @@ TERM_PATTERNS = [
     ("cox",                r'COX 重置冷卻期'),
     ("lc50",               r'LC₅₀'),
     ("lc50",               r'半致死濃度'),
+    # ── 新版（初/中/專）補充術語 ──
+    ("match-the-hatch",    r'Match the Hatch'),
+    ("qiwei",              r'棲位'),
+    ("ghrelin",            r'Ghrelin'),
+    ("dead-stop",          r'Dead Stop'),
+    ("thermocline",        r'溫躍層'),
+    ("volumetric-heat-capacity", r'體積熱容'),
+    ("algal-bloom",        r'藻華'),
+    ("wind-driven-current", r'風生流'),
+    ("asr",                r'(?<![A-Za-z])ASR(?![A-Za-z])'),
+    ("short-bite",         r'短口'),
+    ("limiting-variable",  r'限制變數'),
+    ("reverse-inference",  r'逆向診斷'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
@@ -153,39 +185,51 @@ def build_glossary_html(terms):
     <span class="gl-title">📖 術語速查</span>
     <button id="glossary-close" aria-label="關閉術語面板">✕</button>
   </div>
+  <div class="gl-search-wrap">
+    <input id="glossary-search" type="search" placeholder="搜尋術語…（名稱／別名／解說）" autocomplete="off" aria-label="搜尋術語">
+  </div>
   <dl class="gl-list">
 {items_html}  </dl>
+  <div class="gl-noresult" hidden>找不到相符的術語</div>
 </div>
 <button id="glossary-btn" aria-label="開啟術語速查">📖 術語</button>
 <div id="glossary-overlay"></div>'''
 
 glossary_html = build_glossary_html(GLOSSARY)
 
-# ── 讀取 Markdown（utf-8-sig 處理 BOM）──────────────────────────────────
-md_text = SRC.read_text(encoding="utf-8-sig")
+# ── 版本設定 ──────────────────────────────────────────────────────────────
+# (id, 顯示標籤, markdown 檔名)
+VERSIONS = [
+    ("junior", "初階", "台灣大嘴黑鱸白皮書featFable5-junior.md"),
+    ("senior", "中階", "台灣大嘴黑鱸白皮書featFable5-senior.md"),
+    ("expert", "專業", "台灣大嘴黑鱸白皮書featFable5-expert.md"),
+]
+DEFAULT_VERSION = "junior"
+BASE = Path(__file__).parent
 
-# ── 轉換 Markdown → HTML ─────────────────────────────────────────────────
-md = markdown.Markdown(
-    extensions=["tables", "toc", "fenced_code", "nl2br", "sane_lists", "smarty"],
-    extension_configs={
-        "toc": {"permalink": False},
-        "smarty": {"smart_quotes": False},
-    },
-)
-content_html = md.convert(md_text)
-content_html = inject_term_links(content_html)
-
-# ── 解析 H2 / H3 建立 TOC 資料 ───────────────────────────────────────────
+# H2 / H3 解析（id 已前綴）
 heading_re = re.compile(r'<h([23])[^>]*id="([^"]*)"[^>]*>(.*?)</h\1>', re.DOTALL)
-toc_items = []
-for m in heading_re.finditer(content_html):
-    level, slug, raw_text = m.group(1), m.group(2), m.group(3)
-    text = re.sub(r"<[^>]+>", "", raw_text).strip()
-    toc_items.append({"level": int(level), "slug": slug, "text": text})
+
+_title_re  = re.compile(r'^[ \t]*#[ \t]+(.*?)[ \t]*$', re.M)
+_demote_re = re.compile(r'^(#{1,6}) ', re.M)
+_id_re     = re.compile(r'(<h[1-6][^>]*\bid=")([^"]*)(")')
+
+def prepare_markdown(raw, vid):
+    """抽出第一行 H1 當版本標題並從正文移除；其餘標題整體降一級
+    （# → ##、## → ###、…），使「章→H2、節→H3」沿用既有 TOC 解析。"""
+    m = _title_re.search(raw)
+    title = m.group(1).strip() if m else vid
+    body = (raw[:m.start()] + raw[m.end():]) if m else raw
+    body = _demote_re.sub(lambda mm: "#" + mm.group(0), body)
+    return title, body
+
+def prefix_heading_ids(html, vid):
+    """標題 id 前綴 {vid}-，確保三版合於一頁時 id 全域唯一（錨點不衝突）。"""
+    return _id_re.sub(lambda m: f"{m.group(1)}{vid}-{m.group(2)}{m.group(3)}", html)
 
 # ── 產生 TOC HTML ─────────────────────────────────────────────────────────
 def build_toc_html(items):
-    lines = ['<nav id="toc"><ul class="toc-root">']
+    lines = ['<nav class="toc"><ul class="toc-root">']
     i = 0
     while i < len(items):
         item = items[i]
@@ -218,29 +262,115 @@ def build_toc_html(items):
                 )
                 i += 1
         else:
-            i += 1  # 跳過孤立 H3
+            # 孤立 H3（出現在任何 H2 之前，如「導讀」「開始之前」）→ 當作頂層項目
+            lines.append(
+                f'<li class="toc-h2">'
+                f'<a href="#{item["slug"]}" class="toc-link">{item["text"]}</a>'
+                f"</li>"
+            )
+            i += 1
     lines.append("</ul></nav>")
     return "\n".join(lines)
 
-toc_html = build_toc_html(toc_items)
+# ── 逐版本轉換 ────────────────────────────────────────────────────────────
+versions_data = []
+for vid, vlabel, vfile in VERSIONS:
+    raw = (BASE / vfile).read_text(encoding="utf-8-sig")
+    vtitle, body = prepare_markdown(raw, vid)
+
+    md = markdown.Markdown(
+        extensions=["tables", "toc", "fenced_code", "nl2br", "sane_lists", "smarty"],
+        extension_configs={
+            "toc": {"permalink": False},
+            "smarty": {"smart_quotes": False},
+        },
+    )
+    content_html = md.convert(body)
+    content_html = prefix_heading_ids(content_html, vid)
+    content_html = inject_term_links(content_html)
+    # 重新加回被抽掉的書名（以 H1 呈現於該版頂部）
+    content_html = f'<h1 class="doc-title">{vtitle}</h1>\n{content_html}'
+
+    toc_items = []
+    for m in heading_re.finditer(content_html):
+        level, slug, raw_text = m.group(1), m.group(2), m.group(3)
+        text = re.sub(r"<[^>]+>", "", raw_text).strip()
+        toc_items.append({"level": int(level), "slug": slug, "text": text})
+
+    versions_data.append({
+        "id": vid,
+        "label": vlabel,
+        "title": vtitle,
+        "content": content_html,
+        "toc": build_toc_html(toc_items),
+        "n_h2": sum(1 for x in toc_items if x["level"] == 2),
+        "n_h3": sum(1 for x in toc_items if x["level"] == 3),
+    })
 
 # ── HTML Template ─────────────────────────────────────────────────────────
 CSS = r"""
 :root {
-  --bg:        #0d1117;
-  --sidebar-bg:#010409;
-  --surface:   #161b22;
-  --border:    #30363d;
-  --text:      #c9d1d9;
-  --text-dim:  #8b949e;
-  --heading:   #e6edf3;
-  --accent:    #58a6ff;
-  --accent2:   #39d0d8;
-  --quote-border: #388bfd;
-  --strong:    #f0f6fc;
-  --code-bg:   #161b22;
-  --progress:  #58a6ff;
+  /* ── 亮色（學術白皮書）＝預設 ── */
+  --bg:        #fbfaf7;
+  --sidebar-bg:#f5f3ed;
+  --surface:   #f1efe8;
+  --border:    #e3ded2;
+  --border-soft:  #ece8de;
+  --text:      #2b2d2c;
+  --text-dim:  #6b7180;
+  --heading:   #15211d;
+  --accent:    #0f5e57;
+  --accent2:   #0c746b;
+  --accent-dim:   rgba(15,94,87,0.10);
+  --accent-soft:  rgba(15,94,87,0.06);
+  --accent-soft2: rgba(15,94,87,0.10);
+  --quote-border: #0f5e57;
+  --quote-bg:  rgba(15,94,87,0.06);
+  --row-hover: rgba(15,94,87,0.05);
+  --strong:    #111312;
+  --code-bg:   #efece4;
+  --progress:  #0f5e57;
+  --panel-bg:  #ffffff;
+  --float-bg:       rgba(255,255,255,0.94);
+  --float-bg-hover: rgba(241,239,232,0.98);
+  --hover-tint: rgba(0,0,0,0.05);
+  --chip-bg:    rgba(0,0,0,0.05);
+  --scrim:      rgba(20,22,26,0.38);
+  --shadow:       0 4px 16px rgba(20,30,28,0.12);
+  --shadow-hover: 0 6px 20px rgba(15,94,87,0.18);
+  --font-serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
   --sidebar-w: 260px;
+}
+
+html[data-theme="dark"] {
+  /* ── 精煉深色（炭灰）── */
+  --bg:        #14161a;
+  --sidebar-bg:#0f1114;
+  --surface:   #1c1f24;
+  --border:    #2a2e35;
+  --border-soft:  #23272d;
+  --text:      #c8ccd2;
+  --text-dim:  #8b9099;
+  --heading:   #eceef1;
+  --accent:    #2db6a6;
+  --accent2:   #45d6c6;
+  --accent-dim:   rgba(45,182,166,0.16);
+  --accent-soft:  rgba(45,182,166,0.08);
+  --accent-soft2: rgba(45,182,166,0.13);
+  --quote-border: #2db6a6;
+  --quote-bg:  rgba(45,182,166,0.08);
+  --row-hover: rgba(45,182,166,0.06);
+  --strong:    #f5f6f8;
+  --code-bg:   #1c1f24;
+  --progress:  #2db6a6;
+  --panel-bg:  #14161a;
+  --float-bg:       rgba(28,31,36,0.92);
+  --float-bg-hover: rgba(40,55,52,0.95);
+  --hover-tint: rgba(255,255,255,0.06);
+  --chip-bg:    rgba(255,255,255,0.05);
+  --scrim:      rgba(0,0,0,0.5);
+  --shadow:       0 4px 16px rgba(0,0,0,0.4);
+  --shadow-hover: 0 6px 20px rgba(45,182,166,0.2);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -255,6 +385,7 @@ body {
                system-ui, sans-serif;
   line-height: 1.8;
   display: flex;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 /* ── 進度條 ── */
@@ -305,7 +436,9 @@ body {
 }
 
 /* ── TOC ── */
-#toc { padding: 8px 0 40px; flex: 1; }
+#toc-container { flex: 1; }
+.toc { padding: 8px 0 40px; }
+.toc-pane:not(.active) { display: none; }
 .toc-root { list-style: none; margin: 0; padding: 0; }
 
 .toc-h2 > .toc-link {
@@ -321,12 +454,12 @@ body {
 }
 .toc-h2 > .toc-link:hover {
   color: var(--heading);
-  background: rgba(88,166,255,0.06);
+  background: var(--accent-soft);
 }
 .toc-h2 > .toc-link.active {
   color: var(--accent);
   border-left-color: var(--accent);
-  background: rgba(88,166,255,0.08);
+  background: var(--accent-soft2);
 }
 
 .toc-children {
@@ -363,38 +496,83 @@ body {
   transition: margin-right 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 
+/* ── 等級分頁標籤 ── */
+#level-tabs {
+  display: flex;
+  gap: 4px;
+  max-width: 800px;
+  margin: 0 auto 28px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.level-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.level-tab:hover { color: var(--heading); }
+.level-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.level-tab .lvl-en {
+  font-size: 0.7em;
+  color: var(--text-dim);
+  margin-left: 5px;
+  letter-spacing: 0.04em;
+}
+.level-tab.active .lvl-en { color: var(--accent2); }
+
+/* ── 版本內容切換 ── */
+.content-pane:not(.active) { display: none; }
+.doc-title { /* 書名沿用 #content h1 樣式 */ }
+
 /* 術語面板開啟時：桌機推擠主內容讓位（無遮罩） */
 body.glossary-open #main-wrapper {
   margin-right: 340px;
 }
 
 #content {
-  max-width: 860px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 /* ── 標題 ── */
 #content h1 {
-  font-size: 1.9rem;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--heading);
   border-bottom: 2px solid var(--accent);
-  padding-bottom: 12px;
-  margin-bottom: 28px;
+  padding-bottom: 14px;
+  margin-bottom: 30px;
   line-height: 1.35;
+  letter-spacing: 0.01em;
 }
 #content h2 {
-  font-size: 1.35rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
   color: var(--heading);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-  margin-top: 56px;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-top: 60px;
+  margin-bottom: 22px;
   scroll-margin-top: 24px;
+  letter-spacing: 0.01em;
 }
 #content h3 {
-  font-size: 1.1rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--accent);
-  margin-top: 32px;
+  margin-top: 34px;
   margin-bottom: 12px;
   scroll-margin-top: 24px;
 }
@@ -415,9 +593,9 @@ body.glossary-open #main-wrapper {
 /* ── 引用塊 ── */
 #content blockquote {
   margin: 1.2rem 0;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-left: 4px solid var(--quote-border);
-  background: rgba(56,139,253,0.07);
+  background: var(--quote-bg);
   color: var(--text);
   border-radius: 0 6px 6px 0;
 }
@@ -482,8 +660,8 @@ body.glossary-open #main-wrapper {
 }
 #content tr:last-child td { border-bottom: none; }
 #content tbody tr:nth-child(odd)  { background: var(--surface); }
-#content tbody tr:nth-child(even) { background: var(--bg); }
-#content tbody tr:hover { background: rgba(88,166,255,0.05); }
+#content tbody tr:nth-child(even) { background: transparent; }
+#content tbody tr:hover { background: var(--row-hover); }
 
 /* ── 水平線 ── */
 #content hr {
@@ -509,6 +687,30 @@ body.glossary-open #main-wrapper {
   line-height: 1;
 }
 
+/* ── 亮暗主題切換鈕 ── */
+#theme-btn {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 280;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--float-bg);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.05rem;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+  transition: background 0.15s, box-shadow 0.15s, color 0.15s;
+}
+#theme-btn:hover { background: var(--float-bg-hover); box-shadow: var(--shadow-hover); }
+
 /* ── RWD ── */
 @media (max-width: 768px) {
   body { display: block; }
@@ -531,7 +733,7 @@ body.glossary-open #main-wrapper {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: var(--scrim);
     z-index: 140;
   }
   #sidebar-overlay.open { display: block; }
@@ -571,7 +773,7 @@ body.glossary-open #main-wrapper {
   bottom: 28px;
   right: 28px;
   z-index: 300;
-  background: rgba(22, 27, 34, 0.92);
+  background: var(--float-bg);
   border: 1px solid var(--border);
   color: var(--accent);
   border-radius: 24px;
@@ -580,20 +782,20 @@ body.glossary-open #main-wrapper {
   font-size: 0.85rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow);
   transition: background 0.15s, box-shadow 0.15s;
   font-family: inherit;
 }
 #glossary-btn:hover {
-  background: rgba(30, 58, 95, 0.95);
-  box-shadow: 0 6px 20px rgba(88,166,255,0.2);
+  background: var(--float-bg-hover);
+  box-shadow: var(--shadow-hover);
 }
 
 #glossary-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: var(--scrim);
   z-index: 290;
 }
 /* overlay only shown on mobile (see @media block below) */
@@ -606,7 +808,7 @@ body.glossary-open #main-wrapper {
   width: 340px;
   max-width: 92vw;
   z-index: 310;
-  background: #0d1117;
+  background: var(--panel-bg);
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -642,7 +844,7 @@ body.glossary-open #main-wrapper {
   border-radius: 4px;
   transition: color 0.15s, background 0.15s;
 }
-#glossary-close:hover { color: var(--heading); background: rgba(255,255,255,0.06); }
+#glossary-close:hover { color: var(--heading); background: var(--hover-tint); }
 
 .gl-list {
   overflow-y: auto;
@@ -652,7 +854,7 @@ body.glossary-open #main-wrapper {
 }
 .gl-item {
   padding: 12px 18px;
-  border-bottom: 1px solid rgba(48,54,61,0.6);
+  border-bottom: 1px solid var(--border-soft);
 }
 .gl-item:last-child { border-bottom: none; }
 .gl-term {
@@ -688,13 +890,39 @@ body.glossary-open #main-wrapper {
 .gl-alias {
   font-size: 0.72em;
   color: var(--text-dim);
-  background: rgba(255,255,255,0.05);
+  background: var(--chip-bg);
   border-radius: 3px;
   padding: 1px 5px;
   margin-left: 6px;
   vertical-align: middle;
   font-weight: normal;
   letter-spacing: 0.02em;
+}
+/* ── 速查搜尋框 ── */
+.gl-search-wrap {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+#glossary-search {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 7px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+#glossary-search:focus { border-color: var(--accent); }
+#glossary-search::placeholder { color: var(--text-dim); }
+.gl-noresult {
+  padding: 24px 18px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.82rem;
 }
 """
 
@@ -706,40 +934,70 @@ window.addEventListener('scroll', () => {
   bar.style.width = total > 0 ? (window.scrollY / total * 100) + '%' : '0%';
 }, { passive: true });
 
-// ── TOC: expand/collapse & active highlight ───────────────
-const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
-const allHeadings = Array.from(document.querySelectorAll('#content h2, #content h3'));
+// ── 亮暗主題切換 ─────────────────────────────────────────
+const themeBtn = document.getElementById('theme-btn');
+function applyThemeIcon() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeBtn.textContent = dark ? '☀' : '🌙';
+  themeBtn.setAttribute('aria-label', dark ? '切換為亮色主題' : '切換為深色主題');
+}
+applyThemeIcon();
+themeBtn.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem('twbass-theme', next); } catch (e) {}
+  applyThemeIcon();
+});
 
-// 點 H2 鏈結展開/收合子清單
-document.querySelectorAll('.toc-h2.has-children > .toc-link').forEach(link => {
-  link.addEventListener('click', e => {
-    const li = link.closest('.toc-h2');
-    li.classList.toggle('open');
+// ── 手機側欄元素 ─────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+const menuBtn = document.getElementById('menu-btn');
+
+// ── 版本（等級）切換 ─────────────────────────────────────
+const STORAGE_KEY     = 'twbass-level';
+const DEFAULT_VERSION = 'junior';
+const tabs         = Array.from(document.querySelectorAll('#level-tabs .level-tab'));
+const contentPanes = Array.from(document.querySelectorAll('.content-pane'));
+const tocPanes     = Array.from(document.querySelectorAll('.toc-pane'));
+const validVids    = tabs.map(t => t.dataset.version);
+
+// 每個 TOC pane 的展開/收合與手機關閉行為（一次性綁定）
+tocPanes.forEach(pane => {
+  pane.querySelectorAll('.toc-h2.has-children > .toc-link').forEach(link => {
+    link.addEventListener('click', () => link.closest('.toc-h2').classList.toggle('open'));
+  });
+  const firstH2 = pane.querySelector('.toc-h2.has-children');
+  if (firstH2) firstH2.classList.add('open');
+  pane.querySelectorAll('.toc-link').forEach(a => {
+    a.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
   });
 });
 
-// 初始展開第一個 H2
-const firstH2 = document.querySelector('.toc-h2.has-children');
-if (firstH2) firstH2.classList.add('open');
+// 包裝所有版本的表格（隱藏的 pane 也先包好）
+document.querySelectorAll('.content-pane table').forEach(t => {
+  if (t.parentElement.classList.contains('table-wrap')) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+  t.parentNode.insertBefore(wrap, t);
+  wrap.appendChild(t);
+});
 
-// Intersection Observer：追蹤當前可見標題
-let activeSlug = null;
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      activeSlug = e.target.id;
-      updateActive();
-    }
-  });
-}, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
-allHeadings.forEach(h => observer.observe(h));
+const getActivePane    = () => document.querySelector('.content-pane.active');
+const getActiveTocPane = () => document.querySelector('.toc-pane.active');
 
-function updateActive() {
-  tocLinks.forEach(a => a.classList.remove('active'));
-  const active = tocLinks.find(a => a.getAttribute('href') === '#' + activeSlug);
+// 目前可見標題 → 高亮對應 TOC 連結
+function updateActive(activeSlug) {
+  const tocPane = getActiveTocPane();
+  if (!tocPane) return;
+  const links = Array.from(tocPane.querySelectorAll('.toc-link'));
+  links.forEach(a => a.classList.remove('active'));
+  const active = links.find(a => a.getAttribute('href') === '#' + activeSlug);
   if (!active) return;
   active.classList.add('active');
-  // 確保父 H2 也展開
   const parentLi = active.closest('.toc-h2');
   if (parentLi) {
     parentLi.classList.add('open');
@@ -748,11 +1006,36 @@ function updateActive() {
   }
 }
 
-// ── 手機選單 ─────────────────────────────────────────────
-const sidebar  = document.getElementById('sidebar');
-const overlay  = document.getElementById('sidebar-overlay');
-const menuBtn  = document.getElementById('menu-btn');
+// 每次切版重建 IntersectionObserver，只觀察目前版本的標題
+let observer = null;
+function rebuildObserver() {
+  if (observer) observer.disconnect();
+  const pane = getActivePane();
+  if (!pane) return;
+  observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) updateActive(e.target.id); });
+  }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+  pane.querySelectorAll('h2, h3').forEach(h => observer.observe(h));
+}
 
+function selectVersion(vid, persist) {
+  if (!validVids.includes(vid)) vid = DEFAULT_VERSION;
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.version === vid));
+  contentPanes.forEach(p => p.classList.toggle('active', p.dataset.content === vid));
+  tocPanes.forEach(p => p.classList.toggle('active', p.dataset.toc === vid));
+  if (persist) { try { localStorage.setItem(STORAGE_KEY, vid); } catch (e) {} }
+  rebuildObserver();
+  window.scrollTo({ top: 0 });
+}
+
+tabs.forEach(tab => tab.addEventListener('click', () => selectVersion(tab.dataset.version, true)));
+
+// 初始版本：localStorage → 預設初階
+let initialVid = DEFAULT_VERSION;
+try { const saved = localStorage.getItem(STORAGE_KEY); if (saved) initialVid = saved; } catch (e) {}
+selectVersion(initialVid, false);
+
+// ── 手機選單 ─────────────────────────────────────────────
 menuBtn.addEventListener('click', () => {
   sidebar.classList.toggle('open');
   overlay.classList.toggle('open');
@@ -762,28 +1045,27 @@ overlay.addEventListener('click', () => {
   overlay.classList.remove('open');
 });
 
-// 點 TOC 鏈結後關閉手機側欄
-tocLinks.forEach(a => {
-  a.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
-  });
-});
-
-// ── 表格加上橫向滾動包裝 ────────────────────────────────
-document.querySelectorAll('#content table').forEach(t => {
-  if (t.parentElement.classList.contains('table-wrap')) return;
-  const wrap = document.createElement('div');
-  wrap.className = 'table-wrap';
-  t.parentNode.insertBefore(wrap, t);
-  wrap.appendChild(t);
-});
-
 // ── 術語速查面板 ─────────────────────────────────────────
 const glossaryPanel   = document.getElementById('glossary-panel');
 const glossaryBtn     = document.getElementById('glossary-btn');
 const glossaryClose   = document.getElementById('glossary-close');
 const glossaryOverlay = document.getElementById('glossary-overlay');
+const glossarySearch  = document.getElementById('glossary-search');
+const glItems         = Array.from(document.querySelectorAll('.gl-item'));
+const glNoResult      = document.querySelector('.gl-noresult');
+
+// 全文過濾（術語名＋別名＋解說內文）
+function filterGlossary() {
+  const q = (glossarySearch.value || '').trim().toLowerCase();
+  let shown = 0;
+  glItems.forEach(it => {
+    const hit = !q || it.textContent.toLowerCase().includes(q);
+    it.style.display = hit ? '' : 'none';
+    if (hit) shown++;
+  });
+  if (glNoResult) glNoResult.hidden = (shown !== 0);
+}
+glossarySearch.addEventListener('input', filterGlossary);
 
 function openGlossary() {
   glossaryPanel.classList.add('open');
@@ -797,6 +1079,7 @@ function closeGlossary() {
   glossaryBtn.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('glossary-open');
   if (activeGlItem) { activeGlItem.classList.remove('gl-highlighted'); activeGlItem = null; }
+  if (glossarySearch && glossarySearch.value) { glossarySearch.value = ''; filterGlossary(); }
 }
 
 glossaryBtn.addEventListener('click', () => {
@@ -813,6 +1096,8 @@ document.getElementById('content').addEventListener('click', e => {
   if (!trigger) return;
   const termId = trigger.dataset.term;
   openGlossary();
+  // 清掉搜尋過濾，確保目標條目可見
+  if (glossarySearch && glossarySearch.value) { glossarySearch.value = ''; filterGlossary(); }
   const item = document.getElementById('gl-' + termId);
   if (!item) return;
   if (activeGlItem) activeGlItem.classList.remove('gl-highlighted');
@@ -822,6 +1107,13 @@ document.getElementById('content').addEventListener('click', e => {
 });
 """
 
+HEAD_SCRIPT = r"""    (function () {
+      try {
+        var t = localStorage.getItem('twbass-theme');
+        document.documentElement.dataset.theme = (t === 'dark' || t === 'light') ? t : 'light';
+      } catch (e) { document.documentElement.dataset.theme = 'light'; }
+    })();"""
+
 HTML_TEMPLATE = """\
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -830,8 +1122,12 @@ HTML_TEMPLATE = """\
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台灣大嘴黑鱸釣魚生態白皮書</title>
   <meta name="description" content="台灣大嘴黑鱸（Micropterus salmoides）釣魚生態白皮書——氣候、水體、感官、行為全面量化分析">
+  <script>
+{head_script}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
 {css}
   </style>
@@ -840,18 +1136,24 @@ HTML_TEMPLATE = """\
   <div id="progress-bar"></div>
   <div id="sidebar-overlay"></div>
   <button id="menu-btn" aria-label="開啟目錄">☰</button>
+  <button id="theme-btn" aria-label="切換亮暗主題">🌙</button>
 
   <aside id="sidebar">
     <div id="sidebar-header">
       <div class="site-title">台灣大嘴黑鱸</div>
       <div class="site-subtitle">釣魚生態白皮書</div>
     </div>
-{toc}
+    <div id="toc-container">
+{toc_panes}
+    </div>
   </aside>
 
   <div id="main-wrapper">
+    <div id="level-tabs" role="tablist" aria-label="釣手等級">
+{level_tabs}
+    </div>
     <article id="content">
-{content}
+{content_panes}
     </article>
   </div>
 
@@ -865,10 +1167,29 @@ HTML_TEMPLATE = """\
 """
 
 # ── 組合並輸出 ────────────────────────────────────────────────────────────
+def _active(vid):
+    return " active" if vid == DEFAULT_VERSION else ""
+
+level_tabs = "\n".join(
+    f'<button class="level-tab{_active(v["id"])}" data-version="{v["id"]}" role="tab">'
+    f'{v["label"]}<span class="lvl-en">{v["id"].capitalize()}</span></button>'
+    for v in versions_data
+)
+toc_panes = "\n".join(
+    f'<div class="toc-pane{_active(v["id"])}" data-toc="{v["id"]}">\n{v["toc"]}\n</div>'
+    for v in versions_data
+)
+content_panes = "\n".join(
+    f'<div class="content-pane{_active(v["id"])}" data-content="{v["id"]}">\n{v["content"]}\n</div>'
+    for v in versions_data
+)
+
 html = HTML_TEMPLATE.format(
     css=CSS,
-    toc=toc_html,
-    content=content_html,
+    head_script=HEAD_SCRIPT,
+    level_tabs=level_tabs,
+    toc_panes=toc_panes,
+    content_panes=content_panes,
     glossary=glossary_html,
     js=JS,
 )
@@ -876,4 +1197,5 @@ html = HTML_TEMPLATE.format(
 OUT.parent.mkdir(exist_ok=True)
 OUT.write_text(html, encoding="utf-8")
 print(f"✓ 產生完成：{OUT}")
-print(f"  TOC 項目：{len(toc_items)} 個（H2: {sum(1 for x in toc_items if x['level']==2)}，H3: {sum(1 for x in toc_items if x['level']==3)}）")
+for v in versions_data:
+    print(f"  [{v['label']} {v['id']}] TOC：{v['n_h2'] + v['n_h3']} 項（H2: {v['n_h2']}，H3: {v['n_h3']}）")
