@@ -200,9 +200,9 @@ glossary_html = build_glossary_html(GLOSSARY)
 # ── 版本設定 ──────────────────────────────────────────────────────────────
 # (id, 顯示標籤, markdown 檔名)
 VERSIONS = [
-    ("junior", "初階", "台灣大嘴黑鱸白皮書featFable5-junior.md"),
-    ("senior", "中階", "台灣大嘴黑鱸白皮書featFable5-senior.md"),
-    ("expert", "專業", "台灣大嘴黑鱸白皮書featFable5-expert.md"),
+    ("junior", "初階", "台灣大嘴黑鱸白皮書-junior.md"),
+    ("senior", "中階", "台灣大嘴黑鱸白皮書-senior.md"),
+    ("expert", "專業", "台灣大嘴黑鱸白皮書-expert.md"),
 ]
 DEFAULT_VERSION = "junior"
 BASE = Path(__file__).parent
