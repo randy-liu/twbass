@@ -77,6 +77,7 @@ GLOSSARY = [
     ("swim-bladder",        "魚鰾",             "",            "魚的浮力氣囊，靠充／排氣調浮力。大嘴黑鱸<strong>排氣極慢（每小時只調 0.2–0.5% 體積）</strong>，所以氣壓一變（尤其颱風前驟降）要很久才重新平衡、不舒服——這是低壓前後行為改變的<strong>生理配角</strong>（主因其實是光學）。<br><br><strong>大物比小物更敏感</strong>：颱風級降壓（約 53 hPa）下，50 cm/2.5 kg 個體的魚鰾膨脹絕對量是 35 cm 個體的 <strong>2.5 倍</strong>、內臟擠壓更嚴重——所以驟降時<strong>大物優先棄淺潛深、進入 24–48 hr 閉口</strong>，小物影響小。追大物：搶降壓初期的中上層窗口，降太深就收工。<br><br>另也與聽覺有關：內耳聽石<strong>配合魚鰾</strong>感受聲壓，是遠場（15–25 m）聲音搜尋的一環。"),
     ("snells-window",       "斯涅爾窗",         "Snell's Window", "魚從水下往上看，因光線折射，只有正上方一個<strong>圓錐形窗口</strong>看得到水面以外的世界（窗外是鏡面反射）。<br><br><strong>光線狀態怎麼影響它</strong>：<ul class=\"gl-list-inner\"><li><strong>大晴直射光</strong>：水面強反光＋窗外亮天空，背景雜光多，假餌在窗內的邊緣對比被洗淡、較難辨識。</li><li><strong>陰天／低壓</strong>（積雨雲把直射光變散射光）：水面反光與背景散射光同時劇降，假餌在窗內的<strong>邊緣對比度反而提升 35–50%</strong>、視覺獵食半徑拓寬——這正是低壓陰天「好咬」的主因（約 65%；魚鰾不適只佔 35%）。</li></ul>所以判斷水面附近假餌好不好被看見，看的是「天空光是直射還是散射」。"),
     ("rheotaxis",           "rheotaxis",        "逆流定向",     "魚本能地<strong>頭朝水流上游</strong>定向的行為。黑鱸常逆流定位、在結構後方<strong>逆流伏擊</strong>（餌料被流帶過來、迎面截擊）——所以迎風岸／有流處是黃金帶；下餌也要順流，讓餌「從上游漂向魚」才自然。"),
+    ("melatonin",           "褪黑激素",         "Melatonin",   "控制魚「日夜節律／睡不睡」的荷爾蒙，<strong>光會抑制它</strong>。光夠亮→被壓低→魚進「白天模式」持續視覺獵食；天黑光弱→回升→轉夜間休息。<br><br>關鍵是抑制它只需<strong>極微弱的光</strong>（半抑制門檻約 0.01 lux）：所以<strong>清水</strong>裡滿月月光（水下 1 m 約 0.064 lux）就能壓掉 90%，魚整夜當白天狂獵→隔天反彈、白天重度閉口 &gt;8 hr；濁／染色水把月光擋掉（剩約 0.0015 lux、抑制率僅 9%），月相幾乎無效。<br><br>實戰：只有在<strong>滿月＋晴夜＋清水</strong>三者同時成立時月相才有效；現場別判 lux（0.0X 的差人眼分不出），看月相、雲量、水色就好。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -151,6 +152,7 @@ TERM_PATTERNS = [
     ("snells-window",      r'斯涅爾窗'),
     ("rheotaxis",          r'rheotaxis'),
     ("rheotaxis",          r'逆流定向'),
+    ("melatonin",          r'褪黑激素'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
