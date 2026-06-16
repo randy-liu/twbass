@@ -20,7 +20,7 @@ OUT = Path(__file__).parent / "docs" / "index.html"
 # 每條: (id, term_display, zh_alias, description)
 # zh_alias 為空字串代表無別名
 GLOSSARY = [
-    ("do",                  "DO",               "溶氧",         "溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。<br><br><strong>關鍵門檻</strong>：4.5 mg/L 以上全力活動、3 mg/L 覓食下限、1.5 mg/L 保命線。<br><br><strong>不用儀器的現場判讀</strong>（把 mg/L 換成「現場長相」）：<ul class=\"gl-list-inner\"><li><strong>時間</strong>：水草藻類白天產氧、午後最高，整夜耗到清晨 4–6 點觸底（清晨缺氧、午後足氧）</li><li><strong>水溫</strong>：越熱溶解度越低，悶熱無風盛夏淺水雙重夾擊</li><li><strong>擾動</strong>：風皺水面／入水口／水車＝正在復氧；死角、靜水、停機＝往下崩</li><li><strong>藻華</strong>：濃綠水日夜落差最大，清晨谷最深、最危險</li><li><strong>浮頭</strong>：雜魚水面一張一合吸氣＝已跌破約 2 mg/L，黑鱸同步閉口</li></ul>"),
+    ("do",                  "DO",               "溶氧",         "溶氧量（Dissolved Oxygen），單位 mg/L。魚類最低生存需求約 2 mg/L；低於此值進入保命模式，無法主動覓食。"),
     ("eh",                  "Eh",               "",             "氧化還原電位（單位 mV 毫伏特）。正值=有氧健康底質；接近 0 = 開始耗氧；低於 −150 mV = 臭底危險區，H₂S 大量釋放。<strong>現場不用儀器判斷</strong>：搆得到的底泥（岸邊淺灘、船錨帶起、竿尾戳底）黑又臭（臭雞蛋味）、或水面自然冒泡，即代表底質已落入低 Eh 還原態、在產硫化氫（拖回程的鉛墜會被水洗淨、不宜只聞它；冒泡多為甲烷、只證厭氧，需配合臭味才確認游離 H₂S，單顆移動的泡常是魚）；深水搆不到則由季節（盛夏最毒）與滯水程度推定。南部低鐵呈「黑泥＋強臭」（游離 H₂S 真危險），北部高鐵呈「黑但不臭」（被鎖成 FeS 相對安全）。"),
     ("ph",                  "pH",               "",             "酸鹼值（0–14），中性 = 7。台灣北部水體偏酸（pH 5.5–6.5），南部偏鹼（pH 7–8）。影響化學物質溶解度與魚類感知閾值。"),
     ("h2s",                 "H₂S",              "硫化氫",       "硫化氫，Eh < −150 mV 時底泥產生的有毒氣體，具強烈臭蛋味。高濃度直接毒殺魚類，輕度也會驅趕魚群離開底層。"),
@@ -884,6 +884,14 @@ body.glossary-open #main-wrapper {
   transition: background 0.15s;
 }
 .gl-trigger:hover { background: var(--accent-dim); }
+/* ── 頁內跳轉連結（交叉引用）── */
+#content a[href^="#"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+#content a[href^="#"]:hover { background: var(--accent-dim); border-radius: 2px; }
 /* ── 術語 highlight（持久，直到換術語或關閉面板）── */
 .gl-highlighted { background: rgba(251,191,36,0.18); border-radius: 4px; }
 /* ── 術語別名標籤 ── */
