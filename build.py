@@ -116,7 +116,7 @@ TERM_PATTERNS = [
     ("ebullition",         r'氣泡釋放'),
     ("zeta",               r'Zeta 電位'),
     ("ddl",                r'(?<![A-Za-z])DDL(?![A-Za-z])'),
-    ("stokes",             r'Stokes 沉降'),
+    ("stokes",             r'Stokes (?:沉降|定律|計算)'),
     ("mo2",                r'MO₂'),
     ("pcrit",              r'Pcrit'),
     ("acoustic-masking",   r'Acoustic Masking'),
