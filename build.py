@@ -38,9 +38,9 @@ GLOSSARY = [
     ("q10",                 "Q₁₀",              "溫度係數",     "溫度係數。每升降 10°C，生化反應速率約變 2 倍（升溫加快，降溫減半）。用於推算皮質醇清除速率（ART）與各種底棲化學反應速度。"),
     ("tuishui",             "推水",             "",             "路亞在水中移動時，擠壓前方水體產生的壓力波（低頻流體脈衝）。由魚的側線系統感知，在能見度極差的濁水環境中是最重要的感知信號。"),
     ("cr",                  "C&R",              "",             "Catch &amp; Release（釣放）。釣到後測量拍照再放回水中的行為。過程中皮質醇在 15–30 分鐘內飆升至 >150 ng/mL，啟動 ART 計時。"),
-    ("pizichun",            "皮質醇",           "",             "壓力荷爾蒙（Cortisol），由 HPI 軸（Hypothalamic-Pituitary-Interrenal；下視丘—腦垂體—腎間腺軸，魚類壓力反應系統，等效哺乳類的 HPA 軸：下視丘—腦垂體—腎上腺軸）分泌。<br><br><strong>三個重要基線</strong><ul class=\"gl-list-inner\"><li>HVF 自然靜息基線：<strong>1.68±0.69 ng/mL</strong>（健康範圍 ≤6 ng/mL）</li><li>LVF 慢性基線：<strong>20–40 ng/mL</strong>（HPI 軸長期重塑）</li><li>C&amp;R 急性飆升：<strong>&gt;150 ng/mL</strong>（15–30 分鐘內達峰）</li></ul>促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
+    ("pizichun",            "皮質醇",           "",             "壓力荷爾蒙（Cortisol），由 HPI 軸（Hypothalamic-Pituitary-Interrenal；下視丘—腦垂體—腎間腺軸，魚類壓力反應系統，等效哺乳類的 HPA 軸：下視丘—腦垂體—腎上腺軸）分泌。<br><br><strong>三個重要基線</strong><ul class=\"gl-list-inner\"><li>HVF 健康個體自然靜息：<strong>1.68±0.69 ng/mL</strong>（健康範圍 ≤6）；剛放流 &lt;30 天：<strong>10–15 ng/mL</strong></li><li>LVF 慢性基線：<strong>20–40 ng/mL</strong>（HPI 軸長期重塑）</li><li>C&amp;R 急性飆升：<strong>&gt;150 ng/mL</strong>（15–30 分鐘內達峰）</li></ul>促使魚對咬過的假餌建立負面記憶，是 Follower Rejection 的生化根源。"),
     ("oft",                 "OFT",              "最佳覓食理論", "最佳覓食理論（Optimal Foraging Theory）。魚優先選擇「淨能量獲取率最高」的目標：能量高、捕獲成本低。假餌必須在魚的成本估算中勝過真食物，才能觸發攻擊。"),
-    ("hvf-lvf",             "新鱸 / 老鱸",     "HVF / LVF",    "新鱸（HVF，High Vulnerability Fish）/ 老鱸（LVF，Low Vulnerability Fish）。新鱸（HVF）自然靜息皮質醇基線：<strong>1.68±0.69 ng/mL</strong>（健康範圍 ≤6 ng/mL），依賴視頂蓋反射，容易被釣；老鱸（LVF）慢性皮質醇長期維持在 <strong>20–40 ng/mL</strong>，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。⚠️ 老鱸（LVF）在任何 H₂S 存在條件下幾乎不發動底層衝入（冒險覓食突進被端腦完全抑制）。"),
+    ("hvf-lvf",             "新鱸 / 老鱸",     "HVF / LVF",    "新鱸（HVF，High Vulnerability Fish）/ 老鱸（LVF，Low Vulnerability Fish）。新鱸（HVF）健康個體靜息皮質醇基線 <strong>1.68±0.69 ng/mL</strong>（剛放流 &lt;30 天仍帶緊迫、約 10–15 ng/mL），依賴視頂蓋反射，容易被釣；老鱸（LVF）慢性皮質醇長期維持在 <strong>20–40 ng/mL</strong>，端腦認知主導，對任何不自然訊號都會觸發 Follower Rejection。⚠️ 老鱸（LVF）在任何 H₂S 存在條件下幾乎不發動底層衝入（冒險覓食突進被端腦完全抑制）。"),
     ("mid-strolling",       "Mid-Strolling",    "",             "以 0.5–1.0 m/s 的緩慢等速拖曳假餌。路亞產生 1–5 Hz 的低頻視覺脈衝，嚴格低於魚眼 CFF，誘發魚進入長距離跟隨的「視覺催眠」狀態。"),
     ("follower-rejection",  "Follower Rejection","",            "魚跟隨假餌到 13–24 cm 近距離後拒絕咬合。觸發原因：（1）假餌進入眼球近點，影像失焦；（2）端腦在 60–100 ms 內完成四項違和交叉比對（視覺失真、無味道、側線歸零、皮質醇記憶提取）。"),
     ("reaction-strike",     "Reaction Strike",  "",             "反射咬餌。假餌速度 >1.5 m/s 時，視頂蓋神經元直接發出攻擊指令（潛伏期僅 30–50 ms），繞過端腦的皮質醇記憶阻斷。ART 窗口內仍可觸發。"),
@@ -79,6 +79,11 @@ GLOSSARY = [
     ("rheotaxis",           "rheotaxis",        "逆流定向",     "魚本能地<strong>頭朝水流上游</strong>定向的行為。黑鱸常逆流定位、在結構後方<strong>逆流伏擊</strong>（餌料被流帶過來、迎面截擊）——所以下風岸／有流處是黃金帶；下餌也要順流，讓餌「從上游漂向魚」才自然。"),
     ("melatonin",           "褪黑激素",         "Melatonin",   "控制魚「日夜節律／睡不睡」的荷爾蒙，<strong>光會抑制它</strong>。光夠亮→被壓低→魚進「白天模式」持續視覺獵食；天黑光弱→回升→轉夜間休息。<br><br>關鍵是抑制它只需<strong>極微弱的光</strong>（半抑制門檻約 0.01 lux）：所以<strong>清水</strong>裡滿月月光（水下 1 m 約 0.064 lux）就能壓掉 90%，魚整夜當白天狂獵→隔天反彈、白天重度閉口 &gt;8 hr；濁／染色水把月光擋掉（剩約 0.0015 lux、抑制率僅 9%），月相幾乎無效。<br><br>實戰：只有在<strong>滿月＋晴夜＋清水</strong>三者同時成立時月相才有效；現場別判 lux（0.0X 的差人眼分不出），看月相、雲量、水色就好。"),
     ("wind-stress",         "風應力",           "Pa",          "風摩擦水面、推動表層水流的力，單位 Pa。風越強、應力越大、表層流越快。約 <strong>0.05–0.1 Pa</strong>（約 6 m/s 風）就能在淺塘掀動底泥，並驅動 <strong>9–18 cm/s 的表層吹風流（風生流）</strong>，把獵物推向下風岸。"),
+    ("gr",                  "糖皮質激素受體",   "GR",          "糖皮質激素受體（Glucocorticoid Receptor）。皮質醇要起作用，得先接到這個受體上；它同時是<strong>關掉壓力反應的剎車</strong>（負反饋）。老魚（LVF）長期高壓下，腦中下視丘的 GR 表達量<strong>下調約 50%</strong>，剎車失靈——皮質醇降不下來、警報一直開著，端腦對任何不自然訊號都觸發拒咬。"),
+    ("dishabituation",      "習慣化／脫習慣化", "Habituation / Dishabituation", "<strong>習慣化</strong>：同一個刺激重複出現，神經『看膩』不再反應——假餌以等速等頻拖過 <strong>&gt;3.0 s 或 60 cm</strong>，視頂蓋突觸後電位衰減 60%，魚判定無害、只跟不咬。<br><strong>脫習慣化</strong>：用一個突發的不對稱刺激把神經重新喚醒、重啟攻擊——在 <strong>150–200 ms</strong> 內速度突增 ΔV ≥35 cm/s、急停 1.5–2.5 s 或轉向 ≥45°，咬餌率可從 &lt;5% 暴增到 65–85%。"),
+    ("oral-test",           "口觸",             "Oral-test",   "口觸前測試。黑鱸吞下前，先用 <strong>80–120 ms</strong> 的輕微吸水把餌前緣吸到唇邊<strong>測硬度</strong>。硬過 <strong>Shore A 15</strong>（硬 PVC／ABS／鉛頭）會在 80 ms 內反向噴出（吐餌）；只有 <strong>Shore 00-15 以下</strong>的超軟矽膠／高鹽 Plastisol、且接觸 <strong>≥100 ms</strong>，才能繞過這道審查、觸發吞嚥。這就是同型號軟硬不同效果天差地遠的原因。"),
+    ("shore",               "Shore 硬度",       "durometer",   "橡膠／矽膠軟硬的工業標準（durometer）。<strong>數字越小越軟</strong>，且分不同刻度尺：<strong>Shore 00</strong> 量超軟凝膠、<strong>Shore A</strong> 量一般軟硬橡膠。釣魚門檻：天然獵物約 Shore A 0；軟餌要 <strong>Shore 00-15 以下</strong>才能通過魚的口觸測試，硬過 <strong>Shore A 15</strong> 會被吐出。"),
+    ("lure-shyness",        "Lure-shyness",     "認餌迴避",     "被釣放後對假餌建立的負面記憶與迴避——白話就是『見餌就走』。一次重度釣獲（皮質醇 &gt;150 ng/mL）可建立 <strong>48–96 hr</strong> 的迴避；同點連投間隔短於 ART，皮質醇會階梯累積，把魚推進 100% Lure-shyness。"),
 ]
 
 # ── 術語在 HTML text node 中的搜尋 pattern ─────────────────────────────────
@@ -155,6 +160,13 @@ TERM_PATTERNS = [
     ("rheotaxis",          r'逆流定向'),
     ("melatonin",          r'褪黑激素'),
     ("wind-stress",        r'風應力'),
+    ("gr",                 r'糖皮質激素受體'),
+    ("dishabituation",     r'脫習慣化'),
+    ("dishabituation",     r'習慣化'),
+    ("oral-test",          r'口觸'),
+    ("shore",              r'Shore'),
+    ("lure-shyness",       r'Lure-shyness'),
+    ("schreckstoff",       r'警報素'),
 ]
 
 # 預先編譯 combined regex，single-pass replacement per text node
