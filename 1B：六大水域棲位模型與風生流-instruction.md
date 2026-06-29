@@ -133,7 +133,7 @@ Key_Mechanisms: 溶氧驅動垂直遷徙、異重流被迫上移、冷休克翻�
 ## Q5. 風生流（Wind-driven Flow）與食物鏈集中
 
 **Q5-1. 風生流動力學：**
-- 強風（>5 m/s）在封閉淺水埤塘（水深 1.5m）中形成的表層下湧流（Downwelling，迎風岸）與底層補償流（Upwelling compensation，下風岸）速度（cm/s）估算
+- 強風（>5 m/s）在封閉淺水埤塘（水深 1.5m）中形成的表層下湧流（Downwelling，下風岸）與底層補償流（Upwelling compensation，迎風岸）速度（cm/s）估算
 - 食物鏈集中在下風岸的物理機制：浮游藻類→浮游動物→小魚的水平傳輸路徑
 - 下風岸沿岸帶浮游生物密度增加的距離尺度（m）
 
