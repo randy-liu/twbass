@@ -171,8 +171,6 @@ Read("{完整md路徑}", offset=4000, limit=2000)
 | 南部 H₂S 安全距離（微弱流場） | ≥86 cm | 100–150 cm（舊值）或 20–50 cm（錯值） |
 | Follower Rejection 近點 | 13.5–24 cm（43 cm 成魚） | 未區分體長 |
 | ART（20°C） | 24.0 hr（Q₁₀=2.0） | 24–72 hr（模糊區間） |
-| Schreckstoff 死區（Zone-A/B） | <0.5 m | 2–8 m（未區分 Zone 的舊值） |
-| Schreckstoff 死區（Zone-C） | 4–7 m（持續 12–36 hr） | 同上 |
 
 輸出：`[P1-OK]` 或列出 `[P1-XX]` 問題項目
 
@@ -224,7 +222,7 @@ Read("{完整md路徑}", offset=4000, limit=2000)
 - `VSUP-A04`：ART 溫度矩陣（Q₁₀=2.0）
 - `VSUP-B04`：北部 Fe²⁺ 精算 40 cm
 - `VSUP-B06`：南部 H₂S 精算 ≥86 cm
-- `VSUP-B11`：Zone-C H₃NO 死區 4–7 m
+- `VSUP-B11`：Zone-C H₂S 停機靜水安全距離 ~100 cm（深槽 149 cm、開機 186.8 cm）
 - `VSUP-B12`：靜水 H₂S 55–65 cm / 重啟瞬態 30–50 cm
 
 輸出：`[P3-OK]` 或列出引用斷鏈位置
@@ -271,7 +269,6 @@ Read("{完整md路徑}", offset=4000, limit=2000)
 **已知待解缺口**（供對比）：
 - 35°C 下黑鱸真實 photopic CFF 值（無 ERG 實測）
 - 亞急性 H₂S 對 ART 縮短的量化效應（無 M. salmoides 直接數據）
-- Schreckstoff × CDOM 結合動力學台灣實驗值
 - LVF 族群慢性皮質醇基線（缺現場血液學數據）
 
 輸出：`[P5-OK]` 或列出需補強的研究缺口

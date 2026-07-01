@@ -9,6 +9,27 @@
 
 ---
 
+## 警報素 Schreckstoff 死區全庫移除（黑鱸無 club-cell 系統）＋聽石聲學校正＋senior 微修（2026-07-01）
+
+**性質**：機制誤植移除（跨分類階層外推）＋科學校正＋可讀性。**觸發**：ARS 模擬同儕審查（senior 版）＋使用者現場經驗反證＋WebSearch 文獻考證。**目標檔案**：白皮書 senior/junior/expert、3A、3B、SUP-B、SUP-C、README、SUP-B/SUP-C instruction、twbass-audit SKILL.md、docs/index.html。（主版 `台灣大嘴黑鱸白皮書.md` 已廢棄、未動。）
+
+**一、警報素「中魚→化學死區→換點 ≥8 m→系統性閉口」全庫移除。** 緣由（正文一律不留、全寫在此）：上游 3A/SUP-B 把鯉形／鯰形魚（Ostariophysi）特有的「俱狀細胞 club cell＋Schreckstoff（次黃嘌呤-3-氧化物 H₃NO）」警報素系統誤植到大嘴黑鱸（Perciformes／Centrarchidae，**無此構造**）。WebSearch 考證：(a) 經典警報素只在皮膚被機械性撕裂（掠食咬傷）時不自主釋放，**乾淨嘴鉤穿刺通常不觸發**；(b) 太陽魚科／黑鱸對「受傷同類 damage-released 化學線索」有反應但弱且非專一；(c) 釣放文獻僅記錄個體生理壓力與個體學習性警覺，**查無化學死區**；(d) 使用者現場經驗：好標點常一連上多隻活魚，與死區矛盾。
+- **白皮書**：senior §十四（改標題「連投節奏與中魚後的標點」）整段改誠實版＋白話框＋§四/結語跨引用；junior 4 處、expert 3 處（含決策表、劇本一/二）同步。
+- **3A**：§2 擴散動力學整段刪、**V3A-12 重定義**為「釣放不成死區」、Carry_Forward、連投段去警報素依據。
+- **3B**：V3A-12 複述、V3B-11 規則。
+- **SUP-B**：Title／Key_Mechanisms 去 Schreckstoff、§1（VSUP-B01 重定義、**B02–B04 刪**、VSUP-B05 重定義）、Carry_Forward、CI、Unresolved。
+- **SUP-C**：VSUP-B05／B06 引用、H₂S 恢復 CI 拔除誤掛之 V3A-12。
+- **README／SUP-B・SUP-C instruction（含刪整個 Q1 Schreckstoff×CDOM 研究設計）／twbass-audit SKILL 熱點表**同步。
+- **手法**：保留 V3A-12／VSUP-B05 code 重定義（下游引用不斷鏈、無孤兒），無 live 引用之 VSUP-B02–B04 直接刪；全程乾淨刪除、正文不留墓碑。
+
+**二、聽石／聲音傳播校正（R7）。** senior §十表格＋遠場段、expert 感官表：原「內耳聽石（聲壓給方位）、遠場 15–25 m」依 WebSearch（方向靠 particle motion 非聲壓；黑鱸為 hearing generalist）改為「聲音傳播距離、清水 ~10–20 m 樂觀上限、遠場只給大方向」，並補「高頻撞擊聲傳得遠（內耳）／低頻擺動只在近處（側線）／餌動越大力傳越遠」。
+
+**三、senior 微修。** R5：§八 CP 排序補大肚魚 **0.148**（使「13.9 倍＝2.06/0.148」可驗算；原審查誤以吳郭魚 0.272 除得 7.6）。R4：§五補段與 §二「清晨缺氧」分清（時段／機制不同）。R6：§二補「環境數值兩種判法」通則（全池均勻可量一處推全場 vs 深淺斑塊只能推、聞泥只證有毒不證無毒），0.002 mg/L 標為最不確定假設。R1：§三 102.9/1.03 hr→約 100/約 1、§十四 ART 5°C 67.9→約 68 等計算尾數修剪（依使用者：不硬加假誤差範圍、只修計算多餘尾數）。
+
+TOC 16/30/20 不變，重 build。
+
+---
+
 ## senior §20 顏色 bullet 改成「水色×選色決策表」（含深度/光照失效列）（2026-06-30）
 
 **性質**：可讀性／可操作性（依使用者要求做成查得到的決策表、描述放滿不省字）。**目標檔案**：`台灣大嘴黑鱸白皮書-senior.md`、`docs/index.html`
