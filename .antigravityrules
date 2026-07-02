@@ -12,7 +12,9 @@ A Deep Research prompt system for a quantitative whitepaper on largemouth bass (
 python build.py
 ```
 
-Reads `台灣大嘴黑鱸白皮書.md`, outputs `docs/index.html` (self-contained; no external assets except Google Fonts). Requires `markdown` package.
+Reads the three reader-level whitepaper files — `台灣大嘴黑鱸白皮書-junior.md`, `-senior.md`, `-expert.md` — and outputs one tabbed `docs/index.html` (self-contained; no external assets except Google Fonts). Requires `markdown` package.
+
+> ⚠️ The un-suffixed `台灣大嘴黑鱸白皮書.md` is a **deprecated** older master: it is **NOT** read by `build.py` and must **not** be edited or read — leave it alone. All whitepaper edits go into the `-junior` / `-senior` / `-expert` files.
 
 ## Skills (Antigravity)
 
@@ -24,6 +26,7 @@ python .claude/skills/打包技能.py
 
 This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 - `twbass-audit` — 5-phase audit of research reports against instruction.md + Phase 6 re-run necessity scoring with Gemini/Claude tool recommendation
+- `twbass-instruction-audit` — format audit of `*-instruction.md` files against `TEMPLATE-instruction.md`; outputs FMT-XX fix list
 - `twbass-pipeline-manager` — pipeline status tracking and upstream dependency resolution
 - `gemini-plan-review` — review Gemini Deep Research plans against instruction.md prompts; outputs Go/Hold/Rework signal
 
@@ -35,6 +38,8 @@ This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 | `{卷號}_{主題}.md` | Research report, original run (no number suffix) |
 | `{卷號}{N}_{主題}.md` | Research report, vN (e.g. `0A1` = updated run) |
 | `0`–`4` (no letter suffix) | Master volume specs — reference only, **not for direct execution** |
+| `台灣大嘴黑鱸白皮書-{junior,senior,expert}.md` | 三個讀者分級的白皮書正文（`build.py` 產生 `index.html` 的來源）；無後綴的 `台灣大嘴黑鱸白皮書.md` 為**廢棄舊版**、勿動 |
+| `台灣淡水與沿岸{類群}獵物報告.md` | 生態調查獵物報告（甲殼／兩棲／爬蟲／水生昆蟲），非 `{卷號}` 卷；為 SUP-E 的 fallback 來源材料 |
 
 Always use the highest-numbered version as upstream input. The README version table is authoritative for current valid versions.
 
@@ -56,6 +61,7 @@ SUP-B ──> 1B (V1B-05/06) / 3B / 4A (CI-03/04)
 SUP-C ──> 3A (V3A-06) / 3B (Foraging Forays)
 SUP-D-A ∥ SUP-D-B ──> SUP-D-C (A/B parallel; C runs after or with fallback)
 SUP-D-A + SUP-D-B + SUP-D-C ──> 2A / 2B / 3A / 3B (behavioral mechanism framework; VSUP-DA/DB/DC)
+Prey-4 reports (crustacean / amphibian / reptile / aquatic-insect) ──> SUP-E (fallback source material)
 SUP-E ──> 2A / 1B / 3B (Taiwan ecological calendar + OFT threshold)
 SUP-D-A ∥ SUP-D-B ∥ SUP-E (parallel; no inter-dependency; SUP-D-C after A/B)
 ```
@@ -84,6 +90,9 @@ Scope violations are tracked in `PATCH_NOTES.md`. Each volume has hard boundarie
 | 3B | 南部高溫爛底、北部翻水期、管理池、颱風前後四大極端情境戰術 | 機制理論重寫 |
 | 4A | 築巢底質、孵化、Eh/Fe/H₂S、水位水溫擾動 | 競爭物種、護巢防禦細節 (→4B) |
 | 4B | K 值、競爭物種、護巢防禦性攻擊 | 地球化學細節 |
+| SUP-A | CFF、視網膜適應、皮質醇/ART 等感官生理閾值補充 | 覓食決策機制、策略配方 |
+| SUP-B | Fe²⁺/H₂S 底泥-水柱毒性垂直梯度、避毒安全距離精算 | 魚行為機制；Schreckstoff 死區（2026-07 移除——黑鱸無 club-cell 警報素系統）|
+| SUP-C | 毒區迴避行為實證、Foraging Forays、比較毒理、個體差異 | 水化學梯度精算 (→SUP-B) |
 | SUP-D-A | 食性選擇指數（Chesson's α/Ivlev's E）、NTU 視覺失效閾值（三水體）、感官匹配優先序矩陣 | 多模態入水辨識 (→SUP-D-B)、水中漂流 (→SUP-D-C)、策略切換 (→SUP-D-C) |
 | SUP-D-B | Topwater 入水衝擊辨識（< 100 ms 聲學 + 100 ms–3 s 側線）、追擊序列、Commit 觸發 | 食性選擇指數 (→SUP-D-A)、水中漂流 (→SUP-D-C)、實戰配方（Claude 後處理）|
 | SUP-D-C | 水中漂流偵測（μm/s、Kármán 尾流）、搜索映像 LTP ms、策略切換神經生理 | Topwater 入水辨識 (→SUP-D-B)、追擊序列框架 (→SUP-D-B)、實戰決策矩陣（Claude 後處理） |
@@ -122,7 +131,7 @@ Zone-B was added in v2 (2026-05). All quantitative outputs must list all three z
 | `VSUP-{字母}NN` | Findings from SUP volumes |
 | `CI-XX` | Correction instructions issued by SUP volumes to patch existing volumes |
 
-v1 cross-volume anchors (archived in git, v2 re-runs not yet completed): `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May), `VSUP-B04` (Fe²⁺ safe distance 40 cm north), `VSUP-B06` (H₂S safe distance ≥86 cm south). These IDs may change in v2 reports.
+v1 cross-volume anchors (archived in git, v2 re-runs not yet completed): `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May). These IDs may change in v2 reports. Note: the old `VSUP-B04` / `VSUP-B06` safe-distance labels are superseded — current SUP-B safe distances live in `VSUP-B09` / `VSUP-B11` (north Fe²⁺ ~32.7 / 67.2 cm; south H₂S ~100 cm, deep channel 149 cm). `VSUP-B04`'s former Schreckstoff × CDOM content was removed 2026-07 (bass lack the ostariophysan club-cell alarm system).
 
 ## Modifying Instructions or Adding Volumes
 
