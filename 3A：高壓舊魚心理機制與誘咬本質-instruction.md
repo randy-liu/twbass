@@ -3,7 +3,7 @@ Title: 卷 3A：台灣管理釣場高壓舊魚心理機制與誘咬本質
 Volume_ID: 3A
 Upstream_Required: 0D 報告:0D_基底資料矩陣與極端事件整合.md（Baseline_Facts, Waterbody_Model_Table）；1A 報告:1A_短時間環境觸發與生理限制.md（感官觸發臨界值）；2A 報告:2A_覓食偏好、印記與反射咬餌.md（OFT 決策、Reaction Strike）；2B 報告:2B_側線、內耳與水下聲學傳遞.md（側線頻率響應）
 Core_Parameters: 皮質醇半衰期 hr、Alert Reset Time min、CFF 頻率 Hz、視網膜焦距 cm、尾流頻率 Hz
-Key_Mechanisms: Mid-Strolling 視覺催眠（CFF 神經同步）、Follower Rejection 近場焦距失焦決策、Alert Reset Time 皮質醇動力學、新魚/舊魚行為二元化、急停觸覺觸發門檻
+Key_Mechanisms: Mid-Strolling 長距跟隨（習慣化/脫習慣化）、Follower Rejection 近場焦距失焦決策、Alert Reset Time 皮質醇動力學、新魚/舊魚行為二元化、急停觸覺觸發門檻
 ---
 
 > ⚠️ **輸出格式強制要求（最高優先級）**
@@ -30,6 +30,7 @@ Key_Mechanisms: Mid-Strolling 視覺催眠（CFF 神經同步）、Follower Reje
    - **近緣物種外推**（鱸科 Centrarchidae，如 *M. dolomieu*、*Lepomis macrochirus*、*Perca flavescens*）——標注「類比推估」
    - **廣泛硬骨魚類外推**——標注「廣泛外推」
    - **純理論模型推算**——標注「理論估算」
+   - **誠實輸出優先於格式（不得虛構精確）**：若某參數在 *M. salmoides* 與近緣鱸科文獻均無可靠依據，**允許並鼓勵**輸出「無可靠估計（僅給理論方向）」或「依個體／水體而定」，不得為湊足量化格式而虛構精確數值——此類誠實標註不算違反量化要求。**第 3–4 層（廣泛外推／理論估算）數值僅供方向性參考、信心一律標「低」，不得進入 `Carry_Forward` 作為下游可直接引用的定量基準。**
 6. **章節分離原則**：「機制論證」（神經生理學理）與「作釣涵義映射」需分節書寫，嚴禁混寫；完整戰術配方留給卷 3B。
 7. **跨卷引用**：凡引用 0D/1A/2A/2B 數值，必須標注來源編號（如 `B0-07`、`V1A-03`）；覆蓋 fallback 時標注「[覆蓋 fallback 假設]」。
 
@@ -108,21 +109,21 @@ Key_Mechanisms: Mid-Strolling 視覺催眠（CFF 神經同步）、Follower Reje
 
 # 六、核心研究清單
 
-**Q1：Mid-Strolling 視覺催眠效應與神經同步機制**
+**Q1：Mid-Strolling（長距跟隨不咬）行為與其打破條件**
 
-「Mid-Strolling」指假餌以中速穩定平移時，魚出現長距離跟隨、頭部固定、眼球凝視而不咬的狀態。
+「Mid-Strolling」指假餌以中速穩定平移時，魚出現長距離跟隨、頭部固定、眼球凝視而不咬的狀態。此為釣場常見**行為觀察**；下列 1–2 的神經機制多屬假說，須標「理論方向、信心低」，不得寫成已證實的「視覺催眠」。
 
-1. 穩定移動刺激如何在魚類視覺皮層觸發「持續跟蹤放電（sustained tracking discharge）」——optic tectum 的 direction-selective neuron 最佳觸發速度（cm/s）與方向選擇寬度（°）。
-2. 假餌反射閃光頻率（Hz）在何範圍最可能觸發視網膜 flicker fusion 臨界（critical flicker fusion frequency, CFF）附近的神經同步？量化 CFF 估算值（Hz）。
-3. 高壓舊魚是否因長期暴露產生「習慣化（habituation）」？Dishabituation（脫習慣化）機制（突然加速或停頓）能否重啟跟蹤放電？量化脫習慣化所需速度突變 Δcm/s 或急停持續時間（s）。
-4. Mid-Strolling 假餌尾流（von Kármán vortex street）如何觸發側線感知——尾流頻率（Hz）與距假餌尾部的感知有效距離（cm）。
+1. 方向選擇性追蹤：optic tectum 的 direction-selective neuron 對穩定移動刺激的最佳反應速度（cm/s）與方向選擇寬度（°）（近緣物種／一般硬骨魚電生理外推）；「穩定移動→持續跟蹤放電→抑制攻擊」屬**未證實假說**，標理論方向。
+2. 視覺時間解析與操餌的關係（分兩條、都只影響「看不看得清」，非「咬不咬」）：**(A) 滑行速度→動態模糊**：收線愈快、影像愈易在視網膜抹成拖尾（由積分時間 τ 決定），這是速度與視覺的正確連結，但不換算成 CFF、也不當操餌速度硬上限；**(B) 閃光頻率→CFF**：spinnerbait 葉片轉動、反光餌擺動產生的閃光頻率（Hz）是否落在 CFF 附近（被看成分開的閃 vs 融成一片）——給 CFF 基礎估算值（Hz）。**舊「操餌滑行速度換算脈衝頻率、低於 CFF 才不殘影」為貼錯標籤的偽鏈，不採用。**
+3. 高壓舊魚是否因長期暴露產生「習慣化（habituation）」？Dishabituation（脫習慣化，突然加速或停頓）能否重啟追擊？量化脫習慣化所需速度突變 Δcm/s 或急停持續時間（s）（行為層可觀測，優先於神經臆測）。
+4. Mid-Strolling 假餌尾流（von Kármán vortex street）如何觸發側線感知——尾流頻率（Hz）與距假餌尾部的感知有效距離（cm；側線為近場、約 <1–2 體長）。
 5. 打破 Mid-Strolling 狀態的操作轉換條件：速度突變閾值（Δcm/s）、急停持續時間（s）、角度偏轉（°）與對應咬餌觸發機率的估算。
 
 **Q2：Follower Rejection 視網膜焦距評估決策模型**
 
 「Follower Rejection」指魚跟至極近距離（<30 cm）後突然回頭不咬的狀態。
 
-1. 鱸魚視網膜在極近距離（<20 cm）的空間解析度（cycles/degree）變化——是否因近場焦距過短造成假餌細節失焦，反向觸發威脅迴避（antipredator response）？量化失焦距離臨界（cm）。
+1. 鱸魚視網膜在極近距離（<20 cm）的空間解析度（cycles/degree）變化——「近場焦距過短→假餌細節失焦→反向觸發威脅迴避（antipredator response）」屬**未證實假說**，標理論方向；可給近距解析度下降的方向性描述，但**失焦距離臨界（cm）為推測值、信心低，不進 Carry_Forward 當硬門檻**。
 2. 舊魚「急停決策窗口」：從假餌停止到魚做出咬/不咬決定的持續時間估算（s），及影響此窗口長度的因素（水溫 °C、假餌尺寸比、邊緣效應有無）。
 3. 「邊緣效應（Edge Effect）」：假餌在障礙物旁（落差邊、水草邊緣）如何利用邊界層（boundary layer）改變水動力場，縮短 Follower Rejection 決策窗口，量化效果距離（cm）。
 4. 「觸覺觸發（tactile trigger）」閾值：軟質假餌（Shore A 硬度差異）在極近距離是否激發口觸前測試咬——觸發所需口接觸時間（ms）與材質硬度差異閾值。
@@ -134,7 +135,7 @@ Key_Mechanisms: Mid-Strolling 視覺催眠（CFF 神經同步）、Follower Reje
 
 1. 大嘴黑鱸急性應激後皮質醇峰值（ng/mL）的估算區間，與皮質醇血液半衰期（hr）——直接推算「最短有效投擲間隔（min）」。
 2. 水溫對皮質醇代謝速率的影響：高溫（>28°C）vs 低溫（<15°C）的半衰期差異估算（hr），及台灣夏季南部管理池 vs 冬季北部管理池的實際最小間隔（min）。
-3. 「局部驚嚇 vs 全場驚嚇」的 Alert Reset Time 差異：鉤中逃竄是否觸發 Alarm Substance（皮膚傷害素）擴散？靜水擴散半徑（m）與稀釋半衰期（min）。
+3. 「局部驚嚇 vs 全場驚嚇」的 Alert Reset Time 差異：黑鱸為 Perciformes／Centrarchidae，**無骨鰾類（Ostariophysi）的 club-cell 警報素（Schreckstoff）系統**，鉤中逃竄不以化學警報素擴散傳遞驚擾——量化驚擾主要經視覺（逃竄／掙扎同類）與水波-側線擾動傳遞的空間影響範圍（m）與鄰近個體警戒回復時間（min）；並說明乾淨嘴鉤穿刺（非皮膚撕裂傷）通常不觸發群體性警報反應。
 4. 高壓舊魚「慢性壓力恆定升高（chronic stress hyperactivation）」：靜息皮質醇基準（ng/mL）的合理範圍，與急性重置時間的區分方法。
 5. 台灣管理池「連投模式」涵義：根據皮質醇半衰期，推算北部冬季（水溫 15°C）與南部夏季（水溫 30°C）的科學最小投擲間隔（min）。
 
