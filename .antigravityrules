@@ -27,7 +27,6 @@ python .claude/skills/打包技能.py
 This re-zips each `SKILL.md` into a `.skill` file. Active skills:
 - `twbass-audit` — 5-phase audit of research reports against instruction.md + Phase 6 re-run necessity scoring with Gemini/Claude tool recommendation
 - `twbass-instruction-audit` — format audit of `*-instruction.md` files against `TEMPLATE-instruction.md`; outputs FMT-XX fix list
-- `twbass-pipeline-manager` — pipeline status tracking and upstream dependency resolution
 - `gemini-plan-review` — review Gemini Deep Research plans against instruction.md prompts; outputs Go/Hold/Rework signal
 
 ## File Naming Convention
@@ -114,7 +113,7 @@ Prohibited in all volumes: vague descriptors (高/低/強/弱/顯著/明顯). Al
 
 ## Three Climate Zones
 
-Zone-B was added in v2 (2026-05). All quantitative outputs must list all three zones separately — never merge A+B as "北部":
+All quantitative outputs must list all three zones separately — never merge A+B as "北部":
 
 | Code | Region | Representative Station |
 |------|--------|----------------------|
@@ -131,7 +130,7 @@ Zone-B was added in v2 (2026-05). All quantitative outputs must list all three z
 | `VSUP-{字母}NN` | Findings from SUP volumes |
 | `CI-XX` | Correction instructions issued by SUP volumes to patch existing volumes |
 
-v1 cross-volume anchors (archived in git, v2 re-runs not yet completed): `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May). These IDs may change in v2 reports. Note: the old `VSUP-B04` / `VSUP-B06` safe-distance labels are superseded — current SUP-B safe distances live in `VSUP-B09` / `VSUP-B11` (north Fe²⁺ ~32.7 / 67.2 cm; south H₂S ~100 cm, deep channel 149 cm). `VSUP-B04`'s former Schreckstoff × CDOM content was removed 2026-07 (bass lack the ostariophysan club-cell alarm system).
+Zone-B baseline anchors (from 0D1): `B0-21` (Zone-B 22°C onset 12–18 days early), `B0-22` (Zone-B Eh <0 mV first contact late May). Note: the old `VSUP-B04` / `VSUP-B06` safe-distance labels are superseded — current SUP-B safe distances live in `VSUP-B09` / `VSUP-B11` (north Fe²⁺ ~32.7 / 67.2 cm; south H₂S ~100 cm, deep channel 149 cm). `VSUP-B04`'s former Schreckstoff × CDOM content was removed 2026-07 (bass lack the ostariophysan club-cell alarm system).
 
 ## Modifying Instructions or Adding Volumes
 
@@ -141,4 +140,4 @@ v1 cross-volume anchors (archived in git, v2 re-runs not yet completed): `B0-21`
 
 ## Zone-B Status
 
-Zone-B (桃竹苗) is now built into all v2 `*-instruction.md` files. All volumes are pending a full v2 re-run with Zone-A/B/C three-zone output as the standard format — no separate patches needed. The v1 `CI-XX` patch approach is obsolete. See README.md for the authoritative per-volume execution status.
+Zone-B (桃竹苗) three-zone output (Zone-A/B/C) is the standard format, built into all `*-instruction.md` files. The `CI-XX` patch approach is obsolete. See README.md 執行狀態 for the authoritative per-volume execution status.

@@ -9,6 +9,17 @@
 
 ---
 
+## v3 全庫重跑啟動＋追蹤檔同步（2026-07-03）
+
+**性質**：非內容稽核——為第三次（v3）Deep Research 全庫重跑（換更強模型）做追蹤檔對齊。**觸發**：使用者宣告全部 instruction 進入 v3 重跑。**範圍**：狀態/追蹤檔（README、CLAUDE.md、.antigravityrules）＋技能清單，**不動 instruction 正文**（prompt 內容已於 2026-07-02 FIX-REL A–D 完成重跑前可靠性稽核）。
+
+**動作：**
+- **README「執行狀態」**：新增 v3 待重跑 banner——所有可執行 instruction（0A–4B、SUP-A–SUP-E）標為 **v3 待重跑**；下方 v2 版本表保留為現行版本記錄，在各卷 v3 報告產出並通過稽核前維持為現行版本與上游輸入，v3 完成後逐一取代。
+- **CLAUDE.md ＋ .antigravityrules（鏡射兩份）**：刪除過時的版本/執行狀態描述——(a)「Zone-B Status」區塊原「All volumes are pending a full v2 re-run…」（與 README「v2 已完成」矛盾）改為版本無關措辭；(b) Key Reference IDs 段原「v1 … v2 re-runs not yet completed / These IDs may change in v2 reports」改為「Zone-B baseline anchors (from 0D1)」；(c) Three Climate Zones 開頭「Zone-B was added in v2 (2026-05)」版本描述移除。**原則**：執行/版本狀態單一權威放 README ＋ PATCH_NOTES，CLAUDE.md/.antigravityrules 不承載。
+- **移除 `twbass-pipeline-manager` 技能**：使用者確認未使用，且其狀態表已嚴重過時（SUP-D/SUP-E 誤標「尚未執行」、SUP-D 未拆為 D-A/B/C、Zone-B per-volume 欄與 README 不一致）。刪除 `.claude/skills/twbass-pipeline-manager/` ＋ `twbass-pipeline-manager.skill`，並自 `.claude/skills/打包技能.py`、CLAUDE.md/.antigravityrules 技能清單移除引用。pipeline 依賴圖與狀態改以 README 為單一權威。
+
+---
+
 ## instruction 內容可靠性稽核——重跑前 FIX-REL 清單（回退風險＋架構誘導幻覺＋跨物種污染）（2026-07-02）
 
 **性質**：內容（非格式）可靠性稽核——為「換更強模型重跑 Deep Research」做前置體檢，找出 prompt 本身的錯誤前提。**狀態**：**A、B、C、D 全數已執行（2026-07-02）**。**觸發**：使用者質疑 instruction 內容科學可靠性（例：鯉/鯰特有能力被混入黑鱸）。**範圍**：21 份可執行 instruction（0A–0D、1A–1B、2A–2C、3A–3B、4A–4B、SUP-A~E）全文內容審＋母版 0–4 紅旗詞掃描（乾淨、reference-only 不執行）＋PATCH_NOTES 交叉比對。**核心結論**：可靠性瓶頸在 prompt、不在模型；換模型只會把錯誤前提複製得更精緻。
